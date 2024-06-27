@@ -2,7 +2,7 @@ import React from 'react'
 
 const Phone = () => {
   return (
-    <div>phone</div>
+    <div>phone component</div>
   )
 }
 
