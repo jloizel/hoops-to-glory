@@ -5,9 +5,13 @@
   border: 16px solid #333;
   border-radius: 36px;
   background-color: white;
+  background-image: url('../../public/background2.jpg');
+  background-size: 300px;
+  background-position: 2px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
+
 
 .notch {
   position: absolute;
@@ -42,6 +46,25 @@
   border-radius: 50%;
 }
 
+.dateTime {
+  position: absolute;
+  top: 40px;
+  left: 16px;
+  right: 16px;
+  text-align: center;
+  /* color: #0067B1; */
+  color: white;
+  font-weight: 500;
+}
+
+.dateTime p:first-child {
+  font-size: 16px;
+}
+
+.dateTime p:last-child {
+  font-size: 40px;
+}
+
 .notificationsContainer::-webkit-scrollbar {
   display: none;
 }
@@ -54,7 +77,7 @@
 
 .notificationsContainer {
   position: absolute;
-  top: 60px; /* Adjust based on the iPhone screen position */
+  top: 100px; /* Adjust based on the iPhone screen position */
   left: 0;
   right: 0;
   bottom: 0;
@@ -70,4 +93,5 @@
   margin: 10px 0;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
 }
