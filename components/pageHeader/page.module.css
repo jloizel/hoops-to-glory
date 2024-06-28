@@ -74,6 +74,8 @@
 .rightContainer {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 10px;
 }
 
 .image2 {
@@ -82,4 +84,15 @@
 
 .image2:hover {
   transform: scale(0.95);
+}
+
+.icon {
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.icon:hover {
+  color: #ED174F;
 }

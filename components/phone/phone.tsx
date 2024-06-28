@@ -1,29 +1,42 @@
-"use"
-
-import React, { useEffect, useRef, useState } from 'react'
-import styles from "./page.module.css"
-import phoneBackground from '../../public/background2.jpg';
+import React, { useEffect, useRef, useState } from 'react';
+import { MdMessage } from 'react-icons/md';
+import styles from './page.module.css';
 
 const Phone = () => {
-  const [notifications, setNotifications] = useState<string[]>([]);
+  const [notifications, setNotifications] = useState<any[]>([]); // Array to store notifications
   const notificationsContainerRef = useRef<HTMLDivElement>(null);
   const [currentDateDay, setCurrentDateDay] = useState<string>('');
   const [currentHourMinute, setCurrentHourMinute] = useState<string>('');
-  const [data, setData] = useState([
-    {
-      id: "",
-      title: "",
-      text: ""
-    },
-  ]);
+  const [data, setData] = useState<any[]>([]); // Array to store data from API
 
   useEffect(() => {
+    // Fetch data from API
+    fetch('/data/randomMessages.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(myJson => {
+        setData(myJson); // Set fetched data to state
+      });
+  }, []);
+
+  useEffect(() => {
+    let index = 0;
     const interval = setInterval(() => {
-      setNotifications((prev) => [`New notification ${prev.length + 1}`, ...prev]);
-    }, 3000);
+      if (index < data.length) {
+        const randomMessage = data[index];
+        setNotifications(prevNotifications => [randomMessage, ...prevNotifications]); // Add new notification
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000); // Add notifications every 1 second
 
     return () => clearInterval(interval);
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     // Function to update date and time
@@ -55,11 +68,11 @@ const Phone = () => {
   }, []);
 
   useEffect(() => {
+    // Scroll to top when notifications change
     if (notificationsContainerRef.current) {
       notificationsContainerRef.current.scrollTop = 0;
     }
   }, [notifications]);
-
 
   return (
     <div className={styles.iphoneOutline}>
@@ -70,10 +83,17 @@ const Phone = () => {
         <p>{currentDateDay}</p>
         <p>{currentHourMinute}</p>
       </div>
-      <div className={styles.notificationsContainer} id="notifications-container">
+      <div className={styles.notificationsContainer} ref={notificationsContainerRef} id="notifications-container">
         {notifications.map((notification, index) => (
-          <div key={index} className={styles.notification}>
-            {notification}
+          <div key={notification.id} className={styles.notification}>
+            <div className={styles.messageTop}>
+              <MdMessage className={styles.messageIcon}/>
+              MESSAGES
+            </div>
+            <div className={styles.messageContainer}>
+              <div className={styles.contact}>{notification.contact}</div>
+              <div className={styles.message}>{notification.message}</div>
+            </div>
           </div>
         ))}
       </div>
@@ -81,4 +101,4 @@ const Phone = () => {
   );
 };
 
-export default Phone
+export default Phone;

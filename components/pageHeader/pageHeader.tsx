@@ -15,7 +15,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({username}) => {
     <div className={styles.mainContainer}>
       <Box className={styles.leftContainer}>
         <div className={styles.imageContainer1}>
-          <img src="/logo3.png" className={styles.image1}></img>
+          <img src="/images/logo3.png" className={styles.image1}></img>
         </div>
         <div className={styles.name}>
           <span>Hoops</span>
@@ -33,7 +33,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({username}) => {
       </Box> 
       <Box className={styles.rightContainer}>
         <div className={styles.imageContainer2}>
-          <img src="/HoF.png" className={styles.image2}></img>
+          <img src="/images/HoF.png" className={styles.image2}></img>
         </div>
         <VscDebugRestart className={styles.icon}/>
       </Box>   

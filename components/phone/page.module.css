@@ -5,7 +5,7 @@
   border: 16px solid #333;
   border-radius: 36px;
   background-color: white;
-  background-image: url('../../public/background2.jpg');
+  background-image: url('../../public/images/background2.jpg');
   background-size: 300px;
   background-position: 2px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -77,21 +77,55 @@
 
 .notificationsContainer {
   position: absolute;
-  top: 100px; /* Adjust based on the iPhone screen position */
+  top: 140px; /* Adjust based on the iPhone screen position */
   left: 0;
   right: 0;
   bottom: 0;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
-  padding: 16px;
+  padding: 0px 16px;
   box-sizing: border-box;
+
 }
 
 .notification {
-  background-color: #eee;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 8px;
+  /* background-color: #eee; */
+  /* padding: 10px; */
+  margin-bottom: 10px;
+  /* border-radius: 8px; */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 12px;
+}
+
+.messageTop {
+  background: #EFF3FB;
+  padding: 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: grey;
+  font-weight: 300;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.messageIcon {
+  font-size: 18px;
+  color: #359be4;
+}
+
+.messageContainer {
+  background: #ebefff;
+  padding: 10px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.contact {
+  font-weight: 600;
+}
+
+.message {
+  font-weight: 400;
 }
