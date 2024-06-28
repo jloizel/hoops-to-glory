@@ -1,15 +1,21 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect, useState } from 'react'
 import styles from "./page.module.css"
+import PageHeader from '../../components/pageHeader/pageHeader'
+import Phone from '../../components/phone/phone'
 
 const Home = () => {
+  const [username, setUsername] = useState("")
+
+  useEffect(() => {
+    setUsername("JACK LOIZEL")
+  }, [])
+
   return (
-    <div className={styles.home}>page
-      <div className={styles.imageContainer}>
-        <img src="/logo.png" className={styles.image}></img>
-      </div>
-      <div className={styles.imageContainer}>
-        <img src="/logo2.png" className={styles.image}></img>
-      </div>      
+    <div className={styles.home}>
+      <PageHeader username={username}/>    
+      <Phone/>
     </div>
   )
 }

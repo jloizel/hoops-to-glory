@@ -1,0 +1,73 @@
+.iphoneOutline {
+  position: relative;
+  width: 300px;
+  height: 600px;
+  border: 16px solid #333;
+  border-radius: 36px;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 30px;
+  background-color: #333;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.speaker {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 5px;
+  background-color: black;
+  border-radius: 2.5px;
+}
+
+.camera {
+  position: absolute;
+  top: 7px;
+  left: calc(50% - 50px);
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.notificationsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.notificationsContainer {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.notificationsContainer {
+  position: absolute;
+  top: 60px; /* Adjust based on the iPhone screen position */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.notification {
+  background-color: #eee;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
