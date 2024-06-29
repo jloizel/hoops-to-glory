@@ -1,0 +1,67 @@
+.gameContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 20px;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+}
+
+.topContentContainer, .bottomContentContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  /* padding: 20px; */
+  border-radius: 8px;
+  box-shadow: 0px 8px 24px rgba(62, 53, 82, 0.3);
+  width: 50%;
+  height: 50%;
+}
+
+.header {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  background-color: #0067B1;
+  color: white;
+  padding: 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.icon2 {
+  font-size: 30px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  font-weight: 500;
+  height: 200px;
+}

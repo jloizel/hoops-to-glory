@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from "./page.module.css"
 import PageHeader from '../../components/pageHeader/pageHeader'
-import Phone from '../../components/phone/phone'
+import Game from '../../components/game/game'
 
 const Home = () => {
   const [username, setUsername] = useState("")
@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <div className={styles.home}>
       <PageHeader username={username}/>    
-      <Phone/>
+      <Game/>
     </div>
   )
 }
