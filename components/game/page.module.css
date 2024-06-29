@@ -2,25 +2,36 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 20px;
+  padding: 0 20px;
+  height: 100%;
 }
 
 .leftContainer {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  /* gap: 20px; */
+  justify-content: space-between;
 }
 
 .rightContainer {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  width: 100%;
   height: 100%;
-  gap: 20px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding-left: 20px;
 }
 
-.topContentContainer, .bottomContentContainer {
+.topContentContainer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.middleContentContainer, .bottomContentContainer {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -51,11 +62,7 @@
 }
 
 .icon {
-  font-size: 18px;
-}
-
-.icon2 {
-  font-size: 30px;
+  font-size: 16px;
 }
 
 .content {

@@ -1,7 +1,10 @@
 .iphoneOutline {
   position: relative;
-  width: 300px;
+  /* width: 300px; */
+  /* width: 50h; */
   height: 600px;
+  aspect-ratio: 1 / 2;
+  /* height: 80vh; */
   border: 16px solid #333;
   border-radius: 36px;
   background-color: white;

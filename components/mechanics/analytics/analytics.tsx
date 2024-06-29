@@ -10,14 +10,14 @@ import { SiGoogleanalytics } from "react-icons/si";
 const Analytics = () => {
 
   return (
-    <div className={styles.analyticsContainer}>
+    <div className={styles.container}>
       <div className={styles.header}>
         <SiGoogleanalytics className={styles.icon}/>
         Analytics
       </div>
       <div className={styles.content}>
         <div>
-          <FaInstagram className={styles.icon1}/>
+          <FaInstagram className={styles.icon2}/>
           Followers:
         </div>
         <div>

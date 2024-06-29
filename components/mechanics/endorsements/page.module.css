@@ -1,7 +1,8 @@
-.analyticsContainer {
+.container {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 8px 24px rgba(62, 53, 82, 0.3);
+  width: 50%;
 }
 
 .header {
@@ -13,32 +14,18 @@
   gap: 10px;
   background-color: #0067B1;
   color: white;
-  padding: 10px;
+  padding: 5px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-}
-
-.icon {
-  font-size: 18px;
-}
-
-.icon1, .icon2 {
-  font-size: 30px;
-}
-
-.icon1 {
-  /* color: #E94475; */
-}
-
-.icon2 {
-  /* color: #FF0000; */
+  justify-content: center;
 }
 
 .content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding: 10px;
   gap: 10px;
+  font-size: 14px;
 }
 
 .content div {
