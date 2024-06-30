@@ -11,6 +11,15 @@ const Home = () => {
   const [username, setUsername] = useState("")
   const [usernameSet, setUsernameSet] = useState(false);
 
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+      setOpenModal(false);
+      setUsernameSet(true);
+    }
+  }, []);
+
   const handleChange = (event:any) => {
     setUsername(event.target.value);
   };
@@ -19,8 +28,27 @@ const Home = () => {
     event.preventDefault();
     setOpenModal(false);
     setUsernameSet(true);
+    localStorage.setItem('username', username);
+
+    const trimmedUsername = username.trim();
+    if (trimmedUsername === "") {
+      const randomUsername = generateRandomUsername();
+      setUsername(randomUsername);
+      localStorage.setItem('username', randomUsername);
+    }
   };
 
+  const handleReset = () => {
+    setUsername("");
+    setUsernameSet(false);
+    setOpenModal(true);
+    localStorage.removeItem('username');
+  };
+
+  const generateRandomUsername = (): string => {
+    const randomNumber = Math.floor(Math.random() * 1000); // Generate a random number between 0 and 99
+    return `user${randomNumber}`;
+  };
 
   return (
     <div className={styles.home}>
@@ -46,7 +74,7 @@ const Home = () => {
             </Modal>
           </div>
         )}
-      <PageHeader username={username} usernameSet={usernameSet}/>    
+      <PageHeader username={username} usernameSet={usernameSet} handleReset={handleReset}/>    
       <Game/>
     </div>
   )
