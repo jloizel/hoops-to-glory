@@ -9,6 +9,7 @@ import { Box, Modal } from '@mui/material'
 const Home = () => {
   const [openModal, setOpenModal] = useState(true);
   const [username, setUsername] = useState("")
+  const [usernameSet, setUsernameSet] = useState(false);
 
   const handleChange = (event:any) => {
     setUsername(event.target.value);
@@ -17,6 +18,7 @@ const Home = () => {
   const handleSubmit = (event:any) => {
     event.preventDefault();
     setOpenModal(false);
+    setUsernameSet(true);
   };
 
 
@@ -44,7 +46,7 @@ const Home = () => {
             </Modal>
           </div>
         )}
-      <PageHeader username={username}/>    
+      <PageHeader username={username} usernameSet={usernameSet}/>    
       <Game/>
     </div>
   )

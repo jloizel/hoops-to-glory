@@ -8,9 +8,10 @@ import { VscDebugRestart } from "react-icons/vsc";
 
 interface PageHeaderProps {
   username: string
+  usernameSet: boolean;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({username}) => {
+const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet}) => {
   return (
     <div className={styles.mainContainer}>
       <Box className={styles.leftContainer}>
@@ -25,7 +26,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({username}) => {
         
       </Box>
       <Box className={styles.middleContainer}>
-        <div className={styles.username}>{username}</div>
+        {usernameSet && (<div className={styles.username}>{username}</div> )}
         <div className={styles.rank}>
           <span>MOCK DRAFT RANK:</span>
           <span>UNDRAFTED</span>
