@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import styles from "./page.module.css"
 import { Box, Modal } from '@mui/material'
 import { VscDebugRestart } from "react-icons/vsc";
-
+import { IoClose } from "react-icons/io5";
 
 interface PageHeaderProps {
   username: string
@@ -15,9 +15,15 @@ interface PageHeaderProps {
 const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleReset}) => {
   const [openModal, setOpenModal] = useState(false);
   const [resetUsernameModal, setResetUsernameModal] = useState(false)
+  const [usernameReset, setUsernameReset] = useState(false)
 
   const handleResetClick = () => {
     setOpenModal(true)
+  }
+
+  const handleResetUsername = () => {
+    handleReset()
+    setOpenModal(false)
   }
 
   return (
@@ -50,11 +56,21 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
           <Modal open={openModal} disableAutoFocus={true} className={styles.modalContainer}>
             <div className={styles.modal}>
               <div className={styles.header}>
-                Enter player name
+                Restart game?
+                <IoClose className={styles.closeIcon} onClick={() => {setOpenModal(false)}}/>
               </div>
-              <button type="submit" className={styles.submitButton}>
-                Start your journey
-              </button>
+              <div className={styles.text}>
+                <span>Are you sure you want to restart your game?</span>
+                <span>Also progress will be lost.</span>          
+              </div>
+              <div className={styles.buttonContainer}>
+                <button className={styles.button} onClick={() => {setOpenModal(false)}}>
+                  No, I want to keep playing
+                </button>
+                <button className={styles.button} onClick={() => {handleResetUsername()}}>
+                  Yes, I want to start again
+                </button>
+              </div>
             </div>
           </Modal>
         </div>
