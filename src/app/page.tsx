@@ -29,19 +29,17 @@ const Home = () => {
                 <div className={styles.header}>
                   Enter player name
                 </div>
-                <div className={styles.content}>
-                  <form onSubmit={handleSubmit} className={styles.form}>
-                    <input 
-                      type="text" 
-                      value={username} 
-                      onChange={handleChange}
-                      className={styles.input}
-                    />
-                    <button type="submit" className={styles.submitButton}>
-                      Submit
-                    </button>
-                  </form>
-                </div>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                  <input 
+                    type="text" 
+                    value={username} 
+                    onChange={handleChange}
+                    className={styles.input}
+                  />
+                  <button type="submit" className={styles.submitButton}>
+                    Start your journey
+                  </button>
+                </form>
               </div>
             </Modal>
           </div>
