@@ -48,28 +48,35 @@ const Training = () => {
         Training
       </div>
       <div className={styles.content}>
-        <span>Attend training to improve your skills</span>
+        {/* <span>Select an attribute to train:</span> */}
         <div className={styles.buttonContainer}>
+          <span>Skills & Agility</span>
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('agility')}
             disabled={trainingInProgress}
           >
-            Train Skills & Agility
+            Train
           </button>
+        </div>
+        <div className={styles.buttonContainer}>
+        <span>Shooting</span>
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('shooting')}
             disabled={trainingInProgress}
           >
-            Train Shooting
+            Train
           </button>
+        </div>
+        <div className={styles.buttonContainer}>
+        <span>Fitness & Athleticism</span>
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('fitness')}
             disabled={trainingInProgress}
           >
-            Train Fitness
+            Train
           </button>
         </div>
         {trainingInProgress && (

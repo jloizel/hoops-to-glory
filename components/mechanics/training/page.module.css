@@ -26,11 +26,16 @@
   padding: 10px;
   gap: 10px;
   font-size: 14px;
+  /* margin-top: 100px; */
+}
+
+.content span {
+  font-weight: 500;
 }
 
 .buttonContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   margin: 20px 0;
 }
@@ -38,11 +43,16 @@
 .button {
   margin: 10px;
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #ED174F;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #bd113f;
 }
 
 .button:disabled {
