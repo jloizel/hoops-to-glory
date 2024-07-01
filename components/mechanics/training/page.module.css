@@ -20,13 +20,20 @@
   justify-content: center;
 }
 
+.animationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .content {
   display: flex;
   flex-direction: column;
   padding: 10px;
   gap: 10px;
   font-size: 14px;
-  margin-top: 100px;
+  /* margin-top: 100px; */
 }
 
 .buttonContainer {
@@ -63,7 +70,8 @@
 }
 
 .button:disabled {
-  background-color: #a5d6a7;
+  background-color: #bd113f;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 

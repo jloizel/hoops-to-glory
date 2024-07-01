@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from 'react';
 import styles from "./page.module.css";
@@ -21,40 +21,32 @@ const Training = () => {
   const handleTrainingClick = (type: TrainingType) => {
     setTrainingType(type);
     setTrainingInProgress(true);
+
     setTimeout(() => {
       setSkills(prevSkills => ({
         ...prevSkills,
         [type]: prevSkills[type] + 1,
       }));
+      setTrainingType(null); // Hide the animation after 60 seconds
       setTrainingInProgress(false);
-    }, 60000); // 60 seconds for training
+    }, 6000); // 60 seconds for training
   };
 
-  const averageSkillLevel = (skills.agility + skills.shooting + skills.fitness)/3;
-
-  const startTraining = (type: TrainingType) => {
-    setTrainingType(type);
-    setTimeout(() => setTrainingType(null), trainingDuration * 1000);
-  };
-
-
+  const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <BsConeStriped className={styles.icon} />
+        <BsConeStriped />
         Training
       </div>
-      <div className={styles.animationContainer}>
-        {trainingType && (
-          <Animation
-            type={trainingType as TrainingType}
-            duration={trainingDuration}
-          />
-        )}
-      </div>
+      {trainingType && (
+        <Animation
+          type={trainingType as TrainingType}
+          duration={trainingDuration}
+        />
+      )}
       <div className={styles.content}>
-        {/* <span>Select an attribute to train:</span> */}
         <div className={styles.buttonContainer}>
           <div className={styles.skill}>
             <span>Skills & Agility</span>
@@ -83,7 +75,7 @@ const Training = () => {
         </div>
         <div className={styles.buttonContainer}>
           <div className={styles.skill}>
-            <span>Fitness & Athleticism</span>
+            <span>Strength & Fitness</span>
             <div>Level: {skills.fitness}</div>
           </div>
           <button

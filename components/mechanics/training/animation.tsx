@@ -11,28 +11,28 @@ interface TrainingAnimationProps {
 const Animation: React.FC<TrainingAnimationProps> = ({ type, duration }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.play();
+  // useEffect(() => {
+  //   const video = videoRef.current;
+  //   if (video) {
+  //     video.play();
 
-      const loopVideo = () => {
-        video.currentTime = 0;
-        video.play();
-      };
+  //     const loopVideo = () => {
+  //       video.currentTime = 0;
+  //       video.play();
+  //     };
 
-      video.addEventListener('ended', loopVideo);
+  //     video.addEventListener('ended', loopVideo);
 
-      const stopLooping = setTimeout(() => {
-        video.removeEventListener('ended', loopVideo);
-      }, duration * 1000);
+  //     const stopLooping = setTimeout(() => {
+  //       video.removeEventListener('ended', loopVideo);
+  //     }, duration * 1000);
 
-      return () => {
-        clearTimeout(stopLooping);
-        video.removeEventListener('ended', loopVideo);
-      };
-    }
-  }, [type, duration]);
+  //     return () => {
+  //       clearTimeout(stopLooping);
+  //       video.removeEventListener('ended', loopVideo);
+  //     };
+  //   }
+  // }, [type, duration]);
 
   const getVideoSrc = () => {
     switch (type) {
@@ -48,9 +48,9 @@ const Animation: React.FC<TrainingAnimationProps> = ({ type, duration }) => {
   };
 
   return (
-    <div className={styles.trainingAnimation}>
-      <video ref={videoRef} width="300" height="300" loop autoPlay muted>
-        <source src={getVideoSrc()} type="video/mp4" />
+    <div className={styles.animationContainer}>
+      <video ref={videoRef} width="100" height="100" loop autoPlay muted>
+        <source src={getVideoSrc()} type="video/mp4"/>
         Your browser does not support the video tag.
       </video>
     </div>
