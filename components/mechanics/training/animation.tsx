@@ -49,7 +49,7 @@ const Animation: React.FC<TrainingAnimationProps> = ({ type, duration }) => {
 
   return (
     <div className={styles.animationContainer}>
-      <video ref={videoRef} width="100" height="100" loop autoPlay muted>
+      <video ref={videoRef} className={styles.video} width="100" height="100" loop autoPlay muted >
         <source src={getVideoSrc()} type="video/mp4"/>
         Your browser does not support the video tag.
       </video>

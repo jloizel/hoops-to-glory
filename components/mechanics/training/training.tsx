@@ -29,7 +29,7 @@ const Training = () => {
       }));
       setTrainingType(null); // Hide the animation after 60 seconds
       setTrainingInProgress(false);
-    }, 6000); // 60 seconds for training
+    }, 60000); // 60 seconds for training
   };
 
   const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
