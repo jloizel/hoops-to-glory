@@ -26,22 +26,27 @@
   padding: 10px;
   gap: 10px;
   font-size: 14px;
-  /* margin-top: 100px; */
-}
-
-.content span {
-  font-weight: 500;
+  margin-top: 100px;
 }
 
 .buttonContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 20px 0;
+  justify-content: space-between;
+}
+
+.skill {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+}
+
+.skill div {
+  font-style: italic;
 }
 
 .button {
-  margin: 10px;
   padding: 10px 20px;
   background-color: #ED174F;
   color: white;
@@ -49,6 +54,8 @@
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
 }
 
 .button:hover {
@@ -106,5 +113,5 @@
 }
 
 .skillLevels {
-  margin-top: 20px;
+  margin-top: 10px;
 }

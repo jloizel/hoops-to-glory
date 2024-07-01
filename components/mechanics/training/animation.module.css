@@ -1,0 +1,11 @@
+.trainingAnimation {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.video {
+  width: 100%;
+  height: auto;
+}
