@@ -21,39 +21,6 @@
 }
 
 .animationContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 1s forwards;
-}
-
-.fade-out {
-  opacity: 1;
-  animation: fadeOut 1s forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-  }
-}
-
-.animation {
-  transition: opacity 1s ease-in-out;
-}
-
-.animationContainer {
   height: 120px; /* Adjust this height as needed */
   display: flex;
   align-items: center;
@@ -61,12 +28,46 @@
   transition: opacity 1s ease-in-out;
 }
 
-.hidden {
+.timerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  animation: popOut 1s forwards;
+}
+
+@keyframes popOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animationHidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.visible {
+.animationVisible {
   opacity: 1;
   pointer-events: all;
 }

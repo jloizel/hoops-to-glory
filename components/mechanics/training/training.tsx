@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import { BsConeStriped } from "react-icons/bs";
 import { FaRunning, FaBasketballBall, FaDumbbell } from "react-icons/fa";
 import Animation from './animation';
+import { MdOutlineTimer } from "react-icons/md";
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
@@ -40,18 +41,21 @@ const Training = () => {
         <BsConeStriped />
         Training
       </div>
-      {/* {trainingType && (
-        <Animation
-          type={trainingType as TrainingType}
-          duration={trainingDuration}
-        />
-      )} */}
-      <div className={`${styles['animationContainer']} ${trainingType ? styles.visible : styles.hidden}`}>
-        {trainingType && (
-          <Animation
-            type={trainingType as TrainingType}
-            duration={trainingDuration}
-          />
+      <div className={styles.animationContainer}>
+        {!trainingType ? (
+          <div className={styles.timerContainer}>
+            <span>60</span> {/* replace this with the current training time */}
+            <MdOutlineTimer />
+          </div>
+        ) : (
+          <div className={`${styles.animationVisible}`}>
+            {trainingType && (
+              <Animation
+                type={trainingType as TrainingType}
+                duration={trainingDuration}
+              />
+            )}
+          </div>
         )}
       </div>
       <div className={styles.content}>
