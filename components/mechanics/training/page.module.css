@@ -20,7 +20,7 @@
   justify-content: center;
 }
 
-.animationContainer {
+.topContainer {
   height: 120px; /* Adjust this height as needed */
   display: flex;
   align-items: center;
@@ -33,7 +33,24 @@
   align-items: center;
   justify-content: center;
   font-size: 2rem;
+  /* animation: popOut 1s forwards; */
+}
+
+.timerIcon {
+  font-size: 2rem;
+  animation: popOut 1s backwards;
+}
+
+.timerContainer span {
   animation: popOut 1s forwards;
+}
+
+.popOut {
+  animation: popOut 1s forwards;
+}
+
+.popIn {
+  animation: popIn 1s forwards;
 }
 
 @keyframes popOut {

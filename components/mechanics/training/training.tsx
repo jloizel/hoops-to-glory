@@ -18,10 +18,22 @@ const Training = () => {
     shooting: 0,
     fitness: 0,
   });
+  const [buttonPressed, setButtonPressed] = useState(false)
+  const [showDuration, setShowDuration] = useState(false)
+  const [showAnimation, setShowAnimation] = useState(false)
 
   const handleTrainingClick = (type: TrainingType) => {
+    setButtonPressed(true)
     setTrainingType(type);
     setTrainingInProgress(true);
+
+    setTimeout(() => {
+      setShowDuration(true);
+    }, 500);
+
+    setTimeout(() => {
+      setShowAnimation(true);
+    }, 1000);
 
     setTimeout(() => {
       setSkills(prevSkills => ({
@@ -35,20 +47,32 @@ const Training = () => {
 
   const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
 
+  console.log(buttonPressed)
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <BsConeStriped />
         Training
       </div>
-      <div className={styles.animationContainer}>
+      <div className={styles.topContainer}>
+        <MdOutlineTimer className={`${styles.timerIcon} ${buttonPressed ? styles.popIn : ''}`}/>
+        <div className={`${styles.duration} ${showDuration ? styles.popIn : ''}`}>
+          60
+        </div>
+        <div>
+          <Animation
+            type={trainingType as TrainingType}
+            duration={trainingDuration}
+          />
+        </div>
         {!trainingType ? (
           <div className={styles.timerContainer}>
+            <MdOutlineTimer className={`${styles.timerIcon} ${buttonPressed ? styles.popIn : ''}`}/>
             <span>60</span> {/* replace this with the current training time */}
-            <MdOutlineTimer />
           </div>
         ) : (
-          <div className={`${styles.animationVisible}`}>
+          <div className={styles.animationVisible}>
             {trainingType && (
               <Animation
                 type={trainingType as TrainingType}
