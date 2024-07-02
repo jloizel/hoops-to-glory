@@ -6,9 +6,9 @@
 }
 
 .video {
-  width: 150px;
-  height: auto;
-  filter: saturate(1.8) hue-rotate(55deg) contrast(1);
+  width: auto;
+  height: 120px;
+  filter: saturate(1.7) hue-rotate(53deg) contrast(1.2);
   filter: #0067B1;
 }
 

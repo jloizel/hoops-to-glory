@@ -29,7 +29,7 @@ const Training = () => {
       }));
       setTrainingType(null); // Hide the animation after 60 seconds
       setTrainingInProgress(false);
-    }, 60000); // 60 seconds for training
+    }, 6000); // 60 seconds for training
   };
 
   const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
@@ -40,12 +40,20 @@ const Training = () => {
         <BsConeStriped />
         Training
       </div>
-      {trainingType && (
+      {/* {trainingType && (
         <Animation
           type={trainingType as TrainingType}
           duration={trainingDuration}
         />
-      )}
+      )} */}
+      <div className={`${styles['animationContainer']} ${trainingType ? styles.visible : styles.hidden}`}>
+        {trainingType && (
+          <Animation
+            type={trainingType as TrainingType}
+            duration={trainingDuration}
+          />
+        )}
+      </div>
       <div className={styles.content}>
         <div className={styles.buttonContainer}>
           <div className={styles.skill}>
