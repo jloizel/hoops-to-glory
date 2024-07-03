@@ -21,37 +21,41 @@
 }
 
 .topContainer {
-  height: 120px; /* Adjust this height as needed */
+  position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
-  transition: opacity 1s ease-in-out;
+  align-items: center;
+  height: 120px; /* Adjust as needed */
 }
 
 .timerContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
-  /* animation: popOut 1s forwards; */
 }
 
 .timerIcon {
-  font-size: 2rem;
-  animation: popOut 1s backwards;
-}
-
-.timerContainer span {
-  animation: popOut 1s forwards;
+  font-size: 60px;
+  transition: transform 0.5s ease-in-out, opacity 0.2s ease-in-out;
 }
 
 .popOut {
+  /* transform: scale(0); */
+  opacity: 0;
+}
+
+.durationContainer {
+  font-size: 30px;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 0;
+  /* transform: scale(0); */
+}
+
+.durationContainer.popIn {
+  opacity: 1;
   animation: popOut 1s forwards;
 }
 
-.popIn {
-  animation: popIn 1s forwards;
-}
 
 @keyframes popOut {
   0% {
@@ -80,7 +84,8 @@
 }
 
 .animationHidden {
-  opacity: 0;
+  /* opacity: 0; */
+  display: none;
   pointer-events: none;
 }
 
@@ -88,6 +93,13 @@
   opacity: 1;
   pointer-events: all;
 }
+
+.durationContainer {
+  font-size: 2rem;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
 
 .content {
   display: flex;
