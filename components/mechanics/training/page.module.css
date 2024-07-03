@@ -2,7 +2,7 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 8px 24px rgba(62, 53, 82, 0.3);
-  width: 50%;
+  width: 280px;
 }
 
 .header {
@@ -113,7 +113,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 20px;
   gap: 10px;
   font-size: 14px;
   /* margin-top: 150px; */
@@ -138,7 +138,7 @@
 
 .button {
   padding: 10px 20px;
-  background-color: #ED174F;
+  background-color: #0067B1;
   color: white;
   border: none;
   border-radius: 5px;
@@ -158,11 +158,11 @@
 }
 
 .button:hover {
-  background-color: #bd113f;
+  background-color: #0a2b82;
 }
 
 .button:disabled {
-  background-color: #bd113f;
+  background-color: #0a2b82;
   opacity: 0.5;
   cursor: not-allowed;
 }

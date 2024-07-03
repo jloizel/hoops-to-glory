@@ -26,8 +26,6 @@ const Game = () => {
         <div className={styles.middleContentContainer}>
           <Training/>
           <Recovery/>
-        </div>
-        <div className={styles.bottomContentContainer}>
           <Games/>
           <Endorsements/>
         </div>

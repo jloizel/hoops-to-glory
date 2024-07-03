@@ -3,72 +3,37 @@
   flex-direction: row;
   width: 100%;
   padding: 0 20px;
-  height: 100%;
 }
 
 .leftContainer {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  /* gap: 20px; */
-  justify-content: space-between;
+  align-items: center;
 }
 
 .rightContainer {
+  flex: 3;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
   padding-left: 20px;
 }
 
 .topContentContainer {
+  /* flex: 1; */
   display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  margin-bottom: 20px;
+  align-items: center;
 }
 
 .middleContentContainer, .bottomContentContainer {
+  flex: 2;
   display: flex;
-  flex-direction: row;
-  width: 100%;
+  flex-wrap: wrap; /* Enable flex wrap */
+  /* align-items: stretch; */
   gap: 20px;
+  padding: 80px 0;
 }
 
-.card {
-  background-color: white;
-  /* padding: 20px; */
-  border-radius: 8px;
-  box-shadow: 0px 8px 24px rgba(62, 53, 82, 0.3);
-  width: 50%;
-  height: 50%;
-}
-
-.header {
-  font-size: 16px;
-  font-weight: 500;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  background-color: #0067B1;
-  color: white;
-  padding: 10px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-.icon {
-  font-size: 16px;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  font-weight: 500;
-  height: 200px;
+.middleContentContainer > div {
+  height: 400px; /* Minimum height for items */
 }
