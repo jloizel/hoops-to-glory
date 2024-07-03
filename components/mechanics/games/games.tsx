@@ -10,7 +10,7 @@ const Games = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <PiCourtBasketballLight className={styles.icon}/>
+        <PiCourtBasketballLight/>
         Games
       </div>
       <div className={styles.content}>
