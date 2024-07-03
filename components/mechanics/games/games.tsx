@@ -43,7 +43,7 @@ const Games = () => {
           } else {
             clearInterval(interval);
             if (quarter < 4) {
-              setQuarter(prevQuarter => prevQuarter + 1); // Increment quarter
+              setQuarter(prevQuarter => prevQuarter + 1/2); // Increment quarter
               return 600000; // Reset timer to 10 minutes for the next quarter
             } else {
               setIsRunning(false); // Stop the match after the 4th quarter
