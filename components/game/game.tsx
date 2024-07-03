@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import styles from "./page.module.css"
-import Phone from '../../components/phone/phone'
+import Phone from '../mechanics/phone/phone'
 import Analytics from '../mechanics/analytics/analytics'
 import { Box } from '@mui/material'
 import Training from '../mechanics/training/training'

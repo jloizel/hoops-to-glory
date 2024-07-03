@@ -24,7 +24,7 @@ const Endorsements = () => {
       <div className={styles.content}>
         <div className={styles.bankContainer}>
           <PiPiggyBankLight className={styles.icon} />
-          <span>Money in the bank: {formatMoney(money)}</span>
+          <span>{formatMoney(money)}</span>
         </div>
         <div className={styles.bottomContainer}>
           <button className={styles.button}>

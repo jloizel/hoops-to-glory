@@ -8,7 +8,7 @@
   border: 16px solid #333;
   border-radius: 36px;
   background-color: white;
-  background-image: url('../../public/images/background2.jpg');
+  background-image: url('../../../public/images/background2.jpg');
   background-size: 300px;
   background-position: 2px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
