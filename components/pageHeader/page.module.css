@@ -185,7 +185,7 @@
   text-align: center;
   padding: 5px;
   font-weight: 500;
-  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Poppins', sans-serif;
 }
 
 .buttonContainer {
@@ -198,7 +198,7 @@
   background: #E6E6E5;
   border: none;
   width: 200px;
-  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Poppins', sans-serif;
   padding: 5px;
   border-radius: 4px;
   margin-top: 20px;

@@ -25,10 +25,10 @@ const Game = () => {
         </div>
         <div className={styles.middleContentContainer}>
           <Training/>
-          <Games/>
+          <Recovery/>
         </div>
         <div className={styles.bottomContentContainer}>
-          <Recovery/>
+          <Games/>
           <Endorsements/>
         </div>
       </Box>

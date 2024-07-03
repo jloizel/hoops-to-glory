@@ -4,13 +4,15 @@ import React, { useState } from 'react';
 import styles from "./page.module.css";
 import { BsConeStriped } from "react-icons/bs";
 import { MdOutlineTimer } from "react-icons/md";
+import { TfiTimer } from "react-icons/tfi";
 import Animation from './animation';
+import Countdown from '../../countdown/countdown';
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
 const Training = () => {
   const [trainingType, setTrainingType] = useState<TrainingType | null>(null);
-  const trainingDuration = 60;
+  const trainingDuration = 60000;
   const [trainingInProgress, setTrainingInProgress] = useState(false);
   const [skills, setSkills] = useState<{ agility: number, shooting: number, fitness: number }>({
     agility: 0,
@@ -44,7 +46,7 @@ const Training = () => {
       setTrainingInProgress(false);
       setButtonPressed(false);
       setShowAnimation(false);
-    }, 6000); // 60 seconds for training
+    }, trainingDuration); // 60 seconds for training
   };
 
   const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
@@ -56,9 +58,9 @@ const Training = () => {
         Training
       </div>
       <div className={styles.topContainer}>
-        {!showAnimation && (
+        {/* {!showAnimation && (
           <div className={styles.timerContainer}>
-            <MdOutlineTimer className={`${styles.timerIcon} ${buttonPressed ? styles.popOut : ''}`} />
+            <TfiTimer className={`${styles.timerIcon} ${buttonPressed ? styles.popOut : ''}`} />
           </div>
         )}
         <div className={`${styles.durationContainer} ${showDuration ? styles.popIn : ""}`}>
@@ -73,7 +75,8 @@ const Training = () => {
               duration={trainingDuration}
             />
           </div>
-        )}
+        )} */}
+        <Countdown trainingInProgress={trainingInProgress} trainingDuration={trainingDuration}/>
       </div>
       <div className={styles.content}>
         <div className={styles.buttonContainer}>
@@ -86,7 +89,8 @@ const Training = () => {
             onClick={() => handleTrainingClick('agility')}
             disabled={trainingInProgress}
           >
-            TRAIN
+            <span>TRAIN</span>
+            <span>(+1)</span>
           </button>
         </div>
         <div className={styles.buttonContainer}>
@@ -99,7 +103,8 @@ const Training = () => {
             onClick={() => handleTrainingClick('shooting')}
             disabled={trainingInProgress}
           >
-            TRAIN
+            <span>TRAIN</span>
+            <span>(+1)</span>
           </button>
         </div>
         <div className={styles.buttonContainer}>
@@ -112,7 +117,8 @@ const Training = () => {
             onClick={() => handleTrainingClick('fitness')}
             disabled={trainingInProgress}
           >
-            TRAIN
+            <span>TRAIN</span>
+            <span>(+1)</span>
           </button>
         </div>
         <div className={styles.skillLevels}>
