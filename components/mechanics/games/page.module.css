@@ -29,7 +29,7 @@
   justify-content: space-between;
 }
 
-.bankContainer {
+.topContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;  
@@ -40,44 +40,44 @@
   /* margin-top: 20px; */
 }
 
-.bankContainer span {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  /* gap: 5px; */
-  color: #ED174F;
-  font-size: 14px;
-  font-weight: 600;
-}
-
 .icon {
   color: #ED174F;
-  font-size: 60px;
+  font-size: 80px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
-.icon:hover {
-  scale: 0.95;
-}
-
-.timer {
-  font-size: 32px;
-  margin-right: 20px;
+.timerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ED174F;
 }
 
 .quarter {
-  font-size: 24px;
+  font-family: "Poppins", sans-serif;
+}
+
+.timer {
+  font-family: "Azeret Mono", monospace;
+  font-size: 30px;
+  font-weight: 300;
 }
 
 .statsContainer {
-  margin-top: 20px;
   position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .stat {
   position: absolute;
-  font-size: 20px;
+  font-size: 16px;
   animation: fadeOut 3s forwards;
+  color: #0067B1;
 }
 
 @keyframes fadeOut {
@@ -98,4 +98,61 @@
   justify-content: space-between;
 }
 
+.button {
+  padding: 10px 10px;
+  background-color: #0067B1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.button:hover {
+  background-color: #0a2b82;
+}
+
+.button:disabled {
+  background-color: #0a2b82;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: 400;
+}
+
+.stats div {
+  font-weight: 700;
+  color: #0067B1;
+}
+
+.role {
+  display: flex;
+  flex-direction: row;
+  font-weight: 400;
+  gap: 5px;
+  font-style: italic;
+}
+
+.role div {
+  font-weight: 700;
+  color: #0067B1;
+}
 

@@ -23,8 +23,12 @@ const Endorsements = () => {
       </div>
       <div className={styles.content}>
         <div className={styles.bankContainer}>
-          <PiPiggyBankLight className={styles.icon} />
+          <PiPiggyBankLight className={styles.icon}/>
           <span>{formatMoney(money)}</span>
+        </div>
+        <div className={styles.requirement}>
+          <div>Next endorsement unlocked at:</div>
+          <span>10 points/game</span>
         </div>
         <div className={styles.bottomContainer}>
           <button className={styles.button}>

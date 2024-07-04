@@ -70,9 +70,10 @@ const Games = () => {
   const formatTimer = () => {
     const minutes = Math.floor((timer / 60000) % 60).toString().padStart(2, '0');
     const seconds = Math.floor((timer / 1000) % 60).toString().padStart(2, '0');
-    const milliseconds = Math.floor((timer % 1000) / 10).toString().padStart(2, '0');
-    return `${minutes}:${seconds}:${milliseconds}`;
+    const milliseconds = Math.floor((timer % 10000) / 100).toString().padStart(2, '0');
+    return `${minutes}:${seconds}`;
   };
+
 
   const handleStart = () => {
     setIsRunning(true);
@@ -80,6 +81,18 @@ const Games = () => {
     setQuarter(1); // Reset quarter to 1
     setStats([]); // Clear stats
   };
+
+  const handleQuarter = () => {
+    if (quarter === 1) {
+      return "1st"
+    } else if (quarter === 2) {
+      return "2nd"
+    } else if (quarter === 3) {
+      return "3rd"
+    } else {
+      return "4th"
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -89,20 +102,44 @@ const Games = () => {
       </div>
       <div className={styles.content}>
         <div className={styles.topContainer}>
+          <div className={styles.statsContainer}>
+            {stats.map(stat => (
+              <div key={stat.id} className={styles.stat}>{stat.text}</div>
+            ))}
+          </div>
           <PiCourtBasketballThin className={styles.icon} />
-          <span className={styles.timer}>{formatTimer()}</span>
-          <span className={styles.quarter}>Quarter: {quarter}</span>
+          <div className={styles.timerContainer}>
+            <span className={styles.timer}>{formatTimer()}</span>
+            <span className={styles.quarter}>{handleQuarter()}</span>
+          </div>
         </div>
-        <div className={styles.statsContainer}>
-          {stats.map(stat => (
-            <div key={stat.id} className={styles.stat}>{stat.text}</div>
-          ))}
-        </div>
-        {!isRunning && (
-          <button className={styles.startButton} onClick={handleStart}>
-            Start Match
+        <div className={styles.bottomContainer}>
+          <button className={styles.button} onClick={handleStart} disabled={isRunning}>
+            Play game
           </button>
-        )}
+          <div className={styles.statsContainer}>
+            <div className={styles.stats}>
+              <span>Minutes/game</span>
+              <div>0</div>
+            </div>
+            <div className={styles.stats}>
+              <span>Points/game</span>
+              <div>0</div>
+            </div>
+            <div className={styles.stats}>
+              <span>Assists/game</span>
+              <div>0</div>
+            </div>
+            <div className={styles.stats}>
+              <span>Rebounds/game</span>
+              <div>0</div>
+            </div>
+            <div className={styles.role}>
+              <span>Team role:</span>
+              <div>Benchwarmer</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

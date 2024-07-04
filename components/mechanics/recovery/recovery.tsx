@@ -23,7 +23,7 @@ const Recovery = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <FaBed />
+        <FaHeartCircleBolt />
         Recovery
       </div>
       <div className={styles.content}>
