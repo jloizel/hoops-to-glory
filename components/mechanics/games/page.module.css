@@ -148,6 +148,9 @@
   flex-direction: row;
   font-weight: 400;
   gap: 5px;
+}
+
+.role span {
   font-style: italic;
 }
 
