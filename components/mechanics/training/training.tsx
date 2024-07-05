@@ -5,47 +5,34 @@ import styles from "./page.module.css";
 import { BsConeStriped } from "react-icons/bs";
 import { MdOutlineTimer } from "react-icons/md";
 import { TfiTimer } from "react-icons/tfi";
-import Animation from './animation';
 import Countdown from '../../countdown/countdown';
+
+interface TrainingProps {
+  trainingDuration: number;
+  trainingInProgress: boolean;
+  setTrainingInProgress: React.Dispatch<React.SetStateAction<boolean>>;
+  skills: { agility: number, shooting: number, fitness: number };
+  setSkills: React.Dispatch<React.SetStateAction<{ agility: number, shooting: number, fitness: number }>>;
+}
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
-const Training = () => {
-  const [trainingType, setTrainingType] = useState<TrainingType | null>(null);
-  const trainingDuration = 60000;
-  const [trainingInProgress, setTrainingInProgress] = useState(false);
-  const [skills, setSkills] = useState<{ agility: number, shooting: number, fitness: number }>({
-    agility: 0,
-    shooting: 0,
-    fitness: 0,
-  });
-  const [buttonPressed, setButtonPressed] = useState(false);
-  const [showDuration, setShowDuration] = useState(false);
-  const [showAnimation, setShowAnimation] = useState(false);
-
+const Training: React.FC<TrainingProps> = ({
+  trainingDuration,
+  trainingInProgress,
+  setTrainingInProgress,
+  skills,
+  setSkills,
+}) => {
   const handleTrainingClick = (type: TrainingType) => {
-    setButtonPressed(true);
-    setTrainingType(type);
     setTrainingInProgress(true);
-
-    setTimeout(() => {
-      setShowDuration(true);
-    }, 500);
-
-    setTimeout(() => {
-      setShowDuration(false);
-      setShowAnimation(true);
-    }, 1500);
 
     setTimeout(() => {
       setSkills(prevSkills => ({
         ...prevSkills,
         [type]: prevSkills[type] + 1,
       }));
-      setTrainingType(null); // Hide the animation after 60 seconds
       setTrainingInProgress(false);
-      setButtonPressed(false);
-      setShowAnimation(false);
     }, trainingDuration); // 60 seconds for training
   };
 
@@ -58,24 +45,6 @@ const Training = () => {
         Training
       </div>
       <div className={styles.topContainer}>
-        {/* {!showAnimation && (
-          <div className={styles.timerContainer}>
-            <TfiTimer className={`${styles.timerIcon} ${buttonPressed ? styles.popOut : ''}`} />
-          </div>
-        )}
-        <div className={`${styles.durationContainer} ${showDuration ? styles.popIn : ""}`}>
-          {showDuration && (
-            <span>60 seconds</span>
-          )}
-        </div>
-        {showAnimation && (
-          <div className={styles.animationVisible}>
-            <Animation
-              type={trainingType as TrainingType}
-              duration={trainingDuration}
-            />
-          </div>
-        )} */}
         <Countdown trainingInProgress={trainingInProgress} trainingDuration={trainingDuration}/>
       </div>
       <div className={styles.content}>
