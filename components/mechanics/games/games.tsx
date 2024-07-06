@@ -9,24 +9,17 @@ interface Stat {
   text: string;
 }
 
-const Games = () => {
-  const [timer, setTimer] = useState(600000); // Timer starts at 10 minutes (600000 milliseconds)
+interface GamesProps {
+  stats: Stat[];
+  statInterval: number;
+  addRandomStat: () => void
+  handleStart: () => void
+}
+
+const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handleStart}) => {
+  const [gameLength, setGameLength] = useState(600000);
   const [quarter, setQuarter] = useState(1);
-  const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
-  const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
-
-  const addRandomStat = () => {
-    const statTypes = ["+2 points", "+3 points", "+1 assist", "+1 rebound"];
-    const randomStat = statTypes[Math.floor(Math.random() * statTypes.length)];
-    const newStat = { id: Date.now(), text: randomStat };
-
-    setStats(prevStats => [...prevStats, newStat]);
-
-    // Remove the stat after 3 seconds
-    setTimeout(() => {
-      setStats(prevStats => prevStats.filter(stat => stat.id !== newStat.id));
-    }, 3000);
-  };
+  const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -37,7 +30,7 @@ const Games = () => {
 
     if (isRunning) {
       interval = setInterval(() => {
-        setTimer(prevTimer => {
+        setGameLength(prevTimer => {
           if (prevTimer > 0) {
             return prevTimer - decreaseAmount; // Decrease timer by interval
           } else {
@@ -59,27 +52,19 @@ const Games = () => {
 
   // Add stats periodically only if the timer is running
   useEffect(() => {
-    let statInterval: NodeJS.Timeout;
+    let interval: NodeJS.Timeout;
     if (isRunning) {
-      statInterval = setInterval(addRandomStat, 3000); // Add random stat every 3 seconds
+      interval = setInterval(addRandomStat, statInterval); // Add random stat every 3 seconds
     }
-    return () => clearInterval(statInterval);
+    return () => clearInterval(interval);
   }, [isRunning]);
 
   // Format the timer into mm:ss:msms
   const formatTimer = () => {
-    const minutes = Math.floor((timer / 60000) % 60).toString().padStart(2, '0');
-    const seconds = Math.floor((timer / 1000) % 60).toString().padStart(2, '0');
-    const milliseconds = Math.floor((timer % 10000) / 100).toString().padStart(2, '0');
+    const minutes = Math.floor((gameLength / 60000) % 60).toString().padStart(2, '0');
+    const seconds = Math.floor((gameLength / 1000) % 60).toString().padStart(2, '0');
+    const milliseconds = Math.floor((gameLength % 10000) / 100).toString().padStart(2, '0');
     return `${minutes}:${seconds}`;
-  };
-
-
-  const handleStart = () => {
-    setIsRunning(true);
-    setTimer(600000); // Reset timer to 10 minutes
-    setQuarter(1); // Reset quarter to 1
-    setStats([]); // Clear stats
   };
 
   const handleQuarter = () => {

@@ -12,6 +12,11 @@ import Endorsements from '../mechanics/endorsements/endorsements'
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
+interface Stat {
+  id: number;
+  text: string;
+}
+
 const Game = () => {
 
   // PHONE
@@ -70,12 +75,37 @@ const Game = () => {
   // GAMES
   const [showGames, setShowGames] = useState(false)
   const [gamesPlayed, setGamesPlayed] = useState(0)
+  const [gameLength, setGameLength] = useState(600000); // Timer starts at 10 minutes (600000 milliseconds)
+  const [quarter, setQuarter] = useState(1);
+  const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
+  const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
+  const [statInterval, setStatInterval] = useState(3000) //initial interval of the stats displayed
 
   useEffect(() => {
     if (averageSkillLevel >= 10) {
       setShowGames(true)
     }
   }, [averageSkillLevel])
+
+  const addRandomStat = () => {
+    const statTypes = ["+2 points", "+3 points", "+1 assist", "+1 rebound"];
+    const randomStat = statTypes[Math.floor(Math.random() * statTypes.length)];
+    const newStat = { id: Date.now(), text: randomStat };
+
+    setStats(prevStats => [...prevStats, newStat]);
+
+    // Remove the stat after 3 seconds
+    setTimeout(() => {
+      setStats(prevStats => prevStats.filter(stat => stat.id !== newStat.id));
+    }, 3000);
+  };
+
+  const handleStart = () => {
+    setIsRunning(true);
+    setGameLength(600000); // Reset timer to 10 minutes
+    setQuarter(1); // Reset quarter to 1
+    setStats([]); // Clear stats
+  };
 
 
         
@@ -112,7 +142,12 @@ const Game = () => {
             </div>
           }       
           {showGames &&
-            <Games/>
+            <Games
+              stats={stats}
+              statInterval={statInterval}
+              addRandomStat={addRandomStat}
+              handleStart={handleStart}
+            />
           }     
           {showEndorsements &&
             <Endorsements/>
