@@ -5,8 +5,11 @@ import styles from "./page.module.css"
 import { FaHandshake } from "react-icons/fa";
 import { PiPiggyBankLight } from "react-icons/pi";
 
-const Endorsements = () => {
-  const [money, setMoney] = useState(100)
+interface EndorsementsProps {
+  money: number
+}
+
+const Endorsements: React.FC<EndorsementsProps> = ({money}) => {
   
   const formatMoney = (amount: number) => {
     return new Intl.NumberFormat('en-US', {

@@ -111,6 +111,13 @@ const Game = () => {
         
   // ENDORSEMENTS
   const [showEndorsements, setShowEndorsements] = useState(false)
+  const [money, setMoney] = useState(100)
+
+  useEffect(() => {
+    if (gamesPlayed >= 5) {
+      setShowEndorsements(true)
+    }
+  }, [gamesPlayed])
 
 
 
@@ -150,7 +157,9 @@ const Game = () => {
             />
           }     
           {showEndorsements &&
-            <Endorsements/>
+            <Endorsements
+              money={money}
+            />
           }
         </div>
       </Box>
