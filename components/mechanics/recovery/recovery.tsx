@@ -7,18 +7,13 @@ import { PiCursorClickLight } from "react-icons/pi";
 import { PiMouseLeftClickLight } from "react-icons/pi";
 import BatteryChargingFullIcon from '@mui/icons-material/BatteryChargingFull';
 
-const Recovery = () => {
-  const [clickCount, setClickCount] = useState(10); // Initial click count set to 200
-  const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
+interface RecoveryProps {
+  clickCount: number;
+  energyLevel: number;
+  handleClick: () => void
+}
 
-  const handleClick = () => {
-    if (clickCount > 0) {
-      setClickCount(prevCount => prevCount - 1); // Decrease click count by 1 on each click
-    } else if (clickCount === 0) {
-      setEnergyLevel(prevLevel => prevLevel + 5); // Increase energy level by 5
-      setClickCount(10); // Reset click count to 200
-    }
-  };
+const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick}) => {
 
   return (
     <div className={styles.container}>
