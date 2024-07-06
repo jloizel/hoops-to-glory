@@ -34,6 +34,15 @@
   padding: 80px 0;
 }
 
-.middleContentContainer > div {
-  /* height: 400px;  */
+@keyframes flash {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.flash {
+  animation: flash 1s ease-in-out 3; /* Animation duration and repetition */
 }

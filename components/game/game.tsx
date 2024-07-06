@@ -22,7 +22,7 @@ const Game = () => {
 
   //TRAINING
   const trainingDuration = 60000;
-  const InitialTrainingDuration = 60000;
+  const InitialTrainingDuration = 90000;
   const [trainingInProgress, setTrainingInProgress] = useState(false);
   const [skills, setSkills] = useState<{ agility: number, shooting: number, fitness: number }>({
     agility: 0,
@@ -44,9 +44,16 @@ const Game = () => {
 
   const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
 
-  // RECOVEVERY
+  // RECOVERY
+  const [showRecovery, setShowRecovery] = useState(false)
   const [clickCount, setClickCount] = useState(10); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
+
+  useEffect(() => {
+    if (skills.agility > 0 || skills.shooting > 0 || skills.fitness > 0) {
+      setShowRecovery(true);
+    }
+  }, [skills]);
 
   const handleClick = () => {
     if (clickCount > 0) {
@@ -58,9 +65,12 @@ const Game = () => {
   };
 
   // GAMES
+  const [showGames, setShowGames] = useState(false)
+
 
         
   // ENDORSEMENTS
+  const [showEndorsements, setShowEndorsements] = useState(false)
 
 
 
@@ -81,13 +91,21 @@ const Game = () => {
             handleTrainingClick={handleTrainingClick}
             averageSkillLevel={averageSkillLevel}
           />
-          <Recovery 
-            clickCount={clickCount}
-            energyLevel={energyLevel}
-            handleClick={handleClick}
-          />
-          <Games/>
-          <Endorsements/>
+          {showRecovery &&
+          <div  className={showRecovery ? styles.flash : ''}>
+            <Recovery 
+              clickCount={clickCount}
+              energyLevel={energyLevel}
+              handleClick={handleClick}
+            />
+            </div>
+          }       
+          {showGames &&
+            <Games/>
+          }     
+          {showEndorsements &&
+            <Endorsements/>
+          }
         </div>
       </Box>
     </div>
