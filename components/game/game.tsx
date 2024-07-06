@@ -18,10 +18,11 @@ const Game = () => {
 
 
   // ANALYTICS
-  
+
 
   //TRAINING
   const trainingDuration = 60000;
+  const InitialTrainingDuration = 6000
   const [trainingInProgress, setTrainingInProgress] = useState(false);
   const [skills, setSkills] = useState<{ agility: number, shooting: number, fitness: number }>({
     agility: 0,

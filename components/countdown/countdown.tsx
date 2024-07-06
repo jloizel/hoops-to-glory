@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styles from './page.module.css'; // Import your CSS module
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import { MdTimer } from "react-icons/md";
+import { RiTimerLine } from "react-icons/ri";
+import { IoTimer } from "react-icons/io5";
+
 
 interface CountdownProps {
   trainingInProgress: boolean
@@ -57,7 +61,8 @@ const Countdown: React.FC<CountdownProps> = ({trainingInProgress, trainingDurati
               </div>
             ) : (
               <div className={styles.timerText}>
-                {formatTime(trainingDurationinSec+0.5)}
+                {/* {formatTime(trainingDurationinSec+0.5)} */}
+                <MdTimer className={styles.icon}/>
               </div>
             )}
           </>
