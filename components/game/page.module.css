@@ -44,5 +44,5 @@
 }
 
 .flash {
-  animation: flash 1s ease-in-out 3; /* Animation duration and repetition */
+  animation: flash 0.3s ease-in-out 3; /* Animation duration and repetition */
 }

@@ -21,7 +21,7 @@ const Game = () => {
 
 
   //TRAINING
-  const trainingDuration = 60000;
+  const trainingDuration = 6000;
   const InitialTrainingDuration = 90000;
   const [trainingInProgress, setTrainingInProgress] = useState(false);
   const [skills, setSkills] = useState<{ agility: number, shooting: number, fitness: number }>({
@@ -44,6 +44,7 @@ const Game = () => {
 
   const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
 
+
   // RECOVERY
   const [showRecovery, setShowRecovery] = useState(false)
   const [clickCount, setClickCount] = useState(10); // Initial click count set to 200
@@ -63,6 +64,7 @@ const Game = () => {
       setClickCount(10); // Reset click count to 200
     }
   };
+  
 
   // GAMES
   const [showGames, setShowGames] = useState(false)
@@ -92,7 +94,7 @@ const Game = () => {
             averageSkillLevel={averageSkillLevel}
           />
           {showRecovery &&
-          <div  className={showRecovery ? styles.flash : ''}>
+          <div className={showRecovery ? styles.flash : ''}>
             <Recovery 
               clickCount={clickCount}
               energyLevel={energyLevel}
