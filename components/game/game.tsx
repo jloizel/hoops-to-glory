@@ -10,6 +10,7 @@ import Games from '../mechanics/games/games'
 import Recovery from '../mechanics/recovery/recovery'
 import Endorsements from '../mechanics/endorsements/endorsements'
 
+type TrainingType = 'agility' | 'shooting' | 'fitness';
 
 const Game = () => {
   const trainingDuration = 60000;
@@ -19,6 +20,23 @@ const Game = () => {
     shooting: 0,
     fitness: 0,
   });
+
+  // TRAINING
+
+  const handleTrainingClick = (type: TrainingType) => {
+    setTrainingInProgress(true);
+
+    setTimeout(() => {
+      setSkills(prevSkills => ({
+        ...prevSkills,
+        [type]: prevSkills[type] + 1,
+      }));
+      setTrainingInProgress(false);
+    }, trainingDuration); // 60 seconds for training
+  };
+
+  const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
+
 
   return (
     <div className={styles.gameContainer}>
@@ -33,9 +51,9 @@ const Game = () => {
         <Training
             trainingDuration={trainingDuration}
             trainingInProgress={trainingInProgress}
-            setTrainingInProgress={setTrainingInProgress}
             skills={skills}
-            setSkills={setSkills}
+            handleTrainingClick={handleTrainingClick}
+            averageSkillLevel={averageSkillLevel}
           />
           <Recovery/>
           <Games/>

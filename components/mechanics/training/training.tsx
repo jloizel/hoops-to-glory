@@ -10,9 +10,9 @@ import Countdown from '../../countdown/countdown';
 interface TrainingProps {
   trainingDuration: number;
   trainingInProgress: boolean;
-  setTrainingInProgress: React.Dispatch<React.SetStateAction<boolean>>;
   skills: { agility: number, shooting: number, fitness: number };
-  setSkills: React.Dispatch<React.SetStateAction<{ agility: number, shooting: number, fitness: number }>>;
+  handleTrainingClick: (type: TrainingType) => void; 
+  averageSkillLevel: number
 }
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
@@ -20,23 +20,10 @@ type TrainingType = 'agility' | 'shooting' | 'fitness';
 const Training: React.FC<TrainingProps> = ({
   trainingDuration,
   trainingInProgress,
-  setTrainingInProgress,
   skills,
-  setSkills,
+  handleTrainingClick,
+  averageSkillLevel
 }) => {
-  const handleTrainingClick = (type: TrainingType) => {
-    setTrainingInProgress(true);
-
-    setTimeout(() => {
-      setSkills(prevSkills => ({
-        ...prevSkills,
-        [type]: prevSkills[type] + 1,
-      }));
-      setTrainingInProgress(false);
-    }, trainingDuration); // 60 seconds for training
-  };
-
-  const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
 
   return (
     <div className={styles.container}>
