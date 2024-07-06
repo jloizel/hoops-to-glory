@@ -22,7 +22,6 @@ const Game = () => {
   });
 
   // TRAINING
-
   const handleTrainingClick = (type: TrainingType) => {
     setTrainingInProgress(true);
 
@@ -36,6 +35,21 @@ const Game = () => {
   };
 
   const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
+
+  // RECOVEVERY
+
+
+  // GAMES
+
+        
+  // ENDORSEMENTS
+
+
+  // PHONE
+
+
+  // ANALYTICS
+  
 
 
   return (
