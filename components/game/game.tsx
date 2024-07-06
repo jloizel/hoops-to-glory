@@ -13,6 +13,14 @@ import Endorsements from '../mechanics/endorsements/endorsements'
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
 const Game = () => {
+
+  // PHONE
+
+
+  // ANALYTICS
+  
+
+  //TRAINING
   const trainingDuration = 60000;
   const [trainingInProgress, setTrainingInProgress] = useState(false);
   const [skills, setSkills] = useState<{ agility: number, shooting: number, fitness: number }>({
@@ -21,7 +29,6 @@ const Game = () => {
     fitness: 0,
   });
 
-  // TRAINING
   const handleTrainingClick = (type: TrainingType) => {
     setTrainingInProgress(true);
 
@@ -44,12 +51,6 @@ const Game = () => {
         
   // ENDORSEMENTS
 
-
-  // PHONE
-
-
-  // ANALYTICS
-  
 
 
   return (
