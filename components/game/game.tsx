@@ -49,6 +49,7 @@ const Game = () => {
   const [showRecovery, setShowRecovery] = useState(false)
   const [clickCount, setClickCount] = useState(10); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
+  const [energyStorage, setEnergyStorage] = useState(4)
 
   useEffect(() => {
     if (skills.agility > 0 || skills.shooting > 0 || skills.fitness > 0) {
@@ -68,6 +69,13 @@ const Game = () => {
 
   // GAMES
   const [showGames, setShowGames] = useState(false)
+  const [gamesPlayed, setGamesPlayed] = useState(0)
+
+  useEffect(() => {
+    if (averageSkillLevel >= 10) {
+      setShowGames(true)
+    }
+  }, [averageSkillLevel])
 
 
         
@@ -99,6 +107,7 @@ const Game = () => {
               clickCount={clickCount}
               energyLevel={energyLevel}
               handleClick={handleClick}
+              energyStorage={energyStorage}
             />
             </div>
           }       

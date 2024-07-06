@@ -11,9 +11,10 @@ interface RecoveryProps {
   clickCount: number;
   energyLevel: number;
   handleClick: () => void
+  energyStorage: number
 }
 
-const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick}) => {
+const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick, energyStorage}) => {
 
   return (
     <div className={styles.container}>
@@ -37,8 +38,12 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
           <div className={styles.energyStorageContainer}>
             <span>Energy storage</span>
             <div className={styles.energyStorage}>
-              <BatteryChargingFullIcon className={energyLevel > 0 ? styles.bottleBoltActive : styles.bottleBolt} />
-              <BatteryChargingFullIcon className={energyLevel > 0 ? styles.bottleBoltActive : styles.bottleBolt} />
+              {Array.from({ length: energyStorage }).map((_, index) => (
+                <BatteryChargingFullIcon
+                  key={index}
+                  className={energyLevel > 0 ? styles.bottleBoltActive : styles.bottleBolt}
+                />
+              ))}
             </div>
           </div>
         </div>

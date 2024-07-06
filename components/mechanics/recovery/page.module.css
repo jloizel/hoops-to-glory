@@ -94,12 +94,12 @@
 }
 
 .bottleBolt {
-  font-size: 60px;
+  font-size: 60px !important;
   margin-top: 10px;
 }
 
 .bottleBoltActive {
-  font-size: 60px;
+  font-size: 60px !important;
   margin-top: 10px;
   color: #ED174F;
 }
