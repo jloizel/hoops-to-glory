@@ -13,13 +13,17 @@ interface GamesProps {
   stats: Stat[];
   statInterval: number;
   addRandomStat: () => void
-  handleStart: () => void
+  handleStart: () => void;
+  isRunning: boolean;
+  handleGameEnd: () => void
+  gameEnded: boolean;
+  handleResetGame: () => void
 }
 
-const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handleStart}) => {
+const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handleStart, isRunning, handleGameEnd, gameEnded, handleResetGame}) => {
   const [gameLength, setGameLength] = useState(600000);
   const [quarter, setQuarter] = useState(1);
-  const [isRunning, setIsRunning] = useState(false);
+  // const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -39,7 +43,8 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
               setQuarter(prevQuarter => prevQuarter + 1/2); // Increment quarter
               return 600000; // Reset timer to 10 minutes for the next quarter
             } else {
-              setIsRunning(false); // Stop the match after the 4th quarter
+              handleGameEnd()
+              // setIsRunning(false);
               return 0; // Stop timer at 0 in the 4th quarter
             }
           }
@@ -79,6 +84,14 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
     }
   }
 
+  const handleButtonClick = () => {
+    if (gameEnded) {
+      handleResetGame()
+    } else {
+      handleStart();
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -87,7 +100,7 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
       </div>
       <div className={styles.content}>
         <div className={styles.topContainer}>
-          <div className={styles.statsContainer}>
+          <div className={styles.gameStatsContainer}>
             {stats.map(stat => (
               <div key={stat.id} className={styles.stat}>{stat.text}</div>
             ))}
@@ -99,8 +112,8 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
           </div>
         </div>
         <div className={styles.bottomContainer}>
-          <button className={styles.button} onClick={handleStart} disabled={isRunning}>
-            Play game
+          <button className={styles.button} onClick={handleButtonClick} disabled={isRunning}>
+            {gameEnded ? "Play again" : "Play game"}
           </button>
           <div className={styles.statsContainer}>
             <div className={styles.stats}>

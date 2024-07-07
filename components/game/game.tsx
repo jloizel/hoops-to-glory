@@ -61,9 +61,15 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       }));
       setTrainingInProgress(false);
     }, trainingDuration); // 60 seconds for training
+    
+    if (showRecovery) {
+      setEnergyLevel(prevLevel => prevLevel - 1);
+    }
   };
 
   const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
+  const totalSkillLevel = skills.agility + skills.shooting + skills.fitness;
+
 
   const handleAgilityUpgrade = (value: number) => {
     setSkillUpgrade(prevUpgrade => ({
@@ -90,7 +96,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   // RECOVERY
   const [showRecovery, setShowRecovery] = useState(false)
-  const [clickCount, setClickCount] = useState(10); // Initial click count set to 200
+  const initialClickCount = 10
+  const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
   const [energyStorage, setEnergyStorage] = useState(1)
 
@@ -106,11 +113,17 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }
     if (clickCount > 0) {
       setClickCount(prevCount => prevCount - 1); // Decrease click count by 1 on each click
-    } else if (clickCount === 0) {
+    } else if (clickCount === 0 && clickCount < 5) {
       setEnergyLevel(prevLevel => prevLevel + 1); // Increase energy level by 5
-      setClickCount(10); // Reset click count to 200
+      setClickCount(initialClickCount); // Reset click count to 200
     }
   };
+
+  useEffect(() => {
+    if (energyLevel > 0 && !trainingAvailable) {
+      setTrainingAvailable(true);
+    }
+  }, [energyLevel]);
   
 
 
@@ -122,9 +135,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
   const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
   const [statInterval, setStatInterval] = useState(3000) //initial interval of the stats displayed
+  const [gameEnded, setGameEnded] = useState(false);
 
   useEffect(() => {
-    if (averageSkillLevel >= 10) {
+    if (totalSkillLevel >= 5) {
       setShowGames(true)
     }
   }, [averageSkillLevel])
@@ -146,9 +160,21 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     setIsRunning(true);
     setGameLength(600000); // Reset timer to 10 minutes
     setQuarter(1); // Reset quarter to 1
-    setStats([]); // Clear stats
+    
   };
 
+  const handleGameEnd = () => {
+    setIsRunning(false);
+    setGameEnded(true)
+  };
+
+  const handleResetGame = () => {
+    setQuarter(1)
+    setGameLength(600000);
+    setGameEnded(false);
+    setStats([]); // Clear stats
+    setIsRunning(false);
+  }
 
         
   // ENDORSEMENTS
@@ -197,12 +223,18 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
               </div>
             }       
             {showGames &&
+            <div className={showGames ? styles.flash : ''}>
               <Games
                 stats={stats}
                 statInterval={statInterval}
                 addRandomStat={addRandomStat}
                 handleStart={handleStart}
+                isRunning={isRunning}
+                handleGameEnd={handleGameEnd}
+                gameEnded={gameEnded}
+                handleResetGame={handleResetGame}
               />
+            </div>
             }     
             {showEndorsements &&
               <Endorsements
