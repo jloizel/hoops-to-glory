@@ -11,7 +11,7 @@ interface RecoveryProps {
   clickCount: number;
   energyLevel: number;
   handleClick: () => void
-  energyStorage: number
+  energyStorage: number;
 }
 
 const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick, energyStorage}) => {

@@ -1,8 +1,13 @@
 .gameContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   padding: 0 20px;
+}
+
+.bottomContainer {
+  display: flex;
+  flex-direction: row;
 }
 
 .leftContainer {

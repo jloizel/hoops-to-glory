@@ -74,8 +74,7 @@ const Home = () => {
             </Modal>
           </div>
         )}
-      <PageHeader username={username} usernameSet={usernameSet} handleReset={handleReset}/>    
-      <Game/>
+      <Game username={username} usernameSet={usernameSet} handleReset={handleReset}/>
     </div>
   )
 }

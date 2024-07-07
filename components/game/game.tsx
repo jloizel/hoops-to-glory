@@ -9,6 +9,7 @@ import Training from '../mechanics/training/training'
 import Games from '../mechanics/games/games'
 import Recovery from '../mechanics/recovery/recovery'
 import Endorsements from '../mechanics/endorsements/endorsements'
+import PageHeader from '../pageHeader/pageHeader'
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
@@ -17,7 +18,13 @@ interface Stat {
   text: string;
 }
 
-const Game = () => {
+interface GameProps {
+  username: string
+  usernameSet: boolean;
+  handleReset: () => void;
+}
+
+const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   // PHONE
 
@@ -41,9 +48,11 @@ const Game = () => {
     shooting: 1,
     fitness: 1,
   });
+  const [trainingAvailable, setTrainingAvailable] = useState(true)
 
   const handleTrainingClick = (type: TrainingType) => {
     setTrainingInProgress(true);
+    setTrainingAvailable(false)
 
     setTimeout(() => {
       setSkills(prevSkills => ({
@@ -56,19 +65,34 @@ const Game = () => {
 
   const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
 
-  const handleSkillUpgradeChange = (type: TrainingType, value: number) => {
+  const handleAgilityUpgrade = (value: number) => {
     setSkillUpgrade(prevUpgrade => ({
       ...prevUpgrade,
-      [type]: value,
+      agility: value,
     }));
   };
+
+  const handleShootingUpgrade = (value: number) => {
+    setSkillUpgrade(prevUpgrade => ({
+      ...prevUpgrade,
+      shooting: value,
+    }));
+  };
+
+  const handleFitnessUpgrade = (value: number) => {
+    setSkillUpgrade(prevUpgrade => ({
+      ...prevUpgrade,
+      fitness: value,
+    }));
+  };
+
 
 
   // RECOVERY
   const [showRecovery, setShowRecovery] = useState(false)
   const [clickCount, setClickCount] = useState(10); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
-  const [energyStorage, setEnergyStorage] = useState(4)
+  const [energyStorage, setEnergyStorage] = useState(1)
 
   useEffect(() => {
     if (skills.agility > 0 || skills.shooting > 0 || skills.fitness > 0) {
@@ -85,6 +109,7 @@ const Game = () => {
     }
   };
   
+
 
   // GAMES
   const [showGames, setShowGames] = useState(false)
@@ -137,47 +162,53 @@ const Game = () => {
 
   return (
     <div className={styles.gameContainer}>
-      <Box className={styles.leftContainer}>
-        <Phone/>
-      </Box>
-      <Box className={styles.rightContainer}>
-        <div className={styles.topContentContainer}>
-          <Analytics/>
-        </div>
-        <div className={styles.middleContentContainer}>
-        <Training
-            trainingDuration={trainingDuration}
-            trainingInProgress={trainingInProgress}
-            skills={skills}
-            handleTrainingClick={handleTrainingClick}
-            averageSkillLevel={averageSkillLevel}
-            skillUpgrade={skillUpgrade}
-          />
-          {showRecovery &&
-          <div className={showRecovery ? styles.flash : ''}>
-            <Recovery 
-              clickCount={clickCount}
-              energyLevel={energyLevel}
-              handleClick={handleClick}
-              energyStorage={energyStorage}
+      <div className={styles.topContainer}>
+        <PageHeader username={username} usernameSet={usernameSet} handleReset={handleReset}/>    
+      </div>
+      <div className={styles.bottomContainer}>
+        <Box className={styles.leftContainer}>
+          <Phone/>
+        </Box>
+        <Box className={styles.rightContainer}>
+          <div className={styles.topContentContainer}>
+            <Analytics/>
+          </div>
+          <div className={styles.middleContentContainer}>
+            <Training
+              trainingDuration={trainingDuration}
+              trainingInProgress={trainingInProgress}
+              skills={skills}
+              handleTrainingClick={handleTrainingClick}
+              averageSkillLevel={averageSkillLevel}
+              skillUpgrade={skillUpgrade}
+              trainingAvailable={trainingAvailable}
             />
-            </div>
-          }       
-          {showGames &&
-            <Games
-              stats={stats}
-              statInterval={statInterval}
-              addRandomStat={addRandomStat}
-              handleStart={handleStart}
-            />
-          }     
-          {showEndorsements &&
-            <Endorsements
-              money={money}
-            />
-          }
-        </div>
-      </Box>
+            {showRecovery &&
+            <div className={showRecovery ? styles.flash : ''}>
+              <Recovery 
+                clickCount={clickCount}
+                energyLevel={energyLevel}
+                handleClick={handleClick}
+                energyStorage={energyStorage}
+              />
+              </div>
+            }       
+            {showGames &&
+              <Games
+                stats={stats}
+                statInterval={statInterval}
+                addRandomStat={addRandomStat}
+                handleStart={handleStart}
+              />
+            }     
+            {showEndorsements &&
+              <Endorsements
+                money={money}
+              />
+            }
+          </div>
+        </Box>
+      </div>
     </div>
   )
 }

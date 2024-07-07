@@ -14,7 +14,7 @@ interface TrainingProps {
   handleTrainingClick: (type: TrainingType) => void; 
   averageSkillLevel: number
   skillUpgrade: { agility: number, shooting: number, fitness: number };
-
+  trainingAvailable: boolean;
 }
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
@@ -25,7 +25,8 @@ const Training: React.FC<TrainingProps> = ({
   skills,
   handleTrainingClick,
   averageSkillLevel,
-  skillUpgrade
+  skillUpgrade,
+  trainingAvailable
 }) => {
 
   return (
@@ -46,10 +47,10 @@ const Training: React.FC<TrainingProps> = ({
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('agility')}
-            disabled={trainingInProgress}
+            disabled={trainingInProgress || !trainingAvailable}
           >
             <span>TRAIN</span>
-            <span>(+{skillUpgrade})</span>
+            <span>(+{skillUpgrade.agility})</span>
           </button>
         </div>
         <div className={styles.buttonContainer}>
@@ -60,10 +61,10 @@ const Training: React.FC<TrainingProps> = ({
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('shooting')}
-            disabled={trainingInProgress}
+            disabled={trainingInProgress || !trainingAvailable}
           >
             <span>TRAIN</span>
-            <span>(+{skillUpgrade})</span>
+            <span>(+{skillUpgrade.shooting})</span>
           </button>
         </div>
         <div className={styles.buttonContainer}>
@@ -74,10 +75,10 @@ const Training: React.FC<TrainingProps> = ({
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('fitness')}
-            disabled={trainingInProgress}
+            disabled={trainingInProgress || !trainingAvailable}
           >
             <span>TRAIN</span>
-            <span>(+{skillUpgrade})</span>
+            <span>(+{skillUpgrade.fitness})</span>
           </button>
         </div>
         <div className={styles.skillLevels}>
