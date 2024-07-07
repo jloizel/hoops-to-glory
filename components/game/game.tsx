@@ -22,7 +22,9 @@ const Game = () => {
   // PHONE
 
 
+
   // ANALYTICS
+
 
 
   //TRAINING
@@ -33,6 +35,11 @@ const Game = () => {
     agility: 0,
     shooting: 0,
     fitness: 0,
+  });
+  const [skillUpgrade, setSkillUpgrade] = useState<{ agility: number, shooting: number, fitness: number }>({
+    agility: 1,
+    shooting: 1,
+    fitness: 1,
   });
 
   const handleTrainingClick = (type: TrainingType) => {
@@ -48,6 +55,13 @@ const Game = () => {
   };
 
   const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
+
+  const handleSkillUpgradeChange = (type: TrainingType, value: number) => {
+    setSkillUpgrade(prevUpgrade => ({
+      ...prevUpgrade,
+      [type]: value,
+    }));
+  };
 
 
   // RECOVERY
@@ -137,6 +151,7 @@ const Game = () => {
             skills={skills}
             handleTrainingClick={handleTrainingClick}
             averageSkillLevel={averageSkillLevel}
+            skillUpgrade={skillUpgrade}
           />
           {showRecovery &&
           <div className={showRecovery ? styles.flash : ''}>
