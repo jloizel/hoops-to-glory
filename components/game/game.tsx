@@ -101,10 +101,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   }, [skills]);
 
   const handleClick = () => {
+    if (energyLevel >= energyStorage) {
+      return; // Prevent click if energy level matches or exceeds energy storage
+    }
     if (clickCount > 0) {
       setClickCount(prevCount => prevCount - 1); // Decrease click count by 1 on each click
     } else if (clickCount === 0) {
-      setEnergyLevel(prevLevel => prevLevel + 5); // Increase energy level by 5
+      setEnergyLevel(prevLevel => prevLevel + 1); // Increase energy level by 5
       setClickCount(10); // Reset click count to 200
     }
   };
