@@ -8,7 +8,12 @@ import { TfiTimer } from "react-icons/tfi";
 import Countdown from '../../countdown/countdown';
 
 interface TrainingProps {
-  trainingDuration: number;
+  selectedTrainingType: TrainingType;
+  trainingDurations: {
+    agility: number;
+    shooting: number;
+    fitness: number;
+  };
   trainingInProgress: boolean;
   skills: { agility: number, shooting: number, fitness: number };
   handleTrainingClick: (type: TrainingType) => void; 
@@ -20,7 +25,8 @@ interface TrainingProps {
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
 const Training: React.FC<TrainingProps> = ({
-  trainingDuration,
+  selectedTrainingType,
+  trainingDurations,
   trainingInProgress,
   skills,
   handleTrainingClick,
@@ -28,6 +34,7 @@ const Training: React.FC<TrainingProps> = ({
   skillUpgrade,
   trainingAvailable
 }) => {
+  const trainingDuration = trainingDurations[selectedTrainingType];
 
   return (
     <div className={styles.container}>

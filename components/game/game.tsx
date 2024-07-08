@@ -35,8 +35,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
   //TRAINING
-  const trainingDuration = 6000;
-  const InitialTrainingDuration = 90000;
+  const initialTrainingDuration = 90000;
   const [trainingInProgress, setTrainingInProgress] = useState(false);
   const [skills, setSkills] = useState<{ agility: number, shooting: number, fitness: number }>({
     agility: 0,
@@ -49,10 +48,18 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     fitness: 1,
   });
   const [trainingAvailable, setTrainingAvailable] = useState(true)
+  const [selectedTrainingType, setSelectedTrainingType] = useState<TrainingType>('agility');
+
+  const trainingDurations = {
+    agility: initialTrainingDuration * Math.pow(0.95, skills.agility),
+    shooting: initialTrainingDuration * Math.pow(0.95, skills.shooting),
+    fitness: initialTrainingDuration * Math.pow(0.95, skills.fitness)
+  };
 
   const handleTrainingClick = (type: TrainingType) => {
+    setSelectedTrainingType(type);
     setTrainingInProgress(true);
-    setTrainingAvailable(false)
+    setTrainingAvailable(false);
 
     setTimeout(() => {
       setSkills(prevSkills => ({
@@ -60,8 +67,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
         [type]: prevSkills[type] + 1,
       }));
       setTrainingInProgress(false);
-    }, trainingDuration); // 60 seconds for training
-    
+    }, trainingDurations[type]);
+
     if (showRecovery) {
       setEnergyLevel(prevLevel => prevLevel - 1);
     }
@@ -209,7 +216,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
           </div>
           <div className={styles.middleContentContainer}>
             <Training
-              trainingDuration={trainingDuration}
+              selectedTrainingType={selectedTrainingType}
+              trainingDurations={trainingDurations}
               trainingInProgress={trainingInProgress}
               skills={skills}
               handleTrainingClick={handleTrainingClick}
@@ -227,7 +235,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
               />
               </div>
             }       
-            {/* {showGames && */}
+            {showGames &&
             <div className={showGames ? styles.flash : ''}>
               <Games
                 stats={stats}
@@ -242,7 +250,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
                 handleQuarter={handleQuarter}
               />
             </div>
-            {/* }      */}
+            }
             {showEndorsements &&
               <Endorsements
                 money={money}
