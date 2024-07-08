@@ -39,6 +39,7 @@
   /* height: 120px; */
   /* margin-top: 20px; */
   width: 100%;
+  position: relative;
 }
 
 .icon {
@@ -72,6 +73,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  height: 20px;
+  position: absolute;
+  top: 0px;
 }
 
 .stat {

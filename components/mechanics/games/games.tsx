@@ -86,6 +86,11 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
     }
   }
 
+  const resetGame = () => {
+    handleResetGame()
+    setGameLength(600000)
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -111,7 +116,7 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
               Play game
             </button>
           ) : (
-            <button className={styles.button} onClick={handleResetGame} disabled={isRunning}>
+            <button className={styles.button} onClick={resetGame} disabled={isRunning}>
               Play again
             </button>
           )}
