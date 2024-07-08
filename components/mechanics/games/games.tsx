@@ -17,12 +17,14 @@ interface GamesProps {
   isRunning: boolean;
   handleGameEnd: () => void
   gameEnded: boolean;
-  handleResetGame: () => void
+  handleResetGame: () => void;
+  quarter: number;
+  handleQuarter: () => void
 }
 
-const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handleStart, isRunning, handleGameEnd, gameEnded, handleResetGame}) => {
+const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handleStart, isRunning, handleGameEnd, gameEnded, handleResetGame, quarter, handleQuarter}) => {
   const [gameLength, setGameLength] = useState(600000);
-  const [quarter, setQuarter] = useState(1);
+  
   // const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
@@ -40,7 +42,7 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
           } else {
             clearInterval(interval);
             if (quarter < 4) {
-              setQuarter(prevQuarter => prevQuarter + 1/2); // Increment quarter
+              handleQuarter(); // Increment quarter
               return 600000; // Reset timer to 10 minutes for the next quarter
             } else {
               handleGameEnd()
@@ -72,7 +74,7 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
     return `${minutes}:${seconds}`;
   };
 
-  const handleQuarter = () => {
+  const setQuarter = () => {
     if (quarter === 1) {
       return "1st"
     } else if (quarter === 2) {
@@ -83,14 +85,6 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
       return "4th"
     }
   }
-
-  const handleButtonClick = () => {
-    if (gameEnded) {
-      handleResetGame()
-    } else {
-      handleStart();
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -108,13 +102,20 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
           <PiCourtBasketballThin className={styles.icon} />
           <div className={styles.timerContainer}>
             <span className={styles.timer}>{formatTimer()}</span>
-            <span className={styles.quarter}>{handleQuarter()}</span>
+            <span className={styles.quarter}>{setQuarter()}</span>
           </div>
         </div>
         <div className={styles.bottomContainer}>
-          <button className={styles.button} onClick={handleButtonClick} disabled={isRunning}>
-            {gameEnded ? "Play again" : "Play game"}
-          </button>
+          {!gameEnded ? (
+            <button className={styles.button} onClick={handleStart} disabled={isRunning}>
+              Play game
+            </button>
+          ) : (
+            <button className={styles.button} onClick={handleResetGame} disabled={isRunning}>
+              Play again
+            </button>
+          )}
+          
           <div className={styles.statsContainer}>
             <div className={styles.stats}>
               <span>Minutes/game</span>

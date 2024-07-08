@@ -130,7 +130,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   // GAMES
   const [showGames, setShowGames] = useState(false)
   const [gamesPlayed, setGamesPlayed] = useState(0)
-  const [gameLength, setGameLength] = useState(600000); // Timer starts at 10 minutes (600000 milliseconds)
+  const [gameLength, setGameLength] = useState(60000); // Timer starts at 10 minutes (600000 milliseconds)
   const [quarter, setQuarter] = useState(1);
   const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
   const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
@@ -155,6 +155,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       setStats(prevStats => prevStats.filter(stat => stat.id !== newStat.id));
     }, 3000);
   };
+
+  const handleQuarter = () => {
+    setQuarter(prevQuarter => prevQuarter + 1/2);
+  }
+
 
   const handleStart = () => {
     setIsRunning(true);
@@ -222,7 +227,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
               />
               </div>
             }       
-            {showGames &&
+            {/* {showGames && */}
             <div className={showGames ? styles.flash : ''}>
               <Games
                 stats={stats}
@@ -233,9 +238,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
                 handleGameEnd={handleGameEnd}
                 gameEnded={gameEnded}
                 handleResetGame={handleResetGame}
+                quarter={quarter}
+                handleQuarter={handleQuarter}
               />
             </div>
-            }     
+            {/* }      */}
             {showEndorsements &&
               <Endorsements
                 money={money}
