@@ -2,7 +2,7 @@
   {
     "id": 1,
     "type": "message",
-    "achievement": "1000_views_youtube",
+    "achievement": "1000_youtube_views",
     "contact": "Coach",
     "content": "You reached 1000 views on YouTube!"
   },

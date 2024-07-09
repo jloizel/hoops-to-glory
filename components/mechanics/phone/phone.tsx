@@ -65,7 +65,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
           ...prevNotifications
         ]);
       }
-    }, 3000); // Add random notifications every 30 seconds
+    }, 30000); // Add random notifications every 30 seconds
 
     return () => clearInterval(interval);
   }, [randomNotifications]);
