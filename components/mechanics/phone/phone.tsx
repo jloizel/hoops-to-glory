@@ -4,7 +4,7 @@ import styles from './page.module.css';
 
 interface MessageNotification {
   id: number;
-  achievement?: string;
+  achievement: string; // Ensure achievement is always present for specific notifications
   type: 'message';
   contact: string;
   content: string;
@@ -12,7 +12,7 @@ interface MessageNotification {
 
 interface InstagramNotification {
   id: number;
-  achievement?: string;
+  achievement: string; // Ensure achievement is always present for specific notifications
   type: 'instagram';
   username: string;
   content: string;
@@ -21,30 +21,39 @@ interface InstagramNotification {
 type Notification = MessageNotification | InstagramNotification;
 
 interface PhoneProps {
-  achievements: string[];
+  achievements: string[]; // Array of achieved milestones or events
+  onAchievementReached: (achievement: string) => void; // Function to call when an achievement is reached
 }
 
-const Phone: React.FC<PhoneProps> = ({ achievements }) => {
-  const [randomNotifications, setRandomNotifications] = useState<Notification[]>([]);
-  const [specificNotifications, setSpecificNotifications] = useState<Notification[]>([]);
+const Phone: React.FC<PhoneProps> = ({ achievements, onAchievementReached }) => {
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const notificationsContainerRef = useRef<HTMLDivElement>(null);
   const [currentDateDay, setCurrentDateDay] = useState<string>('');
   const [currentHourMinute, setCurrentHourMinute] = useState<string>('');
-  const notificationsContainerRef = useRef<HTMLDivElement>(null);
+  const [randomNotifications, setRandomNotifications] = useState<Notification[]>([]);
+  const [specificNotifications, setSpecificNotifications] = useState<Notification[]>([
+    // Example initial state of specific notifications
+    { id: 1, achievement: 'gamesPlayed10', type: 'message', contact: 'Coach', content: 'Well done on reaching 10 games played!' },
+    { id: 2, achievement: 'youtubeViews1000', type: 'instagram', username: 'Lebron', content: 'Mentioned you in his story!' },
+  ]);
 
-  // Effect to fetch random and specific notifications
   useEffect(() => {
-    fetch('/data/randomNotifications.json')
+    // Fetch random notifications
+    fetch('/data/randomNotifications.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
       .then(response => response.json())
       .then(data => setRandomNotifications(data));
 
-    fetch('/data/specificNotifications.json')
-      .then(response => response.json())
-      .then(data => setSpecificNotifications(data));
+    // This useEffect is for demonstration purposes only; replace with actual fetch calls for your data
   }, []);
 
-  // Effect to update date and time
   useEffect(() => {
-    const interval = setInterval(() => {
+    // Function to update date and time
+    const updateDateTime = () => {
       const now = new Date();
       const hours = now.getHours().toString().padStart(2, '0');
       const minutes = now.getMinutes().toString().padStart(2, '0');
@@ -57,47 +66,53 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
       };
       const formattedDateDay = now.toLocaleDateString('en-UK', options);
       setCurrentDateDay(formattedDateDay);
-    }, 1000);
+    };
 
+    // Update date and time initially
+    updateDateTime();
+
+    // Update date and time every second
+    const interval = setInterval(updateDateTime, 1000);
     return () => clearInterval(interval);
   }, []);
 
-  // Scroll to top when notifications change
   useEffect(() => {
+    // Scroll to top when notifications change
     if (notificationsContainerRef.current) {
       notificationsContainerRef.current.scrollTop = 0;
     }
-  }, [randomNotifications, specificNotifications]);
+  }, [notifications]);
 
-  // Effect to handle specific notifications based on achievements
   useEffect(() => {
-    achievements.forEach(achievement => {
-      specificNotifications.forEach(notification => {
-        if (notification.achievement === achievement) {
-          setRandomNotifications(prevNotifications => [
-            ...prevNotifications,
-            { ...notification, id: Date.now() }
-          ]);
-        }
-      });
-    });
-  }, [achievements, specificNotifications]);
-
-  // Effect to add random notifications every 30 seconds
-  useEffect(() => {
+    // Add random notifications every 30 seconds
     const interval = setInterval(() => {
       if (randomNotifications.length > 0) {
         const randomIndex = Math.floor(Math.random() * randomNotifications.length);
         const randomNotification = randomNotifications[randomIndex];
-        setRandomNotifications(prevNotifications => [
-          ...prevNotifications.filter(notif => notif.type !== randomNotification.type), // Remove existing random notifications of the same type
-          { ...randomNotification, id: Date.now() }
+        setNotifications(prevNotifications => [
+          { ...randomNotification, id: Date.now() },
+          ...prevNotifications
         ]);
       }
     }, 30000);
 
     return () => clearInterval(interval);
   }, [randomNotifications]);
+
+  useEffect(() => {
+    // Trigger specific notifications when achievements are reached
+    achievements.forEach(achievementType => {
+      const matchingNotifications = specificNotifications.filter(notification => notification.achievement === achievementType);
+      if (matchingNotifications.length > 0) {
+        setNotifications(prevNotifications => [
+          ...matchingNotifications.map(notification => ({ ...notification, id: Date.now() })),
+          ...prevNotifications
+        ]);
+        // Assuming `onAchievementReached` updates the achievements state when called
+        onAchievementReached(achievementType);
+      }
+    });
+  }, [achievements, specificNotifications, onAchievementReached]);
 
   return (
     <div className={styles.iphoneOutline}>
@@ -109,7 +124,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
         <p>{currentHourMinute}</p>
       </div>
       <div className={styles.notificationsContainer} ref={notificationsContainerRef} id="notifications-container">
-        {[...randomNotifications, ...specificNotifications].map(notification => (
+        {notifications.map(notification => (
           <div key={notification.id} className={styles.notification}>
             {notification.type === 'message' ? (
               <div className={styles.messageNotification}>
