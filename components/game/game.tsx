@@ -26,8 +26,6 @@ interface GameProps {
 
 const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
-  // PHONE
-
 
 
   // ANALYTICS
@@ -201,6 +199,35 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
 
+  // PHONE
+  const [achievements, setAchievements] = useState<string[]>([]);
+  // const [gamesPlayed, setGamesPlayed] = useState(0);
+  const [youtubeViews, setYoutubeViews] = useState(0);
+
+  useEffect(() => {
+    if (gamesPlayed === 10) {
+      setAchievements(prev => [...prev, '10_games_played']);
+    }
+  }, [gamesPlayed]);
+
+  useEffect(() => {
+    if (youtubeViews === 1000) {
+      setAchievements(prev => [...prev, '1000_youtube_views']);
+    }
+  }, [youtubeViews]);
+
+  // Simulate milestones for demonstration purposes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGamesPlayed(prev => prev + 1);
+      setYoutubeViews(prev => prev + 100);
+    }, 1000); // Increment values every second
+
+    return () => clearInterval(interval);
+  }, []);
+
+
+
   return (
     <div className={styles.gameContainer}>
       <div className={styles.topContainer}>
@@ -208,7 +235,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       </div>
       <div className={styles.bottomContainer}>
         <Box className={styles.leftContainer}>
-          <Phone/>
+          <Phone achievements={achievements}/>
         </Box>
         <Box className={styles.rightContainer}>
           <div className={styles.topContentContainer}>

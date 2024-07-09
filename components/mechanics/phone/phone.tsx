@@ -2,41 +2,89 @@ import React, { useEffect, useRef, useState } from 'react';
 import { MdMessage } from 'react-icons/md';
 import styles from './page.module.css';
 
-const Phone = () => {
-  const [notifications, setNotifications] = useState<any[]>([]); // Array to store notifications
+interface MessageNotification {
+  id: number;
+  achievement?: string;
+  type: 'message';
+  contact: string;
+  content: string;
+}
+
+interface InstagramNotification {
+  id: number;
+  achievement?: string;
+  type: 'instagram';
+  username: string;
+  content: string;
+}
+
+type Notification = MessageNotification | InstagramNotification;
+
+interface PhoneProps {
+  achievements: string[];
+}
+
+const Phone: React.FC<PhoneProps> = ({ achievements }) => {
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [displayedAchievements, setDisplayedAchievements] = useState<string[]>([]);
   const notificationsContainerRef = useRef<HTMLDivElement>(null);
   const [currentDateDay, setCurrentDateDay] = useState<string>('');
   const [currentHourMinute, setCurrentHourMinute] = useState<string>('');
-  const [data, setData] = useState<any[]>([]); // Array to store data from API
+  const [randomNotifications, setRandomNotifications] = useState<Notification[]>([]);
+  const [specificNotifications, setSpecificNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
-    // Fetch data from API
-    fetch('/data/randomMessages.json', {
+    // Fetch random notifications
+    fetch('/data/randomNotifications.json', {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     })
       .then(response => response.json())
-      .then(myJson => {
-        setData(myJson); // Set fetched data to state
-      });
+      .then(data => setRandomNotifications(data));
+
+    // Fetch specific notifications
+    fetch('/data/specificNotifications.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => setSpecificNotifications(data));
   }, []);
 
   useEffect(() => {
-    let index = 0;
     const interval = setInterval(() => {
-      if (index < data.length) {
-        const randomMessage = data[index];
-        setNotifications(prevNotifications => [randomMessage, ...prevNotifications]); // Add new notification
-        index++;
-      } else {
-        clearInterval(interval);
+      if (randomNotifications.length > 0) {
+        const randomIndex = Math.floor(Math.random() * randomNotifications.length);
+        const randomNotification = randomNotifications[randomIndex];
+        setNotifications(prevNotifications => [
+          { ...randomNotification, id: Date.now() },
+          ...prevNotifications
+        ]);
       }
-    }, 1000); // Add notifications every 1 second
+    }, 30000); // Add random notifications every 30 seconds
 
     return () => clearInterval(interval);
-  }, [data]);
+  }, [randomNotifications]);
+
+  useEffect(() => {
+    achievements.forEach(achievementType => {
+      if (!displayedAchievements.includes(achievementType)) {
+        specificNotifications.forEach(notification => {
+          if (notification.achievement === achievementType) {
+            setNotifications(prevNotifications => [
+              { ...notification, id: Date.now() },
+              ...prevNotifications
+            ]);
+          }
+        });
+        setDisplayedAchievements(prev => [...prev, achievementType]);
+      }
+    });
+  }, [achievements, specificNotifications, displayedAchievements]);
 
   useEffect(() => {
     // Function to update date and time
@@ -84,16 +132,31 @@ const Phone = () => {
         <p>{currentHourMinute}</p>
       </div>
       <div className={styles.notificationsContainer} ref={notificationsContainerRef} id="notifications-container">
-        {notifications.map((notification, index) => (
+        {notifications.map(notification => (
           <div key={notification.id} className={styles.notification}>
-            <div className={styles.messageTop}>
-              <MdMessage className={styles.messageIcon}/>
-              MESSAGES
-            </div>
-            <div className={styles.messageContainer}>
-              <div className={styles.contact}>{notification.contact}</div>
-              <div className={styles.message}>{notification.message}</div>
-            </div>
+            {notification.type === 'message' ? (
+              <div className={styles.messageNotification}>
+                <div className={styles.messageTop}>
+                  <MdMessage className={styles.messageIcon} />
+                  MESSAGES
+                </div>
+                <div className={styles.messageContainer}>
+                  <div className={styles.contact}>{notification.contact}</div>
+                  <div className={styles.message}>{notification.content}</div>
+                </div>
+              </div>
+            ) : (
+              <div className={styles.instagramNotification}>
+                <div className={styles.instagramTop}>
+                  <img src="/path/to/instagram/icon.png" alt="Instagram" className={styles.instagramIcon} />
+                  INSTAGRAM
+                </div>
+                <div className={styles.instagramContainer}>
+                  <div className={styles.username}>{notification.username}</div>
+                  <div className={styles.action}>{notification.content}</div>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
