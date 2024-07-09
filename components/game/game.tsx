@@ -224,13 +224,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setGamesPlayed(prev => prev + 1);
-      setYoutubeViews(prev => prev + 100);
+      setYoutubeViews(prev => prev + 50);
     }, 1000); // Increment values every second
 
     return () => clearInterval(interval);
   }, []);
-
-  console.log(youtubeViews)
 
   return (
     <div className={styles.gameContainer}>

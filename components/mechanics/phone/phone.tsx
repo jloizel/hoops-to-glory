@@ -65,7 +65,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
           ...prevNotifications
         ]);
       }
-    }, 30000); // Add random notifications every 30 seconds
+    }, 3000); // Add random notifications every 30 seconds
 
     return () => clearInterval(interval);
   }, [randomNotifications]);
@@ -73,15 +73,16 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
   useEffect(() => {
     achievements.forEach(achievementType => {
       if (!displayedAchievements.includes(achievementType)) {
-        specificNotifications.forEach(notification => {
-          if (notification.achievement === achievementType) {
-            setNotifications(prevNotifications => [
-              { ...notification, id: Date.now() },
-              ...prevNotifications
-            ]);
-          }
-        });
-        setDisplayedAchievements(prev => [...prev, achievementType]);
+        const matchingNotifications = specificNotifications.filter(notification => notification.achievement === achievementType);
+        
+        if (matchingNotifications.length > 0) {
+          setNotifications(prevNotifications => [
+            ...matchingNotifications.map(notification => ({ ...notification, id: Date.now() })),
+            ...prevNotifications
+          ]);
+
+          setDisplayedAchievements(prev => [...prev, achievementType]);
+        }
       }
     });
   }, [achievements, specificNotifications, displayedAchievements]);
