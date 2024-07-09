@@ -4,7 +4,7 @@ import styles from './page.module.css';
 
 interface MessageNotification {
   id: number;
-  achievement: string; // Ensure achievement is always present for specific notifications
+  achievement?: string;
   type: 'message';
   contact: string;
   content: string;
@@ -12,7 +12,7 @@ interface MessageNotification {
 
 interface InstagramNotification {
   id: number;
-  achievement: string; // Ensure achievement is always present for specific notifications
+  achievement?: string;
   type: 'instagram';
   username: string;
   content: string;
@@ -21,21 +21,17 @@ interface InstagramNotification {
 type Notification = MessageNotification | InstagramNotification;
 
 interface PhoneProps {
-  achievements: string[]; // Array of achieved milestones or events
-  onAchievementReached: (achievement: string) => void; // Function to call when an achievement is reached
+  achievements: string[];
 }
 
-const Phone: React.FC<PhoneProps> = ({ achievements, onAchievementReached }) => {
+const Phone: React.FC<PhoneProps> = ({ achievements }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [displayedAchievements, setDisplayedAchievements] = useState<string[]>([]);
   const notificationsContainerRef = useRef<HTMLDivElement>(null);
   const [currentDateDay, setCurrentDateDay] = useState<string>('');
   const [currentHourMinute, setCurrentHourMinute] = useState<string>('');
   const [randomNotifications, setRandomNotifications] = useState<Notification[]>([]);
-  const [specificNotifications, setSpecificNotifications] = useState<Notification[]>([
-    // Example initial state of specific notifications
-    { id: 1, achievement: 'gamesPlayed10', type: 'message', contact: 'Coach', content: 'Well done on reaching 10 games played!' },
-    { id: 2, achievement: 'youtubeViews1000', type: 'instagram', username: 'Lebron', content: 'Mentioned you in his story!' },
-  ]);
+  const [specificNotifications, setSpecificNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
     // Fetch random notifications
@@ -48,17 +44,59 @@ const Phone: React.FC<PhoneProps> = ({ achievements, onAchievementReached }) => 
       .then(response => response.json())
       .then(data => setRandomNotifications(data));
 
-    // This useEffect is for demonstration purposes only; replace with actual fetch calls for your data
+    // Fetch specific notifications
+    fetch('/data/specificNotifications.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => setSpecificNotifications(data));
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (randomNotifications.length > 0) {
+        const randomIndex = Math.floor(Math.random() * randomNotifications.length);
+        const randomNotification = randomNotifications[randomIndex];
+        setNotifications(prevNotifications => [
+          { ...randomNotification, id: Date.now() },
+          ...prevNotifications
+        ]);
+      }
+    }, 30000); // Add random notifications every 30 seconds
+
+    return () => clearInterval(interval);
+  }, [randomNotifications]);
+
+  useEffect(() => {
+    achievements.forEach(achievementType => {
+      if (!displayedAchievements.includes(achievementType)) {
+        specificNotifications.forEach(notification => {
+          if (notification.achievement === achievementType) {
+            setNotifications(prevNotifications => [
+              { ...notification, id: Date.now() },
+              ...prevNotifications
+            ]);
+          }
+        });
+        setDisplayedAchievements(prev => [...prev, achievementType]);
+      }
+    });
+  }, [achievements, specificNotifications, displayedAchievements]);
 
   useEffect(() => {
     // Function to update date and time
     const updateDateTime = () => {
       const now = new Date();
+
+      // Format hours and minutes
       const hours = now.getHours().toString().padStart(2, '0');
       const minutes = now.getMinutes().toString().padStart(2, '0');
       setCurrentHourMinute(`${hours}:${minutes}`);
 
+      // Format date and day
       const options: Intl.DateTimeFormatOptions = {
         weekday: 'long',
         month: 'long',
@@ -73,6 +111,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements, onAchievementReached }) => 
 
     // Update date and time every second
     const interval = setInterval(updateDateTime, 1000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -82,37 +121,6 @@ const Phone: React.FC<PhoneProps> = ({ achievements, onAchievementReached }) => 
       notificationsContainerRef.current.scrollTop = 0;
     }
   }, [notifications]);
-
-  useEffect(() => {
-    // Add random notifications every 30 seconds
-    const interval = setInterval(() => {
-      if (randomNotifications.length > 0) {
-        const randomIndex = Math.floor(Math.random() * randomNotifications.length);
-        const randomNotification = randomNotifications[randomIndex];
-        setNotifications(prevNotifications => [
-          { ...randomNotification, id: Date.now() },
-          ...prevNotifications
-        ]);
-      }
-    }, 30000);
-
-    return () => clearInterval(interval);
-  }, [randomNotifications]);
-
-  useEffect(() => {
-    // Trigger specific notifications when achievements are reached
-    achievements.forEach(achievementType => {
-      const matchingNotifications = specificNotifications.filter(notification => notification.achievement === achievementType);
-      if (matchingNotifications.length > 0) {
-        setNotifications(prevNotifications => [
-          ...matchingNotifications.map(notification => ({ ...notification, id: Date.now() })),
-          ...prevNotifications
-        ]);
-        // Assuming `onAchievementReached` updates the achievements state when called
-        onAchievementReached(achievementType);
-      }
-    });
-  }, [achievements, specificNotifications, onAchievementReached]);
 
   return (
     <div className={styles.iphoneOutline}>

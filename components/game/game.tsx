@@ -209,7 +209,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     if (gamesPlayed === 10) {
       const achievement = '10_games_played';
       setAchievements(prev => [...prev, achievement]);
-      handleAchievementReached(achievement);
     }
   }, [gamesPlayed]);
 
@@ -218,15 +217,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     if (youtubeViews === 1000) {
       const achievement = '1000_youtube_views';
       setAchievements(prev => [...prev, achievement]);
-      handleAchievementReached(achievement);
     }
   }, [youtubeViews]);
-
-  const handleAchievementReached = (achievement: string) => {
-    // Handle logic when an achievement is reached, e.g., showing a specific notification
-    console.log(`Achievement reached: ${achievement}`);
-    // You can implement further logic here based on the achievement reached
-  };
 
   // Simulate milestones for demonstration purposes
   useEffect(() => {
@@ -238,7 +230,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     return () => clearInterval(interval);
   }, []);
 
-
+  console.log(youtubeViews)
 
   return (
     <div className={styles.gameContainer}>
@@ -247,7 +239,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       </div>
       <div className={styles.bottomContainer}>
         <Box className={styles.leftContainer}>
-          <Phone achievements={achievements} onAchievementReached={handleAchievementReached}/>
+          <Phone achievements={achievements}/>
         </Box>
         <Box className={styles.rightContainer}>
           <div className={styles.topContentContainer}>
