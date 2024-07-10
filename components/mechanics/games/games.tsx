@@ -20,9 +20,14 @@ interface GamesProps {
   handleResetGame: () => void;
   quarter: number;
   handleQuarter: () => void
+  minutesPerGame: number;
+  pointsPerGame: number;
+  assistsPerGame: number;
+  reboundsPerGame: number;
+  teamRole: () => string;
 }
 
-const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handleStart, isRunning, handleGameEnd, gameEnded, handleResetGame, quarter, handleQuarter}) => {
+const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handleStart, isRunning, handleGameEnd, gameEnded, handleResetGame, quarter, handleQuarter, minutesPerGame, pointsPerGame, assistsPerGame, reboundsPerGame, teamRole}) => {
   const [gameLength, setGameLength] = useState(600000);
   
   // const [isRunning, setIsRunning] = useState(false);
@@ -57,14 +62,24 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
     return () => clearInterval(interval);
   }, [isRunning, quarter]);
 
+  const calculateDynamicInterval = () => {
+    const baseInterval = 5000; // 5000 ms
+    const maxStats = 50 + 15 + 20; // Maximum possible stats
+    const currentStats = pointsPerGame + assistsPerGame + reboundsPerGame;
+
+    const dynamicInterval = baseInterval * (1 - currentStats / maxStats);
+    return Math.max(dynamicInterval, 500); // Minimum interval of 500 ms
+  };
+
   // Add stats periodically only if the timer is running
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isRunning) {
-      interval = setInterval(addRandomStat, statInterval); // Add random stat every 3 seconds
+      const dynamicInterval = calculateDynamicInterval();
+      interval = setInterval(addRandomStat, dynamicInterval); // Add random stat based on dynamic interval
     }
     return () => clearInterval(interval);
-  }, [isRunning]);
+  }, [isRunning, pointsPerGame, assistsPerGame, reboundsPerGame]);
 
   // Format the timer into mm:ss:msms
   const formatTimer = () => {
@@ -124,23 +139,23 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
           <div className={styles.statsContainer}>
             <div className={styles.stats}>
               <span>Minutes/game</span>
-              <div>0</div>
+              <div>{minutesPerGame}</div>
             </div>
             <div className={styles.stats}>
               <span>Points/game</span>
-              <div>0</div>
+              <div>{pointsPerGame}</div>
             </div>
             <div className={styles.stats}>
               <span>Assists/game</span>
-              <div>0</div>
+              <div>{assistsPerGame}</div>
             </div>
             <div className={styles.stats}>
               <span>Rebounds/game</span>
-              <div>0</div>
+              <div>{reboundsPerGame}</div>
             </div>
             <div className={styles.role}>
               <span>Team role:</span>
-              <div>Benchwarmer</div>
+              <div>{teamRole()}</div>
             </div>
           </div>
         </div>

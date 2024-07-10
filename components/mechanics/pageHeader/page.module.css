@@ -69,6 +69,7 @@
   color: #ED174F;
   font-weight: 700;
   font-size: 22px;
+  text-transform: capitalize;
 }
 
 .rightContainer {

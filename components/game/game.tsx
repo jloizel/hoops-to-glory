@@ -9,7 +9,7 @@ import Training from '../mechanics/training/training'
 import Games from '../mechanics/games/games'
 import Recovery from '../mechanics/recovery/recovery'
 import Endorsements from '../mechanics/endorsements/endorsements'
-import PageHeader from '../pageHeader/pageHeader'
+import PageHeader from '../mechanics/pageHeader/pageHeader'
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
@@ -34,11 +34,6 @@ interface GameProps {
 }
 
 const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
-
-
-
-  // ANALYTICS
-
 
 
   //TRAINING
@@ -143,7 +138,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   // GAMES
   const [showGames, setShowGames] = useState(true)
-  const [gamesPlayed, setGamesPlayed] = useState(10)
+  const [gamesPlayed, setGamesPlayed] = useState(0)
   const [gameLength, setGameLength] = useState(60000); // Timer starts at 10 minutes (600000 milliseconds)
   const [quarter, setQuarter] = useState(1);
   const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
@@ -157,15 +152,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }
   }, [averageSkillLevel])
 
-  const calculateDynamicInterval = () => {
-    const baseInterval = 5000; // 5000 ms
-    const maxStats = 50 + 15 + 20; // Maximum possible stats
-    const currentStats = pointsPerGame + assistsPerGame + reboundsPerGame;
-
-    const dynamicInterval = baseInterval * (1 - currentStats / maxStats);
-    return Math.max(dynamicInterval, 500); // Minimum interval of 500 ms
-  };
-
   const addRandomStat = () => {
     const statTypes = ["+2 points", "+3 points", "+1 assist", "+1 rebound"];
     const randomStat = statTypes[Math.floor(Math.random() * statTypes.length)];
@@ -176,7 +162,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     // Remove the stat after 3 seconds
     setTimeout(() => {
       setStats(prevStats => prevStats.filter(stat => stat.id !== newStat.id));
-    }, calculateDynamicInterval());
+    }, 300);
   };
 
   
@@ -256,10 +242,30 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }
   }
 
+
+  // ANALYTICS
+  const [followers, setFollowers] = useState(0);
+  const [youtubeViews, setYoutubeViews] = useState(0);
+  
+  useEffect(() => {
+    const baseGrowth = 50;
+    const baseViewsGrowth = 100;
+    const followerCap = 1000000;
+    const viewsCap = 10000000;
+  
+    const averageSkillLevel = (skills.agility + skills.shooting + skills.fitness) / 3;
+  
+    const newFollowers = Math.min(followers + baseGrowth * (1 + Math.log(averageSkillLevel + 1)), followerCap);
+    const newYouTubeViews = Math.min(youtubeViews + baseViewsGrowth * (1 + Math.log(averageSkillLevel + 1)), viewsCap);
+  
+    setFollowers(newFollowers);
+    setYoutubeViews(newYouTubeViews);
+  }, [skills]);
+
+
+
   // PHONE
   const [achievements, setAchievements] = useState<string[]>([]);
-  // const [gamesPlayed, setGamesPlayed] = useState(0);
-  const [youtubeViews, setYoutubeViews] = useState(0);
 
   // Check for 10 games played milestone
   useEffect(() => {
@@ -278,19 +284,59 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   }, [youtubeViews]);
 
   // Simulate milestones for demonstration purposes
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setGamesPlayed(prev => prev + 1);
-  //     setYoutubeViews(prev => prev + 50);
-  //   }, 1000); // Increment values every second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGamesPlayed(prev => prev + 1);
+      setYoutubeViews(prev => prev + 50);
+    }, 1000); // Increment values every second
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
+
+
+  //PAGE HEADER
+  const [draftRank, setDraftRank] = useState("Undrafted");
+
+  useEffect(() => {
+    const weights = {
+      agility: 0.3,
+      shooting: 0.4,
+      fitness: 0.3,
+    };
+
+    const draftScore = weights.agility * skills.agility + weights.shooting * skills.shooting + weights.fitness * skills.fitness;
+
+    const thresholds = {
+      undrafted: 50,
+      lateSecondRound: 100,
+      earlySecondRound: 150,
+      lateFirstRound: 200,
+    };
+
+    let newDraftRank;
+    if (draftScore < thresholds.undrafted) {
+      newDraftRank = "Undrafted";
+    } else if (draftScore < thresholds.lateSecondRound) {
+      newDraftRank = "Late Second Round Pick";
+    } else if (draftScore < thresholds.earlySecondRound) {
+      newDraftRank = "Early Second Round Pick";
+    } else if (draftScore < thresholds.lateFirstRound) {
+      newDraftRank = "Late First Round Pick";
+    } else {
+      const maxPickNumber = 30; // Assuming 30 picks in the first round
+      const rankScalingFactor = 0.1;
+      const pickNumber = Math.max(1, maxPickNumber - Math.floor((draftScore - thresholds.lateFirstRound) * rankScalingFactor));
+      newDraftRank = `Pick #${pickNumber}`;
+    }
+
+    setDraftRank(newDraftRank);
+  }, [skills]);
+
 
   return (
     <div className={styles.gameContainer}>
       <div className={styles.topContainer}>
-        <PageHeader username={username} usernameSet={usernameSet} handleReset={handleReset}/>    
+        <PageHeader username={username} usernameSet={usernameSet} handleReset={handleReset} draftRank={draftRank}/>    
       </div>
       <div className={styles.bottomContainer}>
         <Box className={styles.leftContainer}>
@@ -334,6 +380,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
                 handleResetGame={handleResetGame}
                 quarter={quarter}
                 handleQuarter={handleQuarter}
+                minutesPerGame={minutesPerGame}
+                pointsPerGame={pointsPerGame}
+                assistsPerGame={assistsPerGame}
+                reboundsPerGame={reboundsPerGame}
+                teamRole={teamRole}
               />
             </div>
             }

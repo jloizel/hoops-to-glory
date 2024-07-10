@@ -10,9 +10,10 @@ interface PageHeaderProps {
   username: string
   usernameSet: boolean;
   handleReset: () => void;
+  draftRank: string;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleReset}) => {
+const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleReset, draftRank}) => {
   const [openModal, setOpenModal] = useState(false);
   const [resetUsernameModal, setResetUsernameModal] = useState(false)
   const [usernameReset, setUsernameReset] = useState(false)
@@ -42,7 +43,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
         {usernameSet && (<div className={styles.username}>{username}</div> )}
         <div className={styles.rank}>
           <span>MOCK DRAFT RANK:</span>
-          <span>UNDRAFTED</span>
+          <span>{draftRank}</span>
         </div>
       </Box> 
       <Box className={styles.rightContainer}>

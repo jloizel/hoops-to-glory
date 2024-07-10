@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import styles from "./page.module.css"
-import PageHeader from '../../components/pageHeader/pageHeader'
+import PageHeader from '../../components/mechanics/pageHeader/pageHeader'
 import Game from '../../components/game/game'
 import { Box, Modal } from '@mui/material'
 
