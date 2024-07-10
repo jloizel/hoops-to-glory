@@ -42,10 +42,10 @@ const Training: React.FC<TrainingProps> = ({
         <BsConeStriped />
         Training
       </div>
-      <div className={styles.topContainer}>
-        <Countdown trainingInProgress={trainingInProgress} trainingDuration={trainingDuration}/>
-      </div>
       <div className={styles.content}>
+        <div className={styles.topContainer}>
+          <Countdown trainingInProgress={trainingInProgress} trainingDuration={trainingDuration}/>
+        </div>
         <div className={styles.buttonContainer}>
           <div className={styles.skill}>
             <span>Skills & Agility</span>

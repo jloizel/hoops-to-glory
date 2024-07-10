@@ -2,7 +2,7 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 8px 24px rgba(62, 53, 82, 0.3);
-  width: 50%;
+  width: 200px;
 }
 
 .header {
@@ -30,6 +30,10 @@
   padding: 10px;
   gap: 10px;
   font-size: 14px;
+  align-items: center;
+  width: 100%;
+  /* justify-content: center; */
+  font-weight: 500;
 }
 
 .content div {

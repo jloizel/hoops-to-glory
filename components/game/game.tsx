@@ -245,7 +245,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   // ANALYTICS
   const [followers, setFollowers] = useState(0);
-  const [youtubeViews, setYoutubeViews] = useState(0);
   
   useEffect(() => {
     const baseGrowth = 50;
@@ -256,10 +255,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     const averageSkillLevel = (skills.agility + skills.shooting + skills.fitness) / 3;
   
     const newFollowers = Math.min(followers + baseGrowth * (1 + Math.log(averageSkillLevel + 1)), followerCap);
-    const newYouTubeViews = Math.min(youtubeViews + baseViewsGrowth * (1 + Math.log(averageSkillLevel + 1)), viewsCap);
   
     setFollowers(newFollowers);
-    setYoutubeViews(newYouTubeViews);
   }, [skills]);
 
 
@@ -275,19 +272,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }
   }, [gamesPlayed]);
 
-  // Check for 1000 YouTube views milestone
-  useEffect(() => {
-    if (youtubeViews === 1000) {
-      const achievement = '1000_youtube_views';
-      setAchievements(prev => [...prev, achievement]);
-    }
-  }, [youtubeViews]);
 
   // Simulate milestones for demonstration purposes
   useEffect(() => {
     const interval = setInterval(() => {
       setGamesPlayed(prev => prev + 1);
-      setYoutubeViews(prev => prev + 50);
     }, 1000); // Increment values every second
 
     return () => clearInterval(interval);
@@ -341,11 +330,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       <div className={styles.bottomContainer}>
         <Box className={styles.leftContainer}>
           <Phone achievements={achievements}/>
+          <div className={styles.topContentContainer}>
+            <Analytics followers={followers}/>
+          </div>
         </Box>
         <Box className={styles.rightContainer}>
-          <div className={styles.topContentContainer}>
-            <Analytics followers={followers} views={youtubeViews}/>
-          </div>
           <div className={styles.middleContentContainer}>
             <Training
               selectedTrainingType={selectedTrainingType}
