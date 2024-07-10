@@ -155,7 +155,10 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
                   INSTAGRAM
                 </div>
                 <div className={styles.instagramContainer}>
-                  <div className={styles.username}>{notification.username}</div>
+                  <div className={styles.instaUser}>
+                    <span className={styles.username}>{notification.username}</span>
+                    <img src="/images/verified.png" className={styles.verifiedIcon}/>
+                  </div>
                   <div className={styles.action}>{notification.content}</div>
                 </div>
               </div>
