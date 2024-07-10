@@ -344,7 +344,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
         </Box>
         <Box className={styles.rightContainer}>
           <div className={styles.topContentContainer}>
-            <Analytics/>
+            <Analytics followers={followers} views={youtubeViews}/>
           </div>
           <div className={styles.middleContentContainer}>
             <Training

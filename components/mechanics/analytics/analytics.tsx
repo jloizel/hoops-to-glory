@@ -6,8 +6,12 @@ import { FaInstagram } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { SiGoogleanalytics } from "react-icons/si";
 
+interface AnalyticsProps {
+  followers: number;
+  views: number;
+}
 
-const Analytics = () => {
+const Analytics: React.FC<AnalyticsProps> = ({followers, views}) => {
 
   return (
     <div className={styles.container}>
@@ -18,11 +22,11 @@ const Analytics = () => {
       <div className={styles.content}>
         <div>
           <FaInstagram className={styles.icon2}/>
-          Followers:
+          Followers: {followers}
         </div>
         <div>
           <FaYoutube className={styles.icon2}/> 
-          Views:
+          Views: {views}
         </div>
         
         
