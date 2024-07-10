@@ -18,6 +18,15 @@ interface Stat {
   text: string;
 }
 
+interface Endorsement {
+  id: number;
+  name: string;
+  description: string;
+  action: string;
+  value: number;
+  milestone: string;
+}
+
 interface GameProps {
   username: string
   usernameSet: boolean;
@@ -100,7 +109,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
   // RECOVERY
-  const [showRecovery, setShowRecovery] = useState(false)
+  const [showRecovery, setShowRecovery] = useState(true)
   const initialClickCount = 10
   const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
@@ -133,8 +142,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
   // GAMES
-  const [showGames, setShowGames] = useState(false)
-  const [gamesPlayed, setGamesPlayed] = useState(0)
+  const [showGames, setShowGames] = useState(true)
+  const [gamesPlayed, setGamesPlayed] = useState(10)
   const [gameLength, setGameLength] = useState(60000); // Timer starts at 10 minutes (600000 milliseconds)
   const [quarter, setQuarter] = useState(1);
   const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
@@ -148,6 +157,15 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }
   }, [averageSkillLevel])
 
+  const calculateDynamicInterval = () => {
+    const baseInterval = 5000; // 5000 ms
+    const maxStats = 50 + 15 + 20; // Maximum possible stats
+    const currentStats = pointsPerGame + assistsPerGame + reboundsPerGame;
+
+    const dynamicInterval = baseInterval * (1 - currentStats / maxStats);
+    return Math.max(dynamicInterval, 500); // Minimum interval of 500 ms
+  };
+
   const addRandomStat = () => {
     const statTypes = ["+2 points", "+3 points", "+1 assist", "+1 rebound"];
     const randomStat = statTypes[Math.floor(Math.random() * statTypes.length)];
@@ -158,8 +176,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     // Remove the stat after 3 seconds
     setTimeout(() => {
       setStats(prevStats => prevStats.filter(stat => stat.id !== newStat.id));
-    }, 3000);
+    }, calculateDynamicInterval());
   };
+
+  
 
   const handleQuarter = () => {
     setQuarter(prevQuarter => prevQuarter + 1/2);
@@ -186,9 +206,20 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     setIsRunning(false);
   }
 
+  const minutesPerGame = (averageSkillLevel / 100) * 40; //last number is max average
+  const pointsPerGame = (skills.shooting / 100) * 50;
+  const assistsPerGame = (skills.agility / 100) * 15;
+  const reboundsPerGame = (skills.fitness / 100) * 20;
+
+  const teamRole = () => {
+    if (totalSkillLevel < 100) return "Benchwarmer";
+    if (totalSkillLevel < 200) return "Role Player";
+    if (totalSkillLevel < 300) return "Starter";
+    return "Star Player";
+  };
         
   // ENDORSEMENTS
-  const [showEndorsements, setShowEndorsements] = useState(false)
+  const [showEndorsements, setShowEndorsements] = useState(true)
   const [money, setMoney] = useState(100)
 
   useEffect(() => {
@@ -197,7 +228,33 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }
   }, [gamesPlayed])
 
-
+  const handleEndorsementSelect = (endorsement: Endorsement) => {
+    switch (endorsement.action) {
+      case 'increase_agility':
+        // Apply increase agility action
+        console.log(`Increasing agility by ${endorsement.value}`);
+        break;
+      case 'increase_endurance':
+        // Apply increase endurance action
+        console.log(`Increasing endurance by ${endorsement.value}`);
+        break;
+      case 'reduce_training_time':
+        // Apply reduce training time action
+        console.log(`Reducing training time by ${endorsement.value}%`);
+        break;
+      case 'increase_speed':
+        // Apply increase speed action
+        // handleAgilityUpgrade(endorsement.value);
+        console.log(`Increasing speed by ${endorsement.value}`);
+        break;
+      case 'increase_strength':
+        // Apply increase strength action
+        console.log(`Increasing strength by ${endorsement.value}`);
+        break;
+      default:
+        break;
+    }
+  }
 
   // PHONE
   const [achievements, setAchievements] = useState<string[]>([]);
@@ -221,14 +278,14 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   }, [youtubeViews]);
 
   // Simulate milestones for demonstration purposes
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setGamesPlayed(prev => prev + 1);
-      setYoutubeViews(prev => prev + 50);
-    }, 1000); // Increment values every second
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setGamesPlayed(prev => prev + 1);
+  //     setYoutubeViews(prev => prev + 50);
+  //   }, 1000); // Increment values every second
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <div className={styles.gameContainer}>
@@ -283,6 +340,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
             {showEndorsements &&
               <Endorsements
                 money={money}
+                achievements={achievements}
+                onEndorsementSelect={handleEndorsementSelect}
               />
             }
           </div>

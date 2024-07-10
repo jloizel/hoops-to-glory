@@ -67,11 +67,12 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  margin: 30px 0;
 }
 
 .requirement span {
   color: #0067B1;
-  /* font-size: 16px; */
+  font-size: 16px;
   font-weight: 600;
 }
 
