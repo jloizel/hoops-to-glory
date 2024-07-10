@@ -12,6 +12,11 @@ interface Endorsement {
   milestone: string;
 }
 
+interface Milestone {
+  milestone: string;
+  description: string;
+}
+
 interface EndorsementsProps {
   money: number;
   achievements: string[];
@@ -22,6 +27,8 @@ const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndo
   const [endorsements, setEndorsements] = useState<Endorsement[]>([]);
   const [availableEndorsements, setAvailableEndorsements] = useState<Endorsement[]>([]);
   const [selectedEndorsements, setSelectedEndorsements] = useState<Endorsement[]>([]);
+  const [milestones, setMilestones] = useState<Milestone[]>([]);
+  const [currentMilestone, setCurrentMilestone] = useState<Milestone | null>(null);
 
   useEffect(() => {
     // Fetch endorsements
@@ -33,6 +40,21 @@ const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndo
     })
       .then(response => response.json())
       .then(data => setEndorsements(data));
+  }, []);
+
+  useEffect(() => {
+    // Fetch milestones
+    fetch('/data/milestones.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        setMilestones(data);
+        setCurrentMilestone(data[0]); // Set the first milestone as the current milestone
+      });
   }, []);
 
   useEffect(() => {
@@ -57,6 +79,10 @@ const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndo
       const newAvailableEndorsements = availableEndorsements.filter(e => e.id !== endorsement.id);
       setAvailableEndorsements(newAvailableEndorsements);
     }
+
+    // Update the current milestone to the next one
+    const nextMilestoneIndex = milestones.findIndex(m => m.milestone === currentMilestone?.milestone) + 1;
+    setCurrentMilestone(milestones[nextMilestoneIndex] || null);
   };
 
   const formatMoney = (amount: number) => {
@@ -66,8 +92,8 @@ const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndo
     }).format(amount);
   };
 
-  const isButtonEnabled = (endorsement: Endorsement) => {
-    return achievements.includes(endorsement.milestone);
+  const isButtonEnabled = () => {
+    return currentMilestone ? achievements.includes(currentMilestone.milestone) : false;
   };
 
   return (
@@ -77,13 +103,9 @@ const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndo
         Endorsements
       </div>
       <div className={styles.content}>
-        {/* <div className={styles.bankContainer}>
-          <PiPiggyBankLight className={styles.icon} />
-          <span>{formatMoney(money)}</span>
-        </div> */}
         <div className={styles.requirement}>
           <div>Next endorsement unlocked at:</div>
-          <span>10 points/game</span>
+          <span>{currentMilestone?.description}</span>
         </div>
         <div className={styles.bottomContainer}>
           {availableEndorsements.map(endorsement => (
@@ -91,7 +113,7 @@ const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndo
               key={endorsement.id}
               className={styles.button}
               onClick={() => handleEndorsementSelect(endorsement)}
-              disabled={!isButtonEnabled(endorsement)}
+              disabled={!isButtonEnabled()}
             >
               {endorsement.description}
             </button>

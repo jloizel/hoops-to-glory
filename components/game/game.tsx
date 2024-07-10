@@ -138,7 +138,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   // GAMES
   const [showGames, setShowGames] = useState(true)
-  const [gamesPlayed, setGamesPlayed] = useState(0)
+  const [gamesPlayed, setGamesPlayed] = useState(10)
   const [gameLength, setGameLength] = useState(60000); // Timer starts at 10 minutes (600000 milliseconds)
   const [quarter, setQuarter] = useState(1);
   const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
@@ -164,8 +164,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       setStats(prevStats => prevStats.filter(stat => stat.id !== newStat.id));
     }, 300);
   };
-
-  
 
   const handleQuarter = () => {
     setQuarter(prevQuarter => prevQuarter + 1/2);
@@ -203,6 +201,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     if (totalSkillLevel < 300) return "Starter";
     return "Star Player";
   };
+
         
   // ENDORSEMENTS
   const [showEndorsements, setShowEndorsements] = useState(true)
@@ -243,6 +242,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   }
 
 
+
   // ANALYTICS
   const [followers, setFollowers] = useState(0);
   
@@ -261,13 +261,14 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
 
+
   // PHONE
   const [achievements, setAchievements] = useState<string[]>([]);
 
   // Check for 10 games played milestone
   useEffect(() => {
     if (gamesPlayed === 10) {
-      const achievement = '10_games_played';
+      const achievement = '10_games_played'; //this needs to match the achievement and the milestone in the corresponding json files
       setAchievements(prev => [...prev, achievement]);
     }
   }, [gamesPlayed]);
@@ -281,6 +282,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
     return () => clearInterval(interval);
   }, []);
+
+
 
 
   //PAGE HEADER
