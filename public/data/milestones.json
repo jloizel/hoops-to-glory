@@ -10,5 +10,193 @@
   {
     "milestone": "5 games played",
     "description": "Play 5 games"
+  },
+  {
+    "milestone": "5 assists/game",
+    "description": "Average 5 assists per game"
+  },
+  {
+    "milestone": "100 minutes played",
+    "description": "Play 100 total minutes"
+  },
+  {
+    "milestone": "10 rebounds/game",
+    "description": "Average 10 rebounds per game"
+  },
+  {
+    "milestone": "Team Starter",
+    "description": "Become a starter on the team"
+  },
+  {
+    "milestone": "5 skill average",
+    "description": "Achieve an average skill level of 5"
+  },
+  {
+    "milestone": "10,000 followers",
+    "description": "Reach 10,000 followers on social media"
+  },
+  {
+    "milestone": "20 points/game",
+    "description": "Average 20 points per game"
+  },
+  {
+    "milestone": "50 games played",
+    "description": "Play 50 games"
+  },
+  {
+    "milestone": "15 assists/game",
+    "description": "Average 15 assists per game"
+  },
+  {
+    "milestone": "500 minutes played",
+    "description": "Play 500 total minutes"
+  },
+  {
+    "milestone": "20 rebounds/game",
+    "description": "Average 20 rebounds per game"
+  },
+  {
+    "milestone": "Team Captain",
+    "description": "Become the captain of the team"
+  },
+  {
+    "milestone": "10 skill average",
+    "description": "Achieve an average skill level of 10"
+  },
+  {
+    "milestone": "50,000 followers",
+    "description": "Reach 50,000 followers on social media"
+  },
+  {
+    "milestone": "30 points/game",
+    "description": "Average 30 points per game"
+  },
+  {
+    "milestone": "100 games played",
+    "description": "Play 100 games"
+  },
+  {
+    "milestone": "20 assists/game",
+    "description": "Average 20 assists per game"
+  },
+  {
+    "milestone": "1000 minutes played",
+    "description": "Play 1000 total minutes"
+  },
+  {
+    "milestone": "30 rebounds/game",
+    "description": "Average 30 rebounds per game"
+  },
+  {
+    "milestone": "Team MVP",
+    "description": "Become the MVP of your team"
+  },
+  {
+    "milestone": "15 skill average",
+    "description": "Achieve an average skill level of 15"
+  },
+  {
+    "milestone": "100,000 followers",
+    "description": "Reach 100,000 followers on social media"
+  },
+  {
+    "milestone": "40 points/game",
+    "description": "Average 40 points per game"
+  },
+  {
+    "milestone": "200 games played",
+    "description": "Play 200 games"
+  },
+  {
+    "milestone": "25 assists/game",
+    "description": "Average 25 assists per game"
+  },
+  {
+    "milestone": "2000 minutes played",
+    "description": "Play 2000 total minutes"
+  },
+  {
+    "milestone": "40 rebounds/game",
+    "description": "Average 40 rebounds per game"
+  },
+  {
+    "milestone": "League All-Star",
+    "description": "Become a league All-Star"
+  },
+  {
+    "milestone": "20 skill average",
+    "description": "Achieve an average skill level of 20"
+  },
+  {
+    "milestone": "500,000 followers",
+    "description": "Reach 500,000 followers on social media"
+  },
+  {
+    "milestone": "50 points/game",
+    "description": "Average 50 points per game"
+  },
+  {
+    "milestone": "500 games played",
+    "description": "Play 500 games"
+  },
+  {
+    "milestone": "30 assists/game",
+    "description": "Average 30 assists per game"
+  },
+  {
+    "milestone": "5000 minutes played",
+    "description": "Play 5000 total minutes"
+  },
+  {
+    "milestone": "50 rebounds/game",
+    "description": "Average 50 rebounds per game"
+  },
+  {
+    "milestone": "League MVP",
+    "description": "Become the MVP of the league"
+  },
+  {
+    "milestone": "25 skill average",
+    "description": "Achieve an average skill level of 25"
+  },
+  {
+    "milestone": "1 million followers",
+    "description": "Reach 1 million followers on social media"
+  },
+  {
+    "milestone": "60 points/game",
+    "description": "Average 60 points per game"
+  },
+  {
+    "milestone": "1000 games played",
+    "description": "Play 1000 games"
+  },
+  {
+    "milestone": "35 assists/game",
+    "description": "Average 35 assists per game"
+  },
+  {
+    "milestone": "10000 minutes played",
+    "description": "Play 10000 total minutes"
+  },
+  {
+    "milestone": "60 rebounds/game",
+    "description": "Average 60 rebounds per game"
+  },
+  {
+    "milestone": "Hall of Famer",
+    "description": "Get inducted into the Hall of Fame"
+  },
+  {
+    "milestone": "30 skill average",
+    "description": "Achieve an average skill level of 30"
+  },
+  {
+    "milestone": "10 million followers",
+    "description": "Reach 10 million followers on social media"
+  },
+  {
+    "milestone": "Become Number One NBA Draft Pick",
+    "description": "Become the number one pick in the NBA draft"
   }
 ]

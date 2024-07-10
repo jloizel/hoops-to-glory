@@ -241,6 +241,22 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }
   }
 
+  const milestones = [
+    { condition: gamesPlayed === 10, achievement: '10_games_played' },
+    // Add other milestones here
+    // { condition: totalSkillLevel >= 100, achievement: 'total_skill_100' },
+    // { condition: skills.shooting >= 50, achievement: 'shooting_50' },
+  ];
+
+   // Check for milestones
+   useEffect(() => {
+    milestones.forEach(({ condition, achievement }) => {
+      if (condition && !achievements.includes(achievement)) {
+        setAchievements(prev => [...prev, achievement]);
+      }
+    });
+  }, [gamesPlayed, totalSkillLevel, skills]);
+
 
 
   // ANALYTICS
@@ -266,12 +282,12 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   const [achievements, setAchievements] = useState<string[]>([]);
 
   // Check for 10 games played milestone
-  useEffect(() => {
-    if (gamesPlayed === 10) {
-      const achievement = '10_games_played'; //this needs to match the achievement and the milestone in the corresponding json files
-      setAchievements(prev => [...prev, achievement]);
-    }
-  }, [gamesPlayed]);
+  // useEffect(() => {
+  //   if (gamesPlayed === 10) {
+  //     const achievement = '10_games_played'; //this needs to match the achievement and the milestone in the corresponding json files
+  //     setAchievements(prev => [...prev, achievement]);
+  //   }
+  // }, [gamesPlayed]);
 
 
   // Simulate milestones for demonstration purposes
