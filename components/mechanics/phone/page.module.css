@@ -100,9 +100,9 @@
   font-size: 12px;
 }
 
-.messageTop {
+.messageTop, .instagramTop {
   background: #EFF3FB;
-  padding: 10px;
+  padding: 6px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   color: grey;
@@ -118,17 +118,22 @@
   color: #359be4;
 }
 
-.messageContainer {
+.instagramIcon {
+  width: 18px;
+}
+
+.messageContainer, .instagramContainer {
   background: #ebefff;
-  padding: 10px;
+  padding: 6px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
 
-.contact {
+.contact, .username {
   font-weight: 600;
 }
 
-.message {
+.message, .action {
   font-weight: 400;
 }
+

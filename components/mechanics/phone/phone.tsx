@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MdMessage } from 'react-icons/md';
+import { RiInstagramFill } from "react-icons/ri";
 import styles from './page.module.css';
 
 interface MessageNotification {
@@ -65,7 +66,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
           ...prevNotifications
         ]);
       }
-    }, 30000); // Add random notifications every 30 seconds
+    }, 3000); // Add random notifications every 30 seconds
 
     return () => clearInterval(interval);
   }, [randomNotifications]);
@@ -149,7 +150,8 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
             ) : (
               <div className={styles.instagramNotification}>
                 <div className={styles.instagramTop}>
-                  <img src="/path/to/instagram/icon.png" alt="Instagram" className={styles.instagramIcon} />
+                {/* <RiInstagramFill className={styles.instagramIcon} /> */}
+                <img src="/images/instagram.png" className={styles.instagramIcon}/>
                   INSTAGRAM
                 </div>
                 <div className={styles.instagramContainer}>
