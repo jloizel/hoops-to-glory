@@ -10,6 +10,7 @@ import Games from '../mechanics/games/games'
 import Recovery from '../mechanics/recovery/recovery'
 import Endorsements from '../mechanics/endorsements/endorsements'
 import PageHeader from '../mechanics/pageHeader/pageHeader'
+import milestones from './milestones'
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
@@ -241,21 +242,15 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }
   }
 
-  const milestones = [
-    { condition: gamesPlayed === 10, achievement: '10_games_played' },
-    // Add other milestones here
-    // { condition: totalSkillLevel >= 100, achievement: 'total_skill_100' },
-    // { condition: skills.shooting >= 50, achievement: 'shooting_50' },
-  ];
+  // const milestones = [
+  //   { condition: gamesPlayed === 10, achievement: '10_games_played' },
+  //   // Add other milestones here
+  //   // { condition: totalSkillLevel >= 100, achievement: 'total_skill_100' },
+  //   // { condition: skills.shooting >= 50, achievement: 'shooting_50' },
+  // ];
 
    // Check for milestones
-   useEffect(() => {
-    milestones.forEach(({ condition, achievement }) => {
-      if (condition && !achievements.includes(achievement)) {
-        setAchievements(prev => [...prev, achievement]);
-      }
-    });
-  }, [gamesPlayed, totalSkillLevel, skills]);
+   
 
 
 
@@ -339,6 +334,22 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
     setDraftRank(newDraftRank);
   }, [skills]);
+
+
+  useEffect(() => {
+    const evaluatedTeamRole = teamRole(); // Evaluate the function to get the string value
+
+    milestones.forEach(({ condition, achievement }) => {
+      const params = {
+        pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank,minutesPerGame
+      };
+      if (condition(params) && !achievements.includes(achievement)) {
+        setAchievements(prev => [...prev, achievement]);
+      }
+    });
+  }, [
+    pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
+  ]);
 
 
   return (
