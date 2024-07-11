@@ -1,20 +1,104 @@
 [
   {
     "id": 1,
-    "name": "Nike Air Zoom",
-    "description": "Unleash your speed and agility with Nike Air Zoom.",
-    "action": "increase_speed",
-    "value": 2
+    "name": "Nutrition Guide",
+    "description": "You just acquired a nutrition guide to optimize your diet and performance.",
+    "action": "increase_endurance",
+    "value": 1
   },
   {
     "id": 2,
+    "name": "Shooting Trainer",
+    "description": "You just hired a shooting trainer to improve your shooting accuracy.",
+    "action": "increase_skill_shooting",
+    "value": 2
+  },
+  {
+    "id": 3,
+    "name": "Under Armour ClutchFit",
+    "description": "Get unmatched support and flexibility with Under Armour ClutchFit.",
+    "action": "increase_strength",
+    "value": 1
+  },
+  {
+    "id": 4,
+    "name": "Endurance Program",
+    "description": "You just enrolled in an endurance program to boost your stamina.",
+    "action": "increase_endurance",
+    "value": 3
+  },
+  {
+    "id": 5,
     "name": "Adidas Boost",
     "description": "Experience unparalleled energy return and comfort with Adidas Boost.",
     "action": "increase_endurance",
     "value": 3
   },
   {
-    "id": 3,
+    "id": 6,
+    "name": "Strength Coach",
+    "description": "You just hired a strength coach to enhance your physical strength.",
+    "action": "increase_strength",
+    "value": 2
+  },
+  {
+    "id": 7,
+    "name": "Recovery Specialist",
+    "description": "You just hired a recovery specialist to optimize your post-game recovery.",
+    "action": "increase_recovery",
+    "value": 4
+  },
+  {
+    "id": 8,
+    "name": "Nike Air Zoom",
+    "description": "Unleash your speed and agility with Nike Air Zoom.",
+    "action": "increase_speed",
+    "value": 2
+  },
+  {
+    "id": 9,
+    "name": "Elite Skill Development",
+    "description": "You just joined an elite skill development program to master advanced techniques.",
+    "action": "increase_skill_all",
+    "value": 5
+  },
+  {
+    "id": 10,
+    "name": "Personal Sports Psychologist",
+    "description": "You just hired a personal sports psychologist to enhance your mental toughness.",
+    "action": "increase_mental_toughness",
+    "value": 4
+  },
+  {
+    "id": 11,
+    "name": "Legendary Coach Mentorship",
+    "description": "You just gained mentorship from a legendary coach to refine your game strategy.",
+    "action": "increase_skill_all",
+    "value": 6
+  },
+  {
+    "id": 12,
+    "name": "Championship Experience",
+    "description": "You just acquired championship experience from a retired player to boost your leadership.",
+    "action": "increase_leadership",
+    "value": 7
+  },
+  {
+    "id": 13,
+    "name": "Nike Air Zoom",
+    "description": "Unleash your speed and agility with Nike Air Zoom.",
+    "action": "increase_speed",
+    "value": 2
+  },
+  {
+    "id": 14,
+    "name": "Adidas Boost",
+    "description": "Experience unparalleled energy return and comfort with Adidas Boost.",
+    "action": "increase_endurance",
+    "value": 3
+  },
+  {
+    "id": 15,
     "name": "Under Armour ClutchFit",
     "description": "Get unmatched support and flexibility with Under Armour ClutchFit.",
     "action": "increase_strength",
