@@ -4,23 +4,20 @@
     "name": "Nike Air Zoom",
     "description": "Unleash your speed and agility with Nike Air Zoom.",
     "action": "increase_speed",
-    "value": 2,
-    "milestone": "10_games_played"
+    "value": 2
   },
   {
     "id": 2,
     "name": "Adidas Boost",
     "description": "Experience unparalleled energy return and comfort with Adidas Boost.",
     "action": "increase_endurance",
-    "value": 3,
-    "milestone": "1000_youtube_views"
+    "value": 3
   },
   {
     "id": 3,
     "name": "Under Armour ClutchFit",
     "description": "Get unmatched support and flexibility with Under Armour ClutchFit.",
     "action": "increase_strength",
-    "value": 1,
-    "milestone": "5000_youtube_views"
+    "value": 1
   }
 ]

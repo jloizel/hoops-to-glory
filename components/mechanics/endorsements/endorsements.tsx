@@ -9,7 +9,7 @@ interface Endorsement {
   description: string;
   action: string;
   value: number;
-  milestone: string;
+  // milestone: string;
 }
 
 interface Milestone {

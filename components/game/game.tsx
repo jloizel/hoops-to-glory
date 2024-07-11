@@ -25,7 +25,7 @@ interface Endorsement {
   description: string;
   action: string;
   value: number;
-  milestone: string;
+  // milestone: string;
 }
 
 interface GameProps {
@@ -192,7 +192,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   }
 
   const minutesPerGame = (averageSkillLevel / 100) * 40; //last number is max average
-  const pointsPerGame = (skills.shooting / 100) * 50;
+  // const pointsPerGame = (skills.shooting / 100) * 50;
+  const pointsPerGame = 11;
   const assistsPerGame = (skills.agility / 100) * 15;
   const reboundsPerGame = (skills.fitness / 100) * 20;
 
@@ -214,7 +215,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }
   }, [gamesPlayed])
 
-  const handleEndorsementSelect = (endorsement: Endorsement) => {
+  const handleEndorsementSelect = (endorsement: Endorsement) => { //this needs to match the "action" in the endorsement json file
     switch (endorsement.action) {
       case 'increase_agility':
         // Apply increase agility action
@@ -293,8 +294,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
     return () => clearInterval(interval);
   }, []);
-
-
+  
 
 
   //PAGE HEADER
@@ -335,7 +335,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     setDraftRank(newDraftRank);
   }, [skills]);
 
+  
 
+  //CHECK COMPLETED MILESTONES
   useEffect(() => {
     const evaluatedTeamRole = teamRole(); // Evaluate the function to get the string value
 
