@@ -71,7 +71,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
     return () => clearInterval(interval);
   }, [randomNotifications]);
 
-  useEffect(() => {
+  useEffect(() => { //achievement in json file needs to match name in handleEndorsementSelect
     achievements.forEach(achievementType => {
       if (!displayedAchievements.includes(achievementType)) {
         const matchingNotifications = specificNotifications.filter(notification => notification.achievement === achievementType);

@@ -52,12 +52,17 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   });
   const [trainingAvailable, setTrainingAvailable] = useState(true)
   const [selectedTrainingType, setSelectedTrainingType] = useState<TrainingType>('agility');
+  const [trainingDurations, setTrainingDurations] = useState({
+    agility: initialTrainingDuration,
+    shooting: initialTrainingDuration,
+    fitness: initialTrainingDuration
+  });
 
-  const trainingDurations = {
-    agility: initialTrainingDuration * Math.pow(0.95, skills.agility),
-    shooting: initialTrainingDuration * Math.pow(0.95, skills.shooting),
-    fitness: initialTrainingDuration * Math.pow(0.95, skills.fitness)
-  };
+  // const trainingDurations = {
+  //   agility: initialTrainingDuration * Math.pow(0.95, skills.agility),
+  //   shooting: initialTrainingDuration * Math.pow(0.95, skills.shooting),
+  //   fitness: initialTrainingDuration * Math.pow(0.95, skills.fitness)
+  // };
 
   const handleTrainingClick = (type: TrainingType) => {
     setSelectedTrainingType(type);
@@ -102,6 +107,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }));
   };
 
+  const reduceTrainingTime = (type: TrainingType, percentage: number) => {
+    setTrainingDurations(prevDurations => ({
+      ...prevDurations,
+      [type]: prevDurations[type] * (1 - percentage / 100)
+    }));
+  };
+
 
 
   // RECOVERY
@@ -135,6 +147,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }
   }, [energyLevel]);
   
+  const reduceInitialClickCount = (value: number) => {
+    setClickCount(prevCount => Math.max(0, prevCount - value));
+  };
+
 
 
   // GAMES
@@ -217,26 +233,26 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   const handleEndorsementSelect = (endorsement: Endorsement) => { //this needs to match the "action" in the endorsement json file
     switch (endorsement.action) {
-      case 'increase_agility':
-        // Apply increase agility action
-        console.log(`Increasing agility by ${endorsement.value}`);
+      case 'increase_agility_training_increment':
+        handleAgilityUpgrade(endorsement.value);
         break;
-      case 'increase_endurance':
-        // Apply increase endurance action
-        console.log(`Increasing endurance by ${endorsement.value}`);
+      case 'increase_shooting_training_increment':
+        handleShootingUpgrade(endorsement.value);
         break;
-      case 'reduce_training_time':
-        // Apply reduce training time action
-        console.log(`Reducing training time by ${endorsement.value}%`);
+      case 'increase_fitness_training_increment':
+        handleFitnessUpgrade(endorsement.value);
         break;
-      case 'increase_speed':
-        // Apply increase speed action
-        // handleAgilityUpgrade(endorsement.value);
-        console.log(`Increasing speed by ${endorsement.value}`);
+      case 'reduce_agility_training_time':
+        reduceTrainingTime('agility', endorsement.value);
         break;
-      case 'increase_strength':
-        // Apply increase strength action
-        console.log(`Increasing strength by ${endorsement.value}`);
+      case 'reduce_shooting_training_time':
+        reduceTrainingTime('shooting', endorsement.value);
+        break;
+      case 'reduce_fitness_training_time':
+        reduceTrainingTime('fitness', endorsement.value);
+        break;
+      case 'reduce_recovery_time':
+        reduceInitialClickCount(endorsement.value)
         break;
       default:
         break;
