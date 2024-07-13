@@ -156,6 +156,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     setClickCount(prevCount => Math.max(0, prevCount - value));
   };
 
+  const increaseEnergyStorage = () => {
+    setEnergyStorage(prevEnergyStorage => prevEnergyStorage + 1);
+  };
 
 
   // GAMES
@@ -258,6 +261,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
         break;
       case 'reduce_recovery_time':
         reduceInitialClickCount(endorsement.value)
+        break;
+      case 'increase_energy_storage':
+        increaseEnergyStorage()         
         break;
       default:
         break;
