@@ -278,19 +278,24 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   // ANALYTICS
   const [followers, setFollowers] = useState(0);
+  const [growthRate, setGrowthRate] = useState(1);
   
   useEffect(() => {
-    const baseGrowth = 50;
-    const baseViewsGrowth = 100;
-    const followerCap = 1000000;
-    const viewsCap = 10000000;
-  
-    const averageSkillLevel = (skills.agility + skills.shooting + skills.fitness) / 3;
-  
-    const newFollowers = Math.min(followers + baseGrowth * (1 + Math.log(averageSkillLevel + 1)), followerCap);
-  
-    setFollowers(newFollowers);
-  }, [skills]);
+    const interval = setInterval(() => {
+      setFollowers(prevFollowers => prevFollowers + growthRate); // Increment followers by growth rate
+    }, 1000); // Adjust the interval as needed
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, [growthRate]);
+
+  useEffect(() => {
+    if (gamesPlayed > 0) {
+      const baseGrowth = 1;
+      const skillMultiplier = (skills.agility + skills.shooting + skills.fitness) / 100; // Adjust the multiplier as needed
+      const newGrowthRate = baseGrowth + skillMultiplier;
+      setGrowthRate(newGrowthRate);
+    }
+  }, [skills, gamesPlayed]);
 
 
 
