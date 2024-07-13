@@ -122,6 +122,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
   const [energyStorage, setEnergyStorage] = useState(1)
+  const [autoClick, setAutoClick] = useState(false);
 
   useEffect(() => {
     if (skills.agility > 0 || skills.shooting > 0 || skills.fitness > 0) {
@@ -139,6 +140,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       setEnergyLevel(prevLevel => prevLevel + 1); // Increase energy level by 5
       setClickCount(initialClickCount); // Reset click count to 200
     }
+  };
+
+  const toggleAutoClick = () => {
+    setAutoClick(prev => !prev);
   };
 
   useEffect(() => {
@@ -401,6 +406,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
                 energyLevel={energyLevel}
                 handleClick={handleClick}
                 energyStorage={energyStorage}
+                autoClick={autoClick}
               />
               </div>
             }       

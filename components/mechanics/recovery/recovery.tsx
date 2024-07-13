@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './page.module.css';
 import { FaBed } from 'react-icons/fa';
 import { FaHeartCircleBolt } from "react-icons/fa6";
@@ -12,9 +12,21 @@ interface RecoveryProps {
   energyLevel: number;
   handleClick: () => void
   energyStorage: number;
+  autoClick: boolean;
 }
 
-const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick, energyStorage}) => {
+const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick, energyStorage, autoClick}) => {
+
+  useEffect(() => {
+    if (autoClick) {
+      const interval = setInterval(() => {
+        handleClick();
+      }, 1000); // Adjust the interval as needed
+
+      return () => clearInterval(interval); // Clear interval on component unmount or when autoClick is turned off
+    }
+  }, [autoClick, handleClick]);
+
 
   return (
     <div className={styles.container}>
