@@ -216,8 +216,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   }
 
   const minutesPerGame = (averageSkillLevel / 100) * 40; //last number is max average
-  // const pointsPerGame = (skills.shooting / 100) * 50;
-  const pointsPerGame = 11;
+  const pointsPerGame = (skills.shooting / 100) * 50;
+  // const pointsPerGame = 11;
   const assistsPerGame = (skills.agility / 100) * 15;
   const reboundsPerGame = (skills.fitness / 100) * 20;
 
@@ -265,7 +265,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       case 'increase_energy_storage':
         increaseEnergyStorage()         
         break;
-      default:
+      default:  
         break;
     }
   }
