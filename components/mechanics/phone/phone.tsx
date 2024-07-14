@@ -5,7 +5,7 @@ import styles from './page.module.css';
 
 interface MessageNotification {
   id: number;
-  achievement?: string;
+  milestone?: string;
   type: 'message';
   contact: string;
   content: string;
@@ -13,7 +13,7 @@ interface MessageNotification {
 
 interface InstagramNotification {
   id: number;
-  achievement?: string;
+  milestone?: string;
   type: 'instagram';
   username: string;
   content: string;
@@ -74,7 +74,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
   useEffect(() => { //achievement in json file needs to match name in handleEndorsementSelect
     achievements.forEach(achievementType => {
       if (!displayedAchievements.includes(achievementType)) {
-        const matchingNotifications = specificNotifications.filter(notification => notification.achievement === achievementType);
+        const matchingNotifications = specificNotifications.filter(notification => notification.milestone === achievementType);
         
         if (matchingNotifications.length > 0) {
           setNotifications(prevNotifications => [

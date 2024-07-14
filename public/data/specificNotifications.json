@@ -2,70 +2,70 @@
   {
     "id": 1,
     "type": "message",
-    "achievement": "1000_youtube_views",
+    "milestone": "1000_youtube_views",
     "contact": "Coach",
     "content": "You reached 1000 views on YouTube!"
   },
   {
     "id": 2,
     "type": "message",
-    "achievement": "10_games_played",
+    "milestone": "10_games_played",
     "contact": "Coach",
     "content": "Great progress! Keep it up!"
   },
   {
     "id": 3,
     "type": "instagram",
-    "achievement": "verified_follow",
+    "milestone": "verified_follow",
     "username": "verified_account",
     "content": "Followed by verified_account!"
   },
   {
     "id": 4,
     "type": "instagram",
-    "achievement": "tagged_in_story",
+    "milestone": "tagged_in_story",
     "username": "celebrity_username",
     "content": "Mentioned you in their story!"
   },
   {
     "id": 5,
     "type": "message",
-    "achievement": "5000_views_youtube",
+    "milestone": "5000_views_youtube",
     "contact": "Coach",
     "content": "You reached 5000 views on YouTube!"
   },
   {
     "id": 6,
     "type": "message",
-    "achievement": "50_games_played",
+    "milestone": "50_games_played",
     "contact": "Coach",
     "content": "You've played 50 games now!"
   },
   {
     "id": 7,
     "type": "instagram",
-    "achievement": "mentioned_in_post",
+    "milestone": "mentioned_in_post",
     "username": "influencer_username",
     "content": "Mentioned you in their post!"
   },
   {
     "id": 8,
     "type": "message",
-    "achievement": "10000_views_youtube",
+    "milestone": "10000_views_youtube",
     "contact": "Coach",
     "content": "Congratulations on 10,000 views!"
   },
   {
     "id": 9,
     "type": "instagram",
-    "achievement": "shared_post",
+    "milestone": "shared_post",
     "username": "celebrity_username",
     "content": "Shared your post!"
   },
   {
     "id": 10,
     "type": "instagram",
-    "achievement": "tagged_in_photo",
+    "milestone": "tagged_in_photo",
     "username": "celebrity_username",
     "content": "Tagged you in their photo!"
   }

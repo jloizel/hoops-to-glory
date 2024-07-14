@@ -38,7 +38,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
   //TRAINING
-  const initialTrainingDuration = 90000;
+  const initialTrainingDuration = 30000;
   const [trainingInProgress, setTrainingInProgress] = useState(false);
   const [skills, setSkills] = useState<{ agility: number, shooting: number, fitness: number }>({
     agility: 0,
