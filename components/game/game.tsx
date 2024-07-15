@@ -162,6 +162,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     setEnergyStorage(prevEnergyStorage => prevEnergyStorage + 1);
   };
 
+  
+
 
   // GAMES
   const [showGames, setShowGames] = useState(true)

@@ -16,6 +16,10 @@ interface RecoveryProps {
 }
 
 const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick, energyStorage, autoClick}) => {
+  const [displayStorage2, setDisplayStorage2] = useState(false)
+  const [displayStorage3, setDisplayStorage3] = useState(false)
+  const [displayStorage4, setDisplayStorage4] = useState(false)
+
 
   useEffect(() => {
     if (autoClick) {
@@ -26,6 +30,16 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
       return () => clearInterval(interval); // Clear interval on component unmount or when autoClick is turned off
     }
   }, [autoClick, handleClick]);
+
+  useEffect(() => {
+    if (energyStorage > 1) {
+      setDisplayStorage2(true)
+    } else if (energyLevel > 2) {
+      setDisplayStorage3(true)
+    } else if (energyStorage > 3) {
+      setDisplayStorage4(true)
+    }
+  })
 
 
   return (
@@ -50,12 +64,30 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
           <div className={styles.energyStorageContainer}>
             <span>Energy storage</span>
             <div className={styles.energyStorage}>
-              {Array.from({ length: energyStorage }).map((_, index) => (
+              {/* {Array.from({ length: energyStorage }).map((_, index) => (
                 <BatteryChargingFullIcon
                   key={index}
                   className={energyLevel > 0 ? styles.bottleBoltActive : styles.bottleBolt}
                 />
-              ))}
+              ))} */}
+              <BatteryChargingFullIcon
+                className={energyLevel > 0 ? styles.bottleBoltActive : styles.bottleBolt}
+              />
+              {displayStorage2 && (
+                <BatteryChargingFullIcon
+                  className={energyLevel > 1 ? styles.bottleBoltActive : styles.bottleBolt}
+                />
+              )}
+              {displayStorage3 && (
+                <BatteryChargingFullIcon
+                  className={energyLevel > 2 ? styles.bottleBoltActive : styles.bottleBolt}
+                />
+              )}
+              {displayStorage4 && (
+                <BatteryChargingFullIcon
+                  className={energyLevel > 3 ? styles.bottleBoltActive : styles.bottleBolt}
+                />
+              )}
             </div>
           </div>
         </div>

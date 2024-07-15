@@ -38,6 +38,7 @@
   font-weight: 500;
   height: 120px;
   margin-top: 20px;
+  user-select: none;
 }
 
 .icon {
