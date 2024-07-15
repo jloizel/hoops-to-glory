@@ -220,7 +220,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   }
 
   const minutesPerGame = (averageSkillLevel / 100) * 40; //last number is max average
-  const pointsPerGame = (skills.shooting / 100) * 50;
+  const pointsPerGame = (skills.shooting / 100) * 30;
   // const pointsPerGame = 11;
   const assistsPerGame = (skills.agility / 100) * 15;
   const reboundsPerGame = (skills.fitness / 100) * 20;
@@ -389,6 +389,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
   ]);
 
+  console.log(milestones.length)
 
   return (
     <div className={styles.gameContainer}>
