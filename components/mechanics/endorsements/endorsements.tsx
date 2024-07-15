@@ -9,7 +9,7 @@ interface Endorsement {
   description: string;
   action: string;
   value: number;
-  // milestone: string;
+  level: number;
 }
 
 interface Milestone {
@@ -29,6 +29,7 @@ const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndo
   const [selectedEndorsements, setSelectedEndorsements] = useState<Endorsement[]>([]);
   const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [currentMilestone, setCurrentMilestone] = useState<Milestone | null>(null);
+  const [currentLevel, setCurrentLevel] = useState<number>(1);
 
   useEffect(() => {
     // Fetch endorsements
@@ -58,26 +59,63 @@ const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndo
   }, []);
 
   useEffect(() => {
-    // Initialize available endorsements
     if (endorsements.length > 0) {
-      const initialAvailableEndorsements = endorsements.slice(0, 3);
-      setAvailableEndorsements(initialAvailableEndorsements);
+      initializeAvailableEndorsements();
     }
-  }, [endorsements]);
+  }, [endorsements, currentLevel]);
+
+  const shuffleArray = (array: any[]) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
+  const initializeAvailableEndorsements = () => {
+    let initialAvailable: Endorsement[] = [];
+    const types = new Set<string>();
+
+    const currentLevelEndorsements = endorsements.filter(e => e.level === currentLevel && !types.has(e.action));
+    shuffleArray(currentLevelEndorsements);
+
+    initialAvailable.push(...currentLevelEndorsements.slice(0, 3));
+    currentLevelEndorsements.slice(0, 3).forEach(e => types.add(e.action));
+
+    if (initialAvailable.length < 3) {
+      const nextLevelEndorsements = endorsements.filter(e => e.level === currentLevel + 1 && !types.has(e.action));
+      shuffleArray(nextLevelEndorsements);
+      initialAvailable.push(...nextLevelEndorsements.slice(0, 3 - initialAvailable.length));
+    }
+
+    setAvailableEndorsements(initialAvailable);
+  };
 
   const handleEndorsementSelect = (endorsement: Endorsement) => {
     onEndorsementSelect(endorsement);
     setSelectedEndorsements([...selectedEndorsements, endorsement]);
 
-    const nextEndorsementIndex = selectedEndorsements.length + 3;
-    if (nextEndorsementIndex < endorsements.length) {
-      const newAvailableEndorsements = availableEndorsements.map(e =>
-        e.id === endorsement.id ? endorsements[nextEndorsementIndex] : e
-      );
-      setAvailableEndorsements(newAvailableEndorsements);
-    } else {
-      const newAvailableEndorsements = availableEndorsements.filter(e => e.id !== endorsement.id);
-      setAvailableEndorsements(newAvailableEndorsements);
+    const types = new Set<string>(selectedEndorsements.map(e => e.action));
+    const nextAvailable: Endorsement[] = [];
+
+    const currentLevelEndorsements = endorsements.filter(
+      e => e.level === currentLevel && !types.has(e.action)
+    );
+    shuffleArray(currentLevelEndorsements);
+
+    nextAvailable.push(...currentLevelEndorsements.slice(0, 3));
+    currentLevelEndorsements.slice(0, 3).forEach(e => types.add(e.action));
+
+    if (nextAvailable.length < 3) {
+      const nextLevelEndorsements = endorsements.filter(e => e.level === currentLevel + 1 && !types.has(e.action));
+      shuffleArray(nextLevelEndorsements);
+      nextAvailable.push(...nextLevelEndorsements.slice(0, 3 - nextAvailable.length));
+    }
+
+    setAvailableEndorsements(nextAvailable.slice(0, 3));
+
+    if (nextAvailable.length === 0) {
+      setCurrentLevel(currentLevel + 1);
     }
 
     // Update the current milestone to the next one

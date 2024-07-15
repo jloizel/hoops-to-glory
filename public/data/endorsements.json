@@ -1,107 +1,322 @@
 [
   {
     "id": 1,
-    "name": "Nutrition Guide",
-    "description": "You just acquired a nutrition guide to optimize your diet and performance.",
-    "action": "increase_endurance",
-    "value": 1
+    "name": "Reflex Training Equipment",
+    "description": "Sharpen your reflexes with specialized reflex training equipment.",
+    "action": "increase_agility_training_increment",
+    "value": 1,
+    "level": 1
   },
   {
     "id": 2,
-    "name": "Shooting Trainer",
-    "description": "You just hired a shooting trainer to improve your shooting accuracy.",
-    "action": "increase_skill_shooting",
-    "value": 2
+    "name": "Biomechanics Analysis",
+    "description": "Refine your movements and prevent injuries with biomechanics analysis.",
+    "action": "increase_agility_training_increment",
+    "value": 1,
+    "level": 1
   },
   {
     "id": 3,
-    "name": "Under Armour ClutchFit",
-    "description": "Get unmatched support and flexibility with Under Armour ClutchFit.",
-    "action": "increase_strength",
-    "value": 1
+    "name": "Nike Air Zoom",
+    "description": "Unleash your speed and agility with Nike Air Zoom.",
+    "action": "increase_agility_training_increment",
+    "value": 1,
+    "level": 2
   },
   {
     "id": 4,
-    "name": "Endurance Program",
-    "description": "You just enrolled in an endurance program to boost your stamina.",
-    "action": "increase_endurance",
-    "value": 3
+    "name": "Adidas Boost",
+    "description": "Experience unparalleled energy return and comfort with Adidas Boost.",
+    "action": "increase_agility_training_increment",
+    "value": 1,
+    "level": 2
   },
   {
     "id": 5,
-    "name": "Adidas Boost",
-    "description": "Experience unparalleled energy return and comfort with Adidas Boost.",
-    "action": "increase_endurance",
-    "value": 3
+    "name": "Shooting Machine",
+    "description": "Increase your shooting accuracy with a high-tech shooting machine.",
+    "action": "increase_shooting_training_increment",
+    "value": 1,
+    "level": 1
   },
   {
     "id": 6,
-    "name": "Strength Coach",
-    "description": "You just hired a strength coach to enhance your physical strength.",
-    "action": "increase_strength",
-    "value": 2
+    "name": "Customized Shooting Improvement Plan",
+    "description": "Get a personalized plan to target and improve shooting skills.",
+    "action": "increase_shooting_training_increment",
+    "value": 1,
+    "level": 1
   },
   {
     "id": 7,
-    "name": "Recovery Specialist",
-    "description": "You just hired a recovery specialist to optimize your post-game recovery.",
-    "action": "increase_recovery",
-    "value": 4
+    "name": "Advanced Shooting Analytics",
+    "description": "Use advanced analytics to improve your shooting efficiency.",
+    "action": "increase_shooting_training_increment",
+    "value": 1,
+    "level": 2
   },
   {
     "id": 8,
-    "name": "Nike Air Zoom",
-    "description": "Unleash your speed and agility with Nike Air Zoom.",
-    "action": "increase_speed",
-    "value": 2
+    "name": "Biomechanics Shooting Analysis",
+    "description": "Analyze and improve shooting mechanics through biomechanics.",
+    "action": "increase_shooting_training_increment",
+    "value": 1,
+    "level": 2
   },
   {
     "id": 9,
-    "name": "Elite Skill Development",
-    "description": "You just joined an elite skill development program to master advanced techniques.",
-    "action": "increase_skill_all",
-    "value": 5
+    "name": "Nutrition Guide",
+    "description": "You just acquired a nutrition guide to optimize your diet and performance.",
+    "action": "increase_fitness_training_increment",
+    "value": 1,
+    "level": 1
   },
   {
     "id": 10,
-    "name": "Personal Sports Psychologist",
-    "description": "You just hired a personal sports psychologist to enhance your mental toughness.",
-    "action": "increase_mental_toughness",
-    "value": 4
+    "name": "High Altitude Training Camp",
+    "description": "Boost your endurance and performance with high altitude training.",
+    "action": "increase_fitness_training_increment",
+    "value": 1,
+    "level": 1
   },
   {
     "id": 11,
-    "name": "Legendary Coach Mentorship",
-    "description": "You just gained mentorship from a legendary coach to refine your game strategy.",
-    "action": "increase_skill_all",
-    "value": 6
+    "name": "Functional Movement Screening",
+    "description": "Identify and correct imbalances with a functional movement screening.",
+    "action": "increase_fitness_training_increment",
+    "value": 1,
+    "level": 2
   },
   {
     "id": 12,
-    "name": "Championship Experience",
-    "description": "You just acquired championship experience from a retired player to boost your leadership.",
-    "action": "increase_leadership",
-    "value": 7
+    "name": "MyProtein",
+    "description": "Achieve your physical ambitions with top-quality nutrition.",
+    "action": "increase_fitness_training_increment",
+    "value": 1,
+    "level": 2
   },
   {
     "id": 13,
-    "name": "Nike Air Zoom",
-    "description": "Unleash your speed and agility with Nike Air Zoom.",
-    "action": "increase_speed",
-    "value": 2
+    "name": "Agility Drills Program",
+    "description": "Improve your agility with specialized drills.",
+    "action": "reduce_agility_training_time",
+    "value": 5,
+    "level": 1
   },
   {
     "id": 14,
-    "name": "Adidas Boost",
-    "description": "Experience unparalleled energy return and comfort with Adidas Boost.",
-    "action": "increase_endurance",
-    "value": 3
+    "name": "Dribbling Clinic",
+    "description": "Improve your ball-handling skills with a dribbling clinic.",
+    "action": "reduce_agility_training_time",
+    "value": 5,
+    "level": 1
   },
   {
     "id": 15,
-    "name": "Under Armour ClutchFit",
-    "description": "Get unmatched support and flexibility with Under Armour ClutchFit.",
-    "action": "increase_strength",
-    "value": 1
+    "name": "Yoga Instructor",
+    "description": "You just started yoga sessions to improve your flexibility and balance.",
+    "action": "reduce_agility_training_time",
+    "value": 5,
+    "level": 1
+  },
+  {
+    "id": 16,
+    "name": "Vertical Jump Program",
+    "description": "Increase your vertical leap with a dedicated jump training program.",
+    "action": "reduce_agility_training_time",
+    "value": 5,
+    "level": 1
+  },
+  {
+    "id": 17,
+    "name": "Advanced Flexibility Training",
+    "description": "Improve your range of motion with advanced flexibility training.",
+    "action": "reduce_agility_training_time",
+    "value": 10,
+    "level": 2
+  },
+  {
+    "id": 18,
+    "name": "Speed Trainer",
+    "description": "Boost your sprinting speed with a dedicated speed trainer.",
+    "action": "reduce_agility_training_time",
+    "value": 10,
+    "level": 2
+  },
+  {
+    "id": 19,
+    "name": "Shooting Mechanics Workshop",
+    "description": "Perfect your shooting form with a shooting mechanics workshop.",
+    "action": "reduce_shooting_training_time",
+    "value": 5,
+    "level": 1
+  },
+  {
+    "id": 20,
+    "name": "Shooting Performance Optimization",
+    "description": "Optimize overall shooting performance through targeted training.",
+    "action": "reduce_shooting_training_time",
+    "value": 5,
+    "level": 1
+  },
+  {
+    "id": 21,
+    "name": "Skill Development Camp",
+    "description": "Hone your basketball skills with expert coaching at a development camp.",
+    "action": "reduce_shooting_training_time",
+    "value": 5,
+    "level": 1
+  },
+  {
+    "id": 22,
+    "name": "Elite Shooting Camp",
+    "description": "Intensive camp with top shooting coaches to refine skills.",
+    "action": "reduce_shooting_training_time",
+    "value": 5,
+    "level": 1
+  },
+  {
+    "id": 23,
+    "name": "Shooting Trainer",
+    "description": "You just hired a shooting trainer to improve your shooting accuracy.",
+    "action": "reduce_shooting_training_time",
+    "value": 10,
+    "level": 2
+  },
+  {
+    "id": 24,
+    "name": "Gatorade",
+    "description": "Boost your energy and performance with every sip.",
+    "action": "reduce_shooting_training_time",
+    "value": 10,
+    "level": 2
+  },
+  {
+    "id": 25,
+    "name": "Core Strengthening Program",
+    "description": "Enhance your core stability and overall strength.",
+    "action": "reduce_fitness_training_time",
+    "value": 5,
+    "level": 1
+  },
+  {
+    "id": 26,
+    "name": "Chef",
+    "description": "You just hired a personal chef and dietitian to prepare nutritious meals.",
+    "action": "reduce_fitness_training_time",
+    "value": 5,
+    "level": 1
+  },
+  {
+    "id": 27,
+    "name": "Biometric Tracker",
+    "description": "Optimize your training with real-time biometric data.",
+    "action": "reduce_fitness_training_time",
+    "value": 5,
+    "level": 1
+  },
+  {
+    "id": 28,
+    "name": "Plyometric Training",
+    "description": "Increase your explosiveness with plyometric training.",
+    "action": "reduce_fitness_training_time",
+    "value": 5,
+    "level": 1
+  },
+  {
+    "id": 29,
+    "name": "Strength Conditioning Program",
+    "description": "Build muscular endurance and strength with a comprehensive conditioning program.",
+    "action": "reduce_fitness_training_time",
+    "value": 10,
+    "level": 2
+  },
+  {
+    "id": 30,
+    "name": "Sports Chiropractor",
+    "description": "Optimize your performance and reduce injuries with a sports chiropractor.",
+    "action": "reduce_fitness_training_time",
+    "value": 10,
+    "level": 2
+  },
+  {
+    "id": 31,
+    "name": "Compression Gear",
+    "description": "Enhance your recovery with high-quality compression gear.",
+    "action": "reduce_recovery_time",
+    "value": 15,
+    "level": 1
+  },
+  {
+    "id": 32,
+    "name": "Post-Game Ice Baths",
+    "description": "Speed up your recovery with post-game ice baths.",
+    "action": "reduce_recovery_time",
+    "value": 15,
+    "level": 1
+  },
+  {
+    "id": 33,
+    "name": "Mindfulness Coach",
+    "description": "Improve focus and reduce stress with mindfulness coaching.",
+    "action": "reduce_recovery_time",
+    "value": 15,
+    "level": 1
+  },
+  {
+    "id": 34,
+    "name": "Recovery Specialist",
+    "description": "You just hired a recovery specialist to optimize your post-game recovery and provide you with a recovery plan",
+    "action": "reduce_recovery_time",
+    "value": 15,
+    "level": 1
+  },
+  {
+    "id": 35,
+    "name": "Massage Therapist",
+    "description": "You just hired a massage therapist to reduce muscle soreness.",
+    "action": "reduce_recovery_time",
+    "value": 30,
+    "level": 2
+  },
+  {
+    "id": 36,
+    "name": "Cryotherapy Sessions",
+    "description": "Reduce inflammation and speed up recovery with cryotherapy.",
+    "action": "reduce_recovery_time",
+    "value": 30,
+    "level": 2
+  },
+  {
+    "id": 37,
+    "name": "Hydrotherapy Sessions",
+    "description": "Enhance your recovery with relaxing and rejuvenating hydrotherapy sessions.",
+    "action": "reduce_recovery_time",
+    "value": 30,
+    "level": 2
+  },
+  {
+    "id": 38,
+    "name": "Endurance Program",
+    "description": "You just enrolled in an endurance program to boost your stamina.",
+    "action": "increase_energy_storage",
+    "value": 1,
+    "level": 1
+  },
+  {
+    "id": 39,
+    "name": "Cardio Bootcamp",
+    "description": "Boost your endurance with an intense cardio bootcamp.",
+    "action": "increase_energy_storage",
+    "value": 1,
+    "level": 2
+  },
+  {
+    "id": 40,
+    "name": "Sports Psychology Coaching",
+    "description": "Enhance mental stamina through sports psychology sessions.",
+    "action": "increase_energy_storage",
+    "value": 1,
+    "level": 2
   }
 ]

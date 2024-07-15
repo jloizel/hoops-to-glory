@@ -119,10 +119,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   // RECOVERY
   const [showRecovery, setShowRecovery] = useState(true)
-  const initialClickCount = 200
+  const initialClickCount = 10
   const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
-  const [energyStorage, setEnergyStorage] = useState(1)
+  const [energyStorage, setEnergyStorage] = useState(3)
   const [autoClick, setAutoClick] = useState(false);
 
   useEffect(() => {
