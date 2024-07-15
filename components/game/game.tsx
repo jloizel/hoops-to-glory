@@ -72,7 +72,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     setTimeout(() => {
       setSkills(prevSkills => ({
         ...prevSkills,
-        [type]: prevSkills[type] + 1,
+        [type]: Math.min(prevSkills[type] + 1, 100),
       }));
       setTrainingInProgress(false);
     }, trainingDurations[type]);
@@ -110,7 +110,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   const reduceTrainingTime = (type: TrainingType, percentage: number) => {
     setTrainingDurations(prevDurations => ({
       ...prevDurations,
-      [type]: prevDurations[type] * (1 - percentage / 100)
+      // [type]: prevDurations[type] * (1 - percentage / 100)
+      [type]: Math.max(prevDurations[type] - percentage)
     }));
   };
 
@@ -118,7 +119,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   // RECOVERY
   const [showRecovery, setShowRecovery] = useState(true)
-  const initialClickCount = 10
+  const initialClickCount = 200
   const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
   const [energyStorage, setEnergyStorage] = useState(1)
@@ -154,6 +155,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   
   const reduceInitialClickCount = (value: number) => {
     setClickCount(prevCount => Math.max(0, prevCount - value));
+    // setClickCount(initialClickCount * (1 - value / 100));
   };
 
   const increaseEnergyStorage = () => {
