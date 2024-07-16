@@ -266,6 +266,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       case 'reduce_recovery_time':
         reduceInitialClickCount(endorsement.value)
         break;
+      case 'reduce_recovery_time_auto':
+        reduceInitialClickCount(endorsement.value)
+        toggleAutoClick()
+        break;
       case 'increase_energy_storage':
         increaseEnergyStorage()         
         break;
@@ -389,7 +393,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
   ]);
 
-  console.log(milestones.length)
 
   return (
     <div className={styles.gameContainer}>

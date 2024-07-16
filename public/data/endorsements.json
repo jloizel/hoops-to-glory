@@ -267,7 +267,7 @@
     "id": 34,
     "name": "Recovery Specialist",
     "description": "You just hired a recovery specialist to optimize your post-game recovery and provide you with a recovery plan",
-    "action": "reduce_recovery_time",
+    "action": "reduce_recovery_time_auto",
     "value": 15,
     "level": 1
   },
