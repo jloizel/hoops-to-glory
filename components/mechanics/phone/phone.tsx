@@ -135,7 +135,6 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
         <p>{currentHourMinute}</p>
       </div>
       <div className={styles.notificationsContainer} ref={notificationsContainerRef} id="notifications-container">
-      <AnimatedList className={styles.animatedList} delay={1000}>
         {notifications.map(notification => (
           <div key={notification.id} className={styles.notification}>
             {notification.type === 'message' ? (
@@ -167,7 +166,6 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
             )}
           </div>
         ))}
-      </AnimatedList>
       </div>
     </div>
   );
