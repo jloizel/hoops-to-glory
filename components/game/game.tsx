@@ -162,12 +162,12 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     setEnergyStorage(prevEnergyStorage => prevEnergyStorage + 1);
   };
 
-  
+
 
 
   // GAMES
   const [showGames, setShowGames] = useState(true)
-  const [gamesPlayed, setGamesPlayed] = useState(10)
+  const [gamesPlayed, setGamesPlayed] = useState(0)
   const [gameLength, setGameLength] = useState(60000); // Timer starts at 10 minutes (600000 milliseconds)
   const [quarter, setQuarter] = useState(1);
   const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
@@ -327,13 +327,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
   // Simulate milestones for demonstration purposes
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setGamesPlayed(prev => prev + 1);
-    }, 1000); // Increment values every second
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setGamesPlayed(prev => prev + 1);
+  //   }, 1000); // Increment values every second
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
   
 
 

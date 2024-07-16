@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { MdMessage } from 'react-icons/md';
 import { RiInstagramFill } from "react-icons/ri";
 import styles from './page.module.css';
+import { AnimatedList } from '../../animatedList/animatedList';
 
 interface MessageNotification {
   id: number;
@@ -66,7 +67,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
           ...prevNotifications
         ]);
       }
-    }, 30000); // Add random notifications every 30 seconds
+    }, 3000); // Add random notifications every 30 seconds (change to set interval which reduces with fame})
 
     return () => clearInterval(interval);
   }, [randomNotifications]);
@@ -134,6 +135,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
         <p>{currentHourMinute}</p>
       </div>
       <div className={styles.notificationsContainer} ref={notificationsContainerRef} id="notifications-container">
+      <AnimatedList className={styles.animatedList} delay={1000}>
         {notifications.map(notification => (
           <div key={notification.id} className={styles.notification}>
             {notification.type === 'message' ? (
@@ -165,6 +167,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
             )}
           </div>
         ))}
+      </AnimatedList>
       </div>
     </div>
   );

@@ -2,71 +2,281 @@
   {
     "id": 1,
     "type": "message",
-    "milestone": "1000_youtube_views",
+    "milestone": "5 points/game",
     "contact": "Coach",
-    "content": "You reached 1000 views on YouTube!"
+    "content": "Great job on averaging 5 points per game!"
   },
   {
     "id": 2,
     "type": "message",
-    "milestone": "10_games_played",
+    "milestone": "500 followers",
     "contact": "Coach",
-    "content": "Great progress! Keep it up!"
+    "content": "You've reached 500 followers on social media!"
   },
   {
     "id": 3,
-    "type": "instagram",
-    "milestone": "verified_follow",
-    "username": "verified_account",
-    "content": "Followed by verified_account!"
+    "type": "message",
+    "milestone": "5 games played",
+    "contact": "Coach",
+    "content": "You've played 5 games, keep it up!"
   },
   {
     "id": 4,
-    "type": "instagram",
-    "milestone": "tagged_in_story",
-    "username": "celebrity_username",
-    "content": "Mentioned you in their story!"
+    "type": "message",
+    "milestone": "2 assists/game",
+    "contact": "Coach",
+    "content": "You're averaging 2 assists per game, nice work!"
   },
   {
     "id": 5,
     "type": "message",
-    "milestone": "5000_views_youtube",
+    "milestone": "4 rebounds/game",
     "contact": "Coach",
-    "content": "You reached 5000 views on YouTube!"
+    "content": "You're averaging 4 rebounds per game, great job!"
   },
   {
     "id": 6,
     "type": "message",
-    "milestone": "50_games_played",
+    "milestone": "5 skill average",
     "contact": "Coach",
-    "content": "You've played 50 games now!"
+    "content": "You've achieved an average skill level of 5!"
   },
   {
     "id": 7,
-    "type": "instagram",
-    "milestone": "mentioned_in_post",
-    "username": "influencer_username",
-    "content": "Mentioned you in their post!"
+    "type": "message",
+    "milestone": "Role Player",
+    "contact": "Coach",
+    "content": "You've become a role player on the team!"
   },
   {
     "id": 8,
     "type": "message",
-    "milestone": "10000_views_youtube",
+    "milestone": "1000 followers",
     "contact": "Coach",
-    "content": "Congratulations on 10,000 views!"
+    "content": "You've reached 1000 followers on social media!"
   },
   {
     "id": 9,
-    "type": "instagram",
-    "milestone": "shared_post",
-    "username": "celebrity_username",
-    "content": "Shared your post!"
+    "type": "message",
+    "milestone": "10 points/game",
+    "contact": "Coach",
+    "content": "You're averaging 10 points per game, impressive!"
   },
   {
     "id": 10,
-    "type": "instagram",
-    "milestone": "tagged_in_photo",
-    "username": "celebrity_username",
-    "content": "Tagged you in their photo!"
+    "type": "message",
+    "milestone": "15 games played",
+    "contact": "Coach",
+    "content": "You've played 15 games, well done!"
+  },
+  {
+    "id": 11,
+    "type": "message",
+    "milestone": "6 assists/game",
+    "contact": "Coach",
+    "content": "You're averaging 6 assists per game, awesome!"
+  },
+  {
+    "id": 12,
+    "type": "message",
+    "milestone": "7 rebounds/game",
+    "contact": "Coach",
+    "content": "You're averaging 7 rebounds per game, great effort!"
+  },
+  {
+    "id": 13,
+    "type": "message",
+    "milestone": "10 skill average",
+    "contact": "Coach",
+    "content": "You've achieved an average skill level of 10!"
+  },
+  {
+    "id": 14,
+    "type": "message",
+    "milestone": "Starter",
+    "contact": "Coach",
+    "content": "You've become a starter on the team!"
+  },
+  {
+    "id": 15,
+    "type": "message",
+    "milestone": "10,000 followers",
+    "contact": "Coach",
+    "content": "You've reached 10,000 followers on social media!"
+  },
+  {
+    "id": 16,
+    "type": "message",
+    "milestone": "15 points/game",
+    "contact": "Coach",
+    "content": "You're averaging 15 points per game, amazing!"
+  },
+  {
+    "id": 17,
+    "type": "message",
+    "milestone": "50 games played",
+    "contact": "Coach",
+    "content": "You've played 50 games, fantastic!"
+  },
+  {
+    "id": 18,
+    "type": "message",
+    "milestone": "10 assists/game",
+    "contact": "Coach",
+    "content": "You're averaging 10 assists per game, incredible!"
+  },
+  {
+    "id": 19,
+    "type": "message",
+    "milestone": "10 rebounds/game",
+    "contact": "Coach",
+    "content": "You're averaging 10 rebounds per game, great job!"
+  },
+  {
+    "id": 20,
+    "type": "message",
+    "milestone": "20 skill average",
+    "contact": "Coach",
+    "content": "You've achieved an average skill level of 20!"
+  },
+  {
+    "id": 21,
+    "type": "message",
+    "milestone": "Second Round Pick",
+    "contact": "Coach",
+    "content": "You're predicted to be a second round pick, congratulations!"
+  },
+  {
+    "id": 22,
+    "type": "message",
+    "milestone": "50,000 followers",
+    "contact": "Coach",
+    "content": "You've reached 50,000 followers on social media!"
+  },
+  {
+    "id": 23,
+    "type": "message",
+    "milestone": "20 points/game",
+    "contact": "Coach",
+    "content": "You're averaging 20 points per game, phenomenal!"
+  },
+  {
+    "id": 24,
+    "type": "message",
+    "milestone": "100 games played",
+    "contact": "Coach",
+    "content": "You've played 100 games, amazing work!"
+  },
+  {
+    "id": 25,
+    "type": "message",
+    "milestone": "Star Player",
+    "contact": "Coach",
+    "content": "You've become a star player on the team!"
+  },
+  {
+    "id": 26,
+    "type": "message",
+    "milestone": "15 assists/game",
+    "contact": "Coach",
+    "content": "You're averaging 15 assists per game, excellent!"
+  },
+  {
+    "id": 27,
+    "type": "message",
+    "milestone": "15 rebounds/game",
+    "contact": "Coach",
+    "content": "You're averaging 15 rebounds per game, fantastic!"
+  },
+  {
+    "id": 28,
+    "type": "message",
+    "milestone": "40 skill average",
+    "contact": "Coach",
+    "content": "You've achieved an average skill level of 40!"
+  },
+  {
+    "id": 29,
+    "type": "message",
+    "milestone": "First Round Pick",
+    "contact": "Coach",
+    "content": "You're predicted to be a first round pick, congratulations!"
+  },
+  {
+    "id": 30,
+    "type": "message",
+    "milestone": "500,000 followers",
+    "contact": "Coach",
+    "content": "You've reached 500,000 followers on social media!"
+  },
+  {
+    "id": 31,
+    "type": "message",
+    "milestone": "25 points/game",
+    "contact": "Coach",
+    "content": "You're averaging 25 points per game, outstanding!"
+  },
+  {
+    "id": 32,
+    "type": "message",
+    "milestone": "200 games played",
+    "contact": "Coach",
+    "content": "You've played 200 games, incredible achievement!"
+  },
+  {
+    "id": 33,
+    "type": "message",
+    "milestone": "20 rebounds/game",
+    "contact": "Coach",
+    "content": "You're averaging 20 rebounds per game, great work!"
+  },
+  {
+    "id": 34,
+    "type": "message",
+    "milestone": "60 skill average",
+    "contact": "Coach",
+    "content": "You've achieved an average skill level of 60!"
+  },
+  {
+    "id": 35,
+    "type": "message",
+    "milestone": "Top 10 Pick",
+    "contact": "Coach",
+    "content": "You're predicted to be a top 10 pick, congratulations!"
+  },
+  {
+    "id": 36,
+    "type": "message",
+    "milestone": "1 million followers",
+    "contact": "Coach",
+    "content": "You've reached 1 million followers on social media!"
+  },
+  {
+    "id": 37,
+    "type": "message",
+    "milestone": "30 points/game",
+    "contact": "Coach",
+    "content": "You're averaging 30 points per game, unbelievable!"
+  },
+  {
+    "id": 38,
+    "type": "message",
+    "milestone": "80 skill average",
+    "contact": "Coach",
+    "content": "You've achieved an average skill level of 80!"
+  },
+  {
+    "id": 39,
+    "type": "message",
+    "milestone": "100 skill average",
+    "contact": "Coach",
+    "content": "You've achieved an average skill level of 100!"
+  },
+  {
+    "id": 40,
+    "type": "message",
+    "milestone": "Become Number One NBA Draft Pick",
+    "contact": "Coach",
+    "content": "You've become the number one pick in the NBA draft, outstanding!"
   }
 ]
