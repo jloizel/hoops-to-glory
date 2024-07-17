@@ -10,6 +10,7 @@ interface MessageNotification {
   type: 'message';
   contact: string;
   content: string;
+  level: string;
 }
 
 interface InstagramNotification {
@@ -18,15 +19,18 @@ interface InstagramNotification {
   type: 'instagram';
   username: string;
   content: string;
+  level: string;
 }
 
 type Notification = MessageNotification | InstagramNotification;
 
 interface PhoneProps {
   achievements: string[];
+  randomMessageInterval: number;
+  randomMessageLevel: number;
 }
 
-const Phone: React.FC<PhoneProps> = ({ achievements }) => {
+const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, randomMessageLevel }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [displayedAchievements, setDisplayedAchievements] = useState<string[]>([]);
   const notificationsContainerRef = useRef<HTMLDivElement>(null);
@@ -59,18 +63,21 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (randomNotifications.length > 0) {
-        const randomIndex = Math.floor(Math.random() * randomNotifications.length);
-        const randomNotification = randomNotifications[randomIndex];
+      const availableNotifications = randomNotifications.filter(
+        notification => parseInt(notification.level) <= randomMessageInterval
+      );
+      if (availableNotifications.length > 0) {
+        const randomIndex = Math.floor(Math.random() * availableNotifications.length);
+        const randomNotification = availableNotifications[randomIndex];
         setNotifications(prevNotifications => [
           { ...randomNotification, id: Date.now() },
           ...prevNotifications
         ]);
       }
-    }, 3000); // Add random notifications every 30 seconds (change to set interval which reduces with fame})
+    }, randomMessageInterval);
 
     return () => clearInterval(interval);
-  }, [randomNotifications]);
+  }, [randomNotifications, randomMessageInterval, randomMessageInterval]);
 
   useEffect(() => { //achievement in json file needs to match name in handleEndorsementSelect
     achievements.forEach(achievementType => {

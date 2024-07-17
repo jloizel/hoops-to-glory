@@ -291,7 +291,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
   // ANALYTICS
-  const [followers, setFollowers] = useState(0);
+  const [followers, setFollowers] = useState(50000);
   const [growthRate, setGrowthRate] = useState(1);
   
   useEffect(() => {
@@ -316,6 +316,38 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   // PHONE
   const [achievements, setAchievements] = useState<string[]>([]);
+  const [randomMessageInterval, setRandomMessageInterval] = useState(30000)
+  const [randomMessageLevel, setRandomMessageLevel] = useState(1);
+
+  const baseInterval = 30000;
+  const minInterval = 5000;
+
+  useEffect(() => {
+    const calculateNewInterval = () => {
+      const skillFactor = totalSkillLevel / 300; // Assuming max total skill level is 300
+      const followerFactor = followers / 10000; // Assuming max followers to consider is 10000
+      const influenceFactor = skillFactor + followerFactor;
+      const newInterval = Math.max(baseInterval * (1 - influenceFactor), minInterval);
+      return newInterval;
+    };
+
+    const newInterval = calculateNewInterval();
+    setRandomMessageInterval(newInterval);
+  }, [totalSkillLevel, followers]);
+
+  useEffect(() => {
+    // Example: Increase user level based on followers count
+    if (followers > 10000 && followers < 50000) {
+      setRandomMessageLevel(2);
+    } else if (followers >= 50000 && followers < 100000) {
+      setRandomMessageLevel(3);
+    } else if (followers >= 100000 && followers < 500000) { 
+      setRandomMessageLevel(4);
+    }
+    // Add more conditions based on other criteria
+  }, [followers]);
+
+  console.log(randomMessageLevel)
 
   // Check for 10 games played milestone
   // useEffect(() => {
@@ -401,7 +433,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       </div>
       <div className={styles.bottomContainer}>
         <Box className={styles.leftContainer}>
-          <Phone achievements={achievements}/>
+          <Phone 
+            achievements={achievements}
+            randomMessageInterval={randomMessageInterval}
+            randomMessageLevel={randomMessageLevel}
+          />
           <div className={styles.topContentContainer}>
             <Analytics followers={followers}/>
           </div>
