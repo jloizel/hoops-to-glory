@@ -135,8 +135,11 @@ const Phone: React.FC<PhoneProps> = ({ achievements }) => {
         <p>{currentHourMinute}</p>
       </div>
       <div className={styles.notificationsContainer} ref={notificationsContainerRef} id="notifications-container">
-        {notifications.map(notification => (
-          <div key={notification.id} className={styles.notification}>
+        {notifications.map((notification, index) => (
+          <div
+            key={notification.id}
+            className={`${styles.notification} ${index === 0 ? styles.notificationPopIn : styles.notificationSlideDown}`}
+          >
             {notification.type === 'message' ? (
               <div className={styles.messageNotification}>
                 <div className={styles.messageTop}>

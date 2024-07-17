@@ -8,10 +8,10 @@
   border: 16px solid #333;
   border-radius: 36px;
   background-color: white;
-  background-image: url('../../../public/images/background2.jpg');
-  background-size: 300px;
-  background-position: 2px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-image: url('../../../public/images/background3.jpg');
+  background-size: 280px;
+  background-position: -10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.30);
   overflow: hidden;
 }
 
@@ -96,26 +96,31 @@
   /* padding: 10px; */
   margin-bottom: 10px;
   /* border-radius: 8px; */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   font-size: 12px;
+  box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.692);
+  backdrop-filter: blur(20px);
+  border-radius: 8px;
+  padding: 6px;
 }
 
 .messageTop, .instagramTop {
-  background: #EFF3FB;
-  padding: 6px;
+  /* background: #EFF3FB; */
+  /* padding: 6px; */
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  color: grey;
-  font-weight: 300;
+  color: rgb(70, 67, 67);
+  font-weight: 400;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 5px;
+  margin-bottom: 4px;
 }
 
 .messageIcon {
   font-size: 18px;
-  color: #359be4;
+  color: #30ce22;
 }
 
 .instagramIcon {
@@ -123,10 +128,10 @@
 }
 
 .messageContainer, .instagramContainer {
-  background: #ebefff;
-  padding: 6px;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  /* background: #ebefff; */
+  /* padding: 6px; */
+  /* border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px; */
 }
 
 .contact, .username {
@@ -168,7 +173,7 @@
 }
 
 
-@keyframes popOut {
+@keyframes popIn {
   0% {
     opacity: 0;
     transform:scale(0.5); /* Start smaller */
@@ -179,7 +184,26 @@
   }
 }
 
-.notification {
-  animation: popOut 0.2s ease-out;
+/* .notification {
+  animation: popIn 0.2s ease-out;
+} */
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
+.notificationPopIn {
+  animation: popIn 0.3s ease-out;
+}
+
+/* Notification slide down animation */
+.notificationSlideDown {
+  animation: slideDown 0.3s ease-out;
+}
