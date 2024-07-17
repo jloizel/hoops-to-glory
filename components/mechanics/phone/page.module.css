@@ -200,10 +200,9 @@
 }
 
 .notificationPopIn {
-  animation: popIn 0.3s ease-out;
+  animation: popIn 0.3s forwards;
 }
 
-/* Notification slide down animation */
 .notificationSlideDown {
-  animation: slideDown 0.3s ease-out;
+  animation: slideDown 0.5s forwards;
 }
