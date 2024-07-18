@@ -38,6 +38,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
   const [currentHourMinute, setCurrentHourMinute] = useState<string>('');
   const [randomNotifications, setRandomNotifications] = useState<Notification[]>([]);
   const [specificNotifications, setSpecificNotifications] = useState<Notification[]>([]);
+  const [displayedNotificationIds, setDisplayedNotificationIds] = useState<number[]>([]);
 
   useEffect(() => {
     // Fetch random notifications
@@ -64,7 +65,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
   useEffect(() => {
     const interval = setInterval(() => {
       const availableNotifications = randomNotifications.filter(
-        notification => parseInt(notification.level) <= randomMessageInterval
+        notification => parseInt(notification.level) <= randomMessageLevel && !displayedNotificationIds.includes(notification.id)
       );
       if (availableNotifications.length > 0) {
         const randomIndex = Math.floor(Math.random() * availableNotifications.length);
@@ -73,11 +74,12 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
           { ...randomNotification, id: Date.now() },
           ...prevNotifications
         ]);
+        setDisplayedNotificationIds(prevIds => [...prevIds, randomNotification.id]);
       }
     }, randomMessageInterval);
 
     return () => clearInterval(interval);
-  }, [randomNotifications, randomMessageInterval, randomMessageInterval]);
+  }, [randomNotifications, randomMessageLevel, randomMessageInterval, displayedNotificationIds]);
 
   useEffect(() => { //achievement in json file needs to match name in handleEndorsementSelect
     achievements.forEach(achievementType => {
@@ -91,6 +93,10 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
           ]);
 
           setDisplayedAchievements(prev => [...prev, achievementType]);
+          setDisplayedNotificationIds(prevIds => [
+            ...prevIds,
+            ...matchingNotifications.map(notification => notification.id)
+          ]);
         }
       }
     });
