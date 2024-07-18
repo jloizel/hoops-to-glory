@@ -3,7 +3,8 @@
     "id": 1,
     "type": "message",
     "contact": "John Doe",
-    "content": "Hey, how are you?"
+    "content": "Hey, how are you?",
+    "level": "1"
   },
   {
     "id": 2,
