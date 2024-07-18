@@ -2,62 +2,61 @@
   {
     "id": 1,
     "type": "message",
-    "contact": "John Doe",
-    "content": "Hey, how are you?",
-    "level": "1"
+    "name": "John Doe",
+    "content": "Hey, how are you?"
   },
   {
     "id": 2,
     "type": "message",
-    "contact": "Jane Smith",
+    "name": "Jane Smith",
     "content": "Remember to stay hydrated!"
   },
   {
     "id": 3,
     "type": "instagram",
-    "username": "lebronjames",
+    "name": "lebronjames",
     "content": "Mentioned you in his story!"
   },
   {
     "id": 4,
     "type": "instagram",
-    "username": "katyperry",
+    "name": "katyperry",
     "content": "Follows you now!"
   },
   {
     "id": 5,
     "type": "message",
-    "contact": "Michael Jordan",
+    "name": "Michael Jordan",
     "content": "Great job on your achievements!"
   },
   {
     "id": 6,
     "type": "instagram",
-    "username": "therock",
+    "name": "therock",
     "content": "Shared your post!"
   },
   {
     "id": 7,
     "type": "message",
-    "contact": "Elon Musk",
+    "name": "Elon Musk",
     "content": "Let's collaborate!"
   },
   {
     "id": 8,
     "type": "message",
-    "contact": "Mark Zuckerberg",
+    "name": "Mark Zuckerberg",
     "content": "Your app is amazing!"
   },
   {
     "id": 9,
     "type": "instagram",
-    "username": "taylorswift",
+    "name": "taylorswift",
     "content": "Tagged you in her photo!"
   },
   {
     "id": 10,
     "type": "instagram",
-    "username": "kimkardashian",
+    "name": "kimkardashian",
     "content": "Mentioned you in her story!"
   }
 ]

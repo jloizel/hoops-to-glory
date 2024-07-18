@@ -8,7 +8,7 @@ interface MessageNotification {
   id: number;
   milestone?: string;
   type: 'message';
-  contact: string;
+  name: string;
   content: string;
   level: string;
 }
@@ -17,7 +17,7 @@ interface InstagramNotification {
   id: number;
   milestone?: string;
   type: 'instagram';
-  username: string;
+  name: string;
   content: string;
   level: string;
 }
@@ -154,7 +154,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
                   MESSAGES
                 </div>
                 <div className={styles.messageContainer}>
-                  <div className={styles.contact}>{notification.contact}</div>
+                  <div className={styles.contact}>{notification.name}</div>
                   <div className={styles.message}>{notification.content}</div>
                 </div>
               </div>
@@ -167,7 +167,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
                 </div>
                 <div className={styles.instagramContainer}>
                   <div className={styles.instaUser}>
-                    <span className={styles.username}>{notification.username}</span>
+                    <span className={styles.username}>{notification.name}</span>
                     <img src="/images/verified.png" className={styles.verifiedIcon}/>
                   </div>
                   <div className={styles.action}>{notification.content}</div>
