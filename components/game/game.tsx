@@ -298,14 +298,15 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   // ANALYTICS
   const [followers, setFollowers] = useState(0);
   const [growthRate, setGrowthRate] = useState(1);
+  const [intervalDuration, setIntervalDuration] = useState(10000);
   
   useEffect(() => {
     const interval = setInterval(() => {
       setFollowers(prevFollowers => prevFollowers + growthRate); // Increment followers by growth rate
-    }, 1000); // Adjust the interval as needed
+    }, intervalDuration); // Adjust the interval as needed
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
-  }, [growthRate]);
+  }, [growthRate, intervalDuration]);
 
   useEffect(() => {
     if (gamesPlayed > 0) {
@@ -313,6 +314,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       const skillMultiplier = (skills.agility + skills.shooting + skills.fitness) / 100; // Adjust the multiplier as needed
       const newGrowthRate = baseGrowth + skillMultiplier;
       setGrowthRate(newGrowthRate);
+
+      const newIntervalDuration = Math.max(1000, 10000 / newGrowthRate); // Example adjustment
+      setIntervalDuration(newIntervalDuration);
     }
   }, [skills, gamesPlayed]);
 
