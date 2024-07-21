@@ -35,6 +35,11 @@ interface GameProps {
 }
 
 const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
+  const [gameStarted, setGameStarted] = useState(false)
+
+  useEffect(() => {
+    setGameStarted(true)
+  })
 
 
   //TRAINING
@@ -291,7 +296,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
   // ANALYTICS
-  const [followers, setFollowers] = useState(490);
+  const [followers, setFollowers] = useState(0);
   const [growthRate, setGrowthRate] = useState(1);
   
   useEffect(() => {
