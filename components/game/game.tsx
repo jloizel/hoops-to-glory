@@ -291,7 +291,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
   // ANALYTICS
-  const [followers, setFollowers] = useState(100);
+  const [followers, setFollowers] = useState(490);
   const [growthRate, setGrowthRate] = useState(1);
   
   useEffect(() => {

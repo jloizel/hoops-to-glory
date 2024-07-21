@@ -118,6 +118,20 @@
   margin-bottom: 4px;
 }
 
+.specialTop {
+  /* background: #EFF3FB; */
+  /* padding: 6px; */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: #ED174F;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 4px;
+}
+
 .messageIcon {
   font-size: 18px;
   color: #30ce22;

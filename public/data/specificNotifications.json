@@ -8,7 +8,7 @@
   },
   {
     "id": 2,
-    "type": "message",
+    "type": "special",
     "milestone": "500 followers",
     "contact": "Coach",
     "content": "You've reached 500 followers on social media!"

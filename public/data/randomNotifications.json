@@ -283,7 +283,7 @@
     "id": 41,
     "type": "message",
     "name": "Sarah",
-    "content": "How\u2019s the training going?",
+    "content": "How's the training going?",
     "level": "1"
   },
   {
@@ -340,7 +340,8 @@
     "type": "instagram",
     "name": "@ballislife",
     "content": "liked your story",
-    "level": "1"
+    "level": "1",
+    "verified": true
   },
   {
     "id": 50,
@@ -374,7 +375,7 @@
     "id": 54,
     "type": "message",
     "name": "Jeff",
-    "content": "Nice assist in the last quarter! Let\u2019s keep that up.",
+    "content": "Nice assist in the last quarter! Let's keep that up.",
     "level": "2"
   },
   {
@@ -395,28 +396,28 @@
     "id": 57,
     "type": "message",
     "name": "Jeff",
-    "content": "Good job handling the ball under pressure. You\u2019re on fire!",
+    "content": "Good job handling the ball under pressure. You're on fire!",
     "level": "2"
   },
   {
     "id": 58,
     "type": "message",
     "name": "Henry",
-    "content": "Great job with those rebounds today. Let\u2019s aim for more next game.",
+    "content": "Great job with those rebounds today. Let's aim for more next game.",
     "level": "2"
   },
   {
     "id": 59,
     "type": "message",
     "name": "Zak",
-    "content": "That pass you made was spot-on. Let\u2019s keep practicing those!",
+    "content": "That pass you made was spot-on. Let's keep practicing those!",
     "level": "2"
   },
   {
     "id": 60,
     "type": "message",
     "name": "Coach",
-    "content": "You\u2019re really improving your game. Proud of your progress.",
+    "content": "You're really improving your game. Proud of your progress.",
     "level": "2"
   },
   {
@@ -430,7 +431,7 @@
     "id": 62,
     "type": "message",
     "name": "Coach",
-    "content": "Great game management today. You\u2019re leading well.",
+    "content": "Great game management today. You're leading well.",
     "level": "2"
   },
   {
@@ -725,98 +726,112 @@
     "type": "instagram",
     "name": "@kingjames",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 105,
     "type": "instagram",
     "name": "@stephencurry30",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 106,
     "type": "instagram",
     "name": "@giannis_an34",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 107,
     "type": "instagram",
     "name": "@joelembiid",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 108,
     "type": "instagram",
     "name": "@antdavis23",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 109,
     "type": "instagram",
     "name": "@jaytatum0",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 110,
     "type": "instagram",
     "name": "@zionwilliamson",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 111,
     "type": "instagram",
     "name": "@russwest44",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 112,
     "type": "instagram",
     "name": "@devinbook",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 113,
     "type": "instagram",
     "name": "@klaythompson",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 114,
     "type": "instagram",
     "name": "@juliusrandle30",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 115,
     "type": "instagram",
     "name": "@melo",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 116,
     "type": "instagram",
     "name": "@vicoladipo",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 117,
     "type": "instagram",
     "name": "@kawhileonard",
     "content": "liked your story",
-    "level": "4"
+    "level": "4",
+    "verified": true
   },
   {
     "id": 118,

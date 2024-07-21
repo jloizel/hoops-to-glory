@@ -20,9 +20,19 @@ interface InstagramNotification {
   name: string;
   content: string;
   level: string;
+  verified?: boolean
 }
 
-type Notification = MessageNotification | InstagramNotification;
+interface SpecialNotification {
+  id: number;
+  milestone?: string;
+  type: 'special';
+  name: string;
+  content: string;
+  level: string;
+}
+
+type Notification = MessageNotification | InstagramNotification | SpecialNotification;
 
 interface PhoneProps {
   achievements: string[];
@@ -164,27 +174,42 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
                   <div className={styles.message}>{notification.content}</div>
                 </div>
               </div>
-            ) : (
+            ) : notification.type === 'instagram' ? (
               <div className={styles.instagramNotification}>
                 <div className={styles.instagramTop}>
-                {/* <RiInstagramFill className={styles.instagramIcon} /> */}
-                <img src="/images/instagram.png" className={styles.instagramIcon}/>
+                  <img src="/images/instagram.png" className={styles.instagramIcon}/>
                   INSTAGRAM
                 </div>
                 <div className={styles.instagramContainer}>
                   <div className={styles.instaUser}>
                     <span className={styles.username}>{notification.name}</span>
-                    <img src="/images/verified.png" className={styles.verifiedIcon}/>
+                    {notification.verified && (
+                      <img src="/images/verified.png" className={styles.verifiedIcon}/>
+                    )}
                   </div>
                   <div className={styles.action}>{notification.content}</div>
                 </div>
               </div>
-            )}
+            ) : notification.type === 'special' ? (
+              <div className={styles.specialNotification}>
+                <div className={styles.specialTop}>
+                  <span className={styles.specialIcon}>📢</span>
+                  NOTICE 
+                </div>
+                <div className={styles.specialContainer}>
+                  <div className={styles.specialContent}>
+                    <div className={styles.specialName}>{notification.name}</div>
+                    <div className={styles.specialMessage}>{notification.content}</div>
+                  </div>
+                </div>
+              </div>
+            ) : null}
           </div>
         ))}
       </div>
     </div>
   );
+  
 };
 
 export default Phone;
