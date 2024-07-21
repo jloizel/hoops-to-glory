@@ -2,61 +2,351 @@
   {
     "id": 1,
     "type": "message",
-    "name": "John Doe",
-    "content": "Hey, how are you"
+    "name": "Alex",
+    "content": "Yes bro, you've been looking good on the court recently",
+    "level": "1"
   },
   {
     "id": 2,
     "type": "message",
-    "name": "Jane Smith",
-    "content": "Remember to stay hydrated!"
+    "name": "Mom",
+    "content": "I'm so proud of you, keep chasing your dreams!",
+    "level": "1"
   },
   {
     "id": 3,
-    "type": "instagram",
-    "name": "lebronjames",
-    "content": "Mentioned you in his story!"
+    "type": "message",
+    "name": "Dad",
+    "content": "Keep pushing, son! You got this.",
+    "level": "1"
   },
   {
     "id": 4,
-    "type": "instagram",
-    "name": "katyperry",
-    "content": "Follows you now!"
+    "type": "message",
+    "name": "Emma",
+    "content": "When's your next game? I want to come!",
+    "level": "1"
   },
   {
     "id": 5,
     "type": "message",
-    "name": "Michael Jordan",
-    "content": "Great job on your achievements!"
+    "name": "Chris",
+    "content": "Let's hit the gym together tomorrow.",
+    "level": "1"
   },
   {
     "id": 6,
-    "type": "instagram",
-    "name": "therock",
-    "content": "Shared your post!"
+    "type": "message",
+    "name": "Sarah",
+    "content": "You're killing it out there, keep going strong!",
+    "level": "1"
   },
   {
     "id": 7,
     "type": "message",
-    "name": "Elon Musk",
-    "content": "Let's collaborate!"
+    "name": "John",
+    "content": "That last game was amazing, you're on fire!",
+    "level": "1"
   },
   {
     "id": 8,
     "type": "message",
-    "name": "Mark Zuckerberg",
-    "content": "Your app is amazing!"
+    "name": "Alice",
+    "content": "Keep shining, you're doing great!",
+    "level": "1"
   },
   {
     "id": 9,
-    "type": "instagram",
-    "name": "taylorswift",
-    "content": "Tagged you in her photo!"
+    "type": "message",
+    "name": "Big bro",
+    "content": "Keep those skills sharp, you're awesome!",
+    "level": "1"
   },
   {
     "id": 10,
+    "type": "message",
+    "name": "Uncle Tom",
+    "content": "Your dedication is inspiring, keep going!",
+    "level": "1"
+  },
+  {
+    "id": 11,
+    "type": "message",
+    "name": "Aunt Jane",
+    "content": "You're making the family proud, fantastic job!",
+    "level": "1"
+  },
+  {
+    "id": 12,
+    "type": "message",
+    "name": "Grandma",
+    "content": "Keep following your dreams, sweetheart!",
+    "level": "1"
+  },
+  {
+    "id": 13,
+    "type": "message",
+    "name": "Grandpa",
+    "content": "You're a true champion, never stop!",
+    "level": "1"
+  },
+  {
+    "id": 14,
+    "type": "message",
+    "name": "Charlie",
+    "content": "Let's practice together this weekend",
+    "level": "1"
+  },
+  {
+    "id": 15,
+    "type": "message",
+    "name": "Noah",
+    "content": "Great game last night, you're incredible!",
+    "level": "1"
+  },
+  {
+    "id": 16,
+    "type": "message",
+    "name": "Lucas",
+    "content": "When's your next match? Can't wait to watch!",
+    "level": "1"
+  },
+  {
+    "id": 17,
+    "type": "message",
+    "name": "Sophia",
+    "content": "You're a beast on the court, great job!",
+    "level": "1"
+  },
+  {
+    "id": 18,
+    "type": "message",
+    "name": "Isabella",
+    "content": "You're amazing, keep making us proud!",
+    "level": "1"
+  },
+  {
+    "id": 19,
+    "type": "message",
+    "name": "Charlotte",
+    "content": "Keep dominating, you're the best!",
+    "level": "1"
+  },
+  {
+    "id": 20,
+    "type": "message",
+    "name": "Mom",
+    "content": "Your determination is admirable, keep going!",
+    "level": "1"
+  },
+  {
+    "id": 21,
+    "type": "message",
+    "name": "Alex",
+    "content": "Great game last night, you're on your way to the top!",
+    "level": "1"
+  },
+  {
+    "id": 22,
+    "type": "message",
+    "name": "Liz",
+    "content": "You're dominating on the court, keep it up!",
+    "level": "1"
+  },
+  {
+    "id": 23,
+    "type": "message",
+    "name": "Owen",
+    "content": "Your determination is admirable, keep pushing forward!",
+    "level": "1"
+  },
+  {
+    "id": 24,
+    "type": "message",
+    "name": "gym bro",
+    "content": "Your progress is impressive, keep working hard!",
+    "level": "1"
+  },
+  {
+    "id": 25,
+    "type": "message",
+    "name": "Sam",
+    "content": "Keep striving for greatness, you're doing awesome!",
+    "level": "1"
+  },
+  {
+    "id": 26,
+    "type": "message",
+    "name": "Little bro",
+    "content": "You're a role model, keep inspiring us!",
+    "level": "1"
+  },
+  {
+    "id": 27,
+    "type": "message",
+    "name": "William",
+    "content": "Remember when we used to play? You're amazing now!",
+    "level": "1"
+  },
+  {
+    "id": 28,
+    "type": "message",
+    "name": "Chris",
+    "content": "Keep crushing it on the court, you're unstoppable!",
+    "level": "1"
+  },
+  {
+    "id": 29,
+    "type": "message",
+    "name": "Olivia",
+    "content": "Your success is well-deserved, keep pushing!",
+    "level": "1"
+  },
+  {
+    "id": 30,
+    "type": "message",
+    "name": "John",
+    "content": "When's the next game? We all want to come!",
+    "level": "1"
+  },
+  {
+    "id": 31,
+    "type": "message",
+    "name": "Noah",
+    "content": "Keep posting those highlights, you're amazing!",
+    "level": "1"
+  },
+  {
+    "id": 32,
+    "type": "message",
+    "name": "George",
+    "content": "You're a great example to others, keep striving!",
+    "level": "1"
+  },
+  {
+    "id": 33,
+    "type": "message",
+    "name": "Dad",
+    "content": "You're killing it on the court, keep pushing, so proud of you",
+    "level": "1"
+  },
+  {
+    "id": 34,
+    "type": "message",
+    "name": "Liz",
+    "content": "You're making us proud, great job!",
+    "level": "1"
+  },
+  {
+    "id": 35,
+    "type": "message",
+    "name": "Mike",
+    "content": "Your hard work is really showing!",
+    "level": "1"
+  },
+  {
+    "id": 36,
+    "type": "message",
+    "name": "Anna",
+    "content": "Let's hang out after your game.",
+    "level": "1"
+  },
+  {
+    "id": 37,
+    "type": "message",
+    "name": "Alex",
+    "content": "Hey, let's grab a bite after practice.",
+    "level": "1"
+  },
+  {
+    "id": 38,
+    "type": "message",
+    "name": "Mark",
+    "content": "Do you want to join our pick-up game this Sunday?",
+    "level": "1"
+  },
+  {
+    "id": 39,
+    "type": "message",
+    "name": "James",
+    "content": "Any plans for the weekend?",
+    "level": "1"
+  },
+  {
+    "id": 40,
+    "type": "message",
+    "name": "Andrew",
+    "content": "Want to join us for a game night?",
+    "level": "1"
+  },
+  {
+    "id": 41,
+    "type": "message",
+    "name": "Sarah",
+    "content": "How\u2019s the training going?",
+    "level": "1"
+  },
+  {
+    "id": 42,
     "type": "instagram",
-    "name": "kimkardashian",
-    "content": "Mentioned you in her story!"
+    "name": "@hoops_hustler",
+    "content": "mentioned you in their story",
+    "level": "1"
+  },
+  {
+    "id": 43,
+    "type": "instagram",
+    "name": "@baller_bro",
+    "content": "mentioned you in their story",
+    "level": "1"
+  },
+  {
+    "id": 44,
+    "type": "instagram",
+    "name": "@net_shooter",
+    "content": "mentioned you in their story",
+    "level": "1"
+  },
+  {
+    "id": 45,
+    "type": "instagram",
+    "name": "@pro_baller_life",
+    "content": "mentioned you in their story",
+    "level": "1"
+  },
+  {
+    "id": 46,
+    "type": "instagram",
+    "name": "@crossoverKing",
+    "content": "mentioned you in their story",
+    "level": "1"
+  },
+  {
+    "id": 47,
+    "type": "instagram",
+    "name": "@hoopHustler23",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 48,
+    "type": "instagram",
+    "name": "@3pointpro",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 49,
+    "type": "instagram",
+    "name": "@ballislife",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 50,
+    "type": "instagram",
+    "name": "@training134",
+    "content": "liked your story",
+    "level": "1"
   }
 ]
