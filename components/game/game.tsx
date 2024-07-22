@@ -11,6 +11,7 @@ import Recovery from '../mechanics/recovery/recovery'
 import Endorsements from '../mechanics/endorsements/endorsements'
 import PageHeader from '../mechanics/pageHeader/pageHeader'
 import milestones from './milestones'
+import GameOver from '../gameOver/gameOver'
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
@@ -504,6 +505,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
             }
           </div>
         </Box>
+        <GameOver username={username}/>
       </div>
     </div>
   )
