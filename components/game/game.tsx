@@ -357,8 +357,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     // Add more conditions based on other criteria
   }, [followers]);
 
-  console.log(randomMessageLevel)
-
   // Check for 10 games played milestone
   // useEffect(() => {
   //   if (gamesPlayed === 10) {
@@ -505,7 +503,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
             }
           </div>
         </Box>
-        <GameOver username={username}/>
+        <GameOver/>
       </div>
     </div>
   )
