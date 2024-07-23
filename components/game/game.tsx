@@ -11,7 +11,10 @@ import Recovery from '../mechanics/recovery/recovery'
 import Endorsements from '../mechanics/endorsements/endorsements'
 import PageHeader from '../mechanics/pageHeader/pageHeader'
 import milestones from './milestones'
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
 import GameOver from '../gameOver/gameOver'
+
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
@@ -415,7 +418,15 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     setDraftRank(newDraftRank);
   }, [skills]);
 
-  
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    if (!gameStarted) {
+      setOpen(true)
+    }
+  },[10000])  
 
   //CHECK COMPLETED MILESTONES
   useEffect(() => {
@@ -432,6 +443,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   }, [
     pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
   ]);
+
+
+
 
 
   return (
@@ -503,7 +517,22 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
             }
           </div>
         </Box>
-        <GameOver/>
+        <Modal open={open} onClose={() => setOpen(false)}>
+        <Fade in={open}>
+          <Box sx={{ 
+            position: 'absolute', 
+            top: '50%', 
+            left: '50%', 
+            transform: 'translate(-50%, -50%)', 
+            width: 400, 
+            bgcolor: 'background.paper', 
+            boxShadow: 24, 
+            p: 4 }}>
+            <GameOver/>
+          </Box>
+        </Fade>
+      </Modal>
+        
       </div>
     </div>
   )
