@@ -516,24 +516,15 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
               />
             }
           </div>
-        </Box>
-        <Modal open={open} onClose={() => setOpen(false)}>
+        </Box>    
+      </div>
+      <Modal open={open} onClose={() => setOpen(false)}>
         <Fade in={open}>
-          <Box sx={{ 
-            position: 'absolute', 
-            top: '50%', 
-            left: '50%', 
-            transform: 'translate(-50%, -50%)', 
-            width: 400, 
-            bgcolor: 'background.paper', 
-            boxShadow: 24, 
-            p: 4 }}>
+          <div className={styles.modal}>
             <GameOver/>
-          </Box>
+          </div>
         </Fade>
       </Modal>
-        
-      </div>
     </div>
   )
 }

@@ -55,3 +55,17 @@
 .flash {
   animation: flash 0.3s ease-in-out 3; /* Animation duration and repetition */
 }
+
+.modal {
+  /* position: 'absolute';
+  top: '50%'; 
+  left: '50%'; 
+  transform: 'translate(-50%, -50%)'; 
+  width: 400; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  /* background-color: #e6e6e580; */
+  background-color: #0067b1c7;
+}

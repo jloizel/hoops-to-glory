@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import styles from "./page.module.css"
 
 const GameOver: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
