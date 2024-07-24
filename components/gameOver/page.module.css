@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  overflow: hidden;
+  width: 90%;
+  overflow-y: hidden;
+  position: relative;
+  
+  @media (min-width: 1024px) {
+    width: 70%;
+  }
+}
+
+.videoContainer {
+  width: 100%; 
+  opacity: 0;
+  transition: opacity 3s ease-in-out;
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
+.fadeOut {
+  opacity: 0;
+}
+
+.video {
+  width: 100%; 
+  height: auto; 
+}
+
+.usernameContainer {
+  background-color: #f0f0f0; 
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  
+  @media (min-width: 1024px) {
+    width: 70%;
+  }
+}
+
+.username {
+  position: absolute;
+  color: #333; /* Example color */
+  font-size: 2rem; /* Example font size */
+  opacity: 0;
+  animation: fadeInUsername 1s forwards;
+}
+
+@keyframes fadeInUsername {
+  to {
+    opacity: 1;
+  }
+}

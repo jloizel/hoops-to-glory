@@ -1,66 +1,104 @@
 import React, { useState, useRef, useEffect } from 'react';
-import styles from "./page.module.css"
+import styles from "./page.module.css";
 
-const GameOver: React.FC = () => {
+interface GameOverProps {
+  username: string;
+  open: boolean;
+}
+
+const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
-  const [username, setUsername] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [isVideoVisible, setIsVideoVisible] = useState<boolean>(false);
+  const [isUsernameVisible, setIsUsernameVisible] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
+  const playVideoAndSpeak = async () => {
     if (videoUrl && videoRef.current) {
       const videoElement = videoRef.current;
-      videoElement.play();
+      try {
+        await videoElement.play();
+      } catch (error) {
+        console.error("Error attempting to play video:", error);
+      }
 
-      // Set a timer to start speech after 13.2 seconds
       const timer = setTimeout(() => {
         const speechText = `${username}`;
         const speech = new SpeechSynthesisUtterance(speechText);
-        speech.voice = window.speechSynthesis.getVoices().find(voice => voice.name === 'Microsoft George - English (United Kingdom)') || null;
-        speech.pitch = 1;
-        speech.rate = 1;
-        window.speechSynthesis.speak(speech);
+
+        const voices = window.speechSynthesis.getVoices();
+        if (voices.length === 0) {
+          // If no voices are loaded yet, wait for them to be loaded
+          window.speechSynthesis.onvoiceschanged = () => {
+            const updatedVoices = window.speechSynthesis.getVoices();
+            speech.voice = updatedVoices.find(voice => voice.name === 'Microsoft George - English (United Kingdom)') || null;
+            window.speechSynthesis.speak(speech);
+          };
+        } else {
+          speech.voice = voices.find(voice => voice.name === 'Microsoft George - English (United Kingdom)') || null;
+          window.speechSynthesis.speak(speech);
+        }
       }, 13200); // 13.2 seconds
 
       return () => clearTimeout(timer); // Cleanup timer on unmount or URL change
     }
-  }, [videoUrl, username]);
-
-  const voicesList = window.speechSynthesis.getVoices()
-
-  const handleGenerateVideo = () => {
-    setLoading(true);
-    setError(null);
-    try {
-      // Example video URL, replace with your video URL
-      const videoPath = '/videos/draft.mp4'; // Example path
-      setVideoUrl(videoPath);
-    } catch (error) {
-      setError('Error fetching video. Please try again.');
-      console.error('Error fetching video:', error);
-    } finally {
-      setLoading(false);
-    }
   };
 
+  useEffect(() => {
+    if (open) {
+      setLoading(true);
+      setError(null);
+      try {
+        // Example video URL, replace with your video URL
+        const videoPath = '/videos/draft.mp4'; // Example path
+        setVideoUrl(videoPath);
+        setTimeout(() => setIsVideoVisible(true), 300); // Delay to match modal fade-in
+      } catch (error) {
+        setError('Error fetching video. Please try again.');
+        console.error('Error fetching video:', error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setVideoUrl(null);
+      setIsVideoVisible(false);
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      const videoElement = videoRef.current;
+      const handleVideoEnd = () => {
+        setIsVideoVisible(false);
+        setTimeout(() => {
+          setIsUsernameVisible(true);
+        }, 1000); // Delay to allow the fade-out effect to complete
+      };
+
+      videoElement.addEventListener('ended', handleVideoEnd);
+
+      return () => {
+        videoElement.removeEventListener('ended', handleVideoEnd);
+      };
+    }
+  }, [videoUrl]);
+
+  useEffect(() => {
+    playVideoAndSpeak();
+  }, [videoUrl, username]);
+
   return (
-    <div>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Enter username"
-      />
-      <button onClick={handleGenerateVideo} disabled={loading}>
-        {loading ? 'Generating...' : 'Generate Video'}
-      </button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className={styles.container}>
       {videoUrl && (
-        <div>
-          <video ref={videoRef} src={videoUrl} controls />
+        <div className={`${styles.videoContainer} ${isVideoVisible ? styles.fadeIn : styles.fadeOut}`}>
+          <video ref={videoRef} src={videoUrl} autoPlay className={styles.video} />
         </div>
       )}
+      <div className={styles.usernameContainer}>
+        {isUsernameVisible && <div className={styles.username}>{username}</div>}
+      </div>
+      {error && <p>{error}</p>}
     </div>
   );
 };

@@ -521,7 +521,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       <Modal open={open} onClose={() => setOpen(false)}>
         <Fade in={open}>
           <div className={styles.modal}>
-            <GameOver/>
+            <GameOver username={username} open={open}/>
           </div>
         </Fade>
       </Modal>
