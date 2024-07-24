@@ -89,16 +89,18 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
   }, [videoUrl, username]);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isUsernameVisible ? styles.containerBackground : ""}`}>
       {videoUrl && (
         <div className={`${styles.videoContainer} ${isVideoVisible ? styles.fadeIn : styles.fadeOut}`}>
           <video ref={videoRef} src={videoUrl} autoPlay className={styles.video} />
         </div>
       )}
-      <div className={styles.usernameContainer}>
-        {isUsernameVisible && <div className={styles.username}>{username}</div>}
-      </div>
-      {error && <p>{error}</p>}
+      {isUsernameVisible && (
+          <div className={styles.username}>
+            <span>1st Pick in the Nba</span>
+            {username}
+          </div>
+      )}
     </div>
   );
 };
