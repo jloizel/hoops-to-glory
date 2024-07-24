@@ -84,9 +84,9 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
     }
   }, [videoUrl]);
 
-  useEffect(() => {
-    playVideoAndSpeak();
-  }, [videoUrl, username]);
+  // useEffect(() => {
+  //   playVideoAndSpeak();
+  // }, [videoUrl, username]);
 
   return (
     <div className={`${styles.container} ${isUsernameVisible ? styles.containerBackground : ""}`}>
