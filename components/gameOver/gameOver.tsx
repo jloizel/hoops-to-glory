@@ -51,7 +51,7 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
       setError(null);
       try {
         // Example video URL, replace with your video URL
-        const videoPath = '/videos/draft.mp4'; // Example path
+        const videoPath = '/videos/draftVideo.mp4'; // Example path
         setVideoUrl(videoPath);
         setTimeout(() => setIsVideoVisible(true), 300); // Delay to match modal fade-in
       } catch (error) {
