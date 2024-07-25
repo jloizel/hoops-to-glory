@@ -87,12 +87,21 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
         <audio ref={audioRef} src={audioUrl} />
       )}
       {isUsernameVisible && (
-        <div className={styles.username}>
-          <span>1st Pick in the NBA</span>
-          {username}
+        <div className={styles.pickContainer}>
+          <div className={styles.left}>
+            <div className={styles.username}>
+            <span>1st Pick in the NBA</span>
+            {username}
+            </div>
+          </div>
+          <div className={styles.right}>
+            <div className={styles.imageContainer}>
+              <img src="/images/1.png" className={styles.image}/>
+            </div>
+          </div>
+        
         </div>
       )}
-      {error && <p>{error}</p>}
     </div>
   );
 };

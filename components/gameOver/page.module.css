@@ -9,7 +9,7 @@
   position: relative;
   
   @media (min-width: 1024px) {
-    width: 50%;
+    width: 60%;
   }
 }
 
@@ -37,8 +37,41 @@
   height: auto; 
 }
 
-.username {
+.pickContainer {
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../public/images/skyline2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.pickContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #124486ec;
+}
+
+.left, .right {
+  width: 50%;
+  height: 100%;
+  z-index: 10;
+}
+
+.left {
+
+}
+
+.username {
   color: #0067B1;
   font-size: 30px;
   font-weight: 700;
@@ -52,4 +85,20 @@
   to {
     opacity: 1;
   }
+}
+
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageContainer {
+  width: 60%;
+  height: 60%;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
 }
