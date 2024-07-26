@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from "./page.module.css";
 import Confetti from '../confetti/confetti';
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 interface GameOverProps {
   username: string;
@@ -80,6 +81,7 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
 
   const handleConfettiComplete = () => {
     setIsConfettiComplete(true);
+    console.log("complete")
   };
 
   return (
@@ -115,10 +117,18 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
             <div className={styles.imageContainer}>
               <img src="/images/1.png" className={styles.image}/>
             </div>
+            {isConfettiComplete && (
+              <FaLongArrowAltRight className={styles.arrow}/>
+            )}
           </div>
         
         </div>
       )}
+      {/* {isConfettiComplete && (
+        <div className={styles.pickContainer}>
+          test
+        </div>
+      )} */}
     </div>
   );
 };

@@ -7,7 +7,7 @@ interface ConfettiProps {
   onConfettiComplete: () => void;
 }
 
-const Confetti: React.FC<ConfettiProps> = ({ trigger }) => {
+const Confetti: React.FC<ConfettiProps> = ({ trigger, onConfettiComplete }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -38,6 +38,8 @@ const Confetti: React.FC<ConfettiProps> = ({ trigger }) => {
 
         if (timeLeft > 0) {
           requestAnimationFrame(frame);
+        } else {
+          onConfettiComplete()
         }
       })();
     }

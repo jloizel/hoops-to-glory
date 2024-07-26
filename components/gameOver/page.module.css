@@ -146,6 +146,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .imageContainer {
@@ -157,4 +158,14 @@
 .image, .logo {
   height: 100%;
   width: 100%;
+}
+
+.arrow {
+  position: absolute;
+  bottom: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px; /* Adjust size of the arrow as needed */
 }
