@@ -89,9 +89,19 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
       {isUsernameVisible && (
         <div className={styles.pickContainer}>
           <div className={styles.left}>
+            <div className={styles.top}> 
+              <div className={styles.logoContainer}>
+                <img src="/images/logo3.png" className={styles.logo}/>
+              </div>
+              <div className={styles.draftText}>
+                <span>DRAFT</span>
+                <span>2024</span>
+              </div>
+            </div>
             <div className={styles.username}>
-            <span>1st Pick in the NBA</span>
-            {username}
+              <span>PICK IN THE</span>
+              <span>2024 DRAFT</span>
+              {username}
             </div>
           </div>
           <div className={styles.right}>

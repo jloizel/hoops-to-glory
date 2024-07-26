@@ -14,8 +14,11 @@
     "@mui/icons-material": "^5.15.21",
     "@mui/material": "^5.15.21",
     "axios": "^1.7.2",
+    "canvas-confetti": "^1.9.3",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.3.4",
+    "framer-motion": "^11.3.17",
+    "lucide-react": "^0.416.0",
     "next": "14.2.4",
     "react": "^18",
     "react-countdown-circle-timer": "^3.2.1",
@@ -23,15 +26,17 @@
     "react-icons": "^5.2.1",
     "react-social-icons": "^6.16.0",
     "react-speech": "^1.0.2",
-    "tailwind-merge": "^2.4.0"
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.6.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
-    "tailwindcss": "^3.4.6",
+    "tailwindcss": "^3.4.7",
     "typescript": "^5"
   }
 }
