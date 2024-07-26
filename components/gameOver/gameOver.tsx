@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from "./page.module.css";
+import Confetti from '../confetti/confetti';
 
 interface GameOverProps {
   username: string;
@@ -15,6 +16,7 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
   const [isUsernameVisible, setIsUsernameVisible] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [isConfettiComplete, setIsConfettiComplete] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -76,8 +78,13 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
     }
   }, [videoUrl]);
 
+  const handleConfettiComplete = () => {
+    setIsConfettiComplete(true);
+  };
+
   return (
-    <div className={`${styles.container} ${isUsernameVisible ? styles.containerBackground : ""}`}>
+    <div className={styles.container}>
+      <Confetti trigger={isUsernameVisible} onConfettiComplete={handleConfettiComplete}/>
       {videoUrl && (
         <div className={`${styles.videoContainer} ${isVideoVisible ? styles.fadeIn : styles.fadeOut}`}>
           <video ref={videoRef} src={videoUrl} className={styles.video} />
