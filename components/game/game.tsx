@@ -40,10 +40,37 @@ interface GameProps {
 
 const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   const [gameStarted, setGameStarted] = useState(false)
+  const [elapsedTime, setElapsedTime] = useState(0);
 
   useEffect(() => {
     setGameStarted(true)
   })
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
+
+    if (gameStarted) {
+      timer = setInterval(() => {
+        setElapsedTime(prevTime => prevTime + 1);
+      }, 1000); // Increment the elapsed time every second
+    } else if (timer) {
+      clearInterval(timer);
+    }
+
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [gameStarted]);
+
+  const formatTime = (seconds: number): string => {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
 
 
   //TRAINING
@@ -521,7 +548,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       <Modal open={open} onClose={() => setOpen(false)}>
         <Fade in={open}>
           <div className={styles.modal}>
-            <GameOver username={username} open={open}/>
+            <GameOver username={username} open={open} elapsedTime={formatTime(elapsedTime)} handleClose={handleClose}/>
           </div>
         </Fade>
       </Modal>

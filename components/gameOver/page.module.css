@@ -160,7 +160,7 @@
   width: 100%;
 }
 
-.arrow {
+.arrow1 {
   position: absolute;
   bottom: 10px; 
   right: 10px; 
@@ -172,6 +172,85 @@
   cursor: pointer;
 }
 
-.arrow:hover {
+.arrow1:hover {
+  scale: 1.2;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+
+.time {
+  font-weight: 600;
+  color: white;
+  font-size: 40px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time span {
+  font-size: 25px;
+  line-height: 15px;
+}
+
+.closeIcon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px; 
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+}
+
+.closeIcon:hover {
+  background-color: #124486ec;
+}
+
+.hof {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  margin-top: 30px;
+}
+
+.hof span {
+  font-size: 20px; 
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.arrow2 {
+  font-size: 30px;
+}
+
+.hofImageContainer {
+  width: 100px;
+  height: auto;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.hofImage {
+  width: 100%;
+  height: 100%;
+}
+
+.hofImageContainer:hover {
   scale: 1.2;
 }

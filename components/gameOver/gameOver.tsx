@@ -2,13 +2,18 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from "./page.module.css";
 import Confetti from '../confetti/confetti';
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { IoCloseOutline } from "react-icons/io5";
+import { HiArrowLongRight } from "react-icons/hi2";
+
 
 interface GameOverProps {
   username: string;
   open: boolean;
+  elapsedTime: string;
+  handleClose: () => void;
 }
 
-const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
+const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handleClose }) => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -18,6 +23,7 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isConfettiComplete, setIsConfettiComplete] = useState(false);
+  const [arrowClicked, setArrowClicked] = useState(false)
 
   useEffect(() => {
     if (open) {
@@ -81,8 +87,13 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
 
   const handleConfettiComplete = () => {
     setIsConfettiComplete(true);
-    console.log("complete")
   };
+
+  const handleArrowClick = () => {
+    setArrowClicked(true)
+  };
+
+
 
   return (
     <div className={styles.container}>
@@ -95,7 +106,7 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
       {audioUrl && (
         <audio ref={audioRef} src={audioUrl} />
       )}
-      {isUsernameVisible && (
+      {isUsernameVisible && !arrowClicked && (
         <div className={styles.pickContainer}>
           <div className={styles.left}>
             <div className={styles.top}> 
@@ -118,17 +129,29 @@ const GameOver: React.FC<GameOverProps> = ({ username, open }) => {
               <img src="/images/1.png" className={styles.image}/>
             </div>
             {isConfettiComplete && (
-              <FaLongArrowAltRight className={styles.arrow}/>
+              <HiArrowLongRight className={styles.arrow1} onClick={handleArrowClick}/>
             )}
           </div>
         
         </div>
       )}
-      {/* {isConfettiComplete && (
+      {arrowClicked && (
         <div className={styles.pickContainer}>
-          test
+          <div className={styles.content}>
+            <div className={styles.time}>
+              <span>Your time</span>
+              {elapsedTime}
+            </div>
+            <IoCloseOutline className={styles.closeIcon} onClick={handleClose}/>
+            <div className={styles.hof}>
+              {/* <span>Check out the highscores <HiArrowLongRight className={styles.arrow2}/> </span> */}
+              <div className={styles.hofImageContainer}>
+                <img src="/images/HoF.png" className={styles.hofImage}></img>
+              </div>
+            </div>
+          </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 };
