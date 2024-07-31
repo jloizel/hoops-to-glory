@@ -3,7 +3,7 @@ import styles from "./page.module.css"
 
 const Times = () => {
   return (
-    <div>times</div>
+    <div>Times</div>
   )
 }
 
