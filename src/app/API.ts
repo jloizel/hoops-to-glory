@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-const BASE_URL = ''; // Update with your backend server URL
+const BASE_URL = 'https://hoopstoglory-server.vercel.app/'; // Update with your backend server URL
 
 // Create an Axios instance with custom configurations
 const api: AxiosInstance = axios.create({
