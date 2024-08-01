@@ -451,7 +451,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   useEffect(() => {
     if (!gameStarted) {
-      setOpen(true)
+      setOpen(false)
     }
   },[10000])  
 

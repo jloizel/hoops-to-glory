@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react'
 import styles from "./page.module.css"
-import { Box, Modal } from '@mui/material'
+import { Box, Fade, Modal } from '@mui/material'
 import { VscDebugRestart } from "react-icons/vsc";
 import { IoClose } from "react-icons/io5";
+import HallOfFame from '../../hof/hof';
 
 interface PageHeaderProps {
   username: string
@@ -17,6 +18,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
   const [openModal, setOpenModal] = useState(false);
   const [resetUsernameModal, setResetUsernameModal] = useState(false)
   const [usernameReset, setUsernameReset] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const handleResetClick = () => {
     setOpenModal(true)
@@ -25,6 +27,10 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
   const handleResetUsername = () => {
     handleReset()
     setOpenModal(false)
+  }
+
+  const handleHofClick = () => {
+    setOpen(true)
   }
 
   return (
@@ -47,13 +53,13 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
         </div>
       </Box> 
       <Box className={styles.rightContainer}>
-        <div className={styles.imageContainer2}>
+        <div className={styles.imageContainer2} onClick={handleHofClick}>
           <img src="/images/HoF.png" className={styles.image2}></img>
         </div>
         <VscDebugRestart className={styles.icon} onClick={handleResetClick}/>
       </Box>
       {openModal && (
-        <div className={styles.modalOverlay}>
+        // <div className={styles.modalOverlay}>
           <Modal open={openModal} disableAutoFocus={true} className={styles.modalContainer}>
             <div className={styles.modal}>
               <div className={styles.header}>
@@ -74,8 +80,13 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
               </div>
             </div>
           </Modal>
-        </div>
+        // </div>
       )}
+      <Modal open={open} onClose={() => setOpen(false)} className={styles.modalContainer}>
+        {/* <div className={styles.modal}> */}
+          <HallOfFame/>
+        {/* </div> */}
+      </Modal>
     </div>
   )
 }
