@@ -33,6 +33,10 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
     setOpen(true)
   }
 
+  const handleCloseIcon = () => {
+    setOpen(false)
+  }
+
   return (
     <div className={styles.mainContainer}>
       <Box className={styles.leftContainer}>
@@ -84,7 +88,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
       )}
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modalContainer}>
         {/* <div className={styles.modal}> */}
-          <HallOfFame/>
+          <HallOfFame handleCloseIcon={handleCloseIcon}/>
         {/* </div> */}
       </Modal>
     </div>
