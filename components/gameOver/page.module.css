@@ -254,3 +254,9 @@
 .hofImageContainer:hover {
   scale: 1.2;
 }
+
+.modalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

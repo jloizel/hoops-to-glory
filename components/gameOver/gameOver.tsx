@@ -4,6 +4,9 @@ import Confetti from '../confetti/confetti';
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
 import { HiArrowLongRight } from "react-icons/hi2";
+import { createTime, getAllTimes, getTimeByUsername, updateTime } from '@/app/API';
+import { Modal } from '@mui/material';
+import HallOfFame from '../hof/hof';
 
 
 interface GameOverProps {
@@ -25,6 +28,8 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isConfettiComplete, setIsConfettiComplete] = useState(false);
   const [arrowClicked, setArrowClicked] = useState(false)
+  const [rank, setRank] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState(false)
 
   useEffect(() => {
     if (open) {
@@ -94,7 +99,46 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
     setArrowClicked(true)
   };
 
+  const handleSaveTime = async () => {
+    try {
+      const existingTime = await getTimeByUsername(username);
+      if (existingTime) {
+        await updateTime(existingTime._id, { username, elapsedTime });
+      } else {
+        await createTime({ username, elapsedTime });
+      }
+    } catch (error) {
+      console.error('Error saving time:', error);
+      setError('Error saving time. Please try again.');
+    }
+  };
 
+  const calculateRank = async () => {
+    try {
+      const times = await getAllTimes();
+      times.sort((a, b) => parseFloat(a.elapsedTime) - parseFloat(b.elapsedTime));
+      const userRank = times.findIndex(time => time.username === username) + 1;
+      setRank(userRank);
+    } catch (error) {
+      console.error('Error calculating rank:', error);
+      setError('Error calculating rank. Please try again.');
+    }
+  };
+
+  useEffect(() => {
+    if (!gameStarted && open) {
+      handleSaveTime();
+      calculateRank();
+    }
+  }, [gameStarted, open]);
+
+  const handleHofClick = () => {
+    setModalOpen(true)
+  }
+
+  const handleCloseIcon = () => {
+    setModalOpen(false)
+  }
 
   return (
     <div className={styles.container}>
@@ -146,13 +190,16 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
             <IoCloseOutline className={styles.closeIcon} onClick={handleClose}/>
             <div className={styles.hof}>
               {/* <span>Check out the highscores <HiArrowLongRight className={styles.arrow2}/> </span> */}
-              <div className={styles.hofImageContainer}>
+              <div className={styles.hofImageContainer} onClick={handleHofClick}>
                 <img src="/images/HoF.png" className={styles.hofImage}></img>
               </div>
             </div>
           </div>
         </div>
       )}
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} className={styles.modalContainer}>
+        <HallOfFame handleCloseIcon={handleCloseIcon}/>
+      </Modal>
     </div>
   );
 };

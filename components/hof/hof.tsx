@@ -21,7 +21,7 @@ const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon}) => {
           const allTimes = await getAllTimes();
 
           // Convert elapsedTime to milliseconds for comparison
-          const parseTime = (timeStr) => {
+          const parseTime = (timeStr:any) => {
             const [minutes, seconds] = timeStr.split(':').map(Number);
             return minutes * 60 * 1000 + seconds * 1000;
           };

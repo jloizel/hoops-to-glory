@@ -49,6 +49,18 @@ export const getAllTimes = async (): Promise<Time[]> => {
   }
 };
 
+export const getTimeByUsername = async (username: string): Promise<Time | null> => {
+  try {
+    const response: AxiosResponse<{ time: Time }> = await api.get(`/times/get-by-username/${username}`);
+    return response.data.time;
+  } catch (error:any) {
+    if (error.response && error.response.status === 404) {
+      return null;
+    }
+    throw error;
+  }
+};
+
 
 export const updateTime = async (timeId: string, timeData: { username: string, elapsedTime: string }): Promise<Time> => {
   try {
