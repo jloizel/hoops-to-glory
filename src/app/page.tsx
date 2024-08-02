@@ -53,7 +53,7 @@ const Home = () => {
   return (
     <div className={styles.home}>
       {openModal && (
-          <div className={styles.modalOverlay}>
+          // <div className={styles.modalOverlay}>
             <Modal open={openModal} disableAutoFocus={true} className={styles.modalContainer}>
               <div className={styles.modal}>
                 <div className={styles.header}>
@@ -72,7 +72,7 @@ const Home = () => {
                 </form>
               </div>
             </Modal>
-          </div>
+          // </div>
         )}
       <Game username={username} usernameSet={usernameSet} handleReset={handleReset}/>
     </div>

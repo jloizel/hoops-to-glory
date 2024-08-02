@@ -39,12 +39,9 @@ interface GameProps {
 }
 
 const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
-  const [gameStarted, setGameStarted] = useState(false)
+  const [gameStarted, setGameStarted] = useState(true)
   const [elapsedTime, setElapsedTime] = useState(0);
 
-  useEffect(() => {
-    setGameStarted(true)
-  })
 
   useEffect(() => {
     let timer: NodeJS.Timeout | undefined;
@@ -460,7 +457,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     if (!gameStarted) {
       setOpen(true)
     }
-  },[10000])  
+  },[])  
 
   //CHECK COMPLETED MILESTONES
   useEffect(() => {
