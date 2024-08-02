@@ -11,9 +11,10 @@ interface GameOverProps {
   open: boolean;
   elapsedTime: string;
   handleClose: () => void;
+  gameStarted: boolean;
 }
 
-const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handleClose }) => {
+const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handleClose, gameStarted }) => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);

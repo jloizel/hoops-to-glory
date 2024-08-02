@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from "./page.module.css"
 import { IoCloseOutline } from "react-icons/io5";
 import { getAllTimes, Time } from '@/app/API';
+import { Oval } from 'react-loader-spinner';
 
 interface HallOfFameProps {
   handleCloseIcon: () => void;
@@ -53,7 +54,16 @@ const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon}) => {
         Current Hall of Famers
       </span>
       {loading ? (
-        <p>Loading...</p>
+        <Oval
+          visible={true}
+          height="50"
+          width="50"
+          color="#0067B1"
+          secondaryColor='#0067B1'
+          ariaLabel="oval-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
       ) : (
       <div>
         {times.map((time: Time, index: number) => (index < 10 && (

@@ -409,6 +409,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   //PAGE HEADER
   const [draftRank, setDraftRank] = useState("Undrafted");
+  const [pickNumber, setPickNumber] = useState<number | null>(null);
 
   useEffect(() => {
     const weights = {
@@ -438,12 +439,18 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     } else {
       const maxPickNumber = 30; // Assuming 30 picks in the first round
       const rankScalingFactor = 0.1;
-      const pickNumber = Math.max(1, maxPickNumber - Math.floor((draftScore - thresholds.lateFirstRound) * rankScalingFactor));
+      const setPickNumber = Math.max(1, maxPickNumber - Math.floor((draftScore - thresholds.lateFirstRound) * rankScalingFactor));
       newDraftRank = `Pick #${pickNumber}`;
     }
 
     setDraftRank(newDraftRank);
   }, [skills]);
+
+  useEffect(() => {
+    if (pickNumber === 1) {
+      setGameStarted(false)
+    }
+  })
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -451,7 +458,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   useEffect(() => {
     if (!gameStarted) {
-      setOpen(false)
+      setOpen(true)
     }
   },[10000])  
 
@@ -548,7 +555,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       <Modal open={open} onClose={() => setOpen(false)}>
         <Fade in={open}>
           <div className={styles.modal}>
-            <GameOver username={username} open={open} elapsedTime={formatTime(elapsedTime)} handleClose={handleClose}/>
+            <GameOver username={username} open={open} elapsedTime={formatTime(elapsedTime)} handleClose={handleClose} gameStarted={gameStarted}/>
           </div>
         </Fade>
       </Modal>
