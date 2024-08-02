@@ -50,7 +50,7 @@ export const getAllTimes = async (): Promise<Time[]> => {
 };
 
 
-export const updateTime = async (timeId: string, timeData: { username: string, points: number, city: string }): Promise<Time> => {
+export const updateTime = async (timeId: string, timeData: { username: string, elapsedTime: string }): Promise<Time> => {
   try {
     const response: AxiosResponse<Time> = await api.patch(`/times/update/${timeId}`, timeData);
     return response.data;
