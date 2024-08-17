@@ -39,7 +39,7 @@ interface GameProps {
 }
 
 const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
-  const [gameStarted, setGameStarted] = useState(true)
+  const [gameStarted, setGameStarted] = useState(false)
   const [elapsedTime, setElapsedTime] = useState(0);
 
 

@@ -29,7 +29,8 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
   const [isConfettiComplete, setIsConfettiComplete] = useState(false);
   const [arrowClicked, setArrowClicked] = useState(false)
   const [rank, setRank] = useState<number | null>(null);
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
+  const [timeSaved, setTimeSaved] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -126,11 +127,12 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
   };
 
   useEffect(() => {
-    if (!gameStarted && open) {
+    if (!gameStarted && open && !timeSaved) {
       handleSaveTime();
       calculateRank();
+      setTimeSaved(true);  // Set the flag after saving the time
     }
-  }, [gameStarted, open]);
+  }, [gameStarted, open, timeSaved]);
 
   const handleHofClick = () => {
     setModalOpen(true)
