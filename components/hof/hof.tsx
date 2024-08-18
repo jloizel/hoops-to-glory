@@ -6,9 +6,10 @@ import { Oval } from 'react-loader-spinner';
 
 interface HallOfFameProps {
   handleCloseIcon: () => void;
+  userRank: number | null;
 }
 
-const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon}) => {
+const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, userRank}) => {
   const [loading, setLoading] = useState(false)
   const [timesFetched, setTimesFetched] = useState(false)
   const [times, setTimes] = useState<Time[]>([]);

@@ -31,7 +31,6 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
   const [arrowClicked, setArrowClicked] = useState(false)
   const [rank, setRank] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [timeSaved, setTimeSaved] = useState(false);
   const saveCompleted = useRef(false);
 
   useEffect(() => {
@@ -196,7 +195,7 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
         </div>
       )}
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} className={styles.modalContainer}>
-        <HallOfFame handleCloseIcon={handleCloseIcon}/>
+        <HallOfFame handleCloseIcon={handleCloseIcon} userRank={rank}/>
       </Modal>
     </div>
   );
