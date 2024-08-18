@@ -1,21 +1,24 @@
 .container {
   display: flex;
-  /* justify-content: flex-start; */
-  align-items: center;
-  text-align: center;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  min-height: 40%;
   width: 80%;
   /* padding: 15px; */
   flex-direction: column;
-  font-weight: 400;
-  font-size: 20px;
   gap: 15px;
   max-width: 800px;
   position: relative;
   backdrop-filter: 0.8;
+  align-items: center;
+  justify-content: center;
+}
+
+.oval {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .content {
@@ -23,7 +26,10 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  padding: 40px 0;
+  /* min-height: 400px; */
+  gap: 20px;
 }
 
 .content span {
@@ -32,6 +38,7 @@
   /* color: #ED174F; */
   color: #0067B1;
   /* margin-top: 60px; */
+  text-align: center;
 }
 
 .closeIcon {
@@ -58,15 +65,33 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  min-height: 100px;
 }
 
 .timeItem {
   display: flex;
-  flex-direction: row;
-  gap: 50px;
+  align-items: center;
+  padding: 10px; /* Add padding if needed */
+  border-bottom: 1px solid #ddd;
+}
+
+.index {
+  width: 30px;
+  text-align: right;
+  margin-right: 10px; 
+}
+
+.username {
+  flex: 1; 
+}
+
+.elapsedTime {
+  width: 100px; 
+  text-align: right; 
+  margin-left: 10px; 
 }
 
 .userRank {
-
+  margin-top: 20px;
+  font-weight: 600;
 }
-

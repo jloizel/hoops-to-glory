@@ -57,32 +57,35 @@ const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, userRank}) => {
         </span>
         {loading ? (
           <div className={styles.oval}>
-          <Oval
-            visible={true}
-            height="50"
-            width="50"
-            color="#0067B1"
-            secondaryColor='#0067B1'
-            ariaLabel="oval-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-          />
+            <Oval
+              visible={true}
+              height="50"
+              width="50"
+              color="#0067B1"
+              secondaryColor='#0067B1'
+              ariaLabel="oval-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
           </div>
         ) : (
         <div className={styles.timesContainer}>
           <div className={styles.times}>
-          {times.map((time: Time, index: number) => (index < 10 && (
-            <div key={time._id} className={styles.timeItem}>
-              {index + 1}.
-              <div className={styles.username}>
-                {time.username}
-              </div>
-              <div className={styles.elapsedTime}>
-                {time.elapsedTime}
-              </div>
-            </div>
-            )
-          ))}
+            {times.map((time: Time, index: number) => (
+              index < 10 && (
+                <div key={time._id} className={styles.timeItem}>
+                  <div className={styles.index}>
+                    {index + 1}.
+                  </div>
+                  <div className={styles.username}>
+                    {time.username}
+                  </div>
+                  <div className={styles.elapsedTime}>
+                    {time.elapsedTime}
+                  </div>
+                </div>
+              )
+            ))}
           </div>
           <div className={styles.userRank}>
             Your rank: #{userRank}

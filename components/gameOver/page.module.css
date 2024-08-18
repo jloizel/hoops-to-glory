@@ -260,3 +260,9 @@
   justify-content: center;
   align-items: center;
 }
+
+.noScroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}

@@ -459,6 +459,18 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }
   },[])  
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'; // Disable scrolling
+    } else {
+      document.body.style.overflow = 'auto'; // Enable scrolling
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto'; // Clean up on unmount
+    };
+  }, [open]);
+
   //CHECK COMPLETED MILESTONES
   useEffect(() => {
     const evaluatedTeamRole = teamRole(); // Evaluate the function to get the string value

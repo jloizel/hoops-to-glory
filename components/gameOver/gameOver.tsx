@@ -49,10 +49,13 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
       } finally {
         setLoading(false);
       }
+      document.body.classList.add(styles.noScroll);
     } else {
       setVideoUrl(null);
       setAudioUrl(null);
       setIsVideoVisible(false);
+
+      document.body.classList.remove(styles.noScroll);
     }
   }, [open]);
 
