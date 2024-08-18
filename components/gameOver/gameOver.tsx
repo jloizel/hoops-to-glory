@@ -7,6 +7,7 @@ import { HiArrowLongRight } from "react-icons/hi2";
 import { createTime, getAllTimes, getTimeByUsername, updateTime } from '@/app/API';
 import { Modal } from '@mui/material';
 import HallOfFame from '../hof/hof';
+import { debounce } from 'lodash';
 
 
 interface GameOverProps {
@@ -31,6 +32,7 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
   const [rank, setRank] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [timeSaved, setTimeSaved] = useState(false);
+  const saveCompleted = useRef(false);
 
   useEffect(() => {
     if (open) {
@@ -100,7 +102,8 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
     setArrowClicked(true)
   };
 
-  const handleSaveTime = async () => {
+  /// Save time and calculate rank
+  const saveTimeAndCalculateRank = async () => {
     try {
       const existingTime = await getTimeByUsername(username);
       if (existingTime) {
@@ -108,31 +111,24 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
       } else {
         await createTime({ username, elapsedTime });
       }
-    } catch (error) {
-      console.error('Error saving time:', error);
-      setError('Error saving time. Please try again.');
-    }
-  };
-
-  const calculateRank = async () => {
-    try {
       const times = await getAllTimes();
       times.sort((a, b) => parseFloat(a.elapsedTime) - parseFloat(b.elapsedTime));
       const userRank = times.findIndex(time => time.username === username) + 1;
       setRank(userRank);
     } catch (error) {
-      console.error('Error calculating rank:', error);
-      setError('Error calculating rank. Please try again.');
+      console.error('Error saving time or calculating rank:', error);
+      setError('Error saving time or calculating rank. Please try again.');
     }
   };
 
+  // Trigger saving time and calculating rank when game ends
   useEffect(() => {
-    if (!gameStarted && open && !timeSaved) {
-      handleSaveTime();
-      calculateRank();
-      setTimeSaved(true);  // Set the flag after saving the time
+    if (!gameStarted && open && !saveCompleted.current) {
+      // Ensure the function is executed only once
+      saveTimeAndCalculateRank();
+      saveCompleted.current = true;  // Mark as completed
     }
-  }, [gameStarted, open, timeSaved]);
+  }, [gameStarted, open]);
 
   const handleHofClick = () => {
     setModalOpen(true)
