@@ -51,35 +51,45 @@ const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, userRank}) => {
   return (
     <div className={styles.container}>
       <IoCloseOutline className={styles.closeIcon} onClick={handleCloseIcon}/>
-      <span>
-        Current Hall of Famers
-      </span>
-      {loading ? (
-        <Oval
-          visible={true}
-          height="50"
-          width="50"
-          color="#0067B1"
-          secondaryColor='#0067B1'
-          ariaLabel="oval-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
-      ) : (
-      <div>
-        {times.map((time: Time, index: number) => (index < 10 && (
-          <div key={time._id} className={styles.timeItem} >
-            <span className={styles.username}>
-              {time.username}
-            </span>
-            <span className={styles.elapsedTime}>
-              {time.elapsedTime} POINTS
-            </span>
+      <div className={styles.content}>
+        <span>
+          Current Hall of Famers
+        </span>
+        {loading ? (
+          <div className={styles.oval}>
+          <Oval
+            visible={true}
+            height="50"
+            width="50"
+            color="#0067B1"
+            secondaryColor='#0067B1'
+            ariaLabel="oval-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
           </div>
-          )
-        ))}
+        ) : (
+        <div className={styles.timesContainer}>
+          <div className={styles.times}>
+          {times.map((time: Time, index: number) => (index < 10 && (
+            <div key={time._id} className={styles.timeItem}>
+              {index + 1}.
+              <div className={styles.username}>
+                {time.username}
+              </div>
+              <div className={styles.elapsedTime}>
+                {time.elapsedTime}
+              </div>
+            </div>
+            )
+          ))}
+          </div>
+          <div className={styles.userRank}>
+            Your rank: #{userRank}
+          </div>
+        </div>
+        )}
       </div>
-      )}
     </div>
   )
 }

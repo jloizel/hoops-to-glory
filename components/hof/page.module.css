@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
   align-items: center;
   text-align: center;
   background-color: white;
@@ -18,11 +18,20 @@
   backdrop-filter: 0.8;
 }
 
-.container span {
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.content span {
   font-weight: 600;
   font-size: 20px;
-  color: #ED174F;
-  margin-top: 60px;
+  /* color: #ED174F; */
+  color: #0067B1;
+  /* margin-top: 60px; */
 }
 
 .closeIcon {
@@ -43,3 +52,21 @@
 .closeIcon:hover {
   background-color: rgba(100, 142, 197, 0.925)
 }
+
+.timesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timeItem {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.userRank {
+
+}
+
