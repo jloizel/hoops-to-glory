@@ -20,6 +20,11 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
   const [displayStorage3, setDisplayStorage3] = useState(false)
   const [displayStorage4, setDisplayStorage4] = useState(false)
 
+  useEffect(() => {
+    if (energyLevel > energyStorage) {
+      handleEnergyChange(energyStorage); // Cap energy level to storage limit
+    }
+  }, [energyLevel, energyStorage]);
 
   useEffect(() => {
     if (autoClick) {
@@ -30,16 +35,34 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
       return () => clearInterval(interval); // Clear interval on component unmount or when autoClick is turned off
     }
   }, [autoClick, handleClick]);
+  
 
   useEffect(() => {
     if (energyStorage > 1) {
-      setDisplayStorage2(true)
-    } else if (energyLevel > 2) {
-      setDisplayStorage3(true)
-    } else if (energyStorage > 3) {
-      setDisplayStorage4(true)
+      setDisplayStorage2(true);
+    } else {
+      setDisplayStorage2(false);
     }
-  })
+    
+    if (energyStorage > 2) {
+      setDisplayStorage3(true);
+    } else {
+      setDisplayStorage3(false);
+    }
+
+    if (energyStorage > 3) {
+      setDisplayStorage4(true);
+    } else {
+      setDisplayStorage4(false);
+    }
+  }, [energyStorage]);
+
+  const handleEnergyChange = (newEnergyLevel: number) => {
+    // Prevent energy level from going below 1
+    if (newEnergyLevel >= 1 && newEnergyLevel <= energyStorage) {
+      handleClick(); // Increment click count
+    }
+  };
 
 
   return (

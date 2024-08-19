@@ -111,7 +111,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     }, trainingDurations[type]);
 
     if (showRecovery) {
-      setEnergyLevel(prevLevel => prevLevel - 1);
+      setEnergyLevel(prevLevel => Math.max(prevLevel - 1, 0));
     }
   };
 
@@ -498,6 +498,49 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   ]);
 
 
+
+  //Save game if user leaves page
+  useEffect(() => {
+    // Save the game state on page unload
+    const saveGameState = () => {
+      const gameState = {
+        gameStarted,
+        skills,
+        elapsedTime,
+        energyLevel,
+        followers,
+        gamesPlayed,
+        achievements,
+        // Add any other necessary state
+      };
+      localStorage.setItem('gameState', JSON.stringify(gameState));
+    };
+  
+    window.addEventListener('beforeunload', saveGameState);
+  
+    // Load the game state when the page is loaded
+    const loadGameState = () => {
+      const savedGameState = localStorage.getItem('gameState');
+      if (savedGameState) {
+        const parsedState = JSON.parse(savedGameState);
+  
+        // Restore the saved game state
+        setGameStarted(parsedState.gameStarted);
+        setSkills(parsedState.skills);
+        setElapsedTime(parsedState.elapsedTime);
+        setEnergyLevel(parsedState.energyLevel);
+        setFollowers(parsedState.followers);
+        setGamesPlayed(parsedState.gamesPlayed);
+        setAchievements(parsedState.achievements);
+      }
+    };
+  
+    loadGameState();
+  
+    return () => {
+      window.removeEventListener('beforeunload', saveGameState);
+    };
+  }, []);
 
 
 
