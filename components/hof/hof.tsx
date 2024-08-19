@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import styles from "./page.module.css"
 import { IoCloseOutline } from "react-icons/io5";
-import { getAllTimes, Time } from '@/app/API';
+import { getAllTimes, Time } from '../../src/app/API';
 import { Oval } from 'react-loader-spinner';
 
 interface HallOfFameProps {
   handleCloseIcon: () => void;
-  userRank: number | null;
+  userRank?: number | null;
 }
 
 const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, userRank}) => {

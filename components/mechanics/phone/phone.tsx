@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { MdMessage } from 'react-icons/md';
 import { RiInstagramFill } from "react-icons/ri";
 import styles from './page.module.css';
-import { AnimatedList } from '../../animatedList/animatedList';
 
 interface MessageNotification {
   id: number;
