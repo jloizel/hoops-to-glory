@@ -16,11 +16,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+
     "plugins": [
       {
         "name": "next"
       }
     ]
+
+
+
   },
   "include": [
     "next-env.d.ts",

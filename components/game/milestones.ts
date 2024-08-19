@@ -1,4 +1,5 @@
 type ConditionParams = {
+  triggerIntroMsg: boolean;
   pointsPerGame: number;
   followers: number;
   gamesPlayed: number;
@@ -16,6 +17,7 @@ type Milestone = {
 };
 
 const milestones: Milestone[] = [
+  { condition: ({ triggerIntroMsg }) => triggerIntroMsg, achievement: 'game started' },
   { condition: ({ pointsPerGame }) => pointsPerGame >= 5, achievement: '5 points/game' },
   { condition: ({ followers }) => followers >= 500, achievement: '500 followers' },
   { condition: ({ gamesPlayed }) => gamesPlayed >= 5, achievement: '5 games played' },

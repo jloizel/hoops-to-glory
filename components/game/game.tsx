@@ -471,20 +471,30 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     };
   }, [open]);
 
+
   //CHECK COMPLETED MILESTONES
+  const [triggerIntroMsg, setTriggerIntroMsg] = useState(false)
+
+  useEffect(() => {
+    // If gameStarted is true and the message hasn't been triggered yet
+    if (gameStarted && !triggerIntroMsg) {
+      setTriggerIntroMsg(true); // Mark the message as triggered
+    }
+  }, [gameStarted, triggerIntroMsg]);
+
   useEffect(() => {
     const evaluatedTeamRole = teamRole(); // Evaluate the function to get the string value
 
     milestones.forEach(({ condition, achievement }) => {
       const params = {
-        pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank,minutesPerGame
+        triggerIntroMsg, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank,minutesPerGame
       };
       if (condition(params) && !achievements.includes(achievement)) {
         setAchievements(prev => [...prev, achievement]);
       }
     });
   }, [
-    pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
+    gameStarted, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
   ]);
 
 
