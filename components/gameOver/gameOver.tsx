@@ -134,17 +134,15 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
 
   const handleHofClick = () => {
     setModalOpen(true)
-
-    if (typeof window !== "undefined" && window.document) {
-      document.body.style.overflow = "hidden";
-    }
   }
 
   const handleCloseIcon = () => {
     setModalOpen(false)
-    document.body.style.overflow = "unset";
   }
 
+  useEffect(() => {
+    document.documentElement.style.overflow = modalOpen ? "hidden" : "unset";
+  }, [modalOpen]);
 
   return (
     <div className={styles.container}>

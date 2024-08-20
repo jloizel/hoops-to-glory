@@ -461,13 +461,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   },[])  
 
   useEffect(() => {
-    if (open) {
-      if (typeof window != 'undefined' && window.document) {
-          document.body.style.overflow = 'hidden';
-      }
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    document.documentElement.style.overflow = open ? "hidden" : "unset";
   }, [open]);
 
 

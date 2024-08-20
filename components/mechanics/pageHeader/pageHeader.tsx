@@ -38,11 +38,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
   }
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    document.documentElement.style.overflow = open ? "hidden" : "unset";
   }, [open]);
 
   return (
