@@ -20,6 +20,14 @@ const Home = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (openModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [openModal]);
+
   const handleChange = (event:any) => {
     setUsername(event.target.value);
   };

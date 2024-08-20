@@ -456,19 +456,18 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   useEffect(() => {
     if (!gameStarted) {
       setOpen(true)
+
     }
   },[])  
 
   useEffect(() => {
     if (open) {
-      document.body.style.overflow = 'hidden'; // Disable scrolling
+      if (typeof window != 'undefined' && window.document) {
+          document.body.style.overflow = 'hidden';
+      }
     } else {
-      document.body.style.overflow = 'auto'; // Enable scrolling
+      document.body.style.overflow = 'unset';
     }
-
-    return () => {
-      document.body.style.overflow = 'auto'; // Clean up on unmount
-    };
   }, [open]);
 
 

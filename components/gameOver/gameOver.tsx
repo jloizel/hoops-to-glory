@@ -4,7 +4,7 @@ import Confetti from '../confetti/confetti';
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
 import { HiArrowLongRight } from "react-icons/hi2";
-import { createTime, getAllTimes, getTimeByUsername, updateTime } from '@/app/API';
+import { createTime, getAllTimes, getTimeByUsername, updateTime } from '../../src/app/API';
 import { Modal } from '@mui/material';
 import HallOfFame from '../hof/hof';
 import { debounce } from 'lodash';
@@ -134,11 +134,17 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
 
   const handleHofClick = () => {
     setModalOpen(true)
+
+    if (typeof window !== "undefined" && window.document) {
+      document.body.style.overflow = "hidden";
+    }
   }
 
   const handleCloseIcon = () => {
     setModalOpen(false)
+    document.body.style.overflow = "unset";
   }
+
 
   return (
     <div className={styles.container}>
