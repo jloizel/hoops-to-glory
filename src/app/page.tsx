@@ -21,11 +21,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (openModal) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    document.documentElement.style.overflow = openModal ? "hidden" : "unset";
   }, [openModal]);
 
   const handleChange = (event:any) => {
