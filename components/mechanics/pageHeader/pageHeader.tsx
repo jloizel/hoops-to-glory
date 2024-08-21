@@ -12,9 +12,10 @@ interface PageHeaderProps {
   usernameSet: boolean;
   handleReset: () => void;
   draftRank: string;
+  handleRestartGame: () => void;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleReset, draftRank}) => {
+const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleReset, draftRank, handleRestartGame}) => {
   const [openModal, setOpenModal] = useState(false);
   const [resetUsernameModal, setResetUsernameModal] = useState(false)
   const [usernameReset, setUsernameReset] = useState(false)
@@ -27,6 +28,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
   const handleResetUsername = () => {
     handleReset()
     setOpenModal(false)
+    handleRestartGame()
   }
 
   const handleHofClick = () => {

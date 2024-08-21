@@ -492,9 +492,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
 
-  //Save game if user leaves page
   useEffect(() => {
-    // Save the game state on page unload
     const saveGameState = () => {
       const gameState = {
         gameStarted,
@@ -509,7 +507,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       localStorage.setItem('gameState', JSON.stringify(gameState));
     };
   
-    window.addEventListener('beforeunload', saveGameState);
+    // Add the event listener for saving state
+    window.addEventListener('unload', saveGameState);
   
     // Load the game state when the page is loaded
     const loadGameState = () => {
@@ -517,30 +516,45 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
       if (savedGameState) {
         const parsedState = JSON.parse(savedGameState);
   
-        // Restore the saved game state
-        setGameStarted(parsedState.gameStarted);
-        setSkills(parsedState.skills);
-        setElapsedTime(parsedState.elapsedTime);
-        setEnergyLevel(parsedState.energyLevel);
-        setFollowers(parsedState.followers);
-        setGamesPlayed(parsedState.gamesPlayed);
-        setAchievements(parsedState.achievements);
+        // Ensure the state is valid and not corrupted
+        if (parsedState) {
+          setGameStarted(parsedState.gameStarted ?? true);
+          setSkills(parsedState.skills ?? { agility: 0, shooting: 0, fitness: 0 });
+          setElapsedTime(parsedState.elapsedTime ?? 0);
+          setEnergyLevel(parsedState.energyLevel ?? 0);
+          setFollowers(parsedState.followers ?? 0);
+          setGamesPlayed(parsedState.gamesPlayed ?? 0);
+          setAchievements(parsedState.achievements ?? []);
+        }
       }
     };
   
     loadGameState();
   
     return () => {
-      window.removeEventListener('beforeunload', saveGameState);
+      // Clean up event listener when the component unmounts
+      window.removeEventListener('unload', saveGameState);
     };
   }, []);
 
+  const handleRestartGame = () => {
+    setGameStarted(false);
+    setSkills({ agility: 0, shooting: 0, fitness: 0 });
+    setElapsedTime(0);
+    setEnergyLevel(0);
+    setFollowers(0);
+    setGamesPlayed(0);
+    setAchievements([]);
+  
+    // Clear the game state from localStorage on reset
+    localStorage.removeItem('gameState');
+  };
 
 
   return (
     <div className={styles.gameContainer}>
       <div className={styles.topContainer}>
-        <PageHeader username={username} usernameSet={usernameSet} handleReset={handleReset} draftRank={draftRank}/>    
+        <PageHeader username={username} usernameSet={usernameSet} handleReset={handleReset} draftRank={draftRank} handleRestartGame={handleRestartGame}/>    
       </div>
       <div className={styles.bottomContainer}>
         <Box className={styles.leftContainer}>
