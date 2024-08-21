@@ -470,10 +470,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   useEffect(() => {
     // If gameStarted is true and the message hasn't been triggered yet
-    if (gameStarted && !triggerIntroMsg) {
+    if (gameStarted) {
       setTriggerIntroMsg(true); // Mark the message as triggered
+      setTimeout(() => {
+        setTriggerIntroMsg(false);
+      }, 1000);
     }
-  }, [gameStarted, triggerIntroMsg]);
+  }, [gameStarted]);
 
   useEffect(() => {
     const evaluatedTeamRole = teamRole(); // Evaluate the function to get the string value
