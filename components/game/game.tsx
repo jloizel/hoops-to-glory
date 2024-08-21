@@ -353,7 +353,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   // PHONE
   const [achievements, setAchievements] = useState<string[]>([]);
-  const [randomMessageInterval, setRandomMessageInterval] = useState(30000)
+  const [randomMessageInterval, setRandomMessageInterval] = useState(3000)
   const [randomMessageLevel, setRandomMessageLevel] = useState(1);
 
   const baseInterval = 30000;
@@ -476,7 +476,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
         setTriggerIntroMsg(false);
       }, 1000);
     }
-  }, [gameStarted]);
+  }, []);
+
+  console.log(triggerIntroMsg)
 
   useEffect(() => {
     const evaluatedTeamRole = teamRole(); // Evaluate the function to get the string value
@@ -495,50 +497,51 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
 
-  useEffect(() => {
-    const saveGameState = () => {
-      const gameState = {
-        gameStarted,
-        skills,
-        elapsedTime,
-        energyLevel,
-        followers,
-        gamesPlayed,
-        achievements,
-        // Add any other necessary state
-      };
-      localStorage.setItem('gameState', JSON.stringify(gameState));
-    };
+  // useEffect(() => {
+  //   // Declare the saveGameState function within useEffect or in the component's scope
+  //   const saveGameState = () => {
+  //     const gameState = {
+  //       gameStarted,
+  //       skills,
+  //       elapsedTime,
+  //       energyLevel,
+  //       followers,
+  //       gamesPlayed,
+  //       achievements,
+  //       // Add any other necessary state
+  //     };
+  //     localStorage.setItem('gameState', JSON.stringify(gameState));
+  //   };
   
-    // Add the event listener for saving state
-    window.addEventListener('unload', saveGameState);
+  //   // Add event listener for 'beforeunload'
+  //   window.addEventListener('beforeunload', saveGameState);
   
-    // Load the game state when the page is loaded
-    const loadGameState = () => {
-      const savedGameState = localStorage.getItem('gameState');
-      if (savedGameState) {
-        const parsedState = JSON.parse(savedGameState);
+  //   // Load the game state when the page is loaded
+  //   const loadGameState = () => {
+  //     const savedGameState = localStorage.getItem('gameState');
+  //     if (savedGameState) {
+  //       const parsedState = JSON.parse(savedGameState);
   
-        // Ensure the state is valid and not corrupted
-        if (parsedState) {
-          setGameStarted(parsedState.gameStarted ?? true);
-          setSkills(parsedState.skills ?? { agility: 0, shooting: 0, fitness: 0 });
-          setElapsedTime(parsedState.elapsedTime ?? 0);
-          setEnergyLevel(parsedState.energyLevel ?? 0);
-          setFollowers(parsedState.followers ?? 0);
-          setGamesPlayed(parsedState.gamesPlayed ?? 0);
-          setAchievements(parsedState.achievements ?? []);
-        }
-      }
-    };
+  //       // Restore the saved game state
+  //       setGameStarted(parsedState.gameStarted);
+  //       setSkills(parsedState.skills);
+  //       setElapsedTime(parsedState.elapsedTime);
+  //       setEnergyLevel(parsedState.energyLevel);
+  //       setFollowers(parsedState.followers);
+  //       setGamesPlayed(parsedState.gamesPlayed);
+  //       setAchievements(parsedState.achievements);
+  //     }
+  //   };
   
-    loadGameState();
+  //   loadGameState();
   
-    return () => {
-      // Clean up event listener when the component unmounts
-      window.removeEventListener('unload', saveGameState);
-    };
-  }, []);
+  //   // Cleanup function to remove the event listener
+  //   return () => {
+  //     window.removeEventListener('beforeunload', saveGameState);
+  //   };
+  // }, [gameStarted, skills, elapsedTime, energyLevel, followers, gamesPlayed, achievements]);
+  
+  
 
   const handleRestartGame = () => {
     setGameStarted(false);
