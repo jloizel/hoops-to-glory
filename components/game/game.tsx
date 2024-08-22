@@ -41,6 +41,7 @@ interface GameProps {
 const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   const [gameStarted, setGameStarted] = useState(true)
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [gameRestarted, setGameRestarted] = useState(false)
 
 
   useEffect(() => {
@@ -474,7 +475,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
   useEffect(() => {
-    if (gameStarted) {
+    if (gameStarted || gameRestarted) {
       const triggers = [
         setTriggerIntroMsg1,
         setTriggerIntroMsg2,
@@ -492,7 +493,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
         }, index * 2000); // 2-second intervals between each trigger
       });
     }
-  }, []);
+  }, [, gameStarted, gameRestarted]);
 
 
   useEffect(() => {
@@ -556,10 +557,12 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   //   };
   // }, [gameStarted, skills, elapsedTime, energyLevel, followers, gamesPlayed, achievements]);
   
-  const [gameRestarted, setGameRestarted] = useState(false)
 
   const handleRestartGame = () => {
     setGameStarted(false);
+    setTimeout(() => {
+      setGameStarted(true);
+    }, 2000);
     setSkills({ agility: 0, shooting: 0, fitness: 0 });
     setElapsedTime(0);
     setEnergyLevel(0);
@@ -569,7 +572,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     setGameRestarted(true)
     setTimeout(() => {
       setGameRestarted(false);
-    }, 5000);
+    }, 1000);
   
     // Clear the game state from localStorage on reset
     localStorage.removeItem('gameState');
