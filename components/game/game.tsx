@@ -356,7 +356,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   const [randomMessageInterval, setRandomMessageInterval] = useState(30000)
   const [randomMessageLevel, setRandomMessageLevel] = useState(1);
 
-  const baseInterval = 30000;
+  const baseInterval = 60000;
   const minInterval = 5000;
 
   useEffect(() => {
@@ -556,7 +556,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
   //   };
   // }, [gameStarted, skills, elapsedTime, energyLevel, followers, gamesPlayed, achievements]);
   
-  
+  const [gameRestarted, setGameRestarted] = useState(false)
 
   const handleRestartGame = () => {
     setGameStarted(false);
@@ -566,6 +566,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
     setFollowers(0);
     setGamesPlayed(0);
     setAchievements([]);
+    setGameRestarted(true)
+    setTimeout(() => {
+      setGameRestarted(false);
+    }, 5000);
   
     // Clear the game state from localStorage on reset
     localStorage.removeItem('gameState');
@@ -583,6 +587,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
             achievements={achievements}
             randomMessageInterval={randomMessageInterval}
             randomMessageLevel={randomMessageLevel}
+            gameRestarted={gameRestarted}
           />
           <div className={styles.topContentContainer}>
             <Analytics followers={followers}/>

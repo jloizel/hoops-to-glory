@@ -37,9 +37,10 @@ interface PhoneProps {
   achievements: string[];
   randomMessageInterval: number;
   randomMessageLevel: number;
+  gameRestarted: boolean;
 }
 
-const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, randomMessageLevel }) => {
+const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, randomMessageLevel, gameRestarted }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [displayedAchievements, setDisplayedAchievements] = useState<string[]>([]);
   const notificationsContainerRef = useRef<HTMLDivElement>(null);
@@ -110,6 +111,17 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
       }
     });
   }, [achievements, specificNotifications, displayedAchievements]);
+
+
+  useEffect(() => {
+    if (gameRestarted) {
+      setNotifications([]); // Clear all notifications
+      setDisplayedAchievements([]); // Reset displayed achievements if needed
+      setDisplayedNotificationIds([]); // Reset notification IDs to avoid duplicate logic
+      setRandomNotifications([]);
+      setSpecificNotifications([]);
+    }
+  }, [gameRestarted]);
 
   useEffect(() => {
     // Function to update date and time
