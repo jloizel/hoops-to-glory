@@ -2,35 +2,35 @@
   {
     "id": 0,
     "type": "message",
-    "milestone": "game started",
+    "milestone": "introMsg1",
     "contact": "HoopsToGlory",
     "content": "This is a game about climbing the ranks of basketball stardom, where you start as a hopeful young player with the dream of becoming the next big thing."
   },
   {
     "id": 50,
     "type": "message",
-    "milestone": "game started",
+    "milestone": "introMsg2",
     "contact": "HoopsToGlory",
     "content": "This is a race to the number 1 pick in the draft. Fastest player wins!"
   },
   {
     "id": 51,
     "type": "message",
-    "milestone": "game started",
+    "milestone": "introMsg3",
     "contact": "HoopsToGlory",
     "content": "Autosave is on, you can always close the page & come back later. There is no offline progress."
   },
   {
     "id": 52,
     "type": "message",
-    "milestone": "game started",
+    "milestone": "introMsg4",
     "contact": "HoopsToGlory",
     "content": "Desktop is recommended for optimal experience & performance."
   },
   {
     "id": 53,
     "type": "message",
-    "milestone": "game started",
+    "milestone": "introMsg5",
     "contact": "HoopsToGlory",
     "content": "Please share the game if you enjoyed it! Good luck!"
   },

@@ -466,26 +466,41 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
 
   //CHECK COMPLETED MILESTONES
-  const [triggerIntroMsg, setTriggerIntroMsg] = useState(false)
+  const [triggerIntroMsg1, setTriggerIntroMsg1] = useState(false)
+  const [triggerIntroMsg2, setTriggerIntroMsg2] = useState(false)
+  const [triggerIntroMsg3, setTriggerIntroMsg3] = useState(false)
+  const [triggerIntroMsg4, setTriggerIntroMsg4] = useState(false)
+  const [triggerIntroMsg5, setTriggerIntroMsg5] = useState(false)
+
 
   useEffect(() => {
-    // If gameStarted is true and the message hasn't been triggered yet
     if (gameStarted) {
-      setTriggerIntroMsg(true); // Mark the message as triggered
-      setTimeout(() => {
-        setTriggerIntroMsg(false);
-      }, 1000);
+      const triggers = [
+        setTriggerIntroMsg1,
+        setTriggerIntroMsg2,
+        setTriggerIntroMsg3,
+        setTriggerIntroMsg4,
+        setTriggerIntroMsg5,
+      ];
+  
+      triggers.forEach((trigger, index) => {
+        setTimeout(() => {
+          trigger(true);
+          setTimeout(() => {
+            trigger(false);
+          }, 1000); // Reset after 1 second
+        }, index * 1000); // 2-second intervals between each trigger
+      });
     }
   }, []);
 
-  console.log(triggerIntroMsg)
 
   useEffect(() => {
     const evaluatedTeamRole = teamRole(); // Evaluate the function to get the string value
 
     milestones.forEach(({ condition, achievement }) => {
       const params = {
-        triggerIntroMsg, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank,minutesPerGame
+        triggerIntroMsg1, triggerIntroMsg2, triggerIntroMsg3, triggerIntroMsg4, triggerIntroMsg5, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank,minutesPerGame
       };
       if (condition(params) && !achievements.includes(achievement)) {
         setAchievements(prev => [...prev, achievement]);
