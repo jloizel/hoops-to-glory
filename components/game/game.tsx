@@ -489,7 +489,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
           setTimeout(() => {
             trigger(false);
           }, 1000); // Reset after 1 second
-        }, index * 1000); // 2-second intervals between each trigger
+        }, index * 2000); // 2-second intervals between each trigger
       });
     }
   }, []);
