@@ -353,7 +353,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset}) => {
 
   // PHONE
   const [achievements, setAchievements] = useState<string[]>([]);
-  const [randomMessageInterval, setRandomMessageInterval] = useState(3000)
+  const [randomMessageInterval, setRandomMessageInterval] = useState(30000)
   const [randomMessageLevel, setRandomMessageLevel] = useState(1);
 
   const baseInterval = 30000;
