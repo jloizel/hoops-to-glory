@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from "./page.module.css"
 import { IoCloseOutline } from "react-icons/io5";
 import { getAllTimes, Time } from '../../src/app/API';
-import { Oval } from 'react-loader-spinner';
+import { Oval, ThreeDots } from 'react-loader-spinner';
 
 interface HallOfFameProps {
   handleCloseIcon: () => void;
@@ -46,7 +46,7 @@ const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, userRank}) => {
     fetchTimes();
   }, [timesFetched]);
 
-  
+  console.log(userRank)
 
   return (
     <div className={styles.container}>
@@ -57,13 +57,14 @@ const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, userRank}) => {
         </span>
         {loading ? (
           <div className={styles.oval}>
-            <Oval
+            <ThreeDots
               visible={true}
               height="50"
               width="50"
               color="#0067B1"
-              secondaryColor='#0067B1'
-              ariaLabel="oval-loading"
+              // secondaryColor='#0067B1'
+              // ariaLabel="oval-loading"
+              ariaLabel='three-dots-loading'
               wrapperStyle={{}}
               wrapperClass=""
             />
@@ -87,9 +88,16 @@ const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, userRank}) => {
               )
             ))}
           </div>
-          <div className={styles.userRank}>
-            Your rank: #{userRank}
-          </div>
+          {userRank ? (
+            <div className={styles.userRank}>
+              Your rank: #{userRank}
+            </div>
+          ) : (
+            <div className={styles.userRankUndefined}>
+              Finish the game to display your rank.
+            </div>
+          )}
+          
         </div>
         )}
       </div>
