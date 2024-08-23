@@ -13,9 +13,10 @@ interface PageHeaderProps {
   handleReset: () => void;
   draftRank: string;
   handleRestartGame: () => void;
+  disableRestart: boolean;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleReset, draftRank, handleRestartGame}) => {
+const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleReset, draftRank, handleRestartGame, disableRestart}) => {
   const [openModal, setOpenModal] = useState(false);
   const [resetUsernameModal, setResetUsernameModal] = useState(false)
   const [usernameReset, setUsernameReset] = useState(false)
@@ -66,7 +67,9 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
         <div className={styles.imageContainer2} onClick={handleHofClick}>
           <img src="/images/HoF.png" className={styles.image2}></img>
         </div>
-        <VscDebugRestart className={styles.icon} onClick={handleResetClick}/>
+        <VscDebugRestart 
+          className={`${styles.icon} ${disableRestart ? styles.disabledIcon : ''}`}
+          onClick={!disableRestart ? handleResetClick : undefined} />
       </Box>
       {openModal && (
         // <div className={styles.modalOverlay}>

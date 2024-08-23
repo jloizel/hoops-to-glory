@@ -98,6 +98,11 @@
   color: #ED174F;
 }
 
+.disabledIcon {
+  pointer-events: none; /* Prevents any interaction */
+  opacity: 0.5;
+}
+
 .modalOverlay {
   height: 100%;
   left: 0;

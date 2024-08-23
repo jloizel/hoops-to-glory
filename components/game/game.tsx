@@ -473,6 +473,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [triggerIntroMsg4, setTriggerIntroMsg4] = useState(false)
   const [triggerIntroMsg5, setTriggerIntroMsg5] = useState(false)
 
+  const [disableRestart, setDisableRestart] = useState(false)
 
   useEffect(() => {
     if (gameStarted || journeyStarted) {
@@ -487,15 +488,20 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       triggers.forEach((trigger, index) => {
         setTimeout(() => {
           trigger(true);
+
           setTimeout(() => {
             trigger(false);
+
+            if (index === triggers.length - 1) {
+              setDisableRestart(false);
+            }
           }, 1000); // Reset after 1 second
         }, index * 2000); // 2-second intervals between each trigger
       });
     }
   }, [ gameStarted, journeyStarted ]);
 
-
+  console.log(disableRestart)
 
   useEffect(() => {
     const evaluatedTeamRole = teamRole(); // Evaluate the function to get the string value
@@ -560,6 +566,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   
 
   const handleRestartGame = () => {
+    setDisableRestart(true)
     setGameStarted(false);
     // setTimeout(() => {
     //   setGameStarted(true);
@@ -583,7 +590,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   return (
     <div className={styles.gameContainer}>
       <div className={styles.topContainer}>
-        <PageHeader username={username} usernameSet={usernameSet} handleReset={handleReset} draftRank={draftRank} handleRestartGame={handleRestartGame}/>    
+        <PageHeader username={username} usernameSet={usernameSet} handleReset={handleReset} draftRank={draftRank} handleRestartGame={handleRestartGame} disableRestart={disableRestart}/>    
       </div>
       <div className={styles.bottomContainer}>
         <Box className={styles.leftContainer}>
