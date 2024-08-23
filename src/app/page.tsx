@@ -117,16 +117,20 @@ const Home = () => {
         )}
         {showInactiveModal && (
         <Modal open={showInactiveModal} className={styles.modalContainer}>
-          <div className={styles.modal}>
-            <div className={styles.header}>
+          <div className={styles.modal2}>
+            {/* <div className={styles.header}>
               You left the game tab
-            </div>
-            <p>
-              The game pauses when you're not actively playing. Would you like to be reminded again when this happens?
-            </p>
+            </div> */}
+            <div className={styles.modalText}>
+              The game will pause as an inactive tab. If you want to let the game run in the background, leave it as an active separate window.
+              </div>
             <div className={styles.buttonContainer}>
-              <button onClick={handleRemindLater} className={styles.modalButton}>Remind me later</button>
-              <button onClick={handleDontRemindAgain} className={styles.modalButton}>Don't remind me again</button>
+              <button onClick={handleRemindLater} className={styles.modalButton}>
+                Remind me later
+              </button>
+              <button onClick={handleDontRemindAgain} className={styles.modalButton}>
+                Don't remind me again
+              </button>
             </div>
           </div>
         </Modal>

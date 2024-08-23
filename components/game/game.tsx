@@ -503,6 +503,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   }, [ gameStarted, journeyStarted ]);
 
 
+
   useEffect(() => {
     const evaluatedTeamRole = teamRole(); // Evaluate the function to get the string value
 
@@ -520,52 +521,56 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
 
-  useEffect(() => {
-    // Save game state before the window unloads
-    const saveGameState = () => {
-      const gameState = {
-        gameStarted,
-        skills,
-        elapsedTime,
-        energyLevel,
-        followers,
-        gamesPlayed,
-        achievements,
-        // Add any other necessary state
-      };
-      localStorage.setItem('gameState', JSON.stringify(gameState));
-    };
+  // useEffect(() => {
+  //   // Save game state before the window unloads
+  //   const saveGameState = () => {
+  //     const gameState = {
+  //       gameStarted,
+  //       skills,
+  //       elapsedTime,
+  //       energyLevel,
+  //       followers,
+  //       gamesPlayed,
+  //       achievements,
+  //       // Add any other necessary state
+  //     };
+  //     localStorage.setItem('gameState', JSON.stringify(gameState));
+  //   };
 
-    // Save the game state when the page is about to be unloaded
-    window.addEventListener('beforeunload', saveGameState);
+  //   // Save the game state when the page is about to be unloaded
+  //   window.addEventListener('beforeunload', saveGameState);
 
-    // Load the game state when the page is loaded
-    const loadGameState = () => {
-      const savedGameState = localStorage.getItem('gameState');
-      if (savedGameState) {
-        const parsedState = JSON.parse(savedGameState);
+  //   // Load the game state when the page is loaded
+  //   const loadGameState = () => {
+  //     const savedGameState = localStorage.getItem('gameState');
+  //     if (savedGameState) {
+  //       const parsedState = JSON.parse(savedGameState);
 
-        // Restore the saved game state
-        setGameStarted(parsedState.gameStarted);
-        setSkills(parsedState.skills);
-        setElapsedTime(parsedState.elapsedTime);
-        setEnergyLevel(parsedState.energyLevel);
-        setFollowers(parsedState.followers);
-        setGamesPlayed(parsedState.gamesPlayed);
-        setAchievements(parsedState.achievements);
-      }
-    };
+  //       // Restore the saved game state
+  //       setGameStarted(parsedState.gameStarted);
+  //       setSkills(parsedState.skills);
+  //       setElapsedTime(parsedState.elapsedTime);
+  //       setEnergyLevel(parsedState.energyLevel);
+  //       setFollowers(parsedState.followers);
+  //       setGamesPlayed(parsedState.gamesPlayed);
+  //       setAchievements(parsedState.achievements);
+  //     }
+  //   };
 
-    loadGameState();
+  //   loadGameState();
 
-    // Cleanup function to remove the event listener
-    return () => {
-      window.removeEventListener('beforeunload', saveGameState);
-    };
-  }, [gameStarted, skills, elapsedTime, energyLevel, followers, gamesPlayed, achievements]);
+  //   // Cleanup function to remove the event listener
+  //   return () => {
+  //     window.removeEventListener('beforeunload', saveGameState);
+  //   };
+  // }, [gameStarted, skills, elapsedTime, energyLevel, followers, gamesPlayed, achievements]);
   
 
   const handleRestartGame = () => {
+    setGameRestarted(true)
+    setTimeout(() => {
+      setGameRestarted(false);
+    }, 5000);
     setDisableRestart(true)
     setGameStarted(false);
     // setTimeout(() => {
@@ -577,10 +582,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setFollowers(0);
     setGamesPlayed(0);
     setAchievements([]);
-    setGameRestarted(true)
-    setTimeout(() => {
-      setGameRestarted(false);
-    }, 5000);
   
     // Clear the game state from localStorage on reset
     localStorage.removeItem('gameState');
