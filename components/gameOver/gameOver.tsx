@@ -202,7 +202,7 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
         </div>
       )}
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} className={styles.modalContainer}>
-        <HallOfFame handleCloseIcon={handleCloseIcon} userRank={rank}/>
+        <HallOfFame handleCloseIcon={handleCloseIcon} username={username}/>
       </Modal>
     </div>
   );

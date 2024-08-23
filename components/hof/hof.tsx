@@ -6,13 +6,15 @@ import { Oval, ThreeDots } from 'react-loader-spinner';
 
 interface HallOfFameProps {
   handleCloseIcon: () => void;
-  userRank?: number | null;
+  // userRank?: number | null;
+  username: string
 }
 
-const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, userRank}) => {
+const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, username}) => {
   const [loading, setLoading] = useState(false)
   const [timesFetched, setTimesFetched] = useState(false)
   const [times, setTimes] = useState<Time[]>([]);
+  const [userRank, setUserRank] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchTimes = async () => {
@@ -22,7 +24,7 @@ const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, userRank}) => {
           const allTimes = await getAllTimes();
 
           // Convert elapsedTime to milliseconds for comparison
-          const parseTime = (timeStr:any) => {
+          const parseTime = (timeStr: any) => {
             const [minutes, seconds] = timeStr.split(':').map(Number);
             return minutes * 60 * 1000 + seconds * 1000;
           };
@@ -33,7 +35,22 @@ const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, userRank}) => {
           // Get top 10 times
           const top10Times = sortedTimes.slice(0, 10);
 
+          // Set times for the leaderboard
           setTimes(top10Times);
+
+          // Find user rank
+          const userIndex = sortedTimes.findIndex(time => 
+            time.username && typeof time.username === 'string' &&
+            time.username.trim().toLowerCase() === username.trim().toLowerCase()
+          );
+          
+          // If user is in top 10, show their rank; otherwise, show the user's rank in the whole leaderboard
+          if (userIndex !== -1) {
+            setUserRank(userIndex + 1); // +1 because ranks are 1-based
+          } else {
+            setUserRank(null); // Set to null if the user is not in the top 10
+          }
+
           setTimesFetched(true);
         } catch (error) {
           console.error('Error fetching scores:', error);
@@ -44,9 +61,8 @@ const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, userRank}) => {
     };
 
     fetchTimes();
-  }, [timesFetched]);
+  }, [timesFetched, username]);
 
-  console.log(userRank)
 
   return (
     <div className={styles.container}>
