@@ -120,6 +120,25 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
       setDisplayedNotificationIds([]); // Reset notification IDs to avoid duplicate logic
       setRandomNotifications([]);
       setSpecificNotifications([]);
+
+      // Refetch the notifications data after clearing
+      fetch('/data/randomNotifications.json', {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
+        .then(response => response.json())
+        .then(data => setRandomNotifications(data));
+
+      fetch('/data/specificNotifications.json', {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
+        .then(response => response.json())
+        .then(data => setSpecificNotifications(data));
     }
   }, [gameRestarted]);
 

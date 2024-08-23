@@ -10,6 +10,7 @@ const Home = () => {
   const [openModal, setOpenModal] = useState(true);
   const [username, setUsername] = useState("")
   const [usernameSet, setUsernameSet] = useState(false);
+  const [journeyStarted, setJourneyStarted] = useState(false)
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
@@ -40,6 +41,8 @@ const Home = () => {
       setUsername(randomUsername);
       localStorage.setItem('username', randomUsername);
     }
+
+    setJourneyStarted(true)
   };
 
   const handleReset = () => {
@@ -47,6 +50,7 @@ const Home = () => {
     setUsernameSet(false);
     setOpenModal(true);
     localStorage.removeItem('username');
+    setJourneyStarted(false)
   };
 
   const generateRandomUsername = (): string => {
@@ -78,7 +82,7 @@ const Home = () => {
             </Modal>
           // </div>
         )}
-      <Game username={username} usernameSet={usernameSet} handleReset={handleReset}/>
+      <Game username={username} usernameSet={usernameSet} handleReset={handleReset} journeyStarted={journeyStarted}/>
     </div>
   )
 }
