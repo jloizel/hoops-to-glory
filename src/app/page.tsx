@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styles from "./page.module.css"
 import PageHeader from '../../components/mechanics/pageHeader/pageHeader'
 import Game from '../../components/game/game'
@@ -11,6 +11,9 @@ const Home = () => {
   const [username, setUsername] = useState("")
   const [usernameSet, setUsernameSet] = useState(false);
   const [journeyStarted, setJourneyStarted] = useState(false)
+  const [isTabActive, setIsTabActive] = useState(true);
+  const [showInactiveModal, setShowInactiveModal] = useState(false); 
+  const [dontRemindAgain, setDontRemindAgain] = useState(false);
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
@@ -53,6 +56,7 @@ const Home = () => {
     setOpenModal(true);
     localStorage.removeItem('username');
     setJourneyStarted(false)
+    setDontRemindAgain(false);
   };
 
   const generateRandomUsername = (): string => {
@@ -60,30 +64,73 @@ const Home = () => {
     return `user${randomNumber}`;
   };
 
+
+  const handleVisibilityChange = useCallback(() => {
+    const isCurrentlyActive = document.visibilityState === 'visible';
+    setIsTabActive(isCurrentlyActive);
+
+    if (!isCurrentlyActive && !dontRemindAgain) {
+      setShowInactiveModal(true);
+    }
+  }, [dontRemindAgain]);
+
+  useEffect(() => {
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  const handleRemindLater = () => {
+    setShowInactiveModal(false);
+  };
+
+  // Handle "Don't remind me again" button click
+  const handleDontRemindAgain = () => {
+    setShowInactiveModal(false);
+    setDontRemindAgain(true);
+  };
+
   return (
     <div className={styles.home}>
       {openModal && (
-          // <div className={styles.modalOverlay}>
-            <Modal open={openModal} disableAutoFocus={true} className={styles.modalContainer}>
-              <div className={styles.modal}>
-                <div className={styles.header}>
-                  Enter player name
-                </div>
-                <form onSubmit={handleSubmit} className={styles.form}>
-                  <input 
-                    type="text" 
-                    value={username} 
-                    onChange={handleChange}
-                    className={styles.input}
-                  />
-                  <button type="submit" className={styles.submitButton}>
-                    Start your journey
-                  </button>
-                </form>
+        // <div className={styles.modalOverlay}>
+          <Modal open={openModal} disableAutoFocus={true} className={styles.modalContainer}>
+            <div className={styles.modal}>
+              <div className={styles.header}>
+                Enter player name
               </div>
-            </Modal>
-          // </div>
+              <form onSubmit={handleSubmit} className={styles.form}>
+                <input 
+                  type="text" 
+                  value={username} 
+                  onChange={handleChange}
+                  className={styles.input}
+                />
+                <button type="submit" className={styles.submitButton}>
+                  Start your journey
+                </button>
+              </form>
+            </div>
+          </Modal>
+        // </div>
         )}
+        {showInactiveModal && (
+        <Modal open={showInactiveModal} className={styles.modalContainer}>
+          <div className={styles.modal}>
+            <div className={styles.header}>
+              You left the game tab
+            </div>
+            <p>
+              The game pauses when you're not actively playing. Would you like to be reminded again when this happens?
+            </p>
+            <div className={styles.buttonContainer}>
+              <button onClick={handleRemindLater} className={styles.modalButton}>Remind me later</button>
+              <button onClick={handleDontRemindAgain} className={styles.modalButton}>Don't remind me again</button>
+            </div>
+          </div>
+        </Modal>
+      )}
       <Game username={username} usernameSet={usernameSet} handleReset={handleReset} journeyStarted={journeyStarted}/>
     </div>
   )

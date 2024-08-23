@@ -43,20 +43,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [gameStarted, setGameStarted] = useState(true)
   const [elapsedTime, setElapsedTime] = useState(0);
   const [gameRestarted, setGameRestarted] = useState(false)
-  const [isTabActive, setIsTabActive] = useState(true);
-
-  const handleVisibilityChange = useCallback(() => {
-    setIsTabActive(document.visibilityState === 'visible');
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
-  }, []);
-
-  console.log(isTabActive)
 
 
   useEffect(() => {
@@ -511,7 +497,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
               setDisableRestart(false);
             }
           }, 1000); // Reset after 1 second
-        }, index * 2000); // 2-second intervals between each trigger
+        }, index * 3000); // 2-second intervals between each trigger
       });
     }
   }, [ gameStarted, journeyStarted ]);
