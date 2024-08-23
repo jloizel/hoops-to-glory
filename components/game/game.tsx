@@ -579,10 +579,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     localStorage.removeItem('gameState');
   };
 
-  useEffect(() => {
-    console.log(`Journey started? ${journeyStarted}`)
-  }, [journeyStarted])
-
 
   return (
     <div className={styles.gameContainer}>
