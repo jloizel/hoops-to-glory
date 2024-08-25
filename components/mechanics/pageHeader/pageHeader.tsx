@@ -97,7 +97,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
       )}
       <Modal open={open}  className={styles.modalContainer}>
         {/* <div className={styles.modal}> */}
-          <HallOfFame handleCloseIcon={handleCloseIcon}/>
+          <HallOfFame handleCloseIcon={handleCloseIcon} username={username}/>
         {/* </div> */}
       </Modal>
     </div>
