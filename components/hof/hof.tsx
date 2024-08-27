@@ -121,4 +121,6 @@ const HallOfFame = forwardRef<HTMLDivElement, HallOfFameProps>(({ handleCloseIco
   )
 })
 
+HallOfFame.displayName = 'HallOfFame';
+
 export default HallOfFame
