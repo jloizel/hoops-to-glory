@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 import styles from "./page.module.css"
 import { IoCloseOutline } from "react-icons/io5";
 import { getAllTimes, Time } from '../../src/app/API';
@@ -10,7 +10,7 @@ interface HallOfFameProps {
   username: string
 }
 
-const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, username}) => {
+const HallOfFame = forwardRef<HTMLDivElement, HallOfFameProps>(({ handleCloseIcon, username }, ref) => {
   const [loading, setLoading] = useState(false)
   const [timesFetched, setTimesFetched] = useState(false)
   const [times, setTimes] = useState<Time[]>([]);
@@ -119,6 +119,6 @@ const HallOfFame: React.FC<HallOfFameProps> = ({handleCloseIcon, username}) => {
       </div>
     </div>
   )
-}
+})
 
 export default HallOfFame
