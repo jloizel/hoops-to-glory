@@ -122,7 +122,7 @@ const Home = () => {
               You left the game tab
             </div> */}
             <div className={styles.modalText}>
-              The game will pause as an inactive tab. If you want to let the game run in the background, leave it as an active separate window.
+              Some elements of the game won't run as an inactive tab. If you want to let the game run fully in the background, leave it as an active separate window.
               </div>
             <div className={styles.buttonContainer}>
               <button onClick={handleRemindLater} className={styles.modalButton}>
@@ -135,7 +135,13 @@ const Home = () => {
           </div>
         </Modal>
       )}
-      <Game username={username} usernameSet={usernameSet} handleReset={handleReset} journeyStarted={journeyStarted}/>
+      <Game 
+        username={username} 
+        usernameSet={usernameSet} 
+        handleReset={handleReset} 
+        journeyStarted={journeyStarted}
+        showInactiveModal={showInactiveModal}      
+      />
     </div>
   )
 }

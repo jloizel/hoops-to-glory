@@ -14,9 +14,10 @@ interface PageHeaderProps {
   draftRank: string;
   handleRestartGame: () => void;
   disableRestart: boolean;
+  elapsedTime: string;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleReset, draftRank, handleRestartGame, disableRestart}) => {
+const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleReset, draftRank, handleRestartGame, disableRestart, elapsedTime}) => {
   const [openModal, setOpenModal] = useState(false);
   const [resetUsernameModal, setResetUsernameModal] = useState(false)
   const [usernameReset, setUsernameReset] = useState(false)
@@ -64,6 +65,9 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
         </div>
       </Box> 
       <Box className={styles.rightContainer}>
+        <div className={styles.elapsedTime}>
+          {elapsedTime}
+        </div>
         <div className={styles.imageContainer2} onClick={handleHofClick}>
           <img src="/images/HoF.png" className={styles.image2}></img>
         </div>

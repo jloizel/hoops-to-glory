@@ -37,9 +37,10 @@ interface GameProps {
   usernameSet: boolean;
   handleReset: () => void;
   journeyStarted: boolean;
+  showInactiveModal: boolean;
 }
 
-const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyStarted}) => {
+const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyStarted, showInactiveModal}) => {
   const [gameStarted, setGameStarted] = useState(true)
   const [elapsedTime, setElapsedTime] = useState(0);
   const [gameRestarted, setGameRestarted] = useState(false)
@@ -254,11 +255,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setIsRunning(false);
   }
 
-  const minutesPerGame = (averageSkillLevel / 100) * 40; //last number is max average
-  const pointsPerGame = (skills.shooting / 100) * 30;
-  // const pointsPerGame = 11;
-  const assistsPerGame = (skills.agility / 100) * 15;
-  const reboundsPerGame = (skills.fitness / 100) * 20;
+  const minutesPerGame = parseFloat(((averageSkillLevel / 100) * 40).toFixed(1));//last number is max average
+  const pointsPerGame = parseFloat(((skills.shooting / 100) * 30).toFixed(1));
+  const assistsPerGame = parseFloat(((skills.agility / 100) * 15).toFixed(1));
+  const reboundsPerGame = parseFloat(((skills.fitness / 100) * 20).toFixed(1));
 
   const teamRole = () => {
     if (totalSkillLevel < 100) return "Benchwarmer";
@@ -329,14 +329,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [followers, setFollowers] = useState(0);
   const [growthRate, setGrowthRate] = useState(1);
   const [intervalDuration, setIntervalDuration] = useState(10000);
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFollowers(prevFollowers => prevFollowers + growthRate); // Increment followers by growth rate
-    }, intervalDuration); // Adjust the interval as needed
-
-    return () => clearInterval(interval); // Cleanup interval on component unmount
-  }, [growthRate, intervalDuration]);
 
   useEffect(() => {
     if (gamesPlayed > 0) {
@@ -345,14 +337,22 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       const newGrowthRate = baseGrowth + skillMultiplier;
       setGrowthRate(newGrowthRate);
 
-      const newIntervalDuration = Math.max(1000, 10000 / newGrowthRate); // Example adjustment
+      const newIntervalDuration = Math.max(1000, 10000 / newGrowthRate);
       setIntervalDuration(newIntervalDuration);
     }
   }, [skills, gamesPlayed]);
+  
+  useEffect(() => {
+    if (!showInactiveModal) {
+      const interval = setInterval(() => {
+        setFollowers(prevFollowers => prevFollowers + growthRate); 
+      }, intervalDuration);   
+  
+      return () => clearInterval(interval);
+    }
+  }, [growthRate, intervalDuration, showInactiveModal]);
 
-
-
-
+  
   // PHONE
   const [achievements, setAchievements] = useState<string[]>([]);
   const [randomMessageInterval, setRandomMessageInterval] = useState(30000)
@@ -592,7 +592,15 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   return (
     <div className={styles.gameContainer}>
       <div className={styles.topContainer}>
-        <PageHeader username={username} usernameSet={usernameSet} handleReset={handleReset} draftRank={draftRank} handleRestartGame={handleRestartGame} disableRestart={disableRestart}/>    
+        <PageHeader 
+          username={username} 
+          usernameSet={usernameSet} 
+          handleReset={handleReset} 
+          draftRank={draftRank} 
+          handleRestartGame={handleRestartGame} 
+          disableRestart={disableRestart}
+          elapsedTime={formatTime(elapsedTime)}
+        />    
       </div>
       <div className={styles.bottomContainer}>
         <Box className={styles.leftContainer}>
@@ -663,7 +671,12 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       <Modal open={open} onClose={() => setOpen(false)}>
         <Fade in={open}>
           <div className={styles.modal}>
-            <GameOver username={username} open={open} elapsedTime={formatTime(elapsedTime)} handleClose={handleClose} gameStarted={gameStarted}/>
+            <GameOver 
+              username={username} 
+              open={open} 
+              elapsedTime={formatTime(elapsedTime)} 
+              handleClose={handleClose} 
+              gameStarted={gameStarted}/>
           </div>
         </Fade>
       </Modal>

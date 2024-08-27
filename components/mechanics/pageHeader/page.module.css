@@ -79,6 +79,14 @@
   gap: 10px;
 }
 
+.elapsedTime {
+  color: #0067B1;
+  font-weight: 600;
+  font-size: 22px;
+  font-family: "Azeret Mono", monospace;
+  margin-right: 20px;
+}
+
 .image2 {
   cursor: pointer;
 }
