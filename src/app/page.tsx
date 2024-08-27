@@ -122,14 +122,14 @@ const Home = () => {
               You left the game tab
             </div> */}
             <div className={styles.modalText}>
-              Some elements of the game won't run as an inactive tab. If you want to let the game run fully in the background, leave it as an active separate window.
+              Some elements of the game won&apos;t run as an inactive tab. If you want to let the game run fully in the background, leave it as an active separate window.
               </div>
             <div className={styles.buttonContainer}>
               <button onClick={handleRemindLater} className={styles.modalButton}>
                 Remind me later
               </button>
               <button onClick={handleDontRemindAgain} className={styles.modalButton}>
-                Don't remind me again
+                Don&apos;t remind me again
               </button>
             </div>
           </div>
