@@ -17,10 +17,16 @@ const Home = () => {
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
+    const storedDontRemindAgain = localStorage.getItem('dontRemindAgain');
+
     if (storedUsername) {
       setUsername(storedUsername);
       setOpenModal(false);
       setUsernameSet(true);
+    }
+
+    if (storedDontRemindAgain === "true") {
+      setDontRemindAgain(true);
     }
   }, []);
 
@@ -57,6 +63,7 @@ const Home = () => {
     localStorage.removeItem('username');
     setJourneyStarted(false)
     setDontRemindAgain(false);
+    localStorage.removeItem('dontRemindAgain');
   };
 
   const generateRandomUsername = (): string => {
@@ -89,6 +96,7 @@ const Home = () => {
   const handleDontRemindAgain = () => {
     setShowInactiveModal(false);
     setDontRemindAgain(true);
+    localStorage.setItem('dontRemindAgain', "true");
   };
 
   return (

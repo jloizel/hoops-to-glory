@@ -1,10 +1,16 @@
 .mainContainer {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: max-content;
   padding: 20px;
   position: relative;
   justify-content: space-between;
+  gap: 20px;
+
+  @media (min-width: 768px) {
+    width: 100%;
+    gap: 0;
+  }
 }
 
 .leftContainer {
@@ -17,19 +23,31 @@
 .name {
   color: #0067B1;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  
+  @media (min-width: 768px) {
+    font-size: 24px;
+  }
 }
 
 .name span {
-  line-height: 20px;
+  line-height: 16px;
+
+  @media (min-width: 768px) {
+    line-height: 20px;
+  }
 }
 
 .imageContainer1, .imageContainer2 {
   width: auto;
-  height: 80px;
+  height: 40px;
+
+  @media (min-width: 768px) {
+    height: 80px;
+  }
 }
 
 .image1, .image2 {
@@ -47,7 +65,11 @@
 .username {
   color: #0067B1;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 20px;
+
+  @media (min-width: 768px) {
+    font-size: 30px;
+  }
 }
 
 .rank {
@@ -62,14 +84,22 @@
   color: #0067B1;
   font-style: italic;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 14px;
+  
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
 }
 
 .rank span:last-child {
   color: #ED174F;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 16px;
   text-transform: capitalize;
+
+  @media (min-width: 768px) {
+    font-size: 22px;
+  }
 }
 
 .rightContainer {
@@ -82,9 +112,13 @@
 .elapsedTime {
   color: #0067B1;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 16px;
   font-family: "Azeret Mono", monospace;
-  margin-right: 20px;
+
+  @media (min-width: 768px) {
+    font-size: 22px;
+    margin-right: 20px;
+  }
 }
 
 .image2 {
