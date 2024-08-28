@@ -10,14 +10,26 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Cutive+Mono&family=League+Gothic&family=Lekton:ital,wght@0,400;0,700;1,400&display=swap');
 
-:root:has(.no-doc-scroll) {
+/* :root:has(.no-doc-scroll) {
   overflow:hidden;
-}
+} */
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+html,
+body,
+#__next {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html,
@@ -31,7 +43,7 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: black;
   background-color: #E6E6E5;
   /* background-color: #0067B1; */
   font-family: 'Poppins', sans-serif !important;
@@ -43,11 +55,6 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
 
 @media (max-width: 767px) {
 
