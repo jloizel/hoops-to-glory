@@ -20,6 +20,7 @@ interface TrainingProps {
   averageSkillLevel: number
   skillUpgrade: { agility: number, shooting: number, fitness: number };
   trainingAvailable: boolean;
+  isStateLoaded: boolean;
 }
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
@@ -32,7 +33,8 @@ const Training: React.FC<TrainingProps> = ({
   handleTrainingClick,
   averageSkillLevel,
   skillUpgrade,
-  trainingAvailable
+  trainingAvailable,
+  isStateLoaded
 }) => {
   const trainingDuration = trainingDurations[selectedTrainingType];
 
@@ -54,7 +56,7 @@ const Training: React.FC<TrainingProps> = ({
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('agility')}
-            disabled={trainingInProgress || !trainingAvailable}
+            disabled={trainingInProgress || !trainingAvailable || !isStateLoaded}
           >
             <span>TRAIN</span>
             <span>(+{skillUpgrade.agility})</span>
@@ -68,7 +70,7 @@ const Training: React.FC<TrainingProps> = ({
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('shooting')}
-            disabled={trainingInProgress || !trainingAvailable}
+            disabled={trainingInProgress || !trainingAvailable || !isStateLoaded}
           >
             <span>TRAIN</span>
             <span>(+{skillUpgrade.shooting})</span>
@@ -82,7 +84,7 @@ const Training: React.FC<TrainingProps> = ({
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('fitness')}
-            disabled={trainingInProgress || !trainingAvailable}
+            disabled={trainingInProgress || !trainingAvailable || !isStateLoaded}
           >
             <span>TRAIN</span>
             <span>(+{skillUpgrade.fitness})</span>
