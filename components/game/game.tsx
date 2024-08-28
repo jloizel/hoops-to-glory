@@ -44,17 +44,15 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [gameStarted, setGameStarted] = useState(true)
   const [elapsedTime, setElapsedTime] = useState(0);
   const [gameRestarted, setGameRestarted] = useState(false)
-
+  const [isStateLoaded, setIsStateLoaded] = useState(false);
 
   useEffect(() => {
     let timer: NodeJS.Timeout | undefined;
 
-    if (gameStarted && !showInactiveModal) {
+    if (isStateLoaded && gameStarted && !showInactiveModal) {
       timer = setInterval(() => {
         setElapsedTime(prevTime => prevTime + 1);
       }, 1000); // Increment the elapsed time every second
-    } else if (timer) {
-      clearInterval(timer);
     }
 
     return () => {
@@ -62,7 +60,14 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         clearInterval(timer);
       }
     };
-  }, [gameStarted, showInactiveModal]);
+  }, [isStateLoaded, gameStarted, showInactiveModal]);
+
+  useEffect(() => {
+      if (isStateLoaded && gameStarted && !showInactiveModal) {
+          setElapsedTime(prevTime => prevTime + 1);
+      }
+  }, [isStateLoaded, gameStarted, showInactiveModal]);
+
 
   const formatTime = (seconds: number): string => {
     const hrs = Math.floor(seconds / 3600);
@@ -495,6 +500,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
             if (index === triggers.length - 1) {
               setDisableRestart(false);
+              setIsStateLoaded(true)
+              setGameStarted(true)
             }
           }, 1000); // Reset after 1 second
         }, index * 3000); // 2-second intervals between each trigger
@@ -520,50 +527,49 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   ]);
 
 
+  useEffect(() => {
+    const saveGameState = () => {
+      const gameState = {
+        gameStarted,
+        skills,
+        elapsedTime,
+        energyLevel,
+        followers,
+        gamesPlayed,
+        achievements,
+      };
+      localStorage.setItem('gameState', JSON.stringify(gameState));
+    };
 
-  // useEffect(() => {
-  //   // Save game state before the window unloads
-  //   const saveGameState = () => {
-  //     const gameState = {
-  //       gameStarted,
-  //       skills,
-  //       elapsedTime,
-  //       energyLevel,
-  //       followers,
-  //       gamesPlayed,
-  //       achievements,
-  //       // Add any other necessary state
-  //     };
-  //     localStorage.setItem('gameState', JSON.stringify(gameState));
-  //   };
+    window.addEventListener('beforeunload', saveGameState);
 
-  //   // Save the game state when the page is about to be unloaded
-  //   window.addEventListener('beforeunload', saveGameState);
+    // Cleanup function to remove the event listener
+    return () => {
+      window.removeEventListener('beforeunload', saveGameState);
+    };
+  }, [gameStarted, skills, elapsedTime, energyLevel, followers, gamesPlayed, achievements]);
 
-  //   // Load the game state when the page is loaded
-  //   const loadGameState = () => {
-  //     const savedGameState = localStorage.getItem('gameState');
-  //     if (savedGameState) {
-  //       const parsedState = JSON.parse(savedGameState);
 
-  //       // Restore the saved game state
-  //       setGameStarted(parsedState.gameStarted);
-  //       setSkills(parsedState.skills);
-  //       setElapsedTime(parsedState.elapsedTime);
-  //       setEnergyLevel(parsedState.energyLevel);
-  //       setFollowers(parsedState.followers);
-  //       setGamesPlayed(parsedState.gamesPlayed);
-  //       setAchievements(parsedState.achievements);
-  //     }
-  //   };
 
-  //   loadGameState();
+  useEffect(() => {
+    const loadGameState = () => {
+      const savedGameState = localStorage.getItem('gameState');
+      if (savedGameState) {
+        const parsedState = JSON.parse(savedGameState);
 
-  //   // Cleanup function to remove the event listener
-  //   return () => {
-  //     window.removeEventListener('beforeunload', saveGameState);
-  //   };
-  // }, [gameStarted, skills, elapsedTime, energyLevel, followers, gamesPlayed, achievements]);
+        setGameStarted(parsedState.gameStarted);
+        setSkills(parsedState.skills);
+        setElapsedTime(parsedState.elapsedTime);
+        setEnergyLevel(parsedState.energyLevel);
+        setFollowers(parsedState.followers);
+        setGamesPlayed(parsedState.gamesPlayed);
+        setAchievements(parsedState.achievements);
+      }
+      setIsStateLoaded(true);
+    };
+
+    loadGameState();
+  }, []); // Empty dependency array to run only once on mount
   
 
   const handleRestartGame = () => {
@@ -582,11 +588,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setFollowers(0);
     setGamesPlayed(0);
     setAchievements([]);
-  
-    // Clear the game state from localStorage on reset
+    setIsStateLoaded(false)
     localStorage.removeItem('gameState');
   };
-
 
 
   return (

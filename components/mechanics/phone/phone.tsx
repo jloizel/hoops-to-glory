@@ -102,7 +102,12 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
             ...prevNotifications
           ]);
 
-          setDisplayedAchievements(prev => [...prev, achievementType]);
+          // Save the updated list of displayed achievements to state and localStorage
+          const updatedAchievements = [...displayedAchievements, achievementType];
+          setDisplayedAchievements(updatedAchievements);
+          localStorage.setItem('displayedAchievements', JSON.stringify(updatedAchievements));
+
+          // Update displayed notification IDs to avoid duplicates
           setDisplayedNotificationIds(prevIds => [
             ...prevIds,
             ...matchingNotifications.map(notification => notification.id)
@@ -112,11 +117,19 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
     });
   }, [achievements, specificNotifications, displayedAchievements]);
 
+  useEffect(() => {
+    const savedDisplayedAchievements = localStorage.getItem('displayedAchievements');
+    if (savedDisplayedAchievements) {
+      setDisplayedAchievements(JSON.parse(savedDisplayedAchievements));
+    }
+  }, []);
+
 
   useEffect(() => {
     if (gameRestarted) {
       setNotifications([]); // Clear all notifications
       setDisplayedAchievements([]); // Reset displayed achievements if needed
+      localStorage.removeItem('displayedAchievements');
       setDisplayedNotificationIds([]); // Reset notification IDs to avoid duplicate logic
       setRandomNotifications([]);
       setSpecificNotifications([]);
