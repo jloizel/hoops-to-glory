@@ -86,7 +86,7 @@ const Home = () => {
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, []);
+  }, [handleVisibilityChange]);
 
   const handleRemindLater = () => {
     setShowInactiveModal(false);
@@ -123,7 +123,7 @@ const Home = () => {
           </Modal>
         // </div>
         )}
-        {showInactiveModal && (
+        {showInactiveModal && !dontRemindAgain && (
         <Modal open={showInactiveModal} className={styles.modalContainer}>
           <div className={styles.modal2}>
             {/* <div className={styles.header}>
