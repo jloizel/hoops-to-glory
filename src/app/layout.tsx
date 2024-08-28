@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { GA } from "../../components/GA/GA";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,7 +46,7 @@ export default function RootLayout({
       <meta name="twitter:image" content="https://www.hoopstoglory.com/hoopstoglory.png"/>
       <meta name="twitter:image:alt" content="HoopsToGlory"/>      
 
-      {/* <GA /> */}
+      <GA />
 
       <meta name="google-site-verification" content="S_MD1UKh220VHJtR8tT5hkJRVTQsdjv2VabvTYcXjw0" />
       <body className={inter.className}>{children}</body>
