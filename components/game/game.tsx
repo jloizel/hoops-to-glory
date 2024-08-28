@@ -159,7 +159,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // RECOVERY
-  const [showRecovery, setShowRecovery] = useState(true)
+  const [showRecovery, setShowRecovery] = useState(false)
   const initialClickCount = 10
   const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
@@ -207,7 +207,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // GAMES
-  const [showGames, setShowGames] = useState(true)
+  const [showGames, setShowGames] = useState(false)
   const [gamesPlayed, setGamesPlayed] = useState(0)
   const [gameLength, setGameLength] = useState(60000); // Timer starts at 10 minutes (600000 milliseconds)
   const [quarter, setQuarter] = useState(1);
@@ -274,7 +274,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
         
   // ENDORSEMENTS
-  const [showEndorsements, setShowEndorsements] = useState(true)
+  const [showEndorsements, setShowEndorsements] = useState(false)
   const [money, setMoney] = useState(100)
 
   useEffect(() => {
