@@ -49,7 +49,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   useEffect(() => {
     let timer: NodeJS.Timeout | undefined;
 
-    if (gameStarted) {
+    if (gameStarted && !showInactiveModal) {
       timer = setInterval(() => {
         setElapsedTime(prevTime => prevTime + 1);
       }, 1000); // Increment the elapsed time every second
@@ -62,7 +62,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         clearInterval(timer);
       }
     };
-  }, [gameStarted]);
+  }, [gameStarted, showInactiveModal]);
 
   const formatTime = (seconds: number): string => {
     const hrs = Math.floor(seconds / 3600);
