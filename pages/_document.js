@@ -11,7 +11,7 @@ class MyDocument extends Document {
           {/* Global site tag (gtag.js) - Google Analytics */}
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=G-EWN88JJ8QP"
+            src="https://www.googletagmanager.com/gtag/js?id=G-DYXXS7VYY4"
           ></script>
           <script
             dangerouslySetInnerHTML={{
@@ -19,7 +19,7 @@ class MyDocument extends Document {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'G-EWN88JJ8QP');
+                gtag('config', 'G-DYXXS7VYY4');
               `,
             }}
           />

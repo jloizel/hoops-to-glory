@@ -4,7 +4,7 @@ import App from "./page"
 import ReactGA from "react-ga4"
 
 const googleAnalyticsId = process.env.REACT_APP_GOOGLE_ANALYTICS_ID || "";
-ReactGA.initialize("G-EWN88JJ8QP")
+ReactGA.initialize("G-DYXXS7VYY4")
 
 if (googleAnalyticsId) {
   // Initialize Google Analytics with your tracking ID
