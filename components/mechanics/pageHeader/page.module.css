@@ -41,12 +41,23 @@
   }
 }
 
-.imageContainer1, .imageContainer2 {
-  width: auto;
+.imageContainer1 {
+  width: 20px;
   height: 40px;
 
   @media (min-width: 768px) {
     height: 80px;
+    width: auto;
+  }
+}
+
+.imageContainer2 {
+  width: 40px;
+  height: 40px;
+
+  @media (min-width: 768px) {
+    height: 80px;
+    width: auto;
   }
 }
 
@@ -131,9 +142,13 @@
 
 .icon {
   color: #0067B1;
-  font-size: 40px;
+  font-size: 30px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+
+  @media (min-width: 768px) {
+    font-size: 40px;
+  }
 }
 
 .icon:hover {
@@ -238,8 +253,12 @@
 
 .buttonContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 
 .button {
