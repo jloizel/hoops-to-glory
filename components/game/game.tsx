@@ -463,7 +463,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   useEffect(() => {
     if (!gameStarted) {
       setOpen(true)
-
     }
   },[])  
 
