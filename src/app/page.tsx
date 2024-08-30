@@ -99,6 +99,7 @@ const Home = () => {
     localStorage.setItem('dontRemindAgain', "true");
   };
 
+
   return (
     <div className={styles.home}>
       {openModal && (
