@@ -484,7 +484,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   const [disableRestart, setDisableRestart] = useState(false)
 
-  console.log('journeyStarted:', journeyStarted);
+  // console.log('journeyStarted:', journeyStarted);
   // console.log('triggerIntroMsg1:', triggerIntroMsg1);
   // console.log('gameStarted:', gameStarted);
 
