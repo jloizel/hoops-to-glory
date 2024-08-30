@@ -13,9 +13,10 @@ interface RecoveryProps {
   handleClick: () => void
   energyStorage: number;
   autoClick: boolean;
+  isRunning: boolean;
 }
 
-const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick, energyStorage, autoClick}) => {
+const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick, energyStorage, autoClick, isRunning}) => {
   const [displayStorage2, setDisplayStorage2] = useState(false)
   const [displayStorage3, setDisplayStorage3] = useState(false)
   const [displayStorage4, setDisplayStorage4] = useState(false)
@@ -73,7 +74,7 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
       </div>
       <div className={styles.content}>
         <div className={styles.heartbeatContainer}>
-          <FaHeartCircleBolt onClick={handleClick} className={styles.icon} />
+          <FaHeartCircleBolt onClick={handleClick} className={`${styles.icon} ${isRunning ? styles.iconRunning : ''}`} />
           <div className={styles.clickerContainer}>
             <span className={styles.clickCount}>{clickCount}</span>
             <PiMouseLeftClickLight className={styles.clickIcon}/>

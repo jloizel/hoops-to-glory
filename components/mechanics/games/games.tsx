@@ -35,7 +35,7 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
-    const quarterDuration = 20000; // 20 seconds
+    const quarterDuration = 10000; // 20 seconds
     const timeDecreaseInterval = 100; // 100 milliseconds
     const decreaseAmount = (600000 / quarterDuration) * timeDecreaseInterval; // Decrease timer amount per interval
 
@@ -138,20 +138,20 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
           
           <div className={styles.statsContainer}>
             <div className={styles.stats}>
-              <span>Minutes/game</span>
-              <div>{minutesPerGame}</div>
+              <span>Assists/game</span>
+              <div>{assistsPerGame}</div>
             </div>
             <div className={styles.stats}>
               <span>Points/game</span>
               <div>{pointsPerGame}</div>
             </div>
             <div className={styles.stats}>
-              <span>Assists/game</span>
-              <div>{assistsPerGame}</div>
-            </div>
-            <div className={styles.stats}>
               <span>Rebounds/game</span>
               <div>{reboundsPerGame}</div>
+            </div>
+            <div className={styles.stats}>
+              <span>Minutes/game</span>
+              <div>{minutesPerGame}</div>
             </div>
             <div className={styles.role}>
               <span>Team role:</span>

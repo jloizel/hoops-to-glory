@@ -163,7 +163,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // RECOVERY
-  const [showRecovery, setShowRecovery] = useState(false)
+  const [showRecovery, setShowRecovery] = useState(true)
   const initialClickCount = 100
   const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
@@ -179,6 +179,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const handleClick = () => {
     if (energyLevel >= energyStorage) {
       return; // Prevent click if energy level matches or exceeds energy storage
+    }
+    if (isRunning) {
+      return
     }
     if (clickCount > 0) {
       setClickCount(prevCount => prevCount - 1); // Decrease click count by 1 on each click
@@ -211,7 +214,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // GAMES
-  const [showGames, setShowGames] = useState(false)
+  const [showGames, setShowGames] = useState(true)
   const [gamesPlayed, setGamesPlayed] = useState(0)
   const [gameLength, setGameLength] = useState(60000); // Timer starts at 10 minutes (600000 milliseconds)
   const [quarter, setQuarter] = useState(1);
@@ -278,7 +281,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
         
   // ENDORSEMENTS
-  const [showEndorsements, setShowEndorsements] = useState(false)
+  const [showEndorsements, setShowEndorsements] = useState(true)
   const [money, setMoney] = useState(100)
 
   useEffect(() => {
@@ -640,6 +643,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
               trainingAvailable={trainingAvailable}
               isStateLoaded={isStateLoaded}
               gameStarted={gameStarted}
+              isRunning={isRunning}
             />
             {showRecovery &&
             <div className={showRecovery ? styles.flash : ''}>
@@ -649,6 +653,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
                 handleClick={handleClick}
                 energyStorage={energyStorage}
                 autoClick={autoClick}
+                isRunning={isRunning}
               />
               </div>
             }       
