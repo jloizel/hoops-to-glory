@@ -38,9 +38,10 @@ interface GameProps {
   handleReset: () => void;
   journeyStarted: boolean;
   showInactiveModal: boolean;
+  isTabActive: boolean;
 }
 
-const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyStarted, showInactiveModal}) => {
+const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyStarted, showInactiveModal, isTabActive}) => {
   const [gameStarted, setGameStarted] = useState(false)
   const [gameOver, setGameOver] = useState(false)
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -52,7 +53,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
     let timer: NodeJS.Timeout | undefined;
 
-    if (isStateLoaded && gameStarted && !showInactiveModal && journeyStarted) {
+    if (isStateLoaded && gameStarted && !showInactiveModal && isTabActive) {
       timer = setInterval(() => {
         setElapsedTime(prevTime => prevTime + 1);
       }, 1000); // Increment the elapsed time every second
@@ -63,13 +64,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         clearInterval(timer);
       }
     };
-  }, [isStateLoaded, gameStarted, showInactiveModal, journeyStarted]);
+  }, [isStateLoaded, gameStarted, showInactiveModal, isTabActive]);
 
   useEffect(() => {
-      if (isStateLoaded && gameStarted && !showInactiveModal && journeyStarted) {
+      if (isStateLoaded && gameStarted && !showInactiveModal && isTabActive) {
         setElapsedTime(prevTime => prevTime + 1);
       }
-  }, [isStateLoaded, gameStarted, showInactiveModal, journeyStarted]);
+  }, [isStateLoaded, gameStarted, showInactiveModal, isTabActive]);
 
 
   const formatTime = (seconds: number): string => {
@@ -544,6 +545,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         followers,
         gamesPlayed,
         achievements,
+        journeyStarted
       };
       localStorage.setItem('gameState', JSON.stringify(gameState));
     };
@@ -554,7 +556,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     return () => {
       window.removeEventListener('beforeunload', saveGameState);
     };
-  }, [gameStarted, skills, elapsedTime, energyLevel, followers, gamesPlayed, achievements]);
+  }, [gameStarted, skills, elapsedTime, energyLevel, followers, gamesPlayed, achievements, journeyStarted]);
 
 
 

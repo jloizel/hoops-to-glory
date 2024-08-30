@@ -149,7 +149,8 @@ const Home = () => {
         usernameSet={usernameSet} 
         handleReset={handleReset} 
         journeyStarted={journeyStarted}
-        showInactiveModal={showInactiveModal}      
+        showInactiveModal={showInactiveModal}   
+        isTabActive={isTabActive}   
       />
     </div>
   )
