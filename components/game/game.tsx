@@ -41,15 +41,18 @@ interface GameProps {
 }
 
 const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyStarted, showInactiveModal}) => {
-  const [gameStarted, setGameStarted] = useState(true)
+  const [gameStarted, setGameStarted] = useState(false)
+  const [gameOver, setGameOver] = useState(false)
   const [elapsedTime, setElapsedTime] = useState(0);
   const [gameRestarted, setGameRestarted] = useState(false)
   const [isStateLoaded, setIsStateLoaded] = useState(false);
 
+
   useEffect(() => {
+
     let timer: NodeJS.Timeout | undefined;
 
-    if (isStateLoaded && gameStarted && !showInactiveModal) {
+    if (isStateLoaded && gameStarted && !showInactiveModal && journeyStarted) {
       timer = setInterval(() => {
         setElapsedTime(prevTime => prevTime + 1);
       }, 1000); // Increment the elapsed time every second
@@ -60,13 +63,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         clearInterval(timer);
       }
     };
-  }, [isStateLoaded, gameStarted, showInactiveModal]);
+  }, [isStateLoaded, gameStarted, showInactiveModal, journeyStarted]);
 
   useEffect(() => {
-      if (isStateLoaded && gameStarted && !showInactiveModal) {
-          setElapsedTime(prevTime => prevTime + 1);
+      if (isStateLoaded && gameStarted && !showInactiveModal && journeyStarted) {
+        setElapsedTime(prevTime => prevTime + 1);
       }
-  }, [isStateLoaded, gameStarted, showInactiveModal]);
+  }, [isStateLoaded, gameStarted, showInactiveModal, journeyStarted]);
 
 
   const formatTime = (seconds: number): string => {
@@ -348,14 +351,14 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   }, [skills, gamesPlayed]);
   
   useEffect(() => {
-    if (!showInactiveModal) {
+    if (!showInactiveModal && gameStarted) {
       const interval = setInterval(() => {
         setFollowers(prevFollowers => prevFollowers + growthRate); 
       }, intervalDuration);   
   
       return () => clearInterval(interval);
     }
-  }, [growthRate, intervalDuration, showInactiveModal]);
+  }, [growthRate, intervalDuration, showInactiveModal, gameStarted]);
 
   
   // PHONE
@@ -452,7 +455,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   useEffect(() => {
     if (pickNumber === 1) {
-      setGameStarted(false)
+      setGameOver(true)
     }
   })
 
@@ -461,7 +464,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    if (!gameStarted) {
+    if (gameOver) {
       setOpen(true)
     }
   },[])  
@@ -480,8 +483,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   const [disableRestart, setDisableRestart] = useState(false)
 
+  console.log('journeyStarted:', journeyStarted);
+  // console.log('triggerIntroMsg1:', triggerIntroMsg1);
+  // console.log('gameStarted:', gameStarted);
+
+
   useEffect(() => {
-    if (gameStarted || journeyStarted) {
+    if (journeyStarted) {
       const triggers = [
         setTriggerIntroMsg1,
         setTriggerIntroMsg2,
@@ -506,7 +514,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         }, index * 3000); // 2-second intervals between each trigger
       });
     }
-  }, [ gameStarted, journeyStarted ]);
+  }, [ journeyStarted ]);
 
 
 
@@ -629,6 +637,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
               skillUpgrade={skillUpgrade}
               trainingAvailable={trainingAvailable}
               isStateLoaded={isStateLoaded}
+              gameStarted={gameStarted}
             />
             {showRecovery &&
             <div className={showRecovery ? styles.flash : ''}>
@@ -680,7 +689,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
               open={open} 
               elapsedTime={formatTime(elapsedTime)} 
               handleClose={handleClose} 
-              gameStarted={gameStarted}/>
+              gameOver={gameOver}/>
           </div>
         </Fade>
       </Modal>

@@ -51,9 +51,9 @@ const Home = () => {
       localStorage.setItem('username', randomUsername);
     }
 
-    setTimeout(() => {
+    // setTimeout(() => {
       setJourneyStarted(true);
-    }, 3000);
+    // }, 3000);
   };
 
   const handleReset = () => {

@@ -15,10 +15,10 @@ interface GameOverProps {
   open: boolean;
   elapsedTime: string;
   handleClose: () => void;
-  gameStarted: boolean;
+  gameOver: boolean;
 }
 
-const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handleClose, gameStarted }) => {
+const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handleClose, gameOver }) => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -125,12 +125,12 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
 
   // Trigger saving time and calculating rank when game ends
   useEffect(() => {
-    if (!gameStarted && open && !saveCompleted.current) {
+    if (gameOver && open && !saveCompleted.current) {
       // Ensure the function is executed only once
       saveTimeAndCalculateRank();
       saveCompleted.current = true;  // Mark as completed
     }
-  }, [gameStarted, open]);
+  }, [gameOver, open]);
 
   const handleHofClick = () => {
     setModalOpen(true)
