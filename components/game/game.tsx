@@ -48,6 +48,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [gameRestarted, setGameRestarted] = useState(false)
   const [isStateLoaded, setIsStateLoaded] = useState(false);
 
+  console.log(`isStateLoaded: ${isStateLoaded}`)
+  console.log(`gameStarted: ${gameStarted}`)
+  console.log(`showInactiveModal: ${showInactiveModal}`)
+  console.log(`isTabActive: ${isTabActive}`)
+  console.log(`gameOver: ${gameOver}`)
+
+
 
   useEffect(() => {
 
@@ -127,8 +134,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
   };
 
-  const averageSkillLevel = skills ? Math.round((skills.agility + skills.shooting + skills.fitness) / 3) : 0;
-  const totalSkillLevel = skills ? (skills.agility + skills.shooting + skills.fitness) : 0;
+  const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
+  const totalSkillLevel = skills.agility + skills.shooting + skills.fitness;
 
 
   const handleAgilityUpgrade = (value: number) => {
@@ -545,6 +552,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         elapsedTime,
         followers,
         journeyStarted,
+        showRecovery,
+        showGames,
+        showEndorsements,
 
         skills,
         trainingDurations,
@@ -558,8 +568,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         gamesPlayed,
         stats,
         statInterval,
-        teamRole,
-
         achievements,
       };
       localStorage.setItem('gameState', JSON.stringify(gameState));
@@ -571,9 +579,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     return () => {
       window.removeEventListener('beforeunload', saveGameState);
     };
-  }, [gameStarted, elapsedTime, followers, journeyStarted, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, clickCount, autoClick, gamesPlayed, stats, statInterval, teamRole, achievements ]);
-
-
+  }, [gameStarted, elapsedTime, followers, journeyStarted, showRecovery, showGames, showEndorsements, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, clickCount, autoClick, gamesPlayed, stats, statInterval, teamRole, achievements ]);
 
   useEffect(() => {
     const loadGameState = () => {
@@ -582,31 +588,31 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         const parsedState = JSON.parse(savedGameState);
 
         setGameStarted(parsedState.gameStarted);
-        setElapsedTime(parsedState.elapsedTime);
-        setFollowers(parsedState.followers);
+        setElapsedTime(parsedState.elapsedTime || 0);
+        setFollowers(parsedState.followers || 0);
+        setShowRecovery(parsedState.showRecovery);
+        setShowGames(parsedState.showGames);
+        setShowEndorsements(parsedState.showEndorsements);
 
         setSkills(parsedState.skills || { agility: 0, shooting: 0, fitness: 0 });
         setTrainingDurations(parsedState.trainingDurations || {
-          agility: initialTrainingDuration,
-          shooting: initialTrainingDuration,
-          fitness: initialTrainingDuration
+          agility: 30000,
+          shooting: 30000,
+          fitness: 30000
         });
         setSkillUpgrade(parsedState.skillUpgrade || { agility: 1, shooting: 1, fitness: 1 });
-        
-        setEnergyLevel(parsedState.energyLevel);
-        setEnergyStorage(parsedState.energyStorage);
-        // setClickCount(parsedState.clickCount);
-        // setAutoClick(parsedState.autoClick);
 
-        setGamesPlayed(parsedState.gamesPlayed);
-        setStats(parsedState.stats);
-        setStatInterval(parsedState.statInterval);
-        
+        setEnergyLevel(parsedState.energyLevel || 0); 
+        setEnergyStorage(parsedState.energyStorage || 0);
+        setAutoClick(parsedState.autoClick)
 
-        setAchievements(parsedState.achievements);
-      }
-      setIsStateLoaded(true);
-    };
+        setGamesPlayed(parsedState.gamesPlayed || 0);
+        setStats(parsedState.stats || [])
+        setStatInterval(parsedState.statInterval)
+        setAchievements(parsedState.achievements || []);
+        }
+        setIsStateLoaded(true);
+      };
 
     loadGameState();
   }, []); // Empty dependency array to run only once on mount
@@ -623,7 +629,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setTrainingDurations({agility: initialTrainingDuration, shooting: initialTrainingDuration, fitness: initialTrainingDuration})
     setElapsedTime(0);
     setEnergyLevel(0);
-    setEnergyStorage(0);
+    setEnergyStorage(1);
     setClickCount(initialClickCount);
     setAutoClick(false)
     setStats([])
@@ -634,6 +640,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setIsStateLoaded(false)
     localStorage.removeItem('gameState');
     setTrainingInProgress(false)
+    setShowRecovery(false);
+    setShowGames(false);
+    setShowEndorsements(false);
 
     setShowRecovery(false);
     setShowGames(false);
