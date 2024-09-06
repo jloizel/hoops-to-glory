@@ -595,8 +595,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         
         setEnergyLevel(parsedState.energyLevel);
         setEnergyStorage(parsedState.energyStorage);
-        setClickCount(parsedState.clickCount);
-        setAutoClick(parsedState.autoClick);
+        // setClickCount(parsedState.clickCount);
+        // setAutoClick(parsedState.autoClick);
 
         setGamesPlayed(parsedState.gamesPlayed);
         setStats(parsedState.stats);
