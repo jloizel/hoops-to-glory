@@ -8,6 +8,7 @@ import { createTime, getAllTimes, getTimeByUsername, updateTime } from '../../sr
 import { Modal } from '@mui/material';
 import HallOfFame from '../hof/hof';
 import { debounce } from 'lodash';
+import Share from '../share/share';
 
 
 interface GameOverProps {
@@ -198,6 +199,7 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
                 <img src="/images/HoF.png" className={styles.hofImage}></img>
               </div>
             </div>
+            <Share elapsedTime={elapsedTime}/>
           </div>
         </div>
       )}

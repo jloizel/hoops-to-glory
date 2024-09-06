@@ -43,7 +43,7 @@ interface GameProps {
 
 const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyStarted, showInactiveModal, isTabActive}) => {
   const [gameStarted, setGameStarted] = useState(false)
-  const [gameOver, setGameOver] = useState(false)
+  const [gameOver, setGameOver] = useState(true)
   const [elapsedTime, setElapsedTime] = useState(0);
   const [gameRestarted, setGameRestarted] = useState(false)
   const [isStateLoaded, setIsStateLoaded] = useState(false);
@@ -53,7 +53,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
     let timer: NodeJS.Timeout | undefined;
 
-    if (isStateLoaded && gameStarted && !showInactiveModal && isTabActive) {
+    if (isStateLoaded && gameStarted && !showInactiveModal && isTabActive && !gameOver) {
       timer = setInterval(() => {
         setElapsedTime(prevTime => prevTime + 1);
       }, 1000); // Increment the elapsed time every second
@@ -64,13 +64,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         clearInterval(timer);
       }
     };
-  }, [isStateLoaded, gameStarted, showInactiveModal, isTabActive]);
+  }, [isStateLoaded, gameStarted, showInactiveModal, isTabActive, gameOver]);
 
   useEffect(() => {
-      if (isStateLoaded && gameStarted && !showInactiveModal && isTabActive) {
+      if (isStateLoaded && gameStarted && !showInactiveModal && isTabActive && !gameOver) {
         setElapsedTime(prevTime => prevTime + 1);
       }
-  }, [isStateLoaded, gameStarted, showInactiveModal, isTabActive]);
+  }, [isStateLoaded, gameStarted, showInactiveModal, isTabActive, gameOver]);
 
 
   const formatTime = (seconds: number): string => {
