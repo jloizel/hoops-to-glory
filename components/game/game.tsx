@@ -641,9 +641,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setIsStateLoaded(false)
     localStorage.removeItem('gameState');
     setTrainingInProgress(false)
-    // setShowRecovery(false);
-    // setShowGames(false);
-    // setShowEndorsements(false);
+    setShowRecovery(false);
+    setShowGames(false);
+    setShowEndorsements(false);
   };
 
 
