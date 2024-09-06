@@ -1,5 +1,3 @@
-"use client"
-
 import React, { useEffect, useState } from 'react'
 import styles from "./page.module.css"
 import { PiCourtBasketballLight, PiCourtBasketballThin } from "react-icons/pi";
@@ -12,14 +10,14 @@ interface Stat {
 interface GamesProps {
   stats: Stat[];
   statInterval: number;
-  addRandomStat: () => void
+  addRandomStat: () => void;
   handleStart: () => void;
   isRunning: boolean;
-  handleGameEnd: () => void
+  handleGameEnd: () => void;
   gameEnded: boolean;
   handleResetGame: () => void;
   quarter: number;
-  handleQuarter: () => void
+  handleQuarter: () => void;
   minutesPerGame: number;
   pointsPerGame: number;
   assistsPerGame: number;
@@ -27,36 +25,54 @@ interface GamesProps {
   teamRole: () => string;
 }
 
-const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handleStart, isRunning, handleGameEnd, gameEnded, handleResetGame, quarter, handleQuarter, minutesPerGame, pointsPerGame, assistsPerGame, reboundsPerGame, teamRole}) => {
-  const [gameLength, setGameLength] = useState(600000);
-  
-  // const [isRunning, setIsRunning] = useState(false);
+const Games: React.FC<GamesProps> = ({
+  stats,
+  statInterval,
+  addRandomStat,
+  handleStart,
+  isRunning,
+  handleGameEnd,
+  gameEnded,
+  handleResetGame,
+  quarter,
+  handleQuarter,
+  minutesPerGame,
+  pointsPerGame,
+  assistsPerGame,
+  reboundsPerGame,
+  teamRole
+}) => {
+  const [gameLength, setGameLength] = useState(600000); // 10 minutes for display
+  const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); // Time when quarter starts
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-
-    const quarterDuration = 10000; // 20 seconds
-    const timeDecreaseInterval = 100; // 100 milliseconds
-    const decreaseAmount = (600000 / quarterDuration) * timeDecreaseInterval; // Decrease timer amount per interval
+    const realQuarterDuration = 5000; // 5 seconds real-time
+    const displayQuarterDuration = 600000; // 10 minutes in milliseconds
+    const updateInterval = 100; // 100 milliseconds for updating the display
 
     if (isRunning) {
       interval = setInterval(() => {
-        setGameLength(prevTimer => {
-          if (prevTimer > 0) {
-            return prevTimer - decreaseAmount; // Decrease timer by interval
+        setGameLength(prevGameLength => {
+          const elapsed = Date.now() - quarterStartTime;
+          const timeLeft = realQuarterDuration - elapsed;
+
+          if (timeLeft > 0) {
+            const displayTimeLeft = Math.max(0, displayQuarterDuration - ((realQuarterDuration - timeLeft) / realQuarterDuration) * displayQuarterDuration);
+            return displayTimeLeft;
           } else {
             clearInterval(interval);
             if (quarter < 4) {
-              handleQuarter(); // Increment quarter
-              return 600000; // Reset timer to 10 minutes for the next quarter
+              handleQuarter(); // Move to the next quarter
+              setQuarterStartTime(Date.now()); // Reset the quarter start time
+              return displayQuarterDuration; // Reset display time to 10 minutes
             } else {
-              handleGameEnd()
-              // setIsRunning(false);
-              return 0; // Stop timer at 0 in the 4th quarter
+              handleGameEnd();
+              return 0; // End game
             }
           }
         });
-      }, timeDecreaseInterval);
+      }, updateInterval);
     }
 
     return () => clearInterval(interval);
@@ -71,7 +87,6 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
     return Math.max(dynamicInterval, 500); // Minimum interval of 500 ms
   };
 
-  // Add stats periodically only if the timer is running
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isRunning) {
@@ -81,30 +96,33 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
     return () => clearInterval(interval);
   }, [isRunning, pointsPerGame, assistsPerGame, reboundsPerGame]);
 
-  // Format the timer into mm:ss:msms
+  // Format the timer into mm:ss
   const formatTimer = () => {
     const minutes = Math.floor((gameLength / 60000) % 60).toString().padStart(2, '0');
     const seconds = Math.floor((gameLength / 1000) % 60).toString().padStart(2, '0');
-    const milliseconds = Math.floor((gameLength % 10000) / 100).toString().padStart(2, '0');
     return `${minutes}:${seconds}`;
   };
 
-  const setQuarter = () => {
-    if (quarter === 1) {
-      return "1st"
-    } else if (quarter === 2) {
-      return "2nd"
-    } else if (quarter === 3) {
-      return "3rd"
-    } else {
-      return "4th"
+  const setQuarterLabel = () => {
+    switch (quarter) {
+      case 1:
+        return "1st";
+      case 2:
+        return "2nd";
+      case 3:
+        return "3rd";
+      case 4:
+        return "4th";
+      default:
+        return "";
     }
-  }
+  };
 
   const resetGame = () => {
-    handleResetGame()
-    setGameLength(600000)
-  }
+    handleResetGame();
+    setGameLength(600000); // Reset display time to 10 minutes
+    setQuarterStartTime(Date.now()); // Reset quarter start time
+  };
 
   return (
     <div className={styles.container}>
@@ -122,7 +140,7 @@ const Games: React.FC<GamesProps> = ({stats, statInterval, addRandomStat, handle
           <PiCourtBasketballThin className={styles.icon} />
           <div className={styles.timerContainer}>
             <span className={styles.timer}>{formatTimer()}</span>
-            <span className={styles.quarter}>{setQuarter()}</span>
+            <span className={styles.quarter}>{setQuarterLabel()}</span>
           </div>
         </div>
         <div className={styles.bottomContainer}>

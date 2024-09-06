@@ -35,6 +35,20 @@
     "content": "Please share the game if you enjoyed it! Have fun"
   },
   {
+    "id": 54,
+    "type": "message",
+    "milestone": "showGames",
+    "contact": "HoopsToGlory",
+    "content": "Well done you've unlocked the ability to play games, make the most if to display what you're made of!"
+  },
+  {
+    "id": 55,
+    "type": "message",
+    "milestone": "showEndorsements",
+    "contact": "HoopsToGlory",
+    "content": "You're now able to choose an endorsement / upgrade when you reach specific milestones"
+  },
+  {
     "id": 1,
     "type": "message",
     "milestone": "5 points/game",

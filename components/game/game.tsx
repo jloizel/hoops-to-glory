@@ -219,9 +219,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
 
-
   // GAMES
-  const [showGames, setShowGames] = useState(false)
+  const [showGames, setShowGames] = useState(true)
   const [gamesPlayed, setGamesPlayed] = useState(0)
   const [gameLength, setGameLength] = useState(60000); // Timer starts at 10 minutes (600000 milliseconds)
   const [quarter, setQuarter] = useState(1);
@@ -229,6 +228,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
   const [statInterval, setStatInterval] = useState(3000) //initial interval of the stats displayed
   const [gameEnded, setGameEnded] = useState(false);
+  
+  console.log(showGames)
 
   useEffect(() => {
     if (totalSkillLevel >= 5) {
@@ -246,7 +247,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     // Remove the stat after 3 seconds
     setTimeout(() => {
       setStats(prevStats => prevStats.filter(stat => stat.id !== newStat.id));
-    }, 300);
+    }, 1000);
   };
 
   const handleQuarter = () => {
@@ -534,14 +535,14 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
     milestones.forEach(({ condition, achievement }) => {
       const params = {
-        triggerIntroMsg1, triggerIntroMsg2, triggerIntroMsg3, triggerIntroMsg4, triggerIntroMsg5, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank,minutesPerGame
+        triggerIntroMsg1, triggerIntroMsg2, triggerIntroMsg3, triggerIntroMsg4, triggerIntroMsg5, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank,minutesPerGame
       };
       if (condition(params) && !achievements.includes(achievement)) {
         setAchievements(prev => [...prev, achievement]);
       }
     });
   }, [
-    gameStarted, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
+    gameStarted, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
   ]);
 
 
@@ -640,13 +641,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setIsStateLoaded(false)
     localStorage.removeItem('gameState');
     setTrainingInProgress(false)
-    setShowRecovery(false);
-    setShowGames(false);
-    setShowEndorsements(false);
-
-    setShowRecovery(false);
-    setShowGames(false);
-    setShowEndorsements(false);
+    // setShowRecovery(false);
+    // setShowGames(false);
+    // setShowEndorsements(false);
   };
 
 

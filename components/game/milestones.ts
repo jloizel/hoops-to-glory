@@ -4,6 +4,8 @@ type ConditionParams = {
   triggerIntroMsg3: boolean;
   triggerIntroMsg4: boolean;
   triggerIntroMsg5: boolean;
+  showGames: boolean;
+  showEndorsements: boolean;
   pointsPerGame: number;
   followers: number;
   gamesPlayed: number;
@@ -26,6 +28,8 @@ const milestones: Milestone[] = [
   { condition: ({ triggerIntroMsg3 }) => triggerIntroMsg3, achievement: 'introMsg3' },
   { condition: ({ triggerIntroMsg4 }) => triggerIntroMsg4, achievement: 'introMsg4' },
   { condition: ({ triggerIntroMsg5 }) => triggerIntroMsg5, achievement: 'introMsg5' },
+  { condition: ({ showGames }) => showGames, achievement: 'showGames' },
+  { condition: ({ showEndorsements }) => showEndorsements, achievement: 'showEndorsements' },
   { condition: ({ pointsPerGame }) => pointsPerGame >= 5, achievement: '5 points/game' },
   { condition: ({ followers }) => followers >= 500, achievement: '500 followers' },
   { condition: ({ gamesPlayed }) => gamesPlayed >= 5, achievement: '5 games played' },
