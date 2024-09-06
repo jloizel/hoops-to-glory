@@ -15,18 +15,20 @@ const Countdown: React.FC<CountdownProps> = ({trainingInProgress, trainingDurati
   const [isPlaying, setIsPlaying] = useState(false); // State to track if the timer is playing
   const [key, setKey] = useState(0);
 
-  useEffect(() => {
-    // Update isPlaying state based on timerStarted prop from parent
-    setIsPlaying(trainingInProgress);
-}, [trainingInProgress]);
-
-  // Function to handle starting or stopping the timer
-  const toggleTimer = () => {
-      setIsPlaying(prevIsPlaying => !prevIsPlaying); // Toggle the state
-      setKey(prevKey => prevKey + 1);
-  };
-
   const trainingDurationinSec = trainingDuration/1000-0.5
+
+
+  useEffect(() => {
+    if (!trainingInProgress) {
+      // If trainingInProgress becomes false, stop the timer and reset it
+      setIsPlaying(false);
+      setKey((prevKey) => prevKey + 1); // Reset the timer by changing the key
+    } else {
+      // When trainingInProgress is true, start the timer
+      setIsPlaying(true);
+    }
+  }, [trainingInProgress]);
+
 
   const formatTime = (timeInSeconds: number): string => {
     const minutes = Math.floor(timeInSeconds / 60);
