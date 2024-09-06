@@ -48,13 +48,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [gameRestarted, setGameRestarted] = useState(false)
   const [isStateLoaded, setIsStateLoaded] = useState(false);
 
-  console.log(`isStateLoaded: ${isStateLoaded}`)
-  console.log(`gameStarted: ${gameStarted}`)
-  console.log(`showInactiveModal: ${showInactiveModal}`)
-  console.log(`isTabActive: ${isTabActive}`)
-  console.log(`gameOver: ${gameOver}`)
-
-
 
   useEffect(() => {
 
@@ -228,8 +221,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
   const [statInterval, setStatInterval] = useState(3000) //initial interval of the stats displayed
   const [gameEnded, setGameEnded] = useState(false);
-  
-  console.log(showGames)
+
 
   useEffect(() => {
     if (totalSkillLevel >= 5) {
@@ -394,6 +386,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setRandomMessageInterval(newInterval);
   }, [totalSkillLevel, followers]);
 
+
   useEffect(() => {
     // Example: Increase user level based on followers count
     if (gamesPlayed > 0 && followers < 1000) {
@@ -494,11 +487,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [triggerIntroMsg5, setTriggerIntroMsg5] = useState(false)
 
   const [disableRestart, setDisableRestart] = useState(false)
-
-  // console.log('journeyStarted:', journeyStarted);
-  // console.log('triggerIntroMsg1:', triggerIntroMsg1);
-  // console.log('gameStarted:', gameStarted);
-
 
   useEffect(() => {
     if (journeyStarted) {
@@ -667,6 +655,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
             randomMessageInterval={randomMessageInterval}
             randomMessageLevel={randomMessageLevel}
             gameRestarted={gameRestarted}
+            showInactiveModal={showInactiveModal}
           />
           <div className={styles.topContentContainer}>
             <Analytics followers={followers}/>

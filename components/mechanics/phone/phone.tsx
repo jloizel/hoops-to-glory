@@ -38,9 +38,10 @@ interface PhoneProps {
   randomMessageInterval: number;
   randomMessageLevel: number;
   gameRestarted: boolean;
+  showInactiveModal: boolean;
 }
 
-const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, randomMessageLevel, gameRestarted }) => {
+const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, randomMessageLevel, gameRestarted, showInactiveModal }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [displayedAchievements, setDisplayedAchievements] = useState<string[]>([]);
   const notificationsContainerRef = useRef<HTMLDivElement>(null);
@@ -73,23 +74,33 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const availableNotifications = randomNotifications.filter(
-        notification => parseInt(notification.level) <= randomMessageLevel && !displayedNotificationIds.includes(notification.id)
-      );
-      if (availableNotifications.length > 0) {
-        const randomIndex = Math.floor(Math.random() * availableNotifications.length);
-        const randomNotification = availableNotifications[randomIndex];
-        setNotifications(prevNotifications => [
-          { ...randomNotification, id: Date.now() },
-          ...prevNotifications
-        ]);
-        setDisplayedNotificationIds(prevIds => [...prevIds, randomNotification.id]);
-      }
-    }, randomMessageInterval);
-
-    return () => clearInterval(interval);
-  }, [randomNotifications, randomMessageLevel, randomMessageInterval, displayedNotificationIds]);
+    // Only allow adding notifications if the inactive modal is not shown
+    if (!showInactiveModal && randomNotifications.length > 0) {
+      const interval = setInterval(() => {
+        const availableNotifications = randomNotifications.filter(
+          notification => parseInt(notification.level) <= randomMessageLevel && !displayedNotificationIds.includes(notification.id)
+        );
+        
+        if (availableNotifications.length > 0) {
+          const randomIndex = Math.floor(Math.random() * availableNotifications.length);
+          const randomNotification = availableNotifications[randomIndex];
+          
+          // Update notifications state
+          setNotifications(prevNotifications => [
+            { ...randomNotification, id: Date.now() }, // Assign unique id to the new notification
+            ...prevNotifications,
+          ]);
+  
+          // Update the displayed notification IDs
+          setDisplayedNotificationIds(prevIds => [...prevIds, randomNotification.id]);
+        }
+      }, randomMessageInterval);
+  
+      // Clear the interval when the component unmounts or dependencies change
+      return () => clearInterval(interval);
+    }
+  }, [randomNotifications, randomMessageLevel, randomMessageInterval, displayedNotificationIds, showInactiveModal]);
+  
 
   useEffect(() => { //achievement in json file needs to match name in handleEndorsementSelect
     achievements.forEach(achievementType => {

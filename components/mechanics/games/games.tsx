@@ -46,19 +46,22 @@ const Games: React.FC<GamesProps> = ({
   const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); // Time when quarter starts
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: number | undefined;
     const realQuarterDuration = 5000; // 5 seconds real-time
     const displayQuarterDuration = 600000; // 10 minutes in milliseconds
     const updateInterval = 100; // 100 milliseconds for updating the display
-
+  
     if (isRunning) {
-      interval = setInterval(() => {
+      interval = window.setInterval(() => {
         setGameLength(prevGameLength => {
           const elapsed = Date.now() - quarterStartTime;
           const timeLeft = realQuarterDuration - elapsed;
-
+  
           if (timeLeft > 0) {
-            const displayTimeLeft = Math.max(0, displayQuarterDuration - ((realQuarterDuration - timeLeft) / realQuarterDuration) * displayQuarterDuration);
+            const displayTimeLeft = Math.max(
+              0,
+              displayQuarterDuration - ((realQuarterDuration - timeLeft) / realQuarterDuration) * displayQuarterDuration
+            );
             return displayTimeLeft;
           } else {
             clearInterval(interval);
@@ -74,9 +77,14 @@ const Games: React.FC<GamesProps> = ({
         });
       }, updateInterval);
     }
-
-    return () => clearInterval(interval);
-  }, [isRunning, quarter]);
+  
+    return () => {
+      if (interval !== undefined) {
+        clearInterval(interval);
+      }
+    };
+  }, [isRunning, quarter, quarterStartTime, handleQuarter, handleGameEnd]);
+  
 
   const calculateDynamicInterval = () => {
     const baseInterval = 5000; // 5000 ms
