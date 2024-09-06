@@ -127,8 +127,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
   };
 
-  const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
-  const totalSkillLevel = skills.agility + skills.shooting + skills.fitness;
+  const averageSkillLevel = skills ? Math.round((skills.agility + skills.shooting + skills.fitness) / 3) : 0;
+  const totalSkillLevel = skills ? (skills.agility + skills.shooting + skills.fitness) : 0;
 
 
   const handleAgilityUpgrade = (value: number) => {
@@ -585,9 +585,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setElapsedTime(parsedState.elapsedTime);
         setFollowers(parsedState.followers);
 
-        setSkills(parsedState.skills);
-        setTrainingDurations(parsedState.trainingDurations);
-        setSkillUpgrade(parsedState.skillUpgrade);
+        setSkills(parsedState.skills || { agility: 0, shooting: 0, fitness: 0 });
+        setTrainingDurations(parsedState.trainingDurations || {
+          agility: initialTrainingDuration,
+          shooting: initialTrainingDuration,
+          fitness: initialTrainingDuration
+        });
+        setSkillUpgrade(parsedState.skillUpgrade || { agility: 1, shooting: 1, fitness: 1 });
         
         setEnergyLevel(parsedState.energyLevel);
         setEnergyStorage(parsedState.energyStorage);
