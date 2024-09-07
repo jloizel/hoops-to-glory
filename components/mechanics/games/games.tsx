@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import styles from "./page.module.css"
+import React, { useEffect, useState, useCallback, useRef } from 'react';
+import styles from "./page.module.css";
 import { PiCourtBasketballLight, PiCourtBasketballThin } from "react-icons/pi";
 
 const Games = ({
   stats,
-  statInterval,
   addRandomStat,
   handleStart,
   isRunning,
@@ -21,75 +20,69 @@ const Games = ({
 }) => {
   const [gameLength, setGameLength] = useState(600000); // 10 minutes for display
   const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); // Time when quarter starts
-
-  // Memoizing handleQuarter to avoid recreating the function on every render
-  const memoizedHandleQuarter = useCallback(() => {
-    handleQuarter();
-  }, [handleQuarter]);
-
-  // Memoizing handleGameEnd
-  const memoizedHandleGameEnd = useCallback(() => {
-    handleGameEnd();
-  }, [handleGameEnd]);
-
+  const intervalRef = useRef<number | null>(null);  // Fix the type issue
+  
+  // Ensure that the game is running only once
   useEffect(() => {
-    let interval;
     const realQuarterDuration = 5000; // 5 seconds real-time
     const displayQuarterDuration = 600000; // 10 minutes in milliseconds
     const updateInterval = 100; // 100 milliseconds for updating the display
   
-    if (isRunning) {
-      interval = window.setInterval(() => {
-        setGameLength(prevGameLength => {
+    if (isRunning && !intervalRef.current) {
+      const startQuarterTimer = () => {
+        intervalRef.current = window.setInterval(() => {  // Now correctly typed as number
           const elapsed = Date.now() - quarterStartTime;
           const timeLeft = realQuarterDuration - elapsed;
-
+  
           if (timeLeft > 0) {
             const displayTimeLeft = Math.max(
               0,
               displayQuarterDuration - ((realQuarterDuration - timeLeft) / realQuarterDuration) * displayQuarterDuration
             );
-            return displayTimeLeft;
+            setGameLength(displayTimeLeft);
           } else {
-            clearInterval(interval); // Clear current interval
+            clearInterval(intervalRef.current!);
+            intervalRef.current = null;
+  
             if (quarter < 4) {
-              memoizedHandleQuarter(); // Move to the next quarter
+              handleQuarter(); // Move to the next quarter
               setQuarterStartTime(Date.now()); // Reset the quarter start time
-              return displayQuarterDuration; // Reset display time to 10 minutes
+              setGameLength(displayQuarterDuration); // Reset display time to 10 minutes
             } else {
-              memoizedHandleGameEnd();
-              return 0; // End game
+              handleGameEnd();
+              setGameLength(0); // End game
             }
           }
-        });
-      }, updateInterval);
+        }, updateInterval);
+      };
+      startQuarterTimer();
     }
-
+  
     return () => {
-      if (interval) {
-        clearInterval(interval); // Clear interval on unmount or re-render
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current); // Cleanup interval on unmount or re-render
+        intervalRef.current = null;
       }
     };
-  }, [isRunning, quarter, quarterStartTime, memoizedHandleQuarter, memoizedHandleGameEnd]);
+  }, [isRunning, quarter, quarterStartTime, handleQuarter, handleGameEnd]);
+
+  // Ensure the stat interval is set up correctly
+  useEffect(() => {
+    let statInterval;
+    const dynamicInterval = calculateDynamicInterval();
+    if (isRunning) {
+      statInterval = setInterval(addRandomStat, dynamicInterval); // Add random stat based on dynamic interval
+    }
+    return () => clearInterval(statInterval);
+  }, [isRunning, pointsPerGame, assistsPerGame, reboundsPerGame, addRandomStat]);
 
   const calculateDynamicInterval = () => {
     const baseInterval = 5000; // 5000 ms
     const maxStats = 50 + 15 + 20; // Maximum possible stats
     const currentStats = pointsPerGame + assistsPerGame + reboundsPerGame;
-
     const dynamicInterval = baseInterval * (1 - currentStats / maxStats);
     return Math.max(dynamicInterval, 500); // Minimum interval of 500 ms
   };
-
-  useEffect(() => {
-    let interval;
-    if (isRunning) {
-      const dynamicInterval = calculateDynamicInterval();
-      interval = setInterval(addRandomStat, dynamicInterval); // Add random stat based on dynamic interval
-    }
-
-    return () => clearInterval(interval); // Clear interval when component unmounts or re-renders
-  }, [isRunning, pointsPerGame, assistsPerGame, reboundsPerGame, addRandomStat]);
 
   // Format the timer into mm:ss
   const formatTimer = () => {
@@ -148,7 +141,6 @@ const Games = ({
               Play again
             </button>
           )}
-          
           <div className={styles.statsContainer}>
             <div className={styles.stats}>
               <span>Assists/game</span>
