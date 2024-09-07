@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import styles from "./page.module.css"
+import React, { useEffect, useState, useCallback } from 'react';
+import styles from "./page.module.css";
 import { PiCourtBasketballLight, PiCourtBasketballThin } from "react-icons/pi";
 
 const Games = ({
   stats,
-  statInterval,
   addRandomStat,
   handleStart,
   isRunning,
@@ -22,24 +21,22 @@ const Games = ({
   const [gameLength, setGameLength] = useState(600000); // 10 minutes for display
   const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); // Time when quarter starts
 
-  // Memoizing handleQuarter to avoid recreating the function on every render
   const memoizedHandleQuarter = useCallback(() => {
     handleQuarter();
   }, [handleQuarter]);
 
-  // Memoizing handleGameEnd
   const memoizedHandleGameEnd = useCallback(() => {
     handleGameEnd();
   }, [handleGameEnd]);
 
   useEffect(() => {
-    let interval;
+    let interval: ReturnType<typeof setInterval>;
     const realQuarterDuration = 5000; // 5 seconds real-time
     const displayQuarterDuration = 600000; // 10 minutes in milliseconds
     const updateInterval = 100; // 100 milliseconds for updating the display
-  
+
     if (isRunning) {
-      interval = window.setInterval(() => {
+      interval = setInterval(() => {
         setGameLength(prevGameLength => {
           const elapsed = Date.now() - quarterStartTime;
           const timeLeft = realQuarterDuration - elapsed;
@@ -82,7 +79,7 @@ const Games = ({
   };
 
   useEffect(() => {
-    let interval;
+    let interval: ReturnType<typeof setInterval>;
     if (isRunning) {
       const dynamicInterval = calculateDynamicInterval();
       interval = setInterval(addRandomStat, dynamicInterval); // Add random stat based on dynamic interval
@@ -175,6 +172,6 @@ const Games = ({
       </div>
     </div>
   );
-}
+};
 
 export default Games;
