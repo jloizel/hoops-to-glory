@@ -1,31 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import styles from "./page.module.css"
 import { PiCourtBasketballLight, PiCourtBasketballThin } from "react-icons/pi";
 
-interface Stat {
-  id: number;
-  text: string;
-}
-
-interface GamesProps {
-  stats: Stat[];
-  statInterval: number;
-  addRandomStat: () => void;
-  handleStart: () => void;
-  isRunning: boolean;
-  handleGameEnd: () => void;
-  gameEnded: boolean;
-  handleResetGame: () => void;
-  quarter: number;
-  handleQuarter: () => void;
-  minutesPerGame: number;
-  pointsPerGame: number;
-  assistsPerGame: number;
-  reboundsPerGame: number;
-  teamRole: () => string;
-}
-
-const Games: React.FC<GamesProps> = ({
+const Games = ({
   stats,
   statInterval,
   addRandomStat,
@@ -45,8 +22,18 @@ const Games: React.FC<GamesProps> = ({
   const [gameLength, setGameLength] = useState(600000); // 10 minutes for display
   const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); // Time when quarter starts
 
+  // Memoizing handleQuarter to avoid recreating the function on every render
+  const memoizedHandleQuarter = useCallback(() => {
+    handleQuarter();
+  }, [handleQuarter]);
+
+  // Memoizing handleGameEnd
+  const memoizedHandleGameEnd = useCallback(() => {
+    handleGameEnd();
+  }, [handleGameEnd]);
+
   useEffect(() => {
-    let interval: number | undefined;
+    let interval;
     const realQuarterDuration = 5000; // 5 seconds real-time
     const displayQuarterDuration = 600000; // 10 minutes in milliseconds
     const updateInterval = 100; // 100 milliseconds for updating the display
@@ -56,7 +43,7 @@ const Games: React.FC<GamesProps> = ({
         setGameLength(prevGameLength => {
           const elapsed = Date.now() - quarterStartTime;
           const timeLeft = realQuarterDuration - elapsed;
-  
+
           if (timeLeft > 0) {
             const displayTimeLeft = Math.max(
               0,
@@ -64,27 +51,26 @@ const Games: React.FC<GamesProps> = ({
             );
             return displayTimeLeft;
           } else {
-            clearInterval(interval);
+            clearInterval(interval); // Clear current interval
             if (quarter < 4) {
-              handleQuarter(); // Move to the next quarter
+              memoizedHandleQuarter(); // Move to the next quarter
               setQuarterStartTime(Date.now()); // Reset the quarter start time
               return displayQuarterDuration; // Reset display time to 10 minutes
             } else {
-              handleGameEnd();
+              memoizedHandleGameEnd();
               return 0; // End game
             }
           }
         });
       }, updateInterval);
     }
-  
+
     return () => {
-      if (interval !== undefined) {
-        clearInterval(interval);
+      if (interval) {
+        clearInterval(interval); // Clear interval on unmount or re-render
       }
     };
-  }, [isRunning, quarter, quarterStartTime, handleQuarter, handleGameEnd]);
-  
+  }, [isRunning, quarter, quarterStartTime, memoizedHandleQuarter, memoizedHandleGameEnd]);
 
   const calculateDynamicInterval = () => {
     const baseInterval = 5000; // 5000 ms
@@ -96,13 +82,14 @@ const Games: React.FC<GamesProps> = ({
   };
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval;
     if (isRunning) {
       const dynamicInterval = calculateDynamicInterval();
       interval = setInterval(addRandomStat, dynamicInterval); // Add random stat based on dynamic interval
     }
-    return () => clearInterval(interval);
-  }, [isRunning, pointsPerGame, assistsPerGame, reboundsPerGame]);
+
+    return () => clearInterval(interval); // Clear interval when component unmounts or re-renders
+  }, [isRunning, pointsPerGame, assistsPerGame, reboundsPerGame, addRandomStat]);
 
   // Format the timer into mm:ss
   const formatTimer = () => {
