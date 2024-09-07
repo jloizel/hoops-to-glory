@@ -6,6 +6,9 @@ import { Box, Fade, Modal } from '@mui/material'
 import { VscDebugRestart } from "react-icons/vsc";
 import { IoClose } from "react-icons/io5";
 import HallOfFame from '../../hof/hof';
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+
 
 interface PageHeaderProps {
   username: string
@@ -55,6 +58,10 @@ const PageHeader: React.FC<PageHeaderProps> = ({username, usernameSet, handleRes
           <span>Hoops</span>
           <span>To</span>
           <span>Glory</span>
+        </div>
+        <div className={styles.logoContainer}>
+          <FaGithub className={styles.logo} onClick={() => window.open("https://github.com/jloizel", '_blank')}/>
+          <FaLinkedin className={styles.logo} onClick={() => window.open("https://www.linkedin.com/in/jackloizel/", '_blank')}/>
         </div>
       </Box>
       <Box className={styles.middleContainer}>
