@@ -580,7 +580,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setElapsedTime(parsedState.elapsedTime || 0);
         setFollowers(parsedState.followers || 0);
         setShowRecovery(parsedState.showRecovery);
-        setShowGames(parsedState.showGames);
+        // setShowGames(parsedState.showGames);
         setShowEndorsements(parsedState.showEndorsements);
 
         setSkills(parsedState.skills || { agility: 0, shooting: 0, fitness: 0 });
@@ -630,7 +630,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     localStorage.removeItem('gameState');
     setTrainingInProgress(false)
     setShowRecovery(false);
-    setShowGames(false);
+    // setShowGames(false);
     setShowEndorsements(false);
   };
 
