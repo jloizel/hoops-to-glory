@@ -692,7 +692,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
             <div className={showGames ? styles.flash : ''}>
               <Games
                 stats={stats}
-                statInterval={statInterval}
                 addRandomStat={addRandomStat}
                 handleStart={handleStart}
                 isRunning={isRunning}
