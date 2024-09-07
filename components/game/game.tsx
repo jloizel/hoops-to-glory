@@ -213,7 +213,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // GAMES
-  const [showGames, setShowGames] = useState(false)
+  const [showGames, setShowGames] = useState(true)
   const [gamesPlayed, setGamesPlayed] = useState(0)
   const [gameLength, setGameLength] = useState(60000); // Timer starts at 10 minutes (600000 milliseconds)
   const [quarter, setQuarter] = useState(1);
