@@ -18,11 +18,6 @@ import GameOver from '../gameOver/gameOver'
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
 
-interface Stat {
-  id: number;
-  text: string;
-}
-
 interface Endorsement {
   id: number;
   name: string;
@@ -215,13 +210,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   // GAMES
   const [showGames, setShowGames] = useState(true)
   const [gamesPlayed, setGamesPlayed] = useState(0)
-  const [gameLength, setGameLength] = useState(60000); // Timer starts at 10 minutes (600000 milliseconds)
-  const [quarter, setQuarter] = useState(1);
-  const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
   const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
   const [statInterval, setStatInterval] = useState(3000) //initial interval of the stats displayed
-  const [gameEnded, setGameEnded] = useState(false);
-
 
   useEffect(() => {
     if (totalSkillLevel >= 5) {
@@ -229,41 +219,15 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
   }, [averageSkillLevel])
 
-  const addRandomStat = () => {
-    const statTypes = ["+2 points", "+3 points", "+1 assist", "+1 rebound"];
-    const randomStat = statTypes[Math.floor(Math.random() * statTypes.length)];
-    const newStat = { id: Date.now(), text: randomStat };
-
-    setStats(prevStats => [...prevStats, newStat]);
-
-    // Remove the stat after 3 seconds
-    setTimeout(() => {
-      setStats(prevStats => prevStats.filter(stat => stat.id !== newStat.id));
-    }, 1000);
-  };
-
-  const handleQuarter = () => {
-    setQuarter(prevQuarter => prevQuarter + 1/2);
-  }
-
-
-  const handleStart = () => {
+  const handleGameStart = () => {
     setIsRunning(true);
-    setGameLength(600000); // Reset timer to 10 minutes
-    setQuarter(1); // Reset quarter to 1
-    
   };
 
   const handleGameEnd = () => {
     setIsRunning(false);
-    setGameEnded(true)
   };
 
-  const handleResetGame = () => {
-    setQuarter(1)
-    setGameLength(600000);
-    setGameEnded(false);
-    setStats([]); // Clear stats
+  const handleGameReset = () => {
     setIsRunning(false);
   }
 
@@ -555,7 +519,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         autoClick,
 
         gamesPlayed,
-        stats,
         statInterval,
         achievements,
       };
@@ -568,7 +531,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     return () => {
       window.removeEventListener('beforeunload', saveGameState);
     };
-  }, [gameStarted, elapsedTime, followers, journeyStarted, showRecovery, showGames, showEndorsements, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, clickCount, autoClick, gamesPlayed, stats, statInterval, teamRole, achievements ]);
+  }, [gameStarted, elapsedTime, followers, journeyStarted, showRecovery, showGames, showEndorsements, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, clickCount, autoClick, gamesPlayed, statInterval, teamRole, achievements ]);
 
   useEffect(() => {
     const loadGameState = () => {
@@ -596,7 +559,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setAutoClick(parsedState.autoClick)
 
         setGamesPlayed(parsedState.gamesPlayed || 0);
-        setStats(parsedState.stats || [])
         setStatInterval(parsedState.statInterval)
         setAchievements(parsedState.achievements || []);
         }
@@ -621,7 +583,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setEnergyStorage(1);
     setClickCount(initialClickCount);
     setAutoClick(false)
-    setStats([])
     setStatInterval(3000)
     setFollowers(0);
     setGamesPlayed(0);
@@ -691,15 +652,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
             {showGames &&
             <div className={showGames ? styles.flash : ''}>
               <Games
-                stats={stats}
-                addRandomStat={addRandomStat}
-                handleStart={handleStart}
+                handleGameStart={handleGameStart}
                 isRunning={isRunning}
                 handleGameEnd={handleGameEnd}
-                gameEnded={gameEnded}
-                handleResetGame={handleResetGame}
-                quarter={quarter}
-                handleQuarter={handleQuarter}
+                handleGameReset={handleGameReset}
                 minutesPerGame={minutesPerGame}
                 pointsPerGame={pointsPerGame}
                 assistsPerGame={assistsPerGame}

@@ -2,16 +2,16 @@ import React, { useEffect, useState, useCallback } from 'react';
 import styles from "./page.module.css";
 import { PiCourtBasketballLight, PiCourtBasketballThin } from "react-icons/pi";
 
+interface Stat {
+  id: number;
+  text: string;
+}
+
 const Games = ({
-  stats,
-  addRandomStat,
-  handleStart,
   isRunning,
+  handleGameStart,
   handleGameEnd,
-  gameEnded,
-  handleResetGame,
-  quarter,
-  handleQuarter,
+  handleGameReset,
   minutesPerGame,
   pointsPerGame,
   assistsPerGame,
@@ -19,15 +19,44 @@ const Games = ({
   teamRole
 }) => {
   const [gameLength, setGameLength] = useState(600000); // 10 minutes for display
-  const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); // Time when quarter starts
+  const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); 
+  const [quarter, setQuarter] = useState(1);
+  const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameEnded, setGameEnded] = useState(false); // Track when the game ends
 
-  const memoizedHandleQuarter = useCallback(() => {
-    handleQuarter();
-  }, [handleQuarter]);
+  const handleQuarter = () => {
+    setQuarter(prevQuarter => prevQuarter + 1/2);
+  };
 
-  const memoizedHandleGameEnd = useCallback(() => {
-    handleGameEnd();
-  }, [handleGameEnd]);
+  const handleStartGame = () => {
+    setGameStarted(true);
+    setGameLength(600000); // Reset timer to 10 minutes
+    setQuarter(1); // Reset quarter to 1
+    setGameEnded(false); // Reset the gameEnded state
+  };
+
+  const handleEndGame = () => {
+    setGameStarted(false);
+    setGameEnded(true); // Mark the game as ended
+  };
+
+  const handleResetGame = () => {
+    setQuarter(1);
+    setGameLength(600000);
+    setStats([]); // Clear stats
+    setQuarterStartTime(Date.now()); // Reset quarter start time
+    setGameStarted(false); // Ensure game is not started yet
+    setGameEnded(false); // Reset the gameEnded state
+  };
+
+  useEffect(() => {
+    if (gameStarted) {
+      handleGameStart();
+    } else if (gameEnded) {
+      handleGameEnd();
+    }
+  }, [gameStarted, gameEnded, handleGameStart, handleGameEnd]);
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -35,7 +64,7 @@ const Games = ({
     const displayQuarterDuration = 600000; // 10 minutes in milliseconds
     const updateInterval = 100; // 100 milliseconds for updating the display
 
-    if (isRunning) {
+    if (gameStarted) {
       interval = setInterval(() => {
         setGameLength(prevGameLength => {
           const elapsed = Date.now() - quarterStartTime;
@@ -48,14 +77,13 @@ const Games = ({
             );
             return displayTimeLeft;
           } else {
-            clearInterval(interval); // Clear current interval
             if (quarter < 4) {
-              memoizedHandleQuarter(); // Move to the next quarter
+              handleQuarter(); // Move to the next quarter
               setQuarterStartTime(Date.now()); // Reset the quarter start time
               return displayQuarterDuration; // Reset display time to 10 minutes
             } else {
-              memoizedHandleGameEnd();
-              return 0; // End game
+              handleEndGame();
+              return 0; 
             }
           }
         });
@@ -67,16 +95,29 @@ const Games = ({
         clearInterval(interval); // Clear interval on unmount or re-render
       }
     };
-  }, [isRunning, quarter, quarterStartTime, memoizedHandleQuarter, memoizedHandleGameEnd]);
+  }, [gameStarted, quarter, quarterStartTime, handleQuarter, handleEndGame]);
 
-  const calculateDynamicInterval = () => {
+  const addRandomStat = () => {
+    const statTypes = ["+2 points", "+3 points", "+1 assist", "+1 rebound"];
+    const randomStat = statTypes[Math.floor(Math.random() * statTypes.length)];
+    const newStat = { id: Date.now(), text: randomStat };
+
+    setStats(prevStats => [...prevStats, newStat]);
+
+    // Remove the stat after 3 seconds
+    setTimeout(() => {
+      setStats(prevStats => prevStats.filter(stat => stat.id !== newStat.id));
+    }, 1000);
+  };
+
+  const calculateDynamicInterval = useCallback(() => {
     const baseInterval = 5000; // 5000 ms
     const maxStats = 50 + 15 + 20; // Maximum possible stats
     const currentStats = pointsPerGame + assistsPerGame + reboundsPerGame;
 
     const dynamicInterval = baseInterval * (1 - currentStats / maxStats);
     return Math.max(dynamicInterval, 500); // Minimum interval of 500 ms
-  };
+  }, [pointsPerGame, assistsPerGame, reboundsPerGame]);
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -110,12 +151,6 @@ const Games = ({
     }
   };
 
-  const resetGame = () => {
-    handleResetGame();
-    setGameLength(600000); // Reset display time to 10 minutes
-    setQuarterStartTime(Date.now()); // Reset quarter start time
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -136,15 +171,14 @@ const Games = ({
           </div>
         </div>
         <div className={styles.bottomContainer}>
-          {!gameEnded ? (
-            <button className={styles.button} onClick={handleStart} disabled={isRunning}>
-              Play game
-            </button>
-          ) : (
-            <button className={styles.button} onClick={resetGame} disabled={isRunning}>
-              Play again
-            </button>
-          )}
+          {/* Button that is always visible, but the label changes */}
+          <button
+            className={styles.button}
+            onClick={gameEnded ? handleResetGame : handleStartGame}
+            disabled={isRunning && !gameEnded} // Only disable if the game is running and not ended
+          >
+            {gameEnded ? "Play again" : "Play game"}
+          </button>
           
           <div className={styles.statsContainer}>
             <div className={styles.stats}>
