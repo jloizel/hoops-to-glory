@@ -347,7 +347,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     };
 
     const newInterval = calculateNewInterval();
-    setRandomMessageInterval(newInterval);
+    setRandomMessageInterval(5000);
   }, [totalSkillLevel, followers]);
 
 
