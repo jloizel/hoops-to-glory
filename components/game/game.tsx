@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import styles from "./page.module.css"
 import Phone from '../mechanics/phone/phone'
 import Analytics from '../mechanics/analytics/analytics'
@@ -336,6 +336,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   const baseInterval = 60000;
   const minInterval = 5000;
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const lastCalculatedIntervalRef = useRef<number>(randomMessageInterval);
 
   useEffect(() => {
     const calculateNewInterval = () => {
@@ -347,9 +349,41 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     };
 
     const newInterval = calculateNewInterval();
-    setRandomMessageInterval(minInterval);
+    setRandomMessageInterval(newInterval);
+    lastCalculatedIntervalRef.current = newInterval; // Store the calculated interval for reference
   }, [totalSkillLevel, followers]);
 
+  useEffect(() => {
+    let remainingTime = randomMessageInterval;
+
+    const startCountdown = () => {
+      console.log(`Starting countdown: ${remainingTime / 1000} seconds`);
+      
+      // Ensure the countdown doesn't reset on interval update
+      intervalRef.current = setInterval(() => {
+        remainingTime -= 1000; // Reduce by 1 second (1000 ms)
+        console.log(`Countdown: ${remainingTime / 1000} seconds remaining`);
+
+        if (remainingTime <= 0) {
+          console.log("Interval has reached 0");
+          // Trigger notification logic here
+
+          // Reset countdown with the latest calculated interval
+          remainingTime = lastCalculatedIntervalRef.current;
+        }
+      }, 1000);
+    };
+
+    // Start countdown when component mounts or randomMessageInterval changes
+    startCountdown();
+
+    // Cleanup on unmount or when randomMessageInterval changes
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [randomMessageInterval]);
 
   useEffect(() => {
     // Example: Increase user level based on followers count
