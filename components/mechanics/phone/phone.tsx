@@ -73,6 +73,9 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
       .then(data => setSpecificNotifications(data));
   }, []);
 
+  console.log(randomNotifications)
+  console.log(specificNotifications)
+
   useEffect(() => {
     // Only allow adding notifications if the inactive modal is not shown
     if (!showInactiveModal && randomNotifications.length > 0) {
