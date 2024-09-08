@@ -66,7 +66,7 @@ const Games = ({
 
     if (gameStarted) {
       interval = setInterval(() => {
-        setGameLength(prevGameLength => {
+        setGameLength((prevGameLength) => {
           const elapsed = Date.now() - quarterStartTime;
           const timeLeft = realQuarterDuration - elapsed;
 
@@ -96,6 +96,10 @@ const Games = ({
       }
     };
   }, [gameStarted, quarter, quarterStartTime, handleQuarter, handleEndGame]);
+
+  useEffect(() => {
+    console.log('Quarter:', quarter);
+  }, [quarter]);
 
   const addRandomStat = () => {
     const statTypes = ["+2 points", "+3 points", "+1 assist", "+1 rebound"];
