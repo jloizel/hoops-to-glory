@@ -347,10 +347,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     };
 
     const newInterval = calculateNewInterval();
-    setRandomMessageInterval(newInterval);
+    setRandomMessageInterval(minInterval);
   }, [totalSkillLevel, followers]);
 
-  console.log(randomMessageInterval)
 
   useEffect(() => {
     // Example: Increase user level based on followers count
