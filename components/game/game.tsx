@@ -116,6 +116,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         [type]: Math.min(prevSkills[type] + 1, 100),
       }));
       setTrainingInProgress(false);
+      setIsRunning(false)
     }, trainingDurations[type]);
 
     if (showRecovery) {
