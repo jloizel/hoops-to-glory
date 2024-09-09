@@ -108,6 +108,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setSelectedTrainingType(type);
     setTrainingInProgress(true);
     setTrainingAvailable(false);
+    setIsRunning(true)
 
     setTimeout(() => {
       setSkills(prevSkills => ({

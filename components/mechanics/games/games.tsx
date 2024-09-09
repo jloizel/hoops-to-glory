@@ -25,6 +25,8 @@ const Games = ({
   const [gameStarted, setGameStarted] = useState(false);
   const [gameEnded, setGameEnded] = useState(false); // Track when the game ends
 
+  console.log(isRunning)
+
   const handleQuarter = () => {
     setQuarter(prevQuarter => prevQuarter + 1);
   };
