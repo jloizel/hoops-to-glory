@@ -333,35 +333,36 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   
   // PHONE
   const [achievements, setAchievements] = useState<string[]>([]);
-  const [randomMessageInterval, setRandomMessageInterval] = useState(30000)
-  const [randomMessageLevel, setRandomMessageLevel] = useState(1);
+  const [randomMessageInterval, setRandomMessageInterval] = useState(30000);
+const [randomMessageLevel, setRandomMessageLevel] = useState(1);
 
-  const baseInterval = 60000;
-  const minInterval = 5000;
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const lastCalculatedIntervalRef = useRef<number>(randomMessageInterval);
+const baseInterval = 60000;
+const minInterval = 5000;
+const intervalRef = useRef<NodeJS.Timeout | null>(null);
+const lastCalculatedIntervalRef = useRef<number>(randomMessageInterval);
+const remainingTimeRef = useRef<number>(randomMessageInterval); // Track remaining time separately
 
-  useEffect(() => {
-    const calculateNewInterval = () => {
-      const skillFactor = totalSkillLevel / 300; // Assuming max total skill level is 300
-      const followerFactor = followers / 10000; // Assuming max followers to consider is 10000
-      const influenceFactor = skillFactor + followerFactor;
-      const newInterval = Math.max(baseInterval * (1 - influenceFactor), minInterval);
-      return newInterval;
-    };
+useEffect(() => {
+  const calculateNewInterval = () => {
+    const skillFactor = totalSkillLevel / 300; // Assuming max total skill level is 300
+    const followerFactor = followers / 10000; // Assuming max followers to consider is 10000
+    const influenceFactor = skillFactor + followerFactor;
+    const newInterval = Math.max(baseInterval * (1 - influenceFactor), minInterval);
+    return newInterval;
+  };
 
-    const newInterval = calculateNewInterval();
-    setRandomMessageInterval(newInterval);
-    lastCalculatedIntervalRef.current = newInterval; // Store the calculated interval for reference
-  }, [totalSkillLevel, followers]);
+  const newInterval = calculateNewInterval();
+  setRandomMessageInterval(newInterval);
+  lastCalculatedIntervalRef.current = newInterval; // Store the calculated interval for reference
+}, [totalSkillLevel, followers]);
 
-  useEffect(() => {
-    let remainingTime = randomMessageInterval;
+useEffect(() => {
+  const startCountdown = () => {
+    if (!intervalRef.current) {
+      let remainingTime = remainingTimeRef.current; // Initialize from remainingTimeRef
 
-    const startCountdown = () => {
       console.log(`Starting countdown: ${remainingTime / 1000} seconds`);
-      
-      // Ensure the countdown doesn't reset on interval update
+
       intervalRef.current = setInterval(() => {
         remainingTime -= 1000; // Reduce by 1 second (1000 ms)
         console.log(`Countdown: ${remainingTime / 1000} seconds remaining`);
@@ -373,19 +374,31 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
           // Reset countdown with the latest calculated interval
           remainingTime = lastCalculatedIntervalRef.current;
         }
+
+        // Store the current remaining time
+        remainingTimeRef.current = remainingTime;
       }, 1000);
-    };
+    }
+  };
 
-    // Start countdown when component mounts or randomMessageInterval changes
-    startCountdown();
+  // Start countdown when component mounts or randomMessageInterval changes
+  startCountdown();
 
-    // Cleanup on unmount or when randomMessageInterval changes
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [randomMessageInterval]);
+  // Cleanup on unmount or when randomMessageInterval changes
+  return () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null; // Reset interval ref
+    }
+  };
+}, []); // Empty dependency array so countdown doesn't reset when randomMessageInterval changes
+
+// Handle when randomMessageInterval changes (e.g. due to changes in followers or totalSkillLevel)
+useEffect(() => {
+  // Update remainingTimeRef but don't reset the countdown
+  remainingTimeRef.current = randomMessageInterval;
+}, [randomMessageInterval]);
+
 
   useEffect(() => {
     // Example: Increase user level based on followers count
