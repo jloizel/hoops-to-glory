@@ -230,9 +230,9 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
         <p>{currentHourMinute}</p>
       </div>
       <div className={styles.notificationsContainer} ref={notificationsContainerRef} id="notifications-container">
-        <div className={styles.countdown}>
+        {/* <div className={styles.countdown}>
           Next notification in: {countdown}s
-        </div>
+        </div> */}
         {notifications.map((notification, index) => (
           <div
             key={notification.id}

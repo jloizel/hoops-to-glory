@@ -173,7 +173,6 @@ const Games = ({
           </div>
         </div>
         <div className={styles.bottomContainer}>
-          {/* Button that is always visible, but the label changes */}
           <button
             className={styles.button}
             onClick={gameEnded ? handleResetGame : handleStartGame}
