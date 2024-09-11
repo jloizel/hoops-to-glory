@@ -227,7 +227,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   const handleGameEnd = () => {
     setIsRunning(false);
+    setGamesPlayed(prevNumber => prevNumber + 1);
   };
+
+  console.log(gamesPlayed)
 
   const handleGameReset = () => {
     setIsRunning(false);
