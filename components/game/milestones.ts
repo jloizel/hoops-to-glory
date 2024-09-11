@@ -4,6 +4,7 @@ type ConditionParams = {
   triggerIntroMsg3: boolean;
   triggerIntroMsg4: boolean;
   triggerIntroMsg5: boolean;
+  showRecovery: boolean;
   showGames: boolean;
   showEndorsements: boolean;
   pointsPerGame: number;
@@ -28,6 +29,7 @@ const milestones: Milestone[] = [
   { condition: ({ triggerIntroMsg3 }) => triggerIntroMsg3, achievement: 'introMsg3' },
   { condition: ({ triggerIntroMsg4 }) => triggerIntroMsg4, achievement: 'introMsg4' },
   { condition: ({ triggerIntroMsg5 }) => triggerIntroMsg5, achievement: 'introMsg5' },
+  { condition: ({ showRecovery }) => showRecovery, achievement: 'showRecovery' },
   { condition: ({ showGames }) => showGames, achievement: 'showGames' },
   { condition: ({ showEndorsements }) => showEndorsements, achievement: 'showEndorsements' },
   { condition: ({ pointsPerGame }) => pointsPerGame >= 5, achievement: '5 points/game' },

@@ -488,14 +488,14 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
     milestones.forEach(({ condition, achievement }) => {
       const params = {
-        triggerIntroMsg1, triggerIntroMsg2, triggerIntroMsg3, triggerIntroMsg4, triggerIntroMsg5, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank,minutesPerGame
+        triggerIntroMsg1, triggerIntroMsg2, triggerIntroMsg3, triggerIntroMsg4, triggerIntroMsg5, showRecovery, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank,minutesPerGame
       };
       if (condition(params) && !achievements.includes(achievement)) {
         setAchievements(prev => [...prev, achievement]);
       }
     });
   }, [
-    gameStarted, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
+    gameStarted, showRecovery, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
   ]);
 
 

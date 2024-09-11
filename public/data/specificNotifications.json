@@ -36,17 +36,24 @@
   },
   {
     "id": 54,
-    "type": "message",
+    "type": "special",
     "milestone": "showGames",
     "name": "HoopsToGlory",
     "content": "Well done you've unlocked the ability to play games, make the most of it to show what you're made of!"
   },
   {
     "id": 55,
-    "type": "message",
+    "type": "special",
     "milestone": "showEndorsements",
     "name": "HoopsToGlory",
     "content": "You're now able to choose an endorsement / upgrade when you reach specific milestones"
+  },
+  {
+    "id": 56,
+    "type": "special",
+    "milestone": "showTraining",
+    "name": "HoopsToGlory",
+    "content": "Make sure you recover before completing another training session."
   },
   {
     "id": 1,
