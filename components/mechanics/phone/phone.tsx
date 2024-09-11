@@ -51,6 +51,8 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
   const [specificNotifications, setSpecificNotifications] = useState<Notification[]>([]);
   const [displayedNotificationIds, setDisplayedNotificationIds] = useState<number[]>([]);
   const [countdown, setCountdown] = useState<number>(randomMessageInterval / 1000); // Timer countdown in seconds
+  const [previousInterval, setPreviousInterval] = useState<number>(randomMessageInterval);
+  const [startTime, setStartTime] = useState<number>(Date.now());
 
   useEffect(() => {
     // Fetch random notifications
@@ -75,52 +77,47 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
   }, []);
 
   useEffect(() => {
-    // Countdown logic: Reset countdown whenever randomMessageInterval changes
-    setCountdown(randomMessageInterval / 1000);
-    let intervalId: NodeJS.Timeout;
+    let countdownInterval: NodeJS.Timeout;
 
-    if (!showInactiveModal && randomNotifications.length > 0) {
-      intervalId = setInterval(() => {
-        setCountdown(prevCountdown => {
-          if (prevCountdown <= 1) {
-            return randomMessageInterval / 1000; // Reset countdown after it reaches 0
-          }
-          return prevCountdown - 1;
-        });
-      }, 1000);
+    const updateCountdown = () => {
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime = Math.max(previousInterval - elapsedTime, 0);
+      setCountdown(Math.floor(remainingTime / 1000));
+
+      if (remainingTime <= 0) {
+        // Reset countdown when it reaches zero
+        setStartTime(Date.now());
+        setPreviousInterval(randomMessageInterval); // Use new interval only after the current countdown finishes
+        triggerRandomNotification(); // Trigger the notification
+      }
+    };
+
+    // Start the countdown and update it every 100ms to account for milliseconds
+    countdownInterval = setInterval(updateCountdown, 100);
+
+    return () => clearInterval(countdownInterval); // Clear interval on component unmount
+  }, [startTime, previousInterval, randomMessageInterval]);
+
+
+  const triggerRandomNotification = () => {
+    const availableNotifications = randomNotifications.filter(
+      (notification) =>
+        parseInt(notification.level) <= randomMessageLevel &&
+        !displayedNotificationIds.includes(notification.id)
+    );
+
+    if (availableNotifications.length > 0) {
+      const randomIndex = Math.floor(Math.random() * availableNotifications.length);
+      const randomNotification = availableNotifications[randomIndex];
+
+      setNotifications((prevNotifications) => [
+        { ...randomNotification, id: Date.now() }, // Assign unique id to the new notification
+        ...prevNotifications,
+      ]);
+
+      setDisplayedNotificationIds((prevIds) => [...prevIds, randomNotification.id]);
     }
-
-    return () => clearInterval(intervalId); // Cleanup interval on unmount or dependency change
-  }, [randomMessageInterval, randomNotifications.length, showInactiveModal]);
-
-
-  useEffect(() => {
-    // Only allow adding notifications if the inactive modal is not shown
-    if (!showInactiveModal && randomNotifications.length > 0) {
-      const interval = setInterval(() => {
-        const availableNotifications = randomNotifications.filter(
-          notification => parseInt(notification.level) <= randomMessageLevel && !displayedNotificationIds.includes(notification.id)
-        );
-        
-        if (availableNotifications.length > 0) {
-          const randomIndex = Math.floor(Math.random() * availableNotifications.length);
-          const randomNotification = availableNotifications[randomIndex];
-          
-          // Update notifications state
-          setNotifications(prevNotifications => [
-            { ...randomNotification, id: Date.now() }, // Assign unique id to the new notification
-            ...prevNotifications,
-          ]);
-  
-          // Update the displayed notification IDs
-          setDisplayedNotificationIds(prevIds => [...prevIds, randomNotification.id]);
-        }
-      }, randomMessageInterval);
-  
-      // Clear the interval when the component unmounts or dependencies change
-      return () => clearInterval(interval);
-    }
-  }, [randomNotifications, randomMessageLevel, randomMessageInterval, displayedNotificationIds, showInactiveModal]);
+  };
   
 
   useEffect(() => { //achievement in json file needs to match name in handleEndorsementSelect
