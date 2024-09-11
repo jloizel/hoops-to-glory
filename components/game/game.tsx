@@ -210,7 +210,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // GAMES
-  const [showGames, setShowGames] = useState(false)
+  const [showGames, setShowGames] = useState(true)
   const [gamesPlayed, setGamesPlayed] = useState(0)
   const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
   const [statInterval, setStatInterval] = useState(3000) //initial interval of the stats displayed
@@ -227,8 +227,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   const handleGameEnd = () => {
     setIsRunning(false);
-    setGamesPlayed(prevNumber => prevNumber + 1);
   };
+
+  const handleGamesPlayedCount = () => {
+    setGamesPlayed(prevNumber => prevNumber + 1);
+  }
 
   console.log(gamesPlayed)
 
@@ -653,12 +656,12 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
                 handleGameStart={handleGameStart}
                 isRunning={isRunning}
                 handleGameEnd={handleGameEnd}
-                handleGameReset={handleGameReset}
                 minutesPerGame={minutesPerGame}
                 pointsPerGame={pointsPerGame}
                 assistsPerGame={assistsPerGame}
                 reboundsPerGame={reboundsPerGame}
                 teamRole={teamRole}
+                handleGamesPlayedCount={handleGamesPlayedCount}
               />
             </div>
             }

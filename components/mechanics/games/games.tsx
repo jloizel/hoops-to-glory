@@ -11,7 +11,7 @@ const Games = ({
   isRunning,
   handleGameStart,
   handleGameEnd,
-  handleGameReset,
+  handleGamesPlayedCount,
   minutesPerGame,
   pointsPerGame,
   assistsPerGame,
@@ -41,6 +41,7 @@ const Games = ({
   const handleEndGame = () => {
     setGameStarted(false);
     setGameEnded(true); // Mark the game as ended
+    handleGamesPlayedCount();
   };
 
   const handleResetGame = () => {
