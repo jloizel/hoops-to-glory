@@ -38,21 +38,21 @@
     "id": 54,
     "type": "special",
     "milestone": "showGames",
-    "name": "HoopsToGlory",
+    "name": "",
     "content": "Well done you've unlocked the ability to play games, make the most of it to show what you're made of!"
   },
   {
     "id": 55,
     "type": "special",
     "milestone": "showEndorsements",
-    "name": "HoopsToGlory",
+    "name": "",
     "content": "You're now able to choose an endorsement / upgrade when you reach specific milestones"
   },
   {
     "id": 56,
     "type": "special",
-    "milestone": "showTraining",
-    "name": "HoopsToGlory",
+    "milestone": "showRecovery",
+    "name": "",
     "content": "Make sure you recover before completing another training session."
   },
   {
@@ -66,7 +66,7 @@
     "id": 2,
     "type": "special",
     "milestone": "500 followers",
-    "name": "Coach",
+    "name": "",
     "content": "You've reached 500 followers on social media!"
   },
   {
