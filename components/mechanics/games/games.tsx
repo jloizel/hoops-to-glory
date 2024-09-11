@@ -34,6 +34,7 @@ const Games = ({
     setGameStarted(true);
     setGameLength(600000); // Reset timer to 10 minutes
     setQuarter(1); // Reset quarter to 1
+    setQuarterStartTime(Date.now());
     setGameEnded(false); // Reset the gameEnded state
   };
 
