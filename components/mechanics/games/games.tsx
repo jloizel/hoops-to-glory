@@ -69,7 +69,7 @@ const Games = ({
       interval = setInterval(() => {
         setGameLength((prevGameLength) => {
           const elapsed = Date.now() - quarterStartTime;
-          const timeLeft = realQuarterDuration - (elapsed % realQuarterDuration);
+          const timeLeft = realQuarterDuration - elapsed;
 
           if (timeLeft > 0) {
             const displayTimeLeft = Math.max(
