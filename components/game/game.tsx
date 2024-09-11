@@ -339,11 +339,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   
   // PHONE
   const [achievements, setAchievements] = useState<string[]>([]);
-  const [randomMessageInterval, setRandomMessageInterval] = useState(60000);
+  const [randomMessageInterval, setRandomMessageInterval] = useState(300000);
   const [randomMessageLevel, setRandomMessageLevel] = useState(1);
 
-  const baseInterval = 60000;
-  const minInterval = 5000;
+  const baseInterval = 300000;
+  const minInterval = 30000;
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const lastCalculatedIntervalRef = useRef<number>(randomMessageInterval);
   const remainingTimeRef = useRef<number>(randomMessageInterval); // Track remaining time separately
@@ -351,7 +351,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   useEffect(() => {
     const calculateNewInterval = () => {
       const skillFactor = totalSkillLevel / 300; // Assuming max total skill level is 300
-      const followerFactor = followers / 10000; // Assuming max followers to consider is 10000
+      const followerFactor = followers / 100000; // Assuming max followers to consider is 10000
       const influenceFactor = skillFactor + followerFactor;
       const newInterval = Math.max(baseInterval * (1 - influenceFactor), minInterval);
       return newInterval;
