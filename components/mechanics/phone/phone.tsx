@@ -50,6 +50,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
   const [randomNotifications, setRandomNotifications] = useState<Notification[]>([]);
   const [specificNotifications, setSpecificNotifications] = useState<Notification[]>([]);
   const [displayedNotificationIds, setDisplayedNotificationIds] = useState<number[]>([]);
+  const [countdown, setCountdown] = useState<number>(randomMessageInterval / 1000); // Timer countdown in seconds
 
   useEffect(() => {
     // Fetch random notifications
@@ -72,6 +73,25 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
       .then(response => response.json())
       .then(data => setSpecificNotifications(data));
   }, []);
+
+  useEffect(() => {
+    // Countdown logic: Reset countdown whenever randomMessageInterval changes
+    setCountdown(randomMessageInterval / 1000);
+    let intervalId: NodeJS.Timeout;
+
+    if (!showInactiveModal && randomNotifications.length > 0) {
+      intervalId = setInterval(() => {
+        setCountdown(prevCountdown => {
+          if (prevCountdown <= 1) {
+            return randomMessageInterval / 1000; // Reset countdown after it reaches 0
+          }
+          return prevCountdown - 1;
+        });
+      }, 1000);
+    }
+
+    return () => clearInterval(intervalId); // Cleanup interval on unmount or dependency change
+  }, [randomMessageInterval, randomNotifications.length, showInactiveModal]);
 
 
   useEffect(() => {
@@ -213,6 +233,9 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
         <p>{currentHourMinute}</p>
       </div>
       <div className={styles.notificationsContainer} ref={notificationsContainerRef} id="notifications-container">
+        <div className={styles.countdown}>
+          Next notification in: {countdown}s
+        </div>
         {notifications.map((notification, index) => (
           <div
             key={notification.id}

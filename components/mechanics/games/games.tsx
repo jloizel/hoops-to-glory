@@ -25,7 +25,6 @@ const Games = ({
   const [gameStarted, setGameStarted] = useState(false);
   const [gameEnded, setGameEnded] = useState(false); // Track when the game ends
 
-  console.log(isRunning)
 
   const handleQuarter = () => {
     setQuarter(prevQuarter => prevQuarter + 1);
@@ -98,10 +97,6 @@ const Games = ({
       }
     };
   }, [gameStarted, quarter, quarterStartTime, handleQuarter, handleEndGame]);
-
-  useEffect(() => {
-    console.log('Quarter:', quarter);
-  }, [quarter]);
 
   const addRandomStat = () => {
     const statTypes = ["+2 points", "+3 points", "+1 assist", "+1 rebound"];
