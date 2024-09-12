@@ -210,7 +210,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // GAMES
-  const [showGames, setShowGames] = useState(false)
+  const [showGames, setShowGames] = useState(true)
   const [gamesPlayed, setGamesPlayed] = useState(0)
   const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
   const [statInterval, setStatInterval] = useState(3000) //initial interval of the stats displayed
@@ -233,8 +233,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setGamesPlayed(prevNumber => prevNumber + 1);
   }
 
-  console.log(gamesPlayed)
-
   const handleGameReset = () => {
     setIsRunning(false);
   }
@@ -251,7 +249,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     return "Star Player";
   };
 
-        
+  console.log(gamesPlayed)      
+
   // ENDORSEMENTS
   const [showEndorsements, setShowEndorsements] = useState(false)
   const [money, setMoney] = useState(100)
@@ -327,7 +326,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   }, [skills, gamesPlayed]);
   
   useEffect(() => {
-    if (!showInactiveModal && gameStarted) {
+    if (!showInactiveModal && gameStarted && isStateLoaded) {
       const interval = setInterval(() => {
         setFollowers(prevFollowers => prevFollowers + growthRate); 
       }, intervalDuration);   
@@ -480,7 +479,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       });
     }
   }, [ journeyStarted ]);
-
 
 
   useEffect(() => {

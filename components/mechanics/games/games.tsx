@@ -24,6 +24,7 @@ const Games = ({
   const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
   const [gameStarted, setGameStarted] = useState(false);
   const [gameEnded, setGameEnded] = useState(false); // Track when the game ends
+  const [gameCountUpdated, setGameCountUpdated] = useState(false); // Track if gamesPlayed was updated for this game
 
 
   const handleQuarter = () => {
@@ -41,7 +42,6 @@ const Games = ({
   const handleEndGame = () => {
     setGameStarted(false);
     setGameEnded(true); // Mark the game as ended
-    handleGamesPlayedCount();
   };
 
   const handleResetGame = () => {
@@ -51,6 +51,7 @@ const Games = ({
     setQuarterStartTime(Date.now()); // Reset quarter start time
     setGameStarted(false); // Ensure game is not started yet
     setGameEnded(false); // Reset the gameEnded state
+    setGameCountUpdated(false); // Reset the update flag
   };
 
   useEffect(() => {
@@ -60,6 +61,13 @@ const Games = ({
       handleGameEnd();
     }
   }, [gameStarted, gameEnded, handleGameStart, handleGameEnd]);
+
+  useEffect(() => {
+    if (gameCountUpdated) {
+      handleGamesPlayedCount();
+    }
+  })
+
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -106,6 +114,9 @@ const Games = ({
     const newStat = { id: Date.now(), text: randomStat };
 
     setStats(prevStats => [...prevStats, newStat]);
+
+    console.log("Stats array: ", stats); // Debugging log
+
 
     // Remove the stat after 3 seconds
     setTimeout(() => {
