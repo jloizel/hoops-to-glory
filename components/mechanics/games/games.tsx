@@ -94,6 +94,8 @@ const Games = ({
               return displayQuarterDuration; // Reset display time to 10 minutes
             } else {
               handleEndGame();
+              setGameCountUpdated(true)
+              setGameCountUpdated(false)
               return 0; 
             }
           }
