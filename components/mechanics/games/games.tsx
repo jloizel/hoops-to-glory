@@ -24,7 +24,7 @@ const Games = ({
   const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
   const [gameStarted, setGameStarted] = useState(false);
   const [gameEnded, setGameEnded] = useState(false); // Track when the game ends
-  const [gameCountUpdated, setGameCountUpdated] = useState(false); // Track if gamesPlayed was updated for this game
+  const [updateGameCount, setUpdateGameCount] = useState(false); // Track if gamesPlayed was updated for this game
 
 
   const handleQuarter = () => {
@@ -51,7 +51,7 @@ const Games = ({
     setQuarterStartTime(Date.now()); // Reset quarter start time
     setGameStarted(false); // Ensure game is not started yet
     setGameEnded(false); // Reset the gameEnded state
-    setGameCountUpdated(false); // Reset the update flag
+    setUpdateGameCount(false); // Reset the update flag
   };
 
   useEffect(() => {
@@ -63,8 +63,9 @@ const Games = ({
   }, [gameStarted, gameEnded, handleGameStart, handleGameEnd]);
 
   useEffect(() => {
-    if (gameCountUpdated) {
+    if (updateGameCount) {
       handleGamesPlayedCount();
+      setUpdateGameCount(false)
     }
   })
 
@@ -94,8 +95,10 @@ const Games = ({
               return displayQuarterDuration; // Reset display time to 10 minutes
             } else {
               handleEndGame();
-              setGameCountUpdated(true)
-              setGameCountUpdated(false)
+              setUpdateGameCount(true)
+              // setTimeout(() => {
+              //   setGameCountUpdated(false);
+              // }, 0.1);
               return 0; 
             }
           }
