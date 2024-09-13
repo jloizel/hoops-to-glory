@@ -177,14 +177,21 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     if (energyLevel >= energyStorage) {
       return; // Prevent click if energy level matches or exceeds energy storage
     }
-    if (isRunning) {
-      return
+  
+    // Allow the user to decrement clickCount down to 1 if either isRunning or trainingInProgress is true
+    if ((isRunning || trainingInProgress) && clickCount > 1) {
+      setClickCount(prevCount => prevCount - 1);
+      return;
     }
-    if (clickCount > 0) {
-      setClickCount(prevCount => prevCount - 1); // Decrease click count by 1 on each click
-    } else if (clickCount === 0 && clickCount < 5) {
-      setEnergyLevel(prevLevel => prevLevel + 1); // Increase energy level by 5
-      setClickCount(initialClickCount); // Reset click count to 200
+  
+    // Allow reaching 0 and increasing energy level only when both are false
+    if (!isRunning && !trainingInProgress) {
+      if (clickCount > 1) {
+        setClickCount(prevCount => prevCount - 1); // Decrease click count by 1
+      } else if (clickCount === 1) {
+        setEnergyLevel(prevLevel => prevLevel + 1); // Increase energy level by 1
+        setClickCount(initialClickCount); // Reset click count to the initial value
+      }
     }
   };
 
@@ -223,6 +230,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   const handleGameStart = () => {
     setIsRunning(true);
+
+    if (showRecovery) {
+      setEnergyLevel(prevLevel => Math.max(prevLevel - 1, 0));
+    }
   };
 
   const handleGameEnd = () => {
@@ -328,7 +339,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   useEffect(() => {
     if (!showInactiveModal && gameStarted && isStateLoaded) {
       const interval = setInterval(() => {
-        setFollowers(prevFollowers => prevFollowers + growthRate); 
+        setFollowers(prevFollowers => Math.round(prevFollowers + growthRate));
       }, intervalDuration);   
   
       return () => clearInterval(interval);
@@ -645,6 +656,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
                 energyStorage={energyStorage}
                 autoClick={autoClick}
                 isRunning={isRunning}
+                trainingInProgress={trainingInProgress}
               />
               </div>
             }       

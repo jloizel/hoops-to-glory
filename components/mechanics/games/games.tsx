@@ -113,15 +113,16 @@ const Games = ({
     };
   }, [gameStarted, quarter, quarterStartTime, handleQuarter, handleEndGame]);
 
+  useEffect(() => {
+    console.log("Updated stats:", stats);
+  }, [stats]);
+
   const addRandomStat = () => {
     const statTypes = ["+2 points", "+3 points", "+1 assist", "+1 rebound"];
     const randomStat = statTypes[Math.floor(Math.random() * statTypes.length)];
     const newStat = { id: Date.now(), text: randomStat };
 
     setStats(prevStats => [...prevStats, newStat]);
-
-    console.log("Stats array: ", stats); // Debugging log
-
 
     // Remove the stat after 3 seconds
     setTimeout(() => {
@@ -137,6 +138,7 @@ const Games = ({
     const dynamicInterval = baseInterval * (1 - currentStats / maxStats);
     return Math.max(dynamicInterval, 500); // Minimum interval of 500 ms
   }, [pointsPerGame, assistsPerGame, reboundsPerGame]);
+
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
