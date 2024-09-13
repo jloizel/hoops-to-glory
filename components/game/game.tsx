@@ -221,6 +221,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [gamesPlayed, setGamesPlayed] = useState(0)
   const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
   const [statInterval, setStatInterval] = useState(3000) //initial interval of the stats displayed
+  const [gamePlayable, setGamePlayable] = useState(true)
 
   useEffect(() => {
     if (totalSkillLevel >= 5) {
@@ -228,8 +229,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
   }, [averageSkillLevel])
 
+  console.log(gamePlayable)
+
   const handleGameStart = () => {
     setIsRunning(true);
+    setGamePlayable(false)
 
     if (showRecovery) {
       setEnergyLevel(prevLevel => Math.max(prevLevel - 1, 0));
@@ -244,9 +248,12 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setGamesPlayed(prevNumber => prevNumber + 1);
   }
 
-  const handleGameReset = () => {
-    setIsRunning(false);
-  }
+  useEffect(() => {
+    if (energyLevel > 0 && !gamePlayable) {
+      setGamePlayable(true);
+    }
+  }, [energyLevel]);
+  
 
   const minutesPerGame = parseFloat(((averageSkillLevel / 100) * 40).toFixed(1));//last number is max average
   const pointsPerGame = parseFloat(((skills.shooting / 100) * 30).toFixed(1));
@@ -672,6 +679,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
                 reboundsPerGame={reboundsPerGame}
                 teamRole={teamRole}
                 handleGamesPlayedCount={handleGamesPlayedCount}
+                gamePlayable={gamePlayable}
               />
             </div>
             }

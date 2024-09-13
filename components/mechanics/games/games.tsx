@@ -16,7 +16,8 @@ const Games = ({
   pointsPerGame,
   assistsPerGame,
   reboundsPerGame,
-  teamRole
+  teamRole,
+  gamePlayable
 }) => {
   const [gameLength, setGameLength] = useState(600000); // 10 minutes for display
   const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); 
@@ -113,18 +114,14 @@ const Games = ({
     };
   }, [gameStarted, quarter, quarterStartTime, handleQuarter, handleEndGame]);
 
-  useEffect(() => {
-    console.log("Updated stats:", stats);
-  }, [stats]);
-
   const addRandomStat = () => {
     const statTypes = ["+2 points", "+3 points", "+1 assist", "+1 rebound"];
     const randomStat = statTypes[Math.floor(Math.random() * statTypes.length)];
     const newStat = { id: Date.now(), text: randomStat };
-
+    
     setStats(prevStats => [...prevStats, newStat]);
-
-    // Remove the stat after 3 seconds
+  
+    // Remove the stat after 1 second
     setTimeout(() => {
       setStats(prevStats => prevStats.filter(stat => stat.id !== newStat.id));
     }, 1000);
@@ -139,15 +136,14 @@ const Games = ({
     return Math.max(dynamicInterval, 500); // Minimum interval of 500 ms
   }, [pointsPerGame, assistsPerGame, reboundsPerGame]);
 
-
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
     if (isRunning) {
       const dynamicInterval = calculateDynamicInterval();
-      interval = setInterval(addRandomStat, dynamicInterval); // Add random stat based on dynamic interval
+      interval = setInterval(addRandomStat, dynamicInterval);
     }
-
-    return () => clearInterval(interval); // Clear interval when component unmounts or re-renders
+  
+    return () => clearInterval(interval);
   }, [isRunning, pointsPerGame, assistsPerGame, reboundsPerGame, addRandomStat]);
 
   // Format the timer into mm:ss
@@ -195,7 +191,7 @@ const Games = ({
           <button
             className={styles.button}
             onClick={gameEnded ? handleResetGame : handleStartGame}
-            disabled={isRunning && !gameEnded} // Only disable if the game is running and not ended
+            disabled={!gamePlayable || (isRunning && !gameEnded)} // Only disable if the game is running and not ended
           >
             {gameEnded ? "Play again" : "Play game"}
           </button>
