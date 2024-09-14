@@ -525,6 +525,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     gameStarted, showRecovery, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
   ]);
 
+  console.log(achievements)
 
   useEffect(() => {
     const saveGameState = () => {
