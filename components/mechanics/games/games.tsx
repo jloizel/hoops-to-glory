@@ -114,18 +114,18 @@ const Games = ({
     };
   }, [gameStarted, quarter, quarterStartTime, handleQuarter, handleEndGame]);
 
-  const addRandomStat = () => {
+  const addRandomStat = useCallback(() => {
     const statTypes = ["+2 points", "+3 points", "+1 assist", "+1 rebound"];
     const randomStat = statTypes[Math.floor(Math.random() * statTypes.length)];
     const newStat = { id: Date.now(), text: randomStat };
-    
-    setStats(prevStats => [...prevStats, newStat]);
   
-    // Remove the stat after 1 second
+    setStats((prevStats) => [...prevStats, newStat]);
+  
+    // Remove the stat after 2 seconds for testing
     setTimeout(() => {
-      setStats(prevStats => prevStats.filter(stat => stat.id !== newStat.id));
-    }, 1000);
-  };
+      setStats((prevStats) => prevStats.filter((stat) => stat.id !== newStat.id));
+    }, 2000); // Increase timeout duration for better visibility
+  }, []);
 
   const calculateDynamicInterval = useCallback(() => {
     const baseInterval = 5000; // 5000 ms
@@ -144,7 +144,7 @@ const Games = ({
     }
   
     return () => clearInterval(interval);
-  }, [isRunning, pointsPerGame, assistsPerGame, reboundsPerGame, addRandomStat]);
+  }, [isRunning, calculateDynamicInterval, addRandomStat]);
 
   // Format the timer into mm:ss
   const formatTimer = () => {
@@ -167,6 +167,8 @@ const Games = ({
         return "";
     }
   };
+
+  console.log(stats)
 
   return (
     <div className={styles.container}>

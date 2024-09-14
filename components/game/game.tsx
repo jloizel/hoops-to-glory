@@ -229,7 +229,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
   }, [averageSkillLevel])
 
-  console.log(gamePlayable)
 
   const handleGameStart = () => {
     setIsRunning(true);
@@ -267,7 +266,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     return "Star Player";
   };
 
-  console.log(gamesPlayed)      
 
   // ENDORSEMENTS
   const [showEndorsements, setShowEndorsements] = useState(false)
