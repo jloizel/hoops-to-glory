@@ -341,7 +341,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   useEffect(() => {
     if (gamesPlayed > 0) {
-      const baseGrowth = 1;
+      const baseGrowth = 2;
       const timeMultiplier = 1 + (gamesPlayed / 100);
       const skillMultiplier = Math.sqrt(skills.agility + skills.shooting + skills.fitness) / 10;
       const randomBoost = Math.random() < 0.1 ? 2 : 1;
@@ -367,11 +367,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   
   // PHONE
   const [achievements, setAchievements] = useState<string[]>([]);
-  const [randomMessageInterval, setRandomMessageInterval] = useState(300000);
+  const [randomMessageInterval, setRandomMessageInterval] = useState(150000);
   const [randomMessageLevel, setRandomMessageLevel] = useState(1);
 
-  const baseInterval = 300000;
-  const minInterval = 30000;
+  const baseInterval = 150000;
+  const minInterval = 20000;
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const lastCalculatedIntervalRef = useRef<number>(randomMessageInterval);
   const remainingTimeRef = useRef<number>(randomMessageInterval); // Track remaining time separately
