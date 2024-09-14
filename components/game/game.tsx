@@ -200,8 +200,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   };
 
   useEffect(() => {
-    if (energyLevel > 0 && !trainingAvailable) {
+    if (energyLevel > 0) {
       setTrainingAvailable(true);
+    } else {
+      setTrainingAvailable(false);
     }
   }, [energyLevel]);
   
@@ -348,6 +350,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       setIntervalDuration(newIntervalDuration);
     }
   }, [skills, gamesPlayed]);
+
   
   useEffect(() => {
     if (!showInactiveModal && gameStarted && isStateLoaded) {
