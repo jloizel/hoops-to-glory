@@ -152,8 +152,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const reduceTrainingTime = (type: TrainingType, percentage: number) => {
     setTrainingDurations(prevDurations => ({
       ...prevDurations,
-      // [type]: prevDurations[type] * (1 - percentage / 100)
-      [type]: Math.max(prevDurations[type] - percentage)
+      [type]: prevDurations[type] * (1 - percentage / 100)
+      // [type]: Math.max(prevDurations[type] - percentage)
     }));
   };
 
