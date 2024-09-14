@@ -17,7 +17,8 @@ const Games = ({
   assistsPerGame,
   reboundsPerGame,
   teamRole,
-  gamePlayable
+  gamePlayable,
+  trainingAvailable
 }) => {
   const [gameLength, setGameLength] = useState(600000); // 10 minutes for display
   const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); 
@@ -138,13 +139,13 @@ const Games = ({
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
-    if (isRunning) {
+    if (gameStarted) {
       const dynamicInterval = calculateDynamicInterval();
       interval = setInterval(addRandomStat, dynamicInterval);
     }
   
     return () => clearInterval(interval);
-  }, [isRunning, calculateDynamicInterval, addRandomStat]);
+  }, [gameStarted, calculateDynamicInterval, addRandomStat]);
 
   // Format the timer into mm:ss
   const formatTimer = () => {
@@ -167,8 +168,6 @@ const Games = ({
         return "";
     }
   };
-
-  console.log(stats)
 
   return (
     <div className={styles.container}>
@@ -193,7 +192,7 @@ const Games = ({
           <button
             className={styles.button}
             onClick={gameEnded ? handleResetGame : handleStartGame}
-            disabled={!gamePlayable || (isRunning && !gameEnded)} // Only disable if the game is running and not ended
+            disabled={!gamePlayable || (isRunning && !gameEnded) || !trainingAvailable} // Only disable if the game is running and not ended
           >
             {gameEnded ? "Play again" : "Play game"}
           </button>

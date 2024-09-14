@@ -217,17 +217,25 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // GAMES
-  const [showGames, setShowGames] = useState(false)
+  const [showGames, setShowGames] = useState(true)
   const [gamesPlayed, setGamesPlayed] = useState(0)
   const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
   const [statInterval, setStatInterval] = useState(3000) //initial interval of the stats displayed
-  const [gamePlayable, setGamePlayable] = useState(true)
+  const [gamePlayable, setGamePlayable] = useState(false)
 
   useEffect(() => {
     if (totalSkillLevel >= 5) {
       setShowGames(true)
     }
   }, [averageSkillLevel])
+
+  useEffect(() => {
+    if (energyLevel > 0) {
+      setGamePlayable(true);
+    } else {
+      setGamePlayable(false);
+    }
+  }, [energyLevel]);
 
 
   const handleGameStart = () => {
@@ -678,6 +686,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
                 teamRole={teamRole}
                 handleGamesPlayedCount={handleGamesPlayedCount}
                 gamePlayable={gamePlayable}
+                trainingAvailable={trainingAvailable}
               />
             </div>
             }
