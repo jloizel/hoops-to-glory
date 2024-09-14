@@ -341,12 +341,14 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   useEffect(() => {
     if (gamesPlayed > 0) {
-      const baseGrowth = 1;
-      const skillMultiplier = (skills.agility + skills.shooting + skills.fitness) / 100; // Adjust the multiplier as needed
-      const newGrowthRate = baseGrowth + skillMultiplier;
+      const baseGrowth = 2;
+      const timeMultiplier = 1 + (gamesPlayed / 100);
+      const skillMultiplier = Math.sqrt(skills.agility + skills.shooting + skills.fitness) / 10;
+      const randomBoost = Math.random() < 0.1 ? 2 : 1;
+      const newGrowthRate = (baseGrowth + skillMultiplier) * timeMultiplier * randomBoost;
       setGrowthRate(newGrowthRate);
 
-      const newIntervalDuration = Math.max(1000, 10000 / newGrowthRate);
+      const newIntervalDuration = Math.max(500, 10000 / newGrowthRate);
       setIntervalDuration(newIntervalDuration);
     }
   }, [skills, gamesPlayed]);
