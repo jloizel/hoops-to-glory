@@ -18,18 +18,21 @@ interface Milestone {
 }
 
 interface EndorsementsProps {
-  money: number;
   achievements: string[];
   onEndorsementSelect: (endorsement: Endorsement) => void;
+  completedMilestones: string[]; 
+  onMilestoneChange: (milestone: string) => void;
 }
 
-const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndorsementSelect }) => {
+const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsementSelect, completedMilestones, onMilestoneChange }) => {
   const [endorsements, setEndorsements] = useState<Endorsement[]>([]);
   const [availableEndorsements, setAvailableEndorsements] = useState<Endorsement[]>([]);
   const [selectedEndorsements, setSelectedEndorsements] = useState<Endorsement[]>([]);
   const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [currentMilestone, setCurrentMilestone] = useState<Milestone | null>(null);
   const [currentLevel, setCurrentLevel] = useState<number>(1);
+
+  const FIRST_MILESTONE = { milestone: '5 games played', description: 'Play 5 games to unlock endorsements' };
 
   useEffect(() => {
     // Fetch endorsements
@@ -53,10 +56,17 @@ const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndo
     })
       .then(response => response.json())
       .then(data => {
-        setMilestones(data);
-        setCurrentMilestone(data[0]); // Set the first milestone as the current milestone
+        // Prepend "5 games played" milestone, then shuffle remaining milestones
+        const otherMilestones = data.filter((m: Milestone) => m.milestone !== '5 games played');
+        const shuffledMilestones = shuffleArray(otherMilestones);
+
+        // Combine "5 games played" as the first milestone followed by others
+        const combinedMilestones = [FIRST_MILESTONE, ...shuffledMilestones];
+
+        setMilestones(combinedMilestones);
+        setCurrentMilestone(getNextAvailableMilestone(combinedMilestones));
       });
-  }, []);
+  }, [completedMilestones]); 
 
   useEffect(() => {
     if (endorsements.length > 0) {
@@ -91,9 +101,18 @@ const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndo
     setAvailableEndorsements(initialAvailable);
   };
 
+  const getNextAvailableMilestone = (milestones: Milestone[]): Milestone | null => {
+    return milestones.find(m => !completedMilestones.includes(m.milestone)) || null;
+  };
+
   const handleEndorsementSelect = (endorsement: Endorsement) => {
     onEndorsementSelect(endorsement);
     setSelectedEndorsements([...selectedEndorsements, endorsement]);
+
+    // Notify parent that the current milestone is completed
+    if (currentMilestone) {
+      onMilestoneChange(currentMilestone.milestone);
+    }
 
     const types = new Set<string>(selectedEndorsements.map(e => e.action));
     const nextAvailable: Endorsement[] = [];
@@ -119,15 +138,8 @@ const Endorsements: React.FC<EndorsementsProps> = ({ money, achievements, onEndo
     }
 
     // Update the current milestone to the next one
-    const nextMilestoneIndex = milestones.findIndex(m => m.milestone === currentMilestone?.milestone) + 1;
-    setCurrentMilestone(milestones[nextMilestoneIndex] || null);
-  };
-
-  const formatMoney = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount);
+    const nextMilestone = getNextAvailableMilestone(milestones);
+    setCurrentMilestone(nextMilestone);
   };
 
   const isButtonEnabled = () => {

@@ -160,7 +160,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // RECOVERY
-  const [showRecovery, setShowRecovery] = useState(false)
+  const [showRecovery, setShowRecovery] = useState(true)
   const initialClickCount = 100
   const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
@@ -219,8 +219,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // GAMES
-  const [showGames, setShowGames] = useState(false)
-  const [gamesPlayed, setGamesPlayed] = useState(0)
+  const [showGames, setShowGames] = useState(true)
+  const [gamesPlayed, setGamesPlayed] = useState(5)
   const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
   const [statInterval, setStatInterval] = useState(3000) //initial interval of the stats displayed
   const [gamePlayable, setGamePlayable] = useState(false)
@@ -278,8 +278,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // ENDORSEMENTS
-  const [showEndorsements, setShowEndorsements] = useState(false)
-  const [money, setMoney] = useState(100)
+  const [showEndorsements, setShowEndorsements] = useState(true)
+  const [completedMilestones, setCompletedMilestones] = useState<string[]>([]);
 
   useEffect(() => {
     if (gamesPlayed >= 5) {
@@ -322,16 +322,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
   }
 
-  // const milestones = [
-  //   { condition: gamesPlayed === 10, achievement: '10_games_played' },
-  //   // Add other milestones here
-  //   // { condition: totalSkillLevel >= 100, achievement: 'total_skill_100' },
-  //   // { condition: skills.shooting >= 50, achievement: 'shooting_50' },
-  // ];
-
-   // Check for milestones
-   
-
+  const handleMilestoneChange = (milestone: string) => {
+    setCompletedMilestones((prevMilestones) => [...prevMilestones, milestone]);
+  };
 
 
   // ANALYTICS
@@ -525,8 +518,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     gameStarted, showRecovery, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
   ]);
 
-  console.log(achievements)
-
   useEffect(() => {
     const saveGameState = () => {
       const gameState = {
@@ -549,7 +540,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
         gamesPlayed,
         statInterval,
+
         achievements,
+        completedMilestones
       };
       localStorage.setItem('gameState', JSON.stringify(gameState));
     };
@@ -560,7 +553,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     return () => {
       window.removeEventListener('beforeunload', saveGameState);
     };
-  }, [gameStarted, elapsedTime, followers, journeyStarted, showRecovery, showGames, showEndorsements, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, clickCount, autoClick, gamesPlayed, statInterval, teamRole, achievements ]);
+  }, [gameStarted, elapsedTime, followers, journeyStarted, showRecovery, showGames, showEndorsements, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, clickCount, autoClick, gamesPlayed, statInterval, teamRole, achievements, completedMilestones ]);
 
   useEffect(() => {
     const loadGameState = () => {
@@ -590,6 +583,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setGamesPlayed(parsedState.gamesPlayed || 0);
         setStatInterval(parsedState.statInterval)
         setAchievements(parsedState.achievements || []);
+        setCompletedMilestones(parsedState.completedMilestones || [])
         }
         setIsStateLoaded(true);
       };
@@ -622,6 +616,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setShowRecovery(false);
     // setShowGames(false);
     setShowEndorsements(false);
+    setCompletedMilestones([])
   };
 
 
@@ -698,9 +693,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
             }
             {showEndorsements &&
               <Endorsements
-                money={money}
                 achievements={achievements}
                 onEndorsementSelect={handleEndorsementSelect}
+                completedMilestones={completedMilestones} 
+                onMilestoneChange={handleMilestoneChange}
               />
             }
           </div>
