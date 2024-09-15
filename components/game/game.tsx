@@ -210,9 +210,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
   }, [showRecovery, energyLevel]);
 
-  console.log(`Show recovery? ${showRecovery}`)
-  console.log(`trainingAvailable? ${trainingAvailable}`)
-
   
   const reduceInitialClickCount = (value: number) => {
     setClickCount(prevCount => Math.max(0, prevCount - value));
@@ -288,7 +285,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   // ENDORSEMENTS
   const [showEndorsements, setShowEndorsements] = useState(true)
   const [completedMilestones, setCompletedMilestones] = useState<string[]>([]);
-  const [currentMilestone, setCurrentMilestone] = useState<Milestone | null>(null);
+  const [selectedEndorsements, setSelectedEndorsements] = useState<string[]>([]);
 
   useEffect(() => {
     if (gamesPlayed >= 5) {
@@ -297,6 +294,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   }, [gamesPlayed])
 
   const handleEndorsementSelect = (endorsement: Endorsement) => { //this needs to match the "action" in the endorsement json file
+    setSelectedEndorsements((prevEndorsements) => [...prevEndorsements, endorsement.name]);
+
     switch (endorsement.action) {
       case 'increase_agility_training_increment':
         handleAgilityUpgrade(endorsement.value);
@@ -335,11 +334,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setCompletedMilestones((prevMilestones) => [...prevMilestones, milestone]);
   };
 
-  
-
-  console.log(completedMilestones)
-  console.log(gamesPlayed)
-
+  console.log(selectedEndorsements)
 
   // ANALYTICS
   const [followers, setFollowers] = useState(0);
@@ -633,7 +628,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setCompletedMilestones([])
   };
 
-
   return (
     <div className={styles.gameContainer}>
       <div className={styles.topContainer}>
@@ -655,6 +649,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
             randomMessageLevel={randomMessageLevel}
             gameRestarted={gameRestarted}
             showInactiveModal={showInactiveModal}
+            selectedEndorsements={selectedEndorsements}
           />
           <div className={styles.topContentContainer}>
             <Analytics followers={followers}/>

@@ -39,9 +39,10 @@ interface PhoneProps {
   randomMessageLevel: number;
   gameRestarted: boolean;
   showInactiveModal: boolean;
+  selectedEndorsements: string[];
 }
 
-const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, randomMessageLevel, gameRestarted, showInactiveModal }) => {
+const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, randomMessageLevel, gameRestarted, showInactiveModal, selectedEndorsements }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [displayedAchievements, setDisplayedAchievements] = useState<string[]>([]);
   const notificationsContainerRef = useRef<HTMLDivElement>(null);
