@@ -2,7 +2,25 @@
   {
     "id": 1,
     "type": "special",
-    "name": "5 games played",
-    "content": "You've become the number one pick in the NBA draft, outstanding!"
+    "name": "High Altitude Training Camp",
+    "content": "You've received a special endorsement from Endorsement A!"
+  },
+  {
+    "id": 2,
+    "type": "special",
+    "name": "Biomechanics Analysis",
+    "content": "Endorsement B has selected you for a special feature!"
+  },
+  {
+    "id": 3,
+    "type": "special",
+    "name": "Nike Air Zoom",
+    "content": "Congratulations! Endorsement C has given you a new endorsement!"
+  },
+  {
+    "id": 4,
+    "type": "special",
+    "name": "Shooting Machine",
+    "content": "Congratulations! Endorsement C has given you a new endorsement!"
   }
 ]

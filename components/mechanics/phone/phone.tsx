@@ -54,6 +54,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
   const [countdown, setCountdown] = useState<number>(randomMessageInterval / 1000); // Timer countdown in seconds
   const [previousInterval, setPreviousInterval] = useState<number>(randomMessageInterval);
   const [startTime, setStartTime] = useState<number>(Date.now());
+  const [endorsementNotifications, setEndorsementNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
     // Fetch random notifications
@@ -75,6 +76,16 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
     })
       .then(response => response.json())
       .then(data => setSpecificNotifications(data));
+
+    // Fetch selected endorsements notifications
+    fetch('/data/endorsementNotifications.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => setEndorsementNotifications(data)); // Save them to state
   }, []);
 
   useEffect(() => {
@@ -146,6 +157,27 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
       }
     });
   }, [achievements, specificNotifications, displayedAchievements]);
+
+  useEffect(() => {
+    if (endorsementNotifications.length > 0 && selectedEndorsements.length > 0) {
+      const matchingEndorsements = endorsementNotifications.filter(notification =>
+        selectedEndorsements.includes(notification.name) && !displayedNotificationIds.includes(notification.id)
+      );
+
+      if (matchingEndorsements.length > 0) {
+        setNotifications((prevNotifications) => [
+          ...matchingEndorsements.map(notification => ({ ...notification, id: Date.now() })), // Add unique IDs
+          ...prevNotifications,
+        ]);
+
+        // Avoid showing the same notification again
+        setDisplayedNotificationIds((prevIds) => [
+          ...prevIds,
+          ...matchingEndorsements.map(notification => notification.id),
+        ]);
+      }
+    }
+  }, [selectedEndorsements, endorsementNotifications, displayedNotificationIds]);
 
   useEffect(() => {
     const savedDisplayedAchievements = localStorage.getItem('displayedAchievements');
