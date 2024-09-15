@@ -12,7 +12,7 @@ interface Endorsement {
   level: number;
 }
 
-interface Milestone {
+export interface Milestone {
   milestone: string;
   description: string;
 }
@@ -56,15 +56,8 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
     })
       .then(response => response.json())
       .then(data => {
-        // Prepend "5 games played" milestone, then shuffle remaining milestones
-        const otherMilestones = data.filter((m: Milestone) => m.milestone !== '5 games played');
-        const shuffledMilestones = shuffleArray(otherMilestones);
-
-        // Combine "5 games played" as the first milestone followed by others
-        const combinedMilestones = [FIRST_MILESTONE, ...shuffledMilestones];
-
-        setMilestones(combinedMilestones);
-        setCurrentMilestone(getNextAvailableMilestone(combinedMilestones));
+        setMilestones(data);
+        setCurrentMilestone(getNextAvailableMilestone(data));
       });
   }, [completedMilestones]); 
 

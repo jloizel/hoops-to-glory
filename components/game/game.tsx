@@ -14,6 +14,7 @@ import milestones from './milestones'
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import GameOver from '../gameOver/gameOver'
+import { Milestone } from '../mechanics/endorsements/endorsements';
 
 
 type TrainingType = 'agility' | 'shooting' | 'fitness';
@@ -160,7 +161,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
 
   // RECOVERY
-  const [showRecovery, setShowRecovery] = useState(true)
+  const [showRecovery, setShowRecovery] = useState(false)
   const initialClickCount = 100
   const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
@@ -200,12 +201,18 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   };
 
   useEffect(() => {
-    if (energyLevel > 0) {
-      setTrainingAvailable(true);
-    } else {
-      setTrainingAvailable(false);
+    if (showRecovery) {
+      if (energyLevel > 0) {
+        setTrainingAvailable(true);
+      } else {
+        setTrainingAvailable(false);
+      }
     }
-  }, [energyLevel]);
+  }, [showRecovery, energyLevel]);
+
+  console.log(`Show recovery? ${showRecovery}`)
+  console.log(`trainingAvailable? ${trainingAvailable}`)
+
   
   const reduceInitialClickCount = (value: number) => {
     setClickCount(prevCount => Math.max(0, prevCount - value));
@@ -220,10 +227,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   // GAMES
   const [showGames, setShowGames] = useState(true)
-  const [gamesPlayed, setGamesPlayed] = useState(5)
+  const [gamesPlayed, setGamesPlayed] = useState(4)
   const [isRunning, setIsRunning] = useState(false); // Control whether the match has started
   const [statInterval, setStatInterval] = useState(3000) //initial interval of the stats displayed
   const [gamePlayable, setGamePlayable] = useState(false)
+
 
   useEffect(() => {
     if (totalSkillLevel >= 5) {
@@ -280,6 +288,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   // ENDORSEMENTS
   const [showEndorsements, setShowEndorsements] = useState(true)
   const [completedMilestones, setCompletedMilestones] = useState<string[]>([]);
+  const [currentMilestone, setCurrentMilestone] = useState<Milestone | null>(null);
 
   useEffect(() => {
     if (gamesPlayed >= 5) {
@@ -325,6 +334,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const handleMilestoneChange = (milestone: string) => {
     setCompletedMilestones((prevMilestones) => [...prevMilestones, milestone]);
   };
+
+  
+
+  console.log(completedMilestones)
+  console.log(gamesPlayed)
 
 
   // ANALYTICS
@@ -565,7 +579,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setElapsedTime(parsedState.elapsedTime || 0);
         setFollowers(parsedState.followers || 0);
         setShowRecovery(parsedState.showRecovery);
-        // setShowGames(parsedState.showGames);
+        setShowGames(parsedState.showGames);
         setShowEndorsements(parsedState.showEndorsements);
 
         setSkills(parsedState.skills || { agility: 0, shooting: 0, fitness: 0 });
@@ -580,7 +594,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setEnergyStorage(parsedState.energyStorage || 0);
         setAutoClick(parsedState.autoClick)
 
-        setGamesPlayed(parsedState.gamesPlayed || 0);
+        // setGamesPlayed(parsedState.gamesPlayed || 0);
         setStatInterval(parsedState.statInterval)
         setAchievements(parsedState.achievements || []);
         setCompletedMilestones(parsedState.completedMilestones || [])
