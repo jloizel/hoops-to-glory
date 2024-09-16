@@ -635,6 +635,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setShowGames(false);
     setShowEndorsements(false);
     setCompletedMilestones([])
+    setTrainingAvailable(true)
   };
 
   return (
