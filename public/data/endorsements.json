@@ -100,7 +100,7 @@
     "name": "Agility Drills Program",
     "description": "Improve your agility with specialized drills.",
     "action": "reduce_agility_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -108,7 +108,7 @@
     "name": "Dribbling Clinic",
     "description": "Improve your ball-handling skills with a dribbling clinic.",
     "action": "reduce_agility_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -116,7 +116,7 @@
     "name": "Yoga Instructor",
     "description": "You just started yoga sessions to improve your flexibility and balance.",
     "action": "reduce_agility_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -124,7 +124,7 @@
     "name": "Vertical Jump Program",
     "description": "Increase your vertical leap with a dedicated jump training program.",
     "action": "reduce_agility_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -132,7 +132,7 @@
     "name": "Advanced Flexibility Training",
     "description": "Improve your range of motion with advanced flexibility training.",
     "action": "reduce_agility_training_time",
-    "value": 10,
+    "value": 8,
     "level": 2
   },
   {
@@ -140,7 +140,7 @@
     "name": "Speed Trainer",
     "description": "Boost your sprinting speed with a dedicated speed trainer.",
     "action": "reduce_agility_training_time",
-    "value": 10,
+    "value": 8,
     "level": 2
   },
   {
@@ -148,7 +148,7 @@
     "name": "Shooting Mechanics Workshop",
     "description": "Perfect your shooting form with a shooting mechanics workshop.",
     "action": "reduce_shooting_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -156,7 +156,7 @@
     "name": "Shooting Performance Optimization",
     "description": "Optimize overall shooting performance through targeted training.",
     "action": "reduce_shooting_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -164,7 +164,7 @@
     "name": "Skill Development Camp",
     "description": "Hone your basketball skills with expert coaching at a development camp.",
     "action": "reduce_shooting_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -172,7 +172,7 @@
     "name": "Elite Shooting Camp",
     "description": "Intensive camp with top shooting coaches to refine skills.",
     "action": "reduce_shooting_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -180,7 +180,7 @@
     "name": "Shooting Trainer",
     "description": "You just hired a shooting trainer to improve your shooting accuracy.",
     "action": "reduce_shooting_training_time",
-    "value": 10,
+    "value": 8,
     "level": 2
   },
   {
@@ -188,7 +188,7 @@
     "name": "Gatorade",
     "description": "Boost your energy and performance with every sip.",
     "action": "reduce_shooting_training_time",
-    "value": 10,
+    "value": 8,
     "level": 2
   },
   {
@@ -196,7 +196,7 @@
     "name": "Core Strengthening Program",
     "description": "Enhance your core stability and overall strength.",
     "action": "reduce_fitness_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -204,7 +204,7 @@
     "name": "Chef",
     "description": "You just hired a personal chef and dietitian to prepare nutritious meals.",
     "action": "reduce_fitness_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -212,7 +212,7 @@
     "name": "Biometric Tracker",
     "description": "Optimize your training with real-time biometric data.",
     "action": "reduce_fitness_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -220,7 +220,7 @@
     "name": "Plyometric Training",
     "description": "Increase your explosiveness with plyometric training.",
     "action": "reduce_fitness_training_time",
-    "value": 5,
+    "value": 4,
     "level": 1
   },
   {
@@ -228,7 +228,7 @@
     "name": "Strength Conditioning Program",
     "description": "Build muscular endurance and strength with a comprehensive conditioning program.",
     "action": "reduce_fitness_training_time",
-    "value": 10,
+    "value": 8,
     "level": 2
   },
   {
@@ -236,7 +236,7 @@
     "name": "Sports Chiropractor",
     "description": "Optimize your performance and reduce injuries with a sports chiropractor.",
     "action": "reduce_fitness_training_time",
-    "value": 10,
+    "value": 8,
     "level": 2
   },
   {
@@ -244,7 +244,7 @@
     "name": "Compression Gear",
     "description": "Enhance your recovery with high-quality compression gear.",
     "action": "reduce_recovery_time",
-    "value": 15,
+    "value": 10,
     "level": 1
   },
   {
@@ -252,7 +252,7 @@
     "name": "Post-Game Ice Baths",
     "description": "Speed up your recovery with post-game ice baths.",
     "action": "reduce_recovery_time",
-    "value": 15,
+    "value": 10,
     "level": 1
   },
   {
@@ -260,7 +260,7 @@
     "name": "Mindfulness Coach",
     "description": "Improve focus and reduce stress with mindfulness coaching.",
     "action": "reduce_recovery_time",
-    "value": 15,
+    "value": 10,
     "level": 1
   },
   {
@@ -268,7 +268,7 @@
     "name": "Recovery Specialist",
     "description": "You just hired a recovery specialist to optimize your post-game recovery and provide you with a recovery plan",
     "action": "reduce_recovery_time_auto",
-    "value": 15,
+    "value": 10,
     "level": 1
   },
   {
@@ -276,7 +276,7 @@
     "name": "Massage Therapist",
     "description": "You just hired a massage therapist to reduce muscle soreness.",
     "action": "reduce_recovery_time",
-    "value": 30,
+    "value": 20,
     "level": 2
   },
   {
@@ -284,7 +284,7 @@
     "name": "Cryotherapy Sessions",
     "description": "Reduce inflammation and speed up recovery with cryotherapy.",
     "action": "reduce_recovery_time",
-    "value": 30,
+    "value": 20,
     "level": 2
   },
   {
@@ -292,7 +292,7 @@
     "name": "Hydrotherapy Sessions",
     "description": "Enhance your recovery with relaxing and rejuvenating hydrotherapy sessions.",
     "action": "reduce_recovery_time",
-    "value": 30,
+    "value": 20,
     "level": 2
   },
   {

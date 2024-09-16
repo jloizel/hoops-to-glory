@@ -31,7 +31,16 @@ interface SpecialNotification {
   level: string;
 }
 
-type Notification = MessageNotification | InstagramNotification | SpecialNotification;
+interface EndorsementNotification {
+  id: number;
+  milestone?: string;
+  type: 'endorsement';
+  name: string;
+  content: string;
+  level: string;
+}
+
+type Notification = MessageNotification | InstagramNotification | SpecialNotification | EndorsementNotification;
 
 interface PhoneProps {
   achievements: string[];
@@ -307,6 +316,18 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
                 <div className={styles.specialContainer}>
                   <div className={styles.specialContent}>
                     <div className={styles.specialName}>{notification.name}</div>
+                    <div className={styles.specialMessage}>{notification.content}</div>
+                  </div>
+                </div>
+              </div>
+            ) : notification.type === 'endorsement' ? (
+              <div className={styles.specialNotification}>
+                <div className={styles.specialTop}>
+                  <span className={styles.specialIcon}>📢</span>
+                  NOTICE 
+                </div>
+                <div className={styles.specialContainer}>
+                  <div className={styles.specialContent}>
                     <div className={styles.specialMessage}>{notification.content}</div>
                   </div>
                 </div>

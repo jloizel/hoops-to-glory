@@ -128,33 +128,39 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const averageSkillLevel = Math.round((skills.agility + skills.shooting + skills.fitness) / 3);
   const totalSkillLevel = skills.agility + skills.shooting + skills.fitness;
 
-
-  const handleAgilityUpgrade = (value: number) => {
+  const handleTrainingUpgrade = (type: TrainingType, value: number) => {
     setSkillUpgrade(prevUpgrade => ({
       ...prevUpgrade,
-      agility: value,
+      [type]: prevUpgrade[type] + value
     }));
   };
 
-  const handleShootingUpgrade = (value: number) => {
-    setSkillUpgrade(prevUpgrade => ({
-      ...prevUpgrade,
-      shooting: value,
-    }));
-  };
+  // const handleAgilityUpgrade = (value: number) => {
+  //   setSkillUpgrade(prevUpgrade => ({
+  //     ...prevUpgrade,
+  //     agility: value,
+  //   }));
+  // };
 
-  const handleFitnessUpgrade = (value: number) => {
-    setSkillUpgrade(prevUpgrade => ({
-      ...prevUpgrade,
-      fitness: value,
-    }));
-  };
+  // const handleShootingUpgrade = (value: number) => {
+  //   setSkillUpgrade(prevUpgrade => ({
+  //     ...prevUpgrade,
+  //     shooting: value,
+  //   }));
+  // };
 
-  const reduceTrainingTime = (type: TrainingType, percentage: number) => {
+  // const handleFitnessUpgrade = (value: number) => {
+  //   setSkillUpgrade(prevUpgrade => ({
+  //     ...prevUpgrade,
+  //     fitness: value,
+  //   }));
+  // };
+
+  const reduceTrainingTime = (type: TrainingType, value: number) => {
     setTrainingDurations(prevDurations => ({
       ...prevDurations,
-      [type]: prevDurations[type] * (1 - percentage / 100)
-      // [type]: Math.max(prevDurations[type] - percentage)
+      // [type]: prevDurations[type] * (1 - value / 100)
+      [type]: prevDurations[type] - value
     }));
   };
 
@@ -162,7 +168,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   // RECOVERY
   const [showRecovery, setShowRecovery] = useState(false)
-  const initialClickCount = 100
+  const initialClickCount = 150
   const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
   const [energyStorage, setEnergyStorage] = useState(1)
@@ -271,6 +277,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   const minutesPerGame = parseFloat(((averageSkillLevel / 100) * 40).toFixed(1));//last number is max average
   const pointsPerGame = parseFloat(((skills.shooting / 100) * 30).toFixed(1));
+  // const pointsPerGame = 5
   const assistsPerGame = parseFloat(((skills.agility / 100) * 15).toFixed(1));
   const reboundsPerGame = parseFloat(((skills.fitness / 100) * 20).toFixed(1));
 
@@ -280,6 +287,12 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     if (totalSkillLevel < 300) return "Starter";
     return "Star Player";
   };
+
+  console.log(`trainingavailable? ${trainingAvailable}`)
+  console.log(`trainingInProgress? ${trainingInProgress}`)
+  console.log(`isStateLoaded? ${isStateLoaded}`)
+  console.log(`gameStarted? ${gameStarted}`)
+  console.log(`isRunning? ${isRunning}`)
 
 
   // ENDORSEMENTS
@@ -298,13 +311,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
     switch (endorsement.action) {
       case 'increase_agility_training_increment':
-        handleAgilityUpgrade(endorsement.value);
+        handleTrainingUpgrade('agility', endorsement.value);
         break;
       case 'increase_shooting_training_increment':
-        handleShootingUpgrade(endorsement.value);
+        handleTrainingUpgrade('shooting', endorsement.value);
         break;
       case 'increase_fitness_training_increment':
-        handleFitnessUpgrade(endorsement.value);
+        handleTrainingUpgrade('fitness', endorsement.value);
         break;
       case 'reduce_agility_training_time':
         reduceTrainingTime('agility', endorsement.value);
@@ -579,9 +592,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
         setSkills(parsedState.skills || { agility: 0, shooting: 0, fitness: 0 });
         setTrainingDurations(parsedState.trainingDurations || {
-          agility: 30000,
-          shooting: 30000,
-          fitness: 30000
+          agility: 40000,
+          shooting: 40000,
+          fitness: 40000
         });
         setSkillUpgrade(parsedState.skillUpgrade || { agility: 1, shooting: 1, fitness: 1 });
 
