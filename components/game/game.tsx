@@ -603,7 +603,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setAchievements(parsedState.achievements || []);
         setCompletedMilestones(parsedState.completedMilestones || [])
         }
-        setIsStateLoaded(true);
+        // setIsStateLoaded(true);
       };
 
     loadGameState();
