@@ -1,26 +1,242 @@
 [
   {
     "id": 1,
-    "type": "special",
-    "name": "High Altitude Training Camp",
-    "content": "You've received a special endorsement from Endorsement A!"
+    "name": "Reflex Training Equipment",
+    "type": "endorsement",
+    "content": "Your skills & agility upgrade increment has been increased."
   },
   {
     "id": 2,
-    "type": "special",
     "name": "Biomechanics Analysis",
-    "content": "Endorsement B has selected you for a special feature!"
+    "type": "endorsement",
+    "content": "Your skills & agility upgrade increment has been increased."
   },
   {
     "id": 3,
-    "type": "special",
     "name": "Nike Air Zoom",
-    "content": "Congratulations! Endorsement C has given you a new endorsement!"
+    "type": "endorsement",
+    "content": "Your skills & agility upgrade increment has been increased."
   },
   {
     "id": 4,
-    "type": "special",
+    "name": "Adidas Boost",
+    "type": "endorsement",
+    "content": "Your skills & agility upgrade increment has been increased."
+  },
+  {
+    "id": 5,
     "name": "Shooting Machine",
-    "content": "Congratulations! Endorsement C has given you a new endorsement!"
+    "type": "endorsement",
+    "content": "Your shooting upgrade increment has been increased."
+  },
+  {
+    "id": 6,
+    "name": "Customized Shooting Improvement Plan",
+    "type": "endorsement",
+    "content": "Your shooting upgrade increment has been increased."
+  },
+  {
+    "id": 7,
+    "name": "Advanced Shooting Analytics",
+    "type": "endorsement",
+    "content": "Your shooting upgrade increment has been increased."
+  },
+  {
+    "id": 8,
+    "name": "Biomechanics Shooting Analysis",
+    "type": "endorsement",
+    "content": "Your shooting upgrade increment has been increased."
+  },
+  {
+    "id": 9,
+    "name": "Nutrition Guide",
+    "type": "endorsement",
+    "content": "Your strength & fitness upgrade increment has been increased."
+  },
+  {
+    "id": 10,
+    "name": "High Altitude Training Camp",
+    "type": "endorsement",
+    "content": "Your strength & fitness upgrade increment has been increased."
+  },
+  {
+    "id": 11,
+    "name": "Functional Movement Screening",
+    "type": "endorsement",
+    "content": "Your strength & fitness upgrade increment has been increased."
+  },
+  {
+    "id": 12,
+    "name": "MyProtein",
+    "type": "endorsement",
+    "content": "Your strength & fitness upgrade increment has been increased."
+  },
+  {
+    "id": 13,
+    "name": "Agility Drills Program",
+    "type": "endorsement",
+    "content": "Your skills & agility training time has been decreased."
+  },
+  {
+    "id": 14,
+    "name": "Dribbling Clinic",
+    "type": "endorsement",
+    "content": "Your skills & agility training time has been decreased."
+  },
+  {
+    "id": 15,
+    "name": "Yoga Instructor",
+    "type": "endorsement",
+    "content": "Your skills & agility training time has been decreased."
+  },
+  {
+    "id": 16,
+    "name": "Vertical Jump Program",
+    "type": "endorsement",
+    "content": "Your skills & agility training time has been decreased."
+  },
+  {
+    "id": 17,
+    "name": "Advanced Flexibility Training",
+    "type": "endorsement",
+    "content": "Your skills & agility training time has been decreased."
+  },
+  {
+    "id": 18,
+    "name": "Speed Trainer",
+    "type": "endorsement",
+    "content": "Your skills & agility training time has been decreased."
+  },
+  {
+    "id": 19,
+    "name": "Shooting Mechanics Workshop",
+    "type": "endorsement",
+    "content": "Your shooting training time has been decreased."
+  },
+  {
+    "id": 20,
+    "name": "Shooting Performance Optimization",
+    "type": "endorsement",
+    "content": "Your shooting training time has been decreased."
+  },
+  {
+    "id": 21,
+    "name": "Skill Development Camp",
+    "type": "endorsement",
+    "content": "Your shooting training time has been decreased."
+  },
+  {
+    "id": 22,
+    "name": "Elite Shooting Camp",
+    "type": "endorsement",
+    "content": "Your shooting training time has been decreased."
+  },
+  {
+    "id": 23,
+    "name": "Shooting Trainer",
+    "type": "endorsement",
+    "content": "Your shooting training time has been decreased."
+  },
+  {
+    "id": 24,
+    "name": "Gatorade",
+    "type": "endorsement",
+    "content": "Your shooting training time has been decreased."
+  },
+  {
+    "id": 25,
+    "name": "Core Strengthening Program",
+    "type": "endorsement",
+    "content": "Your strength & fitness training time has been decreased."
+  },
+  {
+    "id": 26,
+    "name": "Chef",
+    "type": "endorsement",
+    "content": "Your strength & fitness training time has been decreased."
+  },
+  {
+    "id": 27,
+    "name": "Biometric Tracker",
+    "type": "endorsement",
+    "content": "Your strength & fitness training time has been decreased."
+  },
+  {
+    "id": 28,
+    "name": "Plyometric Training",
+    "type": "endorsement",
+    "content": "Your strength & fitness training time has been decreased."
+  },
+  {
+    "id": 29,
+    "name": "Strength Conditioning Program",
+    "type": "endorsement",
+    "content": "Your strength & fitness training time has been decreased."
+  },
+  {
+    "id": 30,
+    "name": "Sports Chiropractor",
+    "type": "endorsement",
+    "content": "Your strength & fitness training time has been decreased."
+  },
+  {
+    "id": 31,
+    "name": "Compression Gear",
+    "type": "endorsement",
+    "content": "Your recovery time has been decreased."
+  },
+  {
+    "id": 32,
+    "name": "Post-Game Ice Baths",
+    "type": "endorsement",
+    "content": "Your recovery time has been decreased."
+  },
+  {
+    "id": 33,
+    "name": "Mindfulness Coach",
+    "type": "endorsement",
+    "content": "Your recovery time has been decreased."
+  },
+  {
+    "id": 34,
+    "name": "Recovery Specialist",
+    "type": "endorsement",
+    "content": "Your recovery will now trigger automatically."
+  },
+  {
+    "id": 35,
+    "name": "Massage Therapist",
+    "type": "endorsement",
+    "content": "Your recovery time has been decreased."
+  },
+  {
+    "id": 36,
+    "name": "Cryotherapy Sessions",
+    "type": "endorsement",
+    "content": "Your recovery time has been decreased."
+  },
+  {
+    "id": 37,
+    "name": "Hydrotherapy Sessions",
+    "type": "endorsement",
+    "content": "Your recovery time has been decreased."
+  },
+  {
+    "id": 38,
+    "name": "Endurance Program",
+    "type": "endorsement",
+    "content": "Your energy storage has been increased."
+  },
+  {
+    "id": 39,
+    "name": "Cardio Bootcamp",
+    "type": "endorsement",
+    "content": "Your energy storage has been increased."
+  },
+  {
+    "id": 40,
+    "name": "Sports Psychology Coaching",
+    "type": "endorsement",
+    "content": "Your energy storage has been increased."
   }
 ]
