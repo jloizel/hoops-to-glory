@@ -278,9 +278,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const reboundsPerGame = parseFloat(((skills.fitness / 100) * 20).toFixed(1));
 
   const teamRole = () => {
-    if (totalSkillLevel < 100) return "Benchwarmer";
-    if (totalSkillLevel < 200) return "Role Player";
-    if (totalSkillLevel < 300) return "Starter";
+    if (totalSkillLevel < 40) return "Benchwarmer";
+    if (totalSkillLevel < 75) return "Role Player";
+    if (totalSkillLevel < 150) return "Sixth Man";
+    if (totalSkillLevel < 250) return "Starter";
     return "Star Player";
   };
 
@@ -526,7 +527,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
     milestones.forEach(({ condition, achievement }) => {
       const params = {
-        triggerIntroMsg1, triggerIntroMsg2, triggerIntroMsg3, triggerIntroMsg4, triggerIntroMsg5, showRecovery, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank,minutesPerGame
+        triggerIntroMsg1, triggerIntroMsg2, triggerIntroMsg3, triggerIntroMsg4, triggerIntroMsg5, showRecovery, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank, minutesPerGame
       };
       if (condition(params) && !achievements.includes(achievement)) {
         setAchievements(prev => [...prev, achievement]);

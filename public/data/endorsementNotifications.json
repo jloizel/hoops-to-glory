@@ -238,5 +238,41 @@
     "name": "Sports Psychology Coaching",
     "type": "endorsement",
     "content": "Your energy storage has been increased."
+  },
+  {
+    "id": 41,
+    "name": "Agility Ladder Pro",
+    "type": "endorsement",
+    "content": "Your skills & agility upgrade increment has been increased."
+  },
+  {
+    "id": 42,
+    "name": "Laser Shot Tracking System",
+    "type": "endorsement",
+    "content": "Your shooting upgrade increment has been increased."
+  },
+  {
+    "id": 43,
+    "name": "Power Plate Pro",
+    "type": "endorsement",
+    "content": "Your strength & fitness upgrade increment has been increased."
+  },
+  {
+    "id": 44,
+    "name": "Agility Training Tracker",
+    "type": "endorsement",
+    "content": "Your skills & agility training time has been decreased."
+  },
+  {
+    "id": 45,
+    "name": "Quick Release Shooting Harness",
+    "type": "endorsement",
+    "content": "Your shooting training time has been decreased."
+  },
+  {
+    "id": 46,
+    "name": "Compression Suit",
+    "type": "endorsement",
+    "content": "Your strength & fitness training time has been decreased."
   }
 ]
