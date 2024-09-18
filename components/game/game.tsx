@@ -110,7 +110,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setTimeout(() => {
       setSkills(prevSkills => ({
         ...prevSkills,
-        [type]: Math.min(prevSkills[type] + 1, 100),
+        [type]: Math.min(prevSkills[type] + skillUpgrade[type], 100),
       }));
       setTrainingInProgress(false);
       setIsRunning(false)
