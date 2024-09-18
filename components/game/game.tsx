@@ -357,7 +357,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   useEffect(() => {
     const baseGrowth = 1; // Set base growth to 1
-    const timeMultiplier = gamesPlayed > 0 ? (1 + (gamesPlayed / 100)) : 1;
+    const timeMultiplier = gamesPlayed > 0 ? (1 + (gamesPlayed / 10)) : 1;
     const skillMultiplier = Math.sqrt(skills.agility + skills.shooting + skills.fitness) / 10;
     const newGrowthRate = (baseGrowth + skillMultiplier) * timeMultiplier;
   
