@@ -76,27 +76,64 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
   };
 
   const initializeAvailableEndorsements = () => {
-    let initialAvailable: Endorsement[] = [];
+    const nextAvailable: Endorsement[] = [];
     const types = new Set<string>();
 
-    const currentLevelEndorsements = endorsements.filter(e => e.level === currentLevel && !types.has(e.action));
-    shuffleArray(currentLevelEndorsements);
+    const level1Endorsements = endorsements.filter(e => e.level === 1);
+    const level2Endorsements = endorsements.filter(e => e.level === 2);
 
-    initialAvailable.push(...currentLevelEndorsements.slice(0, 3));
-    currentLevelEndorsements.slice(0, 3).forEach(e => types.add(e.action));
+    shuffleArray(level1Endorsements);
+    shuffleArray(level2Endorsements);
 
-    if (initialAvailable.length < 3) {
-      const nextLevelEndorsements = endorsements.filter(e => e.level === currentLevel + 1 && !types.has(e.action));
-      shuffleArray(nextLevelEndorsements);
-      initialAvailable.push(...nextLevelEndorsements.slice(0, 3 - initialAvailable.length));
+    for (let i = 0; i < 3; i++) {
+      const random = Math.random(); // Get a random number between 0 and 1
+
+      if (random < 0.7) {
+        // 70% chance to pick from level 1
+        if (level1Endorsements.length > 0) {
+          const selected = level1Endorsements.shift(); // Get the first item
+          if (selected) {
+            nextAvailable.push(selected);
+            types.add(selected.action); // Ensure unique actions
+          }
+        }
+      } else {
+        // 30% chance to pick from level 2
+        if (level2Endorsements.length > 0) {
+          const selected = level2Endorsements.shift(); // Get the first item
+          if (selected) {
+            nextAvailable.push(selected);
+            types.add(selected.action); // Ensure unique actions
+          }
+        }
+      }
     }
 
-    setAvailableEndorsements(initialAvailable);
+    // If we still need more endorsements to fill up the 3 slots
+    while (nextAvailable.length < 3 && level1Endorsements.length > 0) {
+      const selected = level1Endorsements.shift();
+      if (selected && !types.has(selected.action)) {
+        nextAvailable.push(selected);
+        types.add(selected.action);
+      }
+    }
+
+    while (nextAvailable.length < 3 && level2Endorsements.length > 0) {
+      const selected = level2Endorsements.shift();
+      if (selected && !types.has(selected.action)) {
+        nextAvailable.push(selected);
+        types.add(selected.action);
+      }
+    }
+
+    setAvailableEndorsements(nextAvailable.slice(0, 3));
   };
+
 
   const getNextAvailableMilestone = (milestones: Milestone[]): Milestone | null => {
     return milestones.find(m => !completedMilestones.includes(m.milestone)) || null;
   };
+
 
   const handleEndorsementSelect = (endorsement: Endorsement) => {
     onEndorsementSelect(endorsement);
@@ -110,25 +147,54 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
     const types = new Set<string>(selectedEndorsements.map(e => e.action));
     const nextAvailable: Endorsement[] = [];
 
-    const currentLevelEndorsements = endorsements.filter(
-      e => e.level === currentLevel && !types.has(e.action)
-    );
-    shuffleArray(currentLevelEndorsements);
+    const level1Endorsements = endorsements.filter(e => e.level === 1 && !types.has(e.action));
+    const level2Endorsements = endorsements.filter(e => e.level === 2 && !types.has(e.action));
 
-    nextAvailable.push(...currentLevelEndorsements.slice(0, 3));
-    currentLevelEndorsements.slice(0, 3).forEach(e => types.add(e.action));
+    shuffleArray(level1Endorsements);
+    shuffleArray(level2Endorsements);
 
-    if (nextAvailable.length < 3) {
-      const nextLevelEndorsements = endorsements.filter(e => e.level === currentLevel + 1 && !types.has(e.action));
-      shuffleArray(nextLevelEndorsements);
-      nextAvailable.push(...nextLevelEndorsements.slice(0, 3 - nextAvailable.length));
+    for (let i = 0; i < 3; i++) {
+      const random = Math.random(); // Get a random number between 0 and 1
+
+      if (random < 0.7) {
+        // 70% chance to pick from level 1
+        if (level1Endorsements.length > 0) {
+          const selected = level1Endorsements.shift(); // Get the first item
+          if (selected) {
+            nextAvailable.push(selected);
+            types.add(selected.action); // Ensure unique actions
+          }
+        }
+      } else {
+        // 30% chance to pick from level 2
+        if (level2Endorsements.length > 0) {
+          const selected = level2Endorsements.shift(); // Get the first item
+          if (selected) {
+            nextAvailable.push(selected);
+            types.add(selected.action); // Ensure unique actions
+          }
+        }
+      }
+    }
+
+    // If we still need more endorsements to fill up the 3 slots
+    while (nextAvailable.length < 3 && level1Endorsements.length > 0) {
+      const selected = level1Endorsements.shift();
+      if (selected && !types.has(selected.action)) {
+        nextAvailable.push(selected);
+        types.add(selected.action);
+      }
+    }
+
+    while (nextAvailable.length < 3 && level2Endorsements.length > 0) {
+      const selected = level2Endorsements.shift();
+      if (selected && !types.has(selected.action)) {
+        nextAvailable.push(selected);
+        types.add(selected.action);
+      }
     }
 
     setAvailableEndorsements(nextAvailable.slice(0, 3));
-
-    if (nextAvailable.length === 0) {
-      setCurrentLevel(currentLevel + 1);
-    }
 
     // Update the current milestone to the next one
     const nextMilestone = getNextAvailableMilestone(milestones);
