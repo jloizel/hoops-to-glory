@@ -43,7 +43,7 @@ const milestones: Milestone[] = [
   { condition: ({ pointsPerGame }) => pointsPerGame >= 10, achievement: '10 points/game' },
   { condition: ({ gamesPlayed }) => gamesPlayed >= 15, achievement: '15 games played' },
   { condition: ({ assistsPerGame }) => assistsPerGame >= 10, achievement: '10 assists/game' },
-  { condition: ({ reboundsPerGame }) => reboundsPerGame >= 7, achievement: '10 rebounds/game' },
+  { condition: ({ reboundsPerGame }) => reboundsPerGame >= 10, achievement: '10 rebounds/game' },
   { condition: ({ minutesPerGame }) => minutesPerGame >= 10, achievement: '10 minutes/game' },
   { condition: ({ teamRole }) => teamRole === 'Sixth Man', achievement: 'Sixth Man' },
   { condition: ({ followers }) => followers >= 10000, achievement: '10,000 followers' },
