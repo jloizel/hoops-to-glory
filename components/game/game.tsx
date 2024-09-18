@@ -156,10 +156,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setTrainingDurations(prevDurations => ({
       ...prevDurations,
       // [type]: prevDurations[type] * (1 - value / 100)
-      [type]: prevDurations[type] - value
+      [type]: prevDurations[type] - (value * 1000)
     }));
   };
-
 
 
   // RECOVERY
@@ -282,11 +281,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   }, [energyLevel]);
   
 
-  const pointsPerGame = parseFloat((30 * Math.pow(skills.shooting / 100, 0.7)).toFixed(1));
+  const pointsPerGame = parseFloat((40 * Math.pow(skills.shooting / 100, 0.7)).toFixed(1));
   // const pointsPerGame = 5
-  const assistsPerGame = parseFloat((30 * Math.pow(skills.agility / 100, 0.7)).toFixed(1));
-  const reboundsPerGame = parseFloat((30 * Math.pow(skills.fitness / 100, 0.7)).toFixed(1));
-  const minutesPerGame = parseFloat((30 * Math.pow(averageSkillLevel / 100, 0.8)).toFixed(1));
+  const assistsPerGame = parseFloat((25 * Math.pow(skills.agility / 100, 0.7)).toFixed(1));
+  const reboundsPerGame = parseFloat((20 * Math.pow(skills.fitness / 100, 0.7)).toFixed(1));
+  const minutesPerGame = parseFloat((40 * Math.pow(averageSkillLevel / 100, 0.8)).toFixed(1));
 
   const teamRole = () => {
     if (totalSkillLevel < 40) return "Benchwarmer";
@@ -296,11 +295,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     return "Star Player";
   };
 
-  console.log(`trainingavailable? ${trainingAvailable}`)
-  console.log(`trainingInProgress? ${trainingInProgress}`)
-  console.log(`isStateLoaded? ${isStateLoaded}`)
-  console.log(`gameStarted? ${gameStarted}`)
-  console.log(`isRunning? ${isRunning}`)
 
 
   // ENDORSEMENTS
