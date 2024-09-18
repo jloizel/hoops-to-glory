@@ -454,13 +454,12 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     };
 
     const draftScore = weights.agility * skills.agility + weights.shooting * skills.shooting + weights.fitness * skills.fitness;
-16
-17
+
     const thresholds = {
-      undrafted: 50,
-      lateSecondRound: 100,
-      earlySecondRound: 150,
-      lateFirstRound: 200,
+      undrafted: 30,
+      lateSecondRound: 50,
+      earlySecondRound: 70,
+      lateFirstRound: 85,
     };
 
     let newDraftRank;
@@ -474,9 +473,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       newDraftRank = "Late First Round Pick";
     } else {
       const maxPickNumber = 30; // Assuming 30 picks in the first round
-      const rankScalingFactor = 0.1;
-      const setPickNumber = Math.max(1, maxPickNumber - Math.floor((draftScore - thresholds.lateFirstRound) * rankScalingFactor));
-      newDraftRank = `Pick #${pickNumber}`;
+      const rankScalingFactor = 0.5; // Adjust scaling factor to fit the range
+      const calculatedPickNumber = Math.max(1, maxPickNumber - Math.floor((draftScore - thresholds.lateFirstRound) * rankScalingFactor));
+      setPickNumber(calculatedPickNumber);
+      newDraftRank = `Pick #${calculatedPickNumber}`;
     }
 
     setDraftRank(newDraftRank);
