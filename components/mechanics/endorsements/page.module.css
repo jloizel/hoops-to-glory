@@ -69,7 +69,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  /* margin-top: 30px; */
+  margin-top: 10px;
 }
 
 .requirement span {

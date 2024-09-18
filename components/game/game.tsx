@@ -249,8 +249,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   useEffect(() => {
     if (energyLevel > 0) {
       setGamePlayable(true);
+    } else if (trainingInProgress) {
+      setGamePlayable(true);
     } else {
-      setGamePlayable(false);
+      setGamePlayable(false)
     }
   }, [energyLevel]);
 
