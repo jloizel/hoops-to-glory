@@ -192,9 +192,9 @@
   {
     "id": 28,
     "type": "message",
-    "milestone": "50,000 followers",
+    "milestone": "25,000 followers",
     "name": "HoopsToGlory",
-    "content": "You've reached 50,000 followers on social media!"
+    "content": "You've reached 25,000 followers on social media!"
   },
   {
     "id": 29,
@@ -248,9 +248,9 @@
   {
     "id": 36,
     "type": "message",
-    "milestone": "500,000 followers",
+    "milestone": "50,000 followers",
     "name": "HoopsToGlory",
-    "content": "You've reached 500,000 followers on social media!"
+    "content": "You've reached 50,000 followers on social media!"
   },
   {
     "id": 37,
@@ -297,9 +297,9 @@
   {
     "id": 43,
     "type": "message",
-    "milestone": "1 million followers",
+    "milestone": "100,000 followers",
     "name": "HoopsToGlory",
-    "content": "You've reached 1 million followers on social media!"
+    "content": "You've reached 100,000 followers on social media!"
   },
   {
     "id": 44,

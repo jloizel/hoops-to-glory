@@ -382,10 +382,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   
         // Increase random boost based on followers
         let boost = 0;
-        if (followers > 10000) {
-          boost = Math.random() < 0.5 ? (Math.random() < 0.5 ? 20 : 25) : 0; // Higher chance and values if many followers
+        if (followers > 100000) {
+          boost = Math.random() < 0.5 ? (Math.random() < 0.5 ? 15 : 25) : 0; // Higher chance and values if many followers
         } else if (followers > 50000) {
-          boost = Math.random() < 0.4 ? (Math.random() < 0.5 ? 15 : 20) : 0; // Higher chance and values if many followers
+          boost = Math.random() < 0.4 ? (Math.random() < 0.5 ? 10 : 15) : 0; // Higher chance and values if many followers
         } else if (followers > 10000) {
           boost = Math.random() < 0.3 ? (Math.random() < 0.5 ? 5 : 10) : 0; // Medium chance and values
         } else if (followers > 1000) {
