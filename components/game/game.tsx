@@ -309,7 +309,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [selectedEndorsements, setSelectedEndorsements] = useState<string[]>([]);
 
   useEffect(() => {
-    if (gamesPlayed >= 5) {
+    if (gamesPlayed >= 1) {
       setShowEndorsements(true)
     }
   }, [gamesPlayed])
