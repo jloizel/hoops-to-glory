@@ -169,6 +169,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
   const [energyStorage, setEnergyStorage] = useState(1)
   const [autoClick, setAutoClick] = useState(false);
+  const [clickDisabled, setClickDisabled] = useState(false)
 
   useEffect(() => {
     if (skills.agility > 0 || skills.shooting > 0 || skills.fitness > 0) {
@@ -176,9 +177,17 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
   }, [skills]);
 
+  useEffect(() => {
+    if (energyLevel >= energyStorage) {
+      setClickDisabled(true)
+    } else {
+      setClickDisabled(false)
+    }
+  }, [energyLevel, energyStorage])
+
   const handleClick = () => {
     if (energyLevel >= energyStorage) {
-      return; // Prevent click if energy level matches or exceeds energy storage
+      return; // Exit early to prevent further actions
     }
   
     // Allow the user to decrement clickCount down to 1 if either isRunning or trainingInProgress is true
@@ -197,6 +206,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       }
     }
   };
+
+  console.log(clickDisabled)
 
   const toggleAutoClick = () => {
     setAutoClick(prev => !prev);
@@ -691,6 +702,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
                 autoClick={autoClick}
                 isRunning={isRunning}
                 trainingInProgress={trainingInProgress}
+                clickDisabled={clickDisabled}
               />
               </div>
             }       
