@@ -189,15 +189,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       return; // Exit early to prevent further actions
     }
 
-    if (energyLevel + 1 >= energyStorage && clickCount === 1) {
-      return; // Prevent clicking the last time if it would fill up the energy storage
-    }
-  
     // Allow the user to decrement clickCount down to 1 if either isRunning or trainingInProgress is true
-    if ((isRunning || trainingInProgress) && clickCount > 1) {
-      setClickCount(prevCount => prevCount - 1);
-      return;
-    }
+    // if ((isRunning || trainingInProgress) && clickCount > 1) {
+    //   setClickCount(prevCount => prevCount - 1);
+    //   return;
+    // }
   
     // Allow reaching 0 and increasing energy level only when both are false
     if (!isRunning && !trainingInProgress) {
