@@ -354,6 +354,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [growthRate, setGrowthRate] = useState(1);
   const [intervalDuration, setIntervalDuration] = useState(10000);
 
+
   useEffect(() => {
     const baseGrowth = 1; // Set base growth to 1
     const timeMultiplier = gamesPlayed > 0 ? (1 + (gamesPlayed / 100)) : 1;
@@ -376,13 +377,15 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
           const randomBoost = Math.random() < 0.5 ? 2 : 3; // Either add 2 or 3 followers
           followerIncrease += randomBoost;
         }
+
+        console.log(intervalDuration)
   
         setFollowers(prevFollowers => Math.round(prevFollowers + followerIncrease));
       }, intervalDuration);   
   
       return () => clearInterval(interval);
     }
-  }, [growthRate, intervalDuration, showInactiveModal, gameStarted]);
+  }, [growthRate, intervalDuration, showInactiveModal, gameStarted, isStateLoaded]);
   
 
   
@@ -613,7 +616,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setAchievements(parsedState.achievements || []);
         setCompletedMilestones(parsedState.completedMilestones || [])
         }
-        // setIsStateLoaded(true);
+        setIsStateLoaded(true);
       };
 
     loadGameState();
