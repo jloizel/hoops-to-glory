@@ -371,7 +371,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   
     setGrowthRate(newGrowthRate);
   
-    const newIntervalDuration = Math.max(200, 10000 / newGrowthRate);
+    const newIntervalDuration = Math.max(100, 10000 / newGrowthRate);
     setIntervalDuration(newIntervalDuration);
   }, [skills, gamesPlayed]);
   
@@ -380,18 +380,28 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       const interval = setInterval(() => {
         let followerIncrease = growthRate;
   
-        // Random boost: 10% chance to increase by 2 or 3 followers
-        if (Math.random() < 0.1) {  // 10% chance
-          const randomBoost = Math.random() < 0.5 ? 2 : 3; // Either add 2 or 3 followers
-          followerIncrease += randomBoost;
+        // Increase random boost based on followers
+        let boost = 0;
+        if (followers > 10000) {
+          boost = Math.random() < 0.5 ? (Math.random() < 0.5 ? 20 : 25) : 0; // Higher chance and values if many followers
+        } else if (followers > 50000) {
+          boost = Math.random() < 0.4 ? (Math.random() < 0.5 ? 15 : 20) : 0; // Higher chance and values if many followers
+        } else if (followers > 10000) {
+          boost = Math.random() < 0.3 ? (Math.random() < 0.5 ? 5 : 10) : 0; // Medium chance and values
+        } else if (followers > 1000) {
+          boost = Math.random() < 0.2 ? (Math.random() < 0.5 ? 3 : 5) : 0; // Medium chance and values
+        } else {
+          boost = Math.random() < 0.1 ? (Math.random() < 0.5 ? 2 : 3) : 0; // Lower chance and values
         }
   
+        followerIncrease += boost;
+  
         setFollowers(prevFollowers => Math.round(prevFollowers + followerIncrease));
-      }, intervalDuration);   
+      }, intervalDuration);
   
       return () => clearInterval(interval);
     }
-  }, [growthRate, intervalDuration, showInactiveModal, gameStarted, isStateLoaded]);
+  }, [growthRate, intervalDuration, showInactiveModal, gameStarted, isStateLoaded, followers]);
   
 
   
