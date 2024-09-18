@@ -1,335 +1,342 @@
 [
   {
-    "id": 0,
+    "id": 1,
     "type": "message",
     "milestone": "introMsg1",
     "name": "HoopsToGlory",
     "content": "This is a game about climbing the ranks of basketball stardom, where you start as a hopeful young player with the dream of becoming the next big thing."
   },
   {
-    "id": 50,
+    "id": 2,
     "type": "message",
     "milestone": "introMsg2",
     "name": "HoopsToGlory",
     "content": "This is a race to the number 1 pick in the draft. Fastest player wins!"
   },
   {
-    "id": 51,
+    "id": 3,
     "type": "message",
     "milestone": "introMsg3",
     "name": "HoopsToGlory",
     "content": "Autosave is on, you can always close the page & come back later. There is no offline progress."
   },
   {
-    "id": 52,
+    "id": 4,
     "type": "message",
     "milestone": "introMsg4",
     "name": "HoopsToGlory",
     "content": "Desktop is recommended for optimal experience & performance."
   },
   {
-    "id": 53,
+    "id": 5,
     "type": "message",
     "milestone": "introMsg5",
     "name": "HoopsToGlory",
     "content": "Please share the game if you enjoyed it. Have fun!"
   },
   {
-    "id": 54,
-    "type": "special",
-    "milestone": "showGames",
-    "name": "",
-    "content": "Well done you've unlocked the ability to play games, make the most of it to show what you're made of!"
-  },
-  {
-    "id": 55,
-    "type": "special",
-    "milestone": "showEndorsements",
-    "name": "",
-    "content": "You're now able to choose an endorsement / upgrade when you reach specific milestones."
-  },
-  {
-    "id": 56,
+    "id": 6,
     "type": "special",
     "milestone": "showRecovery",
-    "name": "",
+    "name": "HoopsToGlory",
     "content": "Make sure you recover before completing another training session."
   },
   {
-    "id": 1,
-    "type": "message",
-    "milestone": "5 points/game",
-    "name": "HoopsToGlory",
-    "content": "Great job on averaging 5 points per game!"
-  },
-  {
-    "id": 2,
+    "id": 7,
     "type": "special",
-    "milestone": "500 followers",
-    "name": "",
-    "content": "You've reached 500 followers on social media!"
+    "milestone": "showGames",
+    "name": "HoopsToGlory",
+    "content": "Well done you've unlocked the ability to play games, make the most of it to show what you're made of!"
   },
   {
-    "id": 3,
+    "id": 8,
+    "type": "special",
+    "milestone": "showEndorsements",
+    "name": "HoopsToGlory",
+    "content": "You're now able to choose an endorsement / upgrade when you reach specific milestones."
+  },
+  {
+    "id": 9,
     "type": "message",
     "milestone": "5 games played",
     "name": "HoopsToGlory",
     "content": "You've played 5 games, keep it up!"
   },
   {
-    "id": 4,
+    "id": 10,
     "type": "message",
-    "milestone": "2 assists/game",
+    "milestone": "5 points/game",
     "name": "HoopsToGlory",
-    "content": "You're averaging 2 assists per game, nice work!"
+    "content": "Great job on averaging 5 points per game!"
   },
   {
-    "id": 5,
-    "type": "message",
-    "milestone": "4 rebounds/game",
+    "id": 11,
+    "type": "special",
+    "milestone": "500 followers",
     "name": "HoopsToGlory",
-    "content": "You're averaging 4 rebounds per game, great job!"
+    "content": "You've reached 500 followers on social media!"
   },
   {
-    "id": 6,
+    "id": 12,
     "type": "message",
-    "milestone": "5 skill average",
+    "milestone": "5 assists/game",
     "name": "HoopsToGlory",
-    "content": "You've achieved an average skill level of 5!"
+    "content": "You're averaging 5 assists per game, nice work!"
   },
   {
-    "id": 7,
+    "id": 13,
+    "type": "message",
+    "milestone": "5 rebounds/game",
+    "name": "HoopsToGlory",
+    "content": "You're averaging 5 rebounds per game, great job!"
+  },
+  {
+    "id": 14,
+    "type": "message",
+    "milestone": "5 minutes/game",
+    "name": "HoopsToGlory",
+    "content": "You're averaging 5 minutes per game, let's go!'"
+  },
+  {
+    "id": 15,
     "type": "message",
     "milestone": "Role Player",
     "name": "HoopsToGlory",
     "content": "You've become a role player on the team!"
   },
   {
-    "id": 8,
+    "id": 16,
     "type": "message",
     "milestone": "1000 followers",
-    "name": "",
+    "name": "HoopsToGlory",
     "content": "You've reached 1000 followers on social media!"
   },
   {
-    "id": 9,
+    "id": 17,
     "type": "message",
     "milestone": "10 points/game",
     "name": "HoopsToGlory",
     "content": "You're averaging 10 points per game, impressive!"
   },
   {
-    "id": 10,
+    "id": 18,
     "type": "message",
     "milestone": "15 games played",
     "name": "HoopsToGlory",
     "content": "You've played 15 games, well done!"
   },
   {
-    "id": 11,
-    "type": "message",
-    "milestone": "6 assists/game",
-    "name": "HoopsToGlory",
-    "content": "You're averaging 6 assists per game, awesome!"
-  },
-  {
-    "id": 12,
-    "type": "message",
-    "milestone": "7 rebounds/game",
-    "name": "HoopsToGlory",
-    "content": "You're averaging 7 rebounds per game, great effort!"
-  },
-  {
-    "id": 13,
-    "type": "message",
-    "milestone": "10 skill average",
-    "name": "HoopsToGlory",
-    "content": "You've achieved an average skill level of 10!"
-  },
-  {
-    "id": 14,
-    "type": "message",
-    "milestone": "Starter",
-    "name": "HoopsToGlory",
-    "content": "You've become a starter on the team!"
-  },
-  {
-    "id": 15,
-    "type": "message",
-    "milestone": "10,000 followers",
-    "name": "",
-    "content": "You've reached 10,000 followers on social media!"
-  },
-  {
-    "id": 16,
-    "type": "message",
-    "milestone": "15 points/game",
-    "name": "HoopsToGlory",
-    "content": "You're averaging 15 points per game, amazing!"
-  },
-  {
-    "id": 17,
-    "type": "message",
-    "milestone": "50 games played",
-    "name": "HoopsToGlory",
-    "content": "You've played 50 games, fantastic!"
-  },
-  {
-    "id": 18,
+    "id": 19,
     "type": "message",
     "milestone": "10 assists/game",
     "name": "HoopsToGlory",
-    "content": "You're averaging 10 assists per game, incredible!"
-  },
-  {
-    "id": 19,
-    "type": "message",
-    "milestone": "10 rebounds/game",
-    "name": "HoopsToGlory",
-    "content": "You're averaging 10 rebounds per game, great job!"
+    "content": "You're averaging 10 assists per game, awesome!"
   },
   {
     "id": 20,
     "type": "message",
-    "milestone": "20 skill average",
+    "milestone": "10 rebounds/game",
     "name": "HoopsToGlory",
-    "content": "You've achieved an average skill level of 20!"
+    "content": "You're averaging 10 rebounds per game, great effort!"
   },
   {
     "id": 21,
+    "type": "message",
+    "milestone": "10 minutes/game",
+    "name": "HoopsToGlory",
+    "content": "You're averaging 10 minutes per game!"
+  },
+  {
+    "id": 22,
+    "type": "message",
+    "milestone": "Sixth Man",
+    "name": "HoopsToGlory",
+    "content": "You've become the team's Sixth Man!"
+  },
+  {
+    "id": 23,
+    "type": "message",
+    "milestone": "10,000 followers",
+    "name": "HoopsToGlory",
+    "content": "You've reached 10,000 followers on social media!"
+  },
+  {
+    "id": 24,
+    "type": "message",
+    "milestone": "18 points/game",
+    "name": "HoopsToGlory",
+    "content": "You're averaging 18 points per game, amazing!"
+  },
+  {
+    "id": 25,
+    "type": "message",
+    "milestone": "30 games played",
+    "name": "HoopsToGlory",
+    "content": "You've played 30 games, fantastic!"
+  },
+  {
+    "id": 26,
+    "type": "message",
+    "milestone": "16 minutes/game",
+    "name": "HoopsToGlory",
+    "content": "You're averaging 16 minutes per game, keep going!"
+  },
+  {
+    "id": 27,
     "type": "message",
     "milestone": "Second Round Pick",
     "name": "HoopsToGlory",
     "content": "You're predicted to be a second round pick, congratulations!"
   },
   {
-    "id": 22,
+    "id": 28,
     "type": "message",
     "milestone": "50,000 followers",
-    "name": "",
+    "name": "HoopsToGlory",
     "content": "You've reached 50,000 followers on social media!"
   },
   {
-    "id": 23,
+    "id": 29,
     "type": "message",
-    "milestone": "20 points/game",
+    "milestone": "50 games played",
     "name": "HoopsToGlory",
-    "content": "You're averaging 20 points per game, phenomenal!"
+    "content": "You've played 50 games, amazing work!"
   },
   {
-    "id": 24,
+    "id": 30,
     "type": "message",
-    "milestone": "100 games played",
+    "milestone": "Starter",
     "name": "HoopsToGlory",
-    "content": "You've played 100 games, amazing work!"
+    "content": "You've become a starter on the team, about time!"
   },
   {
-    "id": 25,
-    "type": "message",
-    "milestone": "Star Player",
-    "name": "HoopsToGlory",
-    "content": "You've become a star player on the team!"
-  },
-  {
-    "id": 26,
+    "id": 31,
     "type": "message",
     "milestone": "15 assists/game",
     "name": "HoopsToGlory",
     "content": "You're averaging 15 assists per game, excellent!"
   },
   {
-    "id": 27,
+    "id": 32,
     "type": "message",
     "milestone": "15 rebounds/game",
     "name": "HoopsToGlory",
     "content": "You're averaging 15 rebounds per game, fantastic!"
   },
   {
-    "id": 28,
+    "id": 33,
     "type": "message",
-    "milestone": "40 skill average",
+    "milestone": "22 minutes/game",
     "name": "HoopsToGlory",
-    "content": "You've achieved an average skill level of 40!"
+    "content": "You're averaging 22 minutes per game, wow!"
   },
   {
-    "id": 29,
+    "id": 34,
     "type": "message",
     "milestone": "First Round Pick",
     "name": "HoopsToGlory",
     "content": "You're predicted to be a first round pick, congratulations!"
   },
   {
-    "id": 30,
+    "id": 35,
+    "type": "message",
+    "milestone": "Star Player",
+    "name": "HoopsToGlory",
+    "content": "You've become a star player on the team!"
+  },
+  {
+    "id": 36,
     "type": "message",
     "milestone": "500,000 followers",
-    "name": "",
+    "name": "HoopsToGlory",
     "content": "You've reached 500,000 followers on social media!"
   },
   {
-    "id": 31,
+    "id": 37,
     "type": "message",
     "milestone": "25 points/game",
     "name": "HoopsToGlory",
     "content": "You're averaging 25 points per game, outstanding!"
   },
   {
-    "id": 32,
+    "id": 38,
     "type": "message",
-    "milestone": "200 games played",
+    "milestone": "80 games played",
     "name": "HoopsToGlory",
-    "content": "You've played 200 games, incredible achievement!"
+    "content": "You've played 80 games, incredible achievement!"
   },
   {
-    "id": 33,
+    "id": 39,
     "type": "message",
     "milestone": "20 rebounds/game",
     "name": "HoopsToGlory",
     "content": "You're averaging 20 rebounds per game, great work!"
   },
   {
-    "id": 34,
+    "id": 40,
     "type": "message",
-    "milestone": "60 skill average",
+    "milestone": "28 minutes/game",
     "name": "HoopsToGlory",
-    "content": "You've achieved an average skill level of 60!"
+    "content": "You're now averaging 28 minutes per game."
   },
   {
-    "id": 35,
+    "id": 41,
+    "type": "message",
+    "milestone": "32 points/game",
+    "name": "HoopsToGlory",
+    "content": "You're averaging 32 points per game, jheeze!"
+  },
+  {
+    "id": 42,
     "type": "message",
     "milestone": "Top 10 Pick",
     "name": "HoopsToGlory",
     "content": "You're predicted to be a top 10 pick, congratulations!"
   },
   {
-    "id": 36,
+    "id": 43,
     "type": "message",
     "milestone": "1 million followers",
-    "name": "",
+    "name": "HoopsToGlory",
     "content": "You've reached 1 million followers on social media!"
   },
   {
-    "id": 37,
+    "id": 44,
     "type": "message",
-    "milestone": "30 points/game",
+    "milestone": "34 minutes/game",
     "name": "HoopsToGlory",
-    "content": "You're averaging 30 points per game, unbelievable!"
+    "content": "You're now averaging 34 minutes per game, how do you do it?"
   },
   {
-    "id": 38,
+    "id": 45,
     "type": "message",
     "milestone": "80 skill average",
     "name": "HoopsToGlory",
     "content": "You've achieved an average skill level of 80!"
   },
   {
-    "id": 39,
+    "id": 46,
+    "type": "message",
+    "milestone": "25 assists/game",
+    "name": "HoopsToGlory",
+    "content": "You're averaging 25 assists per game, unbelievable!"
+  },
+  {
+    "id": 47,
+    "type": "message",
+    "milestone": "40 points/game",
+    "name": "HoopsToGlory",
+    "content": "You're averaging 40 points per game, this is insane!"
+  },
+  {
+    "id": 48,
     "type": "message",
     "milestone": "100 skill average",
     "name": "HoopsToGlory",
     "content": "You've achieved an average skill level of 100!"
   },
   {
-    "id": 40,
+    "id": 49,
     "type": "message",
     "milestone": "Become Number One NBA Draft Pick",
     "name": "HoopsToGlory",
