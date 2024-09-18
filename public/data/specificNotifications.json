@@ -260,13 +260,6 @@
     "content": "You're averaging 25 points per game, outstanding!"
   },
   {
-    "id": 38,
-    "type": "message",
-    "milestone": "80 games played",
-    "name": "HoopsToGlory",
-    "content": "You've played 80 games, incredible achievement!"
-  },
-  {
     "id": 39,
     "type": "message",
     "milestone": "20 rebounds/game",
