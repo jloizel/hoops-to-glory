@@ -357,8 +357,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [intervalDuration, setIntervalDuration] = useState(10000);
 
   useEffect(() => {
-    const baseGrowth = 2;
-    const timeMultiplier = gamesPlayed > 0 ? (1 + (gamesPlayed / 100)) : 1; // Default multiplier for 0 games played
+    const baseGrowth = 1; // Set base growth to 1
+    const timeMultiplier = gamesPlayed > 0 ? (1 + (gamesPlayed / 100)) : 1;
     const skillMultiplier = Math.sqrt(skills.agility + skills.shooting + skills.fitness) / 10;
     const newGrowthRate = (baseGrowth + skillMultiplier) * timeMultiplier;
   
@@ -371,12 +371,21 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   useEffect(() => {
     if (!showInactiveModal && gameStarted && isStateLoaded) {
       const interval = setInterval(() => {
-        setFollowers(prevFollowers => Math.round(prevFollowers + growthRate));
+        let followerIncrease = growthRate;
+  
+        // Random boost: 10% chance to increase by 2 or 3 followers
+        if (Math.random() < 0.1) {  // 10% chance
+          const randomBoost = Math.random() < 0.5 ? 2 : 3; // Either add 2 or 3 followers
+          followerIncrease += randomBoost;
+        }
+  
+        setFollowers(prevFollowers => Math.round(prevFollowers + followerIncrease));
       }, intervalDuration);   
   
       return () => clearInterval(interval);
     }
   }, [growthRate, intervalDuration, showInactiveModal, gameStarted]);
+  
 
   
   // PHONE
