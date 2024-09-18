@@ -196,14 +196,14 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     // }
   
     // Allow reaching 0 and increasing energy level only when both are false
-    if (!isRunning && !trainingInProgress) {
+    // if (!isRunning && !trainingInProgress) {
       if (clickCount > 1) {
         setClickCount(prevCount => prevCount - 1); // Decrease click count by 1
       } else if (clickCount === 1) {
         setEnergyLevel(prevLevel => prevLevel + 1); // Increase energy level by 1
         setClickCount(initialClickCount); // Reset click count to the initial value
       }
-    }
+    // }
   };
 
   const toggleAutoClick = () => {
