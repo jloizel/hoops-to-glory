@@ -18,7 +18,8 @@ const Games = ({
   reboundsPerGame,
   teamRole,
   gamePlayable,
-  trainingAvailable
+  trainingAvailable,
+  trainingInProgress
 }) => {
   const [gameLength, setGameLength] = useState(600000); // 10 minutes for display
   const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); 
@@ -39,11 +40,13 @@ const Games = ({
     setQuarter(1); // Reset quarter to 1
     setQuarterStartTime(Date.now());
     setGameEnded(false); // Reset the gameEnded state
+    handleGameStart();
   };
 
   const handleEndGame = () => {
     setGameStarted(false);
     setGameEnded(true); // Mark the game as ended
+    handleGameEnd();
   };
 
   const handleResetGame = () => {
@@ -56,13 +59,13 @@ const Games = ({
     setUpdateGameCount(false); // Reset the update flag
   };
 
-  useEffect(() => {
-    if (gameStarted) {
-      handleGameStart();
-    } else if (gameEnded) {
-      handleGameEnd();
-    }
-  }, [gameStarted, gameEnded, handleGameStart, handleGameEnd]);
+  // useEffect(() => {
+  //   if (gameStarted) {
+  //     handleGameStart();
+  //   } else if (gameEnded) {
+  //     handleGameEnd();
+  //   }
+  // }, [gameStarted, gameEnded, handleGameStart, handleGameEnd]);
 
   useEffect(() => {
     if (updateGameCount) {
@@ -192,7 +195,7 @@ const Games = ({
           <button
             className={styles.button}
             onClick={gameEnded ? handleResetGame : handleStartGame}
-            disabled={!gamePlayable || (isRunning && !gameEnded) || !trainingAvailable} // Only disable if the game is running and not ended
+            disabled={!gamePlayable || (isRunning && !gameEnded) || !trainingAvailable || trainingInProgress} // Only disable if the game is running and not ended
           >
             {gameEnded ? "Play again" : "Play game"}
           </button>

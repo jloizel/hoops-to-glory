@@ -729,6 +729,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
                 handleGamesPlayedCount={handleGamesPlayedCount}
                 gamePlayable={gamePlayable}
                 trainingAvailable={trainingAvailable}
+                trainingInProgress={trainingInProgress}
               />
             </div>
             }
