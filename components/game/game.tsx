@@ -435,9 +435,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     // Example: Increase user level based on followers count
     if (gamesPlayed > 0 && followers < 1000) {
       setRandomMessageLevel(2);
-    } else if (followers >= 1000 && followers < 10000) {
+    } else if (followers >= 1000 && followers < 50000) {
       setRandomMessageLevel(3);
-    } else if (followers >= 10000 && followers < 100000) { 
+    } else if (followers >= 50000) { 
       setRandomMessageLevel(4);
     }
     // Add more conditions based on other criteria
