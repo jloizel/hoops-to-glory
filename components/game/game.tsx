@@ -357,19 +357,16 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [intervalDuration, setIntervalDuration] = useState(10000);
 
   useEffect(() => {
-    if (gamesPlayed > 0) {
-      const baseGrowth = 2;
-      const timeMultiplier = 1 + (gamesPlayed / 100);
-      const skillMultiplier = Math.sqrt(skills.agility + skills.shooting + skills.fitness) / 10;
-      const randomBoost = Math.random() < 0.1 ? 2 : 1;
-      const newGrowthRate = (baseGrowth + skillMultiplier) * timeMultiplier * randomBoost;
-      setGrowthRate(newGrowthRate);
-
-      const newIntervalDuration = Math.max(500, 10000 / newGrowthRate);
-      setIntervalDuration(newIntervalDuration);
-    }
+    const baseGrowth = 2;
+    const timeMultiplier = gamesPlayed > 0 ? (1 + (gamesPlayed / 100)) : 1; // Default multiplier for 0 games played
+    const skillMultiplier = Math.sqrt(skills.agility + skills.shooting + skills.fitness) / 10;
+    const newGrowthRate = (baseGrowth + skillMultiplier) * timeMultiplier;
+  
+    setGrowthRate(newGrowthRate);
+  
+    const newIntervalDuration = Math.max(500, 10000 / newGrowthRate);
+    setIntervalDuration(newIntervalDuration);
   }, [skills, gamesPlayed]);
-
   
   useEffect(() => {
     if (!showInactiveModal && gameStarted && isStateLoaded) {
@@ -586,8 +583,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         const parsedState = JSON.parse(savedGameState);
 
         setGameStarted(parsedState.gameStarted);
-        setElapsedTime(parsedState.elapsedTime || 0);
-        setFollowers(parsedState.followers || 0);
+        setElapsedTime(parsedState.elapsedTime);
+        setFollowers(parsedState.followers);
         setShowRecovery(parsedState.showRecovery);
         setShowGames(parsedState.showGames);
         setShowEndorsements(parsedState.showEndorsements);
