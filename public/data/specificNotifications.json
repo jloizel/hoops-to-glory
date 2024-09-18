@@ -167,19 +167,20 @@
     "name": "HoopsToGlory",
     "content": "You're averaging 18 points per game, amazing!"
   },
-  {
-    "id": 25,
-    "type": "message",
-    "milestone": "30 games played",
-    "name": "HoopsToGlory",
-    "content": "You've played 30 games, fantastic!"
-  },
+  
   {
     "id": 26,
     "type": "message",
     "milestone": "16 minutes/game",
     "name": "HoopsToGlory",
     "content": "You're averaging 16 minutes per game, keep going!"
+  },
+  {
+    "id": 25,
+    "type": "message",
+    "milestone": "30 games played",
+    "name": "HoopsToGlory",
+    "content": "You've played 30 games, fantastic!"
   },
   {
     "id": 27,

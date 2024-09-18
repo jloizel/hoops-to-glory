@@ -64,16 +64,12 @@
     "description": "Average 18 points per game"
   },
   {
-    "milestone": "50 games played",
-    "description": "Play 50 games"
-  },
-  {
-    "milestone": "10 assists/game",
-    "description": "Average 10 assists per game"
-  },
-  {
     "milestone": "16 minutes/game",
     "description": "Average 16 minutes per game"
+  },
+  {
+    "milestone": "30 games played",
+    "description": "Play 30 games"
   },
   {
     "milestone": "Second Round Pick",
@@ -84,8 +80,8 @@
     "description": "Reach 50,000 followers on social media"
   },
   {
-    "milestone": "100 games played",
-    "description": "Play 100 games"
+    "milestone": "50 games played",
+    "description": "Play 50 games"
   },
   {
     "milestone": "Starter",
@@ -120,8 +116,8 @@
     "description": "Average 25 points per game"
   },
   {
-    "milestone": "200 games played",
-    "description": "Play 500 games"
+    "milestone": "80 games played",
+    "description": "Play 80 games"
   },
 
   {
