@@ -206,8 +206,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
   };
 
-  console.log(clickDisabled)
-
   const toggleAutoClick = () => {
     setAutoClick(prev => !prev);
   };
