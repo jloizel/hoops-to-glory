@@ -271,11 +271,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   }, [energyLevel]);
   
 
-  const minutesPerGame = parseFloat(((averageSkillLevel / 100) * 40).toFixed(1));//last number is max average
-  const pointsPerGame = parseFloat(((skills.shooting / 100) * 30).toFixed(1));
+  const pointsPerGame = parseFloat((30 * Math.pow(skills.shooting / 100, 0.7)).toFixed(1));
   // const pointsPerGame = 5
-  const assistsPerGame = parseFloat(((skills.agility / 100) * 15).toFixed(1));
-  const reboundsPerGame = parseFloat(((skills.fitness / 100) * 20).toFixed(1));
+  const assistsPerGame = parseFloat((30 * Math.pow(skills.agility / 100, 0.7)).toFixed(1));
+  const reboundsPerGame = parseFloat((30 * Math.pow(skills.fitness / 100, 0.7)).toFixed(1));
+  const minutesPerGame = parseFloat((30 * Math.pow(averageSkillLevel / 100, 0.8)).toFixed(1));
 
   const teamRole = () => {
     if (totalSkillLevel < 40) return "Benchwarmer";
