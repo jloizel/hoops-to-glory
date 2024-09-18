@@ -325,7 +325,7 @@
     "description": "Master footwork and speed with the Agility Ladder Pro to improve reaction time and acceleration.",
     "action": "increase_agility_training_increment",
     "value": 1,
-    "level": 1
+    "level": 2
   },
   {
     "id": 42,
@@ -333,7 +333,7 @@
     "description": "Improve shooting accuracy with the laser shot tracking system, providing instant feedback for precision.",
     "action": "increase_shooting_training_increment",
     "value": 1,
-    "level": 1
+    "level": 2
   },
   {
     "id": 43,
@@ -341,7 +341,7 @@
     "description": "Build explosive power and enhance fitness with the power plate pro.",
     "action": "increase_fitness_training_increment",
     "value": 1,
-    "level": 1
+    "level": 2
   },
   {
     "id": 44,
@@ -349,7 +349,7 @@
     "description": "Optimize agility sessions to reduce training time.",
     "action": "reduce_agility_training_time",
     "value": 4,
-    "level": 1
+    "level": 2
   },
   {
     "id": 45,
@@ -357,7 +357,7 @@
     "description": "Sharpen shooting mechanics and release speed with the quick release shooting harness.",
     "action": "reduce_shooting_training_time",
     "value": 4,
-    "level": 1
+    "level": 2
   },
   {
     "id": 46,
@@ -365,6 +365,6 @@
     "description": "Reduce muscle fatigue and boost performance with the fitness recovery compression suit.",
     "action": "reduce_fitness_training_time",
     "value": 4,
-    "level": 1
+    "level": 2
   }
 ]

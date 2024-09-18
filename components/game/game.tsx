@@ -385,8 +385,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
           const randomBoost = Math.random() < 0.5 ? 2 : 3; // Either add 2 or 3 followers
           followerIncrease += randomBoost;
         }
-
-        console.log(intervalDuration)
   
         setFollowers(prevFollowers => Math.round(prevFollowers + followerIncrease));
       }, intervalDuration);   
@@ -456,7 +454,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     };
 
     const draftScore = weights.agility * skills.agility + weights.shooting * skills.shooting + weights.fitness * skills.fitness;
-
+16
+17
     const thresholds = {
       undrafted: 50,
       lateSecondRound: 100,
