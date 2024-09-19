@@ -881,5 +881,493 @@
     "name": "Nick Nurse",
     "content": "Your performance is noteworthy. Let's connect to discuss potential growth areas and strategies.",
     "level": "4"
+  },
+  {
+    "id": 125,
+    "type": "message",
+    "name": "Coach Carter",
+    "content": "Keep that defense strong, you're improving every game!",
+    "level": "2"
+  },
+  {
+    "id": 126,
+    "type": "message",
+    "name": "Big Bro",
+    "content": "That crossover in your last game was killer!",
+    "level": "2"
+  },
+  {
+    "id": 127,
+    "type": "message",
+    "name": "Teammate",
+    "content": "Great teamwork out there, keep passing like that.",
+    "level": "2"
+  },
+  {
+    "id": 128,
+    "type": "message",
+    "name": "Cousin Jake",
+    "content": "You’re a walking highlight reel, can’t wait to see your next game!",
+    "level": "1"
+  },
+  {
+    "id": 129,
+    "type": "message",
+    "name": "Emma",
+    "content": "When are we celebrating your next win?",
+    "level": "1"
+  },
+  {
+    "id": 130,
+    "type": "message",
+    "name": "Dylan",
+    "content": "You’re making it look easy out there!",
+    "level": "1"
+  },
+  {
+    "id": 131,
+    "type": "message",
+    "name": "Jordan",
+    "content": "That block you had last night was insane!",
+    "level": "2"
+  },
+  {
+    "id": 132,
+    "type": "message",
+    "name": "Josh",
+    "content": "You gotta teach me that step-back jumper!",
+    "level": "2"
+  },
+  {
+    "id": 133,
+    "type": "message",
+    "name": "Coach Smith",
+    "content": "Great hustle during practice, keep grinding!",
+    "level": "1"
+  },
+  {
+    "id": 134,
+    "type": "message",
+    "name": "Marcus",
+    "content": "You’re one dunk away from going viral!",
+    "level": "1"
+  },
+  {
+    "id": 135,
+    "type": "message",
+    "name": "Liam",
+    "content": "Keep dominating in the paint, you're unstoppable!",
+    "level": "1"
+  },
+  {
+    "id": 136,
+    "type": "message",
+    "name": "Dave",
+    "content": "That last-minute shot you made was clutch!",
+    "level": "1"
+  },
+  {
+    "id": 137,
+    "type": "message",
+    "name": "Jess",
+    "content": "When’s your next game? I need to bring the whole squad!",
+    "level": "1"
+  },
+  {
+    "id": 138,
+    "type": "message",
+    "name": "Kate",
+    "content": "You’re out there making history, keep it up!",
+    "level": "1"
+  },
+  {
+    "id": 139,
+    "type": "message",
+    "name": "Uncle Rob",
+    "content": "Your hard work is paying off, proud of you!",
+    "level": "1"
+  },
+  {
+    "id": 140,
+    "type": "message",
+    "name": "Teammate",
+    "content": "Let’s keep the energy up for the next game!",
+    "level": "1"
+  },
+  {
+    "id": 141,
+    "type": "message",
+    "name": "Chris",
+    "content": "That game was yours from the tip-off!",
+    "level": "1"
+  },
+  {
+    "id": 142,
+    "type": "message",
+    "name": "Cousin Sam",
+    "content": "You’ve been a beast on the boards, keep going!",
+    "level": "1"
+  },
+  {
+    "id": 143,
+    "type": "message",
+    "name": "Josh",
+    "content": "How do you make it look so effortless?",
+    "level": "1"
+  },
+  {
+    "id": 144,
+    "type": "message",
+    "name": "Teammate",
+    "content": "Can't wait to run it back with you, we’re on fire!",
+    "level": "1"
+  },
+  {
+    "id": 145,
+    "type": "message",
+    "name": "Grandma",
+    "content": "Every game you play, you make us prouder!",
+    "level": "1"
+  },
+  {
+    "id": 146,
+    "type": "message",
+    "name": "Lucas",
+    "content": "Your jumper is looking cleaner every game!",
+    "level": "1"
+  },
+  {
+    "id": 147,
+    "type": "message",
+    "name": "Coach Davis",
+    "content": "Your basketball IQ is really starting to show, keep learning!",
+    "level": "2"
+  },
+  {
+    "id": 148,
+    "type": "message",
+    "name": "Jake",
+    "content": "You got the handles like Kyrie out there!",
+    "level": "1"
+  },
+  {
+    "id": 149,
+    "type": "message",
+    "name": "Brad",
+    "content": "You’re turning into a franchise player!",
+    "level": "2"
+  },
+  {
+    "id": 150,
+    "type": "message",
+    "name": "Sophie",
+    "content": "That fast break dunk was insane, when’s the highlight dropping?",
+    "level": "2"
+  },
+  {
+    "id": 151,
+    "type": "message",
+    "name": "Alex",
+    "content": "Your vision on the court is top-tier, keep sharing the ball!",
+    "level": "1"
+  },
+  {
+    "id": 152,
+    "type": "message",
+    "name": "Mike",
+    "content": "You were on fire last night, can’t wait for the next one!",
+    "level": "1"
+  },
+  {
+    "id": 153,
+    "type": "message",
+    "name": "Uncle Joe",
+    "content": "You’ve got the whole neighborhood talking about you!",
+    "level": "1"
+  },
+  {
+    "id": 154,
+    "type": "message",
+    "name": "Coach White",
+    "content": "Your hustle on defense was top-notch, keep it up!",
+    "level": "1"
+  },
+  {
+    "id": 155,
+    "type": "message",
+    "name": "Will",
+    "content": "You keep getting better every game!",
+    "level": "1"
+  },
+  {
+    "id": 156,
+    "type": "message",
+    "name": "Chris",
+    "content": "You’re going to the next level, no question about it!",
+    "level": "1"
+  },
+  {
+    "id": 157,
+    "type": "message",
+    "name": "Jordan",
+    "content": "That was a smooth spin move, you’re unstoppable!",
+    "level": "1"
+  },
+  {
+    "id": 158,
+    "type": "message",
+    "name": "Jake",
+    "content": "Keep working on those free throws, you're almost there!",
+    "level": "1"
+  },
+  {
+    "id": 159,
+    "type": "message",
+    "name": "Tony",
+    "content": "Your footwork in the post is deadly, keep at it!",
+    "level": "1"
+  },
+  {
+    "id": 160,
+    "type": "message",
+    "name": "Noah",
+    "content": "You're putting up numbers like an all-star!",
+    "level": "2"
+  },
+  {
+    "id": 161,
+    "type": "instagram",
+    "name": "@kyrieirving",
+    "content": "liked your story",
+    "level": "4",
+    "verified": true
+  },
+  {
+    "id": 162,
+    "type": "instagram",
+    "name": "@damianlillard",
+    "content": "liked your story",
+    "level": "4",
+    "verified": true
+  },
+  {
+    "id": 163,
+    "type": "instagram",
+    "name": "@karlanthonytowns",
+    "content": "liked your story",
+    "level": "4",
+    "verified": true
+  },
+  {
+    "id": 164,
+    "type": "instagram",
+    "name": "@jokicnikola15",
+    "content": "liked your story",
+    "level": "4",
+    "verified": true
+  },
+  {
+    "id": 165,
+    "type": "instagram",
+    "name": "@bradleybeal",
+    "content": "liked your story",
+    "level": "4",
+    "verified": true
+  },
+  {
+    "id": 166,
+    "type": "instagram",
+    "name": "@pg13",
+    "content": "liked your story",
+    "level": "4",
+    "verified": true
+  },
+  {
+    "id": 167,
+    "type": "instagram",
+    "name": "@matt_hooper12",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 168,
+    "type": "instagram",
+    "name": "@jessica_bballqueen",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 169,
+    "type": "instagram",
+    "name": "@kevin_swish23",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 170,
+    "type": "instagram",
+    "name": "@emily_jumpshot",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 171,
+    "type": "instagram",
+    "name": "@tyler_ballislife",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 172,
+    "type": "instagram",
+    "name": "@brian_dunkmaster",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 173,
+    "type": "instagram",
+    "name": "@courtqueen_zoe",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 174,
+    "type": "instagram",
+    "name": "@hoops_katie",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 175,
+    "type": "instagram",
+    "name": "@logan_baller",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 176,
+    "type": "instagram",
+    "name": "@natalie_3pointer",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 177,
+    "type": "instagram",
+    "name": "@hoopdreamer_mike",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 178,
+    "type": "instagram",
+    "name": "@danny_jumpstar",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 179,
+    "type": "instagram",
+    "name": "@stephanie_nets",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 180,
+    "type": "instagram",
+    "name": "@luke_crossover",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 181,
+    "type": "instagram",
+    "name": "@chloe_dribblequeen",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 182,
+    "type": "instagram",
+    "name": "@isaac_slamdunk",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 183,
+    "type": "instagram",
+    "name": "@rachel_hoopster",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 184,
+    "type": "instagram",
+    "name": "@ethan_netmvp",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 185,
+    "type": "instagram",
+    "name": "@bball_benny",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 186,
+    "type": "instagram",
+    "name": "@courtshooter_tom",
+    "content": "liked your story",
+    "level": "1"
+  },
+  {
+    "id": 187,
+    "type": "instagram",
+    "name": "@basketballforever",
+    "content": "mentioned you in their story",
+    "level": "3",
+    "verified": "true"
+  },
+  {
+    "id": 188,
+    "type": "instagram",
+    "name": "@basketballcoverage",
+    "content": "mentioned you in their story",
+    "level": "3",
+    "verified": "true"
+  },
+  {
+    "id": 189,
+    "type": "instagram",
+    "name": "@bleacherreport",
+    "content": "mentioned you in their story",
+    "level": "3",
+    "verified": "true"
+  },
+  {
+    "id": 190,
+    "type": "instagram",
+    "name": "@houseofhighlights",
+    "content": "mentioned you in their story",
+    "level": "3",
+    "verified": "true"
+  },
+  {
+    "id": 191,
+    "type": "instagram",
+    "name": "@overtime",
+    "content": "mentioned you in their story",
+    "level": "3",
+    "verified": "true"
+  },
+  {
+    "id": 192,
+    "type": "instagram",
+    "name": "@basketnews",
+    "content": "mentioned you in their story",
+    "level": "3",
+    "verified": "true"
   }
 ]
