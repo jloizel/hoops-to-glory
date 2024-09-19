@@ -179,6 +179,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   useEffect(() => {
     if (energyLevel >= energyStorage) {
       setClickDisabled(true)
+    } else if (gameOver) {
+      setClickDisabled(true)
     } else {
       setClickDisabled(false)
     }
@@ -186,6 +188,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   const handleClick = () => {
     if (energyLevel >= energyStorage) {
+      return; // Exit early to prevent further actions
+    }
+
+    if (gameOver) {
       return; // Exit early to prevent further actions
     }
 
@@ -709,6 +715,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
               isStateLoaded={isStateLoaded}
               gameStarted={gameStarted}
               isRunning={isRunning}
+              gameOver={gameOver}
             />
             {showRecovery &&
             <div className={showRecovery ? styles.flash : ''}>
@@ -739,6 +746,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
                 gamePlayable={gamePlayable}
                 trainingAvailable={trainingAvailable}
                 trainingInProgress={trainingInProgress}
+                gameOver={gameOver}
               />
             </div>
             }
@@ -748,6 +756,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
                 onEndorsementSelect={handleEndorsementSelect}
                 completedMilestones={completedMilestones} 
                 onMilestoneChange={handleMilestoneChange}
+                gameOver={gameOver}
               />
             }
           </div>

@@ -19,7 +19,8 @@ const Games = ({
   teamRole,
   gamePlayable,
   trainingAvailable,
-  trainingInProgress
+  trainingInProgress,
+  gameOver
 }) => {
   const [gameLength, setGameLength] = useState(600000); // 10 minutes for display
   const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); 
@@ -195,7 +196,7 @@ const Games = ({
           <button
             className={styles.button}
             onClick={gameEnded ? handleResetGame : handleStartGame}
-            disabled={!gamePlayable || (isRunning && !gameEnded) || !trainingAvailable || trainingInProgress} // Only disable if the game is running and not ended
+            disabled={!gamePlayable || (isRunning && !gameEnded) || !trainingAvailable || trainingInProgress || gameOver} // Only disable if the game is running and not ended
           >
             {gameEnded ? "Play again" : "Play game"}
           </button>

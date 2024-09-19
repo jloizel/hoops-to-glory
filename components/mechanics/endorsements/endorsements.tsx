@@ -22,9 +22,10 @@ interface EndorsementsProps {
   onEndorsementSelect: (endorsement: Endorsement) => void;
   completedMilestones: string[]; 
   onMilestoneChange: (milestone: string) => void;
+  gameOver: boolean;
 }
 
-const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsementSelect, completedMilestones, onMilestoneChange }) => {
+const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsementSelect, completedMilestones, onMilestoneChange, gameOver }) => {
   const [endorsements, setEndorsements] = useState<Endorsement[]>([]);
   const [availableEndorsements, setAvailableEndorsements] = useState<Endorsement[]>([]);
   const [selectedEndorsements, setSelectedEndorsements] = useState<Endorsement[]>([]);
@@ -222,7 +223,7 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
               key={endorsement.id}
               className={styles.button}
               onClick={() => handleEndorsementSelect(endorsement)}
-              disabled={!isButtonEnabled()}
+              disabled={!isButtonEnabled() || gameOver}
             >
               {endorsement.description}
             </button>
