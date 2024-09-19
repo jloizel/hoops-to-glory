@@ -89,8 +89,8 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
     for (let i = 0; i < 3; i++) {
       const random = Math.random(); // Get a random number between 0 and 1
 
-      if (random < 0.7) {
-        // 70% chance to pick from level 1
+      if (random < 0.55) {
+        // 55% chance to pick from level 1
         if (level1Endorsements.length > 0) {
           const selected = level1Endorsements.shift(); // Get the first item
           if (selected) {
@@ -99,7 +99,7 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
           }
         }
       } else {
-        // 30% chance to pick from level 2
+        // 45% chance to pick from level 2
         if (level2Endorsements.length > 0) {
           const selected = level2Endorsements.shift(); // Get the first item
           if (selected) {

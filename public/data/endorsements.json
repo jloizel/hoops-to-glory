@@ -324,24 +324,24 @@
     "name": "Agility Ladder Pro",
     "description": "Master footwork and speed with the Agility Ladder Pro to improve reaction time and acceleration.",
     "action": "increase_agility_training_increment",
-    "value": 2,
-    "level": 2
+    "value": 1,
+    "level": 1
   },
   {
     "id": 42,
     "name": "Laser Shot Tracking System",
     "description": "Improve shooting accuracy with the laser shot tracking system, providing instant feedback for precision.",
     "action": "increase_shooting_training_increment",
-    "value": 2,
-    "level": 2
+    "value": 1,
+    "level": 1
   },
   {
     "id": 43,
     "name": "Power Plate Pro",
     "description": "Build explosive power and enhance fitness with the power plate pro.",
     "action": "increase_fitness_training_increment",
-    "value": 2,
-    "level": 2
+    "value": 1,
+    "level": 1
   },
   {
     "id": 44,
