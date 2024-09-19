@@ -39,7 +39,7 @@ interface GameProps {
 
 const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyStarted, showInactiveModal, isTabActive}) => {
   const [gameStarted, setGameStarted] = useState(false)
-  const [gameOver, setGameOver] = useState(false)
+  const [gameOver, setGameOver] = useState(true)
   const [elapsedTime, setElapsedTime] = useState(0);
   const [gameRestarted, setGameRestarted] = useState(false)
   const [isStateLoaded, setIsStateLoaded] = useState(false);
