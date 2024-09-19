@@ -12,6 +12,19 @@ interface AnalyticsProps {
 
 const Analytics: React.FC<AnalyticsProps> = ({followers}) => {
 
+  const formatFollowers = (followers: number): string => {
+    if (followers >= 1000000) {
+      // Format as 1.2m, 1.7m etc.
+      return (followers / 1000000).toFixed(1) + 'm';
+    } else if (followers >= 1000) {
+      // Format as 12.1k, 15.7k, keeping the hundreds
+      return (followers / 1000).toFixed(1) + 'k';
+    } else {
+      // For values below 1000, return the exact number
+      return followers.toString();
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -20,7 +33,7 @@ const Analytics: React.FC<AnalyticsProps> = ({followers}) => {
       </div>
       <div className={styles.content}>
         <FaInstagram className={styles.icon2}/>
-        Followers: {followers}
+        Followers: {formatFollowers(followers)}
         {/* <div>
           <FaYoutube className={styles.icon2}/> 
           Views: {views}
