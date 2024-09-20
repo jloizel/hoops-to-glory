@@ -110,7 +110,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setTimeout(() => {
       setSkills(prevSkills => ({
         ...prevSkills,
-        [type]: Math.min(prevSkills[type] + skillUpgrade[type], 100),
+        [type]: Math.min(prevSkills[type] + skillUpgrade[type], 99),
       }));
       setTrainingInProgress(false);
       setIsRunning(false)
@@ -293,11 +293,11 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   }, [energyLevel]);
   
 
-  const pointsPerGame = parseFloat((40 * Math.pow(skills.shooting / 100, 0.7)).toFixed(1));
+  const pointsPerGame = parseFloat((40 * Math.pow(skills.shooting / 99, 0.7)).toFixed(1));
   // const pointsPerGame = 5
-  const assistsPerGame = parseFloat((25 * Math.pow(skills.agility / 100, 0.7)).toFixed(1));
-  const reboundsPerGame = parseFloat((20 * Math.pow(skills.fitness / 100, 0.7)).toFixed(1));
-  const minutesPerGame = parseFloat((40 * Math.pow(averageSkillLevel / 100, 0.8)).toFixed(1));
+  const assistsPerGame = parseFloat((25 * Math.pow(skills.agility / 99, 0.7)).toFixed(1));
+  const reboundsPerGame = parseFloat((20 * Math.pow(skills.fitness / 99, 0.7)).toFixed(1));
+  const minutesPerGame = parseFloat((40 * Math.pow(averageSkillLevel / 99, 0.8)).toFixed(1));
 
   const teamRole = () => {
     if (averageSkillLevel < 25) return "Benchwarmer";
@@ -413,10 +413,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   
   // PHONE
   const [achievements, setAchievements] = useState<string[]>([]);
-  const [randomMessageInterval, setRandomMessageInterval] = useState(150000);
+  const baseInterval = 150000;
+  const [randomMessageInterval, setRandomMessageInterval] = useState(baseInterval);
   const [randomMessageLevel, setRandomMessageLevel] = useState(1);
 
-  const baseInterval = 150000;
   const minInterval = 20000;
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const lastCalculatedIntervalRef = useRef<number>(randomMessageInterval);
@@ -424,7 +424,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   useEffect(() => {
     const calculateNewInterval = () => {
-      const skillFactor = totalSkillLevel / 300; // Assuming max total skill level is 300
+      const skillFactor = totalSkillLevel / 297; // Assuming max total skill level is 297
       const followerFactor = followers / 100000; // Assuming max followers to consider is 10000
       const influenceFactor = skillFactor + followerFactor;
       const newInterval = Math.max(baseInterval * (1 - influenceFactor), minInterval);
@@ -468,15 +468,24 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       shooting: 0.4,
       fitness: 0.3,
     };
-
-    const draftScore = weights.agility * skills.agility + weights.shooting * skills.shooting + weights.fitness * skills.fitness;
-
+  
+    // Normalize skills to a scale of 0 to 1 (assuming the max level is 100)
+    const normalizedAgility = skills.agility / 99;
+    const normalizedShooting = skills.shooting / 99;
+    const normalizedFitness = skills.fitness / 99;
+  
+    // Calculate the draft score with normalized values
+    const draftScore = 
+      weights.agility * normalizedAgility + 
+      weights.shooting * normalizedShooting + 
+      weights.fitness * normalizedFitness;
+  
     const thresholds = {
-      undrafted: 55,
-      secondRound: 75,
-      firstRound: 85,
+      undrafted: 0.55,  
+      secondRound: 0.75,
+      firstRound: 0.85,
     };
-
+  
     let newDraftRank;
     if (draftScore < thresholds.undrafted) {
       newDraftRank = "Undrafted";
@@ -491,7 +500,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       setPickNumber(calculatedPickNumber);
       newDraftRank = `Pick #${calculatedPickNumber}`;
     }
-
+  
     setDraftRank(newDraftRank);
   }, [skills]);
 
@@ -622,11 +631,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setShowEndorsements(parsedState.showEndorsements);
 
         setSkills(parsedState.skills || { agility: 0, shooting: 0, fitness: 0 });
-        setTrainingDurations(parsedState.trainingDurations || {
-          agility: 40000,
-          shooting: 40000,
-          fitness: 40000
-        });
+        setTrainingDurations(parsedState.trainingDurations);
         setSkillUpgrade(parsedState.skillUpgrade || { agility: 1, shooting: 1, fitness: 1 });
 
         setEnergyLevel(parsedState.energyLevel || 0); 

@@ -62,7 +62,7 @@ const Training: React.FC<TrainingProps> = ({
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('agility')}
-            disabled={trainingInProgress || !trainingAvailable || !isStateLoaded || !gameStarted || isRunning || gameOver}
+            disabled={trainingInProgress || !trainingAvailable || !isStateLoaded || !gameStarted || isRunning || gameOver || skills.agility >= 99}
           >
             <span>TRAIN</span>
             <span>(+{skillUpgrade.agility})</span>
@@ -76,7 +76,7 @@ const Training: React.FC<TrainingProps> = ({
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('shooting')}
-            disabled={trainingInProgress || !trainingAvailable || !isStateLoaded || !gameStarted || isRunning || gameOver}
+            disabled={trainingInProgress || !trainingAvailable || !isStateLoaded || !gameStarted || isRunning || gameOver || skills.shooting >= 99}
           >
             <span>TRAIN</span>
             <span>(+{skillUpgrade.shooting})</span>
@@ -90,7 +90,7 @@ const Training: React.FC<TrainingProps> = ({
           <button
             className={styles.button}
             onClick={() => handleTrainingClick('fitness')}
-            disabled={trainingInProgress || !trainingAvailable || !isStateLoaded || !gameStarted || isRunning || gameOver}
+            disabled={trainingInProgress || !trainingAvailable || !isStateLoaded || !gameStarted || isRunning || gameOver || skills.fitness >= 99}
           >
             <span>TRAIN</span>
             <span>(+{skillUpgrade.fitness})</span>

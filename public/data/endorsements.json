@@ -19,9 +19,9 @@
     "id": 4,
     "name": "Adidas Boost",
     "description": "Experience unparalleled energy return and comfort with Adidas Boost.",
-    "action": "increase_agility_training_increment",
-    "value": 2,
-    "level": 2
+    "action": "reduce_recovery_time",
+    "value": 10,
+    "level": 1
   },
   {
     "id": 5,
@@ -40,14 +40,6 @@
     "level": 2
   },
   {
-    "id": 8,
-    "name": "Biomechanics Shooting Analysis",
-    "description": "Analyze and improve shooting mechanics through biomechanics.",
-    "action": "increase_shooting_training_increment",
-    "value": 2,
-    "level": 2
-  },
-  {
     "id": 9,
     "name": "Nutrition Guide",
     "description": "You just acquired a nutrition guide to optimize your diet and performance.",
@@ -59,9 +51,9 @@
     "id": 10,
     "name": "High Altitude Training Camp",
     "description": "Boost your endurance and performance with high altitude training.",
-    "action": "increase_fitness_training_increment",
-    "value": 2,
-    "level": 2
+    "action": "reduce_recovery_time",
+    "value": 10,
+    "level": 1
   },
   {
     "id": 12,
