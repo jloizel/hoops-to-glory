@@ -64,6 +64,18 @@
     "description": "Play 30 games"
   },
   {
+    "milestone": "15 assists/game",
+    "description": "Average 15 assists per game"
+  },
+  {
+    "milestone": "15 rebounds/game",
+    "description": "Average 15 rebounds per game"
+  },
+  {
+    "milestone": "22 minutes/game",
+    "description": "Average 22 minutes per game"
+  },
+  {
     "milestone": "Sixth Man",
     "description": "Become the sixth man on your team"
   },
@@ -76,28 +88,16 @@
     "description": "Become a predicted second round pick"
   },
   {
-    "milestone": "25,000 followers",
-    "description": "Reach 25,000 followers on social media"
-  },
-  {
     "milestone": "50 games played",
     "description": "Play 50 games"
   },
   {
+    "milestone": "25,000 followers",
+    "description": "Reach 25,000 followers on social media"
+  },
+  {
     "milestone": "Starter",
     "description": "Become a starter on your team"
-  },
-  {
-    "milestone": "15 assists/game",
-    "description": "Average 15 assists per game"
-  },
-  {
-    "milestone": "15 rebounds/game",
-    "description": "Average 15 rebounds per game"
-  },
-  {
-    "milestone": "22 minutes/game",
-    "description": "Average 22 minutes per game"
   },
   {
     "milestone": "First Round Pick",
