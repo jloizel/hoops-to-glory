@@ -165,7 +165,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [showRecovery, setShowRecovery] = useState(false)
   const initialClickCount = 150
   const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
-  const [currentClickResetValue, setCurrentClickResetValue] = useState(initialClickCount);
+  const [currentClickValue, setCurrentClickValue] = useState(initialClickCount);
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
   const [energyStorage, setEnergyStorage] = useState(1)
   const [autoClick, setAutoClick] = useState(false);
@@ -210,7 +210,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setEnergyLevel(Math.min(potentialEnergyLevel, energyStorage)); 
 
         // Reset click count to the initial value after recovering energy
-        setClickCount(currentClickResetValue);
+        setClickCount(currentClickValue);
       }
     // }
   };
@@ -233,7 +233,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const reduceClickCount = (value: number) => {
     setClickCount(prevCount => {
       const newCount = Math.max(0, prevCount - value);
-      setCurrentClickResetValue(newCount); // Update the reset value to the current click count
+      setCurrentClickValue(newCount); // Update the reset value to the current click count
       return newCount;
     });
   };
@@ -377,7 +377,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   
     setGrowthRate(newGrowthRate);
   
-    const newIntervalDuration = Math.max(500, 10000 / newGrowthRate);
+    const newIntervalDuration = Math.max(200, 10000 / newGrowthRate);
     setIntervalDuration(newIntervalDuration);
   }, [skills, gamesPlayed]);
   

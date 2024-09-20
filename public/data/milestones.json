@@ -92,6 +92,10 @@
     "description": "Play 50 games"
   },
   {
+    "milestone": "25 points/game",
+    "description": "Average 25 points per game"
+  },
+  {
     "milestone": "25,000 followers",
     "description": "Reach 25,000 followers on social media"
   },
@@ -108,20 +112,12 @@
     "description": "Become a star player on the team"
   },
   {
-    "milestone": "50,000 followers",
-    "description": "Reach 50,000 followers on social media"
-  },
-  {
-    "milestone": "25 points/game",
-    "description": "Average 25 points per game"
-  },
-  {
-    "milestone": "20 rebounds/game",
-    "description": "Average 20 rebounds per game"
-  },
-  {
     "milestone": "28 minutes/game",
     "description": "Average 28 minutes per game"
+  },
+  {
+    "milestone": "50,000 followers",
+    "description": "Reach 50,000 followers on social media"
   },
   {
     "milestone": "32 points/game",
@@ -146,6 +142,10 @@
   {
     "milestone": "25 assists/game",
     "description": "Average 25 assists per game"
+  },
+  {
+    "milestone": "20 rebounds/game",
+    "description": "Average 20 rebounds per game"
   },
   {
     "milestone": "40 points/game",
