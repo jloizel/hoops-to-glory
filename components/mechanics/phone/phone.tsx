@@ -132,7 +132,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
       const randomNotification = availableNotifications[randomIndex];
 
       setNotifications((prevNotifications) => [
-        { ...randomNotification, id: Date.now() }, // Assign unique id to the new notification
+        { ...randomNotification, id: randomNotification.id }, // Assign unique id to the new notification
         ...prevNotifications,
       ]);
 
@@ -175,7 +175,10 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
 
       if (matchingEndorsements.length > 0) {
         setNotifications((prevNotifications) => [
-          ...matchingEndorsements.map(notification => ({ ...notification, id: Date.now() })), // Add unique IDs
+          ...matchingEndorsements.map(notification => ({
+            ...notification,
+            id: notification.id + Date.now(), // Keep `id` as a number by adding Date.now()
+          })),
           ...prevNotifications,
         ]);
 

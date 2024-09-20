@@ -33,7 +33,7 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
     if (autoClick) {
       const interval = setInterval(() => {
         handleClick();
-      }, 500); // Adjust the interval as needed
+      }, 300); // Adjust the interval as needed
 
       return () => clearInterval(interval); // Clear interval on component unmount or when autoClick is turned off
     }

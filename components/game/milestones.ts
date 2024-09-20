@@ -16,6 +16,7 @@ type ConditionParams = {
   teamRole: string;
   draftRank: string | number;
   minutesPerGame: number;
+  pickNumber: number | null
 };
 
 type Milestone = {
@@ -63,12 +64,11 @@ const milestones: Milestone[] = [
   { condition: ({ minutesPerGame }) => minutesPerGame >= 34, achievement: '34 minutes/game' },
   { condition: ({ teamRole }) => teamRole === 'Star Player', achievement: 'Star Player' },
   { condition: ({ followers }) => followers >= 50000, achievement: '50,000 followers' },
-  { condition: ({ draftRank }) => typeof draftRank === 'number' && draftRank <= 10, achievement: 'Top 10 Pick' },
-  { condition: ({ followers }) => followers >= 100000, achievement: '100,000 followers' },
+  { condition: ({ pickNumber }) => pickNumber !== null && pickNumber <= 10, achievement: 'Top 10 Pick' },
   { condition: ({ assistsPerGame }) => assistsPerGame >= 25, achievement: '25 assists/game' },
   { condition: ({ reboundsPerGame }) => reboundsPerGame >= 20, achievement: '20 rebounds/game' },
   { condition: ({ pointsPerGame }) => pointsPerGame >= 40, achievement: '40 points/game' },
-  { condition: ({ followers }) => followers >= 250000, achievement: '250,000 followers' },
+  { condition: ({ followers }) => followers >= 100000, achievement: '100,000 followers' },
   { condition: ({ draftRank }) => draftRank === 'Pick #1', achievement: 'Become Number One NBA Draft Pick' },
 ];
 

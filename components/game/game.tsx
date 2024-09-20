@@ -26,6 +26,7 @@ interface Endorsement {
   action: string;
   value: number;
   // milestone: string;
+  level: number;
 }
 
 interface GameProps {
@@ -192,27 +193,18 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       return; // Exit early to prevent further actions
     }
 
-    // Allow the user to decrement clickCount down to 1 if either isRunning or trainingInProgress is true
-    // if ((isRunning || trainingInProgress) && clickCount > 1) {
-    //   setClickCount(prevCount => prevCount - 1);
-    //   return;
-    // }
-  
-    // Allow reaching 0 and increasing energy level only when both are false
-    // if (!isRunning && !trainingInProgress) {
-      if (clickCount > 1) {
-        setClickCount(prevCount => prevCount - 1); // Decrease click count by 1
-      } else if (clickCount === 1) {
-        // Calculate the potential new energy level
-        const potentialEnergyLevel = energyLevel + energyStorage;
+    if (clickCount > 1) {
+      setClickCount(prevCount => prevCount - 1); // Decrease click count by 1
+    } else if (clickCount === 1) {
+      // Calculate the potential new energy level
+      const potentialEnergyLevel = energyLevel + energyStorage;
 
-        // Update the energy level, but cap it at the energyStorage limit
-        setEnergyLevel(Math.min(potentialEnergyLevel, energyStorage)); 
+      // Update the energy level, but cap it at the energyStorage limit
+      setEnergyLevel(Math.min(potentialEnergyLevel, energyStorage)); 
 
-        // Reset click count to the initial value after recovering energy
-        setClickCount(currentClickValue);
-      }
-    // }
+      // Reset click count to the initial value after recovering energy
+      setClickCount(currentClickValue);
+    }
   };
 
   const toggleAutoClick = () => {
@@ -232,7 +224,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   
   const reduceClickCount = (value: number) => {
     setClickCount(prevCount => {
-      const newCount = Math.max(0, prevCount - value);
+      const newCount = prevCount - value;
       setCurrentClickValue(newCount); // Update the reset value to the current click count
       return newCount;
     });
@@ -300,7 +292,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const minutesPerGame = parseFloat((40 * Math.pow(averageSkillLevel / 99, 0.8)).toFixed(1));
 
   const teamRole = () => {
-    if (averageSkillLevel < 25) return "Benchwarmer";
+    if (averageSkillLevel < 20) return "Benchwarmer";
     if (averageSkillLevel < 50) return "Role Player";
     if (averageSkillLevel < 70) return "Sixth Man";
     if (averageSkillLevel < 90) return "Starter";
@@ -313,12 +305,51 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [showEndorsements, setShowEndorsements] = useState(false)
   const [completedMilestones, setCompletedMilestones] = useState<string[]>([]);
   const [selectedEndorsements, setSelectedEndorsements] = useState<string[]>([]);
+  const [endorsements, setEndorsements] = useState<Endorsement[]>([]);
+  const [level1Endorsements, setLevel1Endorsements] = useState<Endorsement[]>([]);
+  const [level2Endorsements, setLevel2Endorsements] = useState<Endorsement[]>([]);
 
   useEffect(() => {
     if (gamesPlayed >= 1) {
       setShowEndorsements(true)
     }
   }, [gamesPlayed])
+
+  const fetchEndorsements = () => {
+    // Fetch endorsements from the server
+    fetch('/data/endorsements.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        setEndorsements(data);
+        // Separate into level 1 and level 2 endorsements
+        const level1 = data.filter((e: Endorsement) => e.level === 1);
+        const level2 = data.filter((e: Endorsement) => e.level === 2);
+        setLevel1Endorsements(prev => prev.length ? prev : level1);
+        setLevel2Endorsements(prev => prev.length ? prev : level2);
+      });
+  };
+  
+  useEffect(() => {
+    // Only fetch endorsements if they haven't been loaded from the saved state
+    if (isStateLoaded && endorsements.length === 0) {
+      fetchEndorsements();
+    }
+  }, [isStateLoaded, endorsements.length]);
+
+  const handleEndorsementSelection = (endorsement: Endorsement) => {
+    // Update the selected endorsement in parent component
+    if (endorsement.level === 1) {
+      setLevel1Endorsements(prev => prev.filter(e => e.id !== endorsement.id));
+    } else if (endorsement.level === 2) {
+      setLevel2Endorsements(prev => prev.filter(e => e.id !== endorsement.id));
+    }
+  };
+
 
   const handleEndorsementSelect = (endorsement: Endorsement) => { //this needs to match the "action" in the endorsement json file
     setSelectedEndorsements((prevEndorsements) => [...prevEndorsements, endorsement.name]);
@@ -368,7 +399,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [growthRate, setGrowthRate] = useState(1);
   const [intervalDuration, setIntervalDuration] = useState(10000);
 
-
   useEffect(() => {
     const baseGrowth = 1; // Set base growth to 1
     const timeMultiplier = gamesPlayed > 0 ? (1 + (gamesPlayed / 10)) : 1;
@@ -377,7 +407,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   
     setGrowthRate(newGrowthRate);
   
-    const newIntervalDuration = Math.max(200, 10000 / newGrowthRate);
+    const newIntervalDuration = Math.max(100, 10000 / newGrowthRate);
     setIntervalDuration(newIntervalDuration);
   }, [skills, gamesPlayed]);
   
@@ -389,9 +419,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         // Increase random boost based on followers
         let boost = 0;
         if (followers > 100000) {
-          boost = Math.random() < 0.5 ? (Math.random() < 0.5 ? 15 : 25) : 0; // Higher chance and values if many followers
+          boost = Math.random() < 0.5 ? (Math.random() < 0.5 ? 40 : 60) : 0; // Higher chance and values if many followers
         } else if (followers > 50000) {
-          boost = Math.random() < 0.4 ? (Math.random() < 0.5 ? 10 : 15) : 0; // Higher chance and values if many followers
+          boost = Math.random() < 0.4 ? (Math.random() < 0.5 ? 20 : 30) : 0; // Higher chance and values if many followers
         } else if (followers > 10000) {
           boost = Math.random() < 0.3 ? (Math.random() < 0.5 ? 5 : 10) : 0; // Medium chance and values
         } else if (followers > 1000) {
@@ -462,6 +492,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [draftRank, setDraftRank] = useState("Undrafted");
   const [pickNumber, setPickNumber] = useState<number | null>(null);
 
+  console.log(pickNumber)
+
   useEffect(() => {
     const weights = {
       agility: 0.3,
@@ -495,8 +527,15 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       newDraftRank = "First Round Pick";
     } else {
       const maxPickNumber = 30; // Assuming 30 picks in the first round
-      const rankScalingFactor = 0.5; // Adjust scaling factor to fit the range
-      const calculatedPickNumber = Math.max(1, maxPickNumber - Math.floor((draftScore - thresholds.firstRound) * rankScalingFactor));
+      const minPickNumber = 1;   // The highest pick number (1st pick)
+  
+      // Normalize the score above the first round threshold
+      const pickNumberRange = maxPickNumber - minPickNumber; // 29 for 1-30 range
+      const scoreAboveThreshold = draftScore - thresholds.firstRound; // Get how much above the threshold
+      const normalizedScore = Math.min(scoreAboveThreshold / (1 - thresholds.firstRound), 1); // Normalize to 0-1
+  
+      const calculatedPickNumber = Math.floor(minPickNumber + (pickNumberRange * (1 - normalizedScore)));
+      
       setPickNumber(calculatedPickNumber);
       newDraftRank = `Pick #${calculatedPickNumber}`;
     }
@@ -510,7 +549,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setGameOver(true)
       }, 5000);
     }
-  })
+  }, [pickNumber])
+
+  console.log(gameOver)
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -520,7 +561,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     if (gameOver) {
       setOpen(true)
     }
-  },[])  
+  },[gameOver])  
 
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "unset";
@@ -570,14 +611,14 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
     milestones.forEach(({ condition, achievement }) => {
       const params = {
-        triggerIntroMsg1, triggerIntroMsg2, triggerIntroMsg3, triggerIntroMsg4, triggerIntroMsg5, showRecovery, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank, minutesPerGame
+        triggerIntroMsg1, triggerIntroMsg2, triggerIntroMsg3, triggerIntroMsg4, triggerIntroMsg5, showRecovery, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole: evaluatedTeamRole, draftRank, minutesPerGame, pickNumber
       };
       if (condition(params) && !achievements.includes(achievement)) {
         setAchievements(prev => [...prev, achievement]);
       }
     });
   }, [
-    gameStarted, showRecovery, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements
+    gameStarted, showRecovery, showGames, showEndorsements, pointsPerGame, followers, gamesPlayed, assistsPerGame, reboundsPerGame, averageSkillLevel, teamRole, draftRank, minutesPerGame, achievements, pickNumber
   ]);
 
   useEffect(() => {
@@ -604,7 +645,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         statInterval,
 
         achievements,
-        completedMilestones
+        completedMilestones,
+        level1Endorsements,
+        level2Endorsements,
+        selectedEndorsements
       };
       localStorage.setItem('gameState', JSON.stringify(gameState));
     };
@@ -615,7 +659,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     return () => {
       window.removeEventListener('beforeunload', saveGameState);
     };
-  }, [gameStarted, elapsedTime, followers, journeyStarted, showRecovery, showGames, showEndorsements, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, clickCount, autoClick, gamesPlayed, statInterval, teamRole, achievements, completedMilestones ]);
+  }, [gameStarted, elapsedTime, followers, journeyStarted, showRecovery, showGames, showEndorsements, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, clickCount, autoClick, gamesPlayed, statInterval, teamRole, achievements, completedMilestones, level1Endorsements, level2Endorsements, selectedEndorsements ]);
 
   useEffect(() => {
     const loadGameState = () => {
@@ -643,6 +687,12 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setStatInterval(parsedState.statInterval)
         setAchievements(parsedState.achievements || []);
         setCompletedMilestones(parsedState.completedMilestones || [])
+
+        if (parsedState.level1Endorsements && parsedState.level2Endorsements) {
+          setLevel1Endorsements(parsedState.level1Endorsements);
+          setLevel2Endorsements(parsedState.level2Endorsements);
+        }
+        setSelectedEndorsements(parsedState.selectedEndorsements)
         }
         setIsStateLoaded(true);
       };
@@ -677,6 +727,8 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setShowEndorsements(false);
     setCompletedMilestones([])
     setTrainingAvailable(true)
+    fetchEndorsements();
+    setSelectedEndorsements([])
   };
 
   return (
@@ -761,7 +813,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
                 onEndorsementSelect={handleEndorsementSelect}
                 completedMilestones={completedMilestones} 
                 onMilestoneChange={handleMilestoneChange}
+                handleEndorsementSelection={handleEndorsementSelection}
                 gameOver={gameOver}
+                level1Endorsements={level1Endorsements}
+                level2Endorsements={level2Endorsements}
               />
             }
           </div>

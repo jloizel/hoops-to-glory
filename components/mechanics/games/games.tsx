@@ -138,7 +138,7 @@ const Games = ({
     const currentStats = pointsPerGame + assistsPerGame + reboundsPerGame;
 
     const dynamicInterval = baseInterval * (1 - currentStats / maxStats);
-    return Math.max(dynamicInterval, 500); // Minimum interval of 500 ms
+    return Math.max(dynamicInterval, 2000); // Minimum interval of 500 ms
   }, [pointsPerGame, assistsPerGame, reboundsPerGame]);
 
   useEffect(() => {
