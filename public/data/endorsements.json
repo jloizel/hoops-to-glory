@@ -8,14 +8,6 @@
     "level": 1
   },
   {
-    "id": 2,
-    "name": "Biomechanics Analysis",
-    "description": "Refine your movements and prevent injuries with biomechanics analysis.",
-    "action": "increase_agility_training_increment",
-    "value": 1,
-    "level": 1
-  },
-  {
     "id": 3,
     "name": "Nike Air Zoom",
     "description": "Unleash your speed and agility with Nike Air Zoom.",
@@ -35,14 +27,6 @@
     "id": 5,
     "name": "Shooting Machine",
     "description": "Increase your shooting accuracy with a high-tech shooting machine.",
-    "action": "increase_shooting_training_increment",
-    "value": 1,
-    "level": 1
-  },
-  {
-    "id": 6,
-    "name": "Customized Shooting Improvement Plan",
-    "description": "Get a personalized plan to target and improve shooting skills.",
     "action": "increase_shooting_training_increment",
     "value": 1,
     "level": 1
@@ -75,14 +59,6 @@
     "id": 10,
     "name": "High Altitude Training Camp",
     "description": "Boost your endurance and performance with high altitude training.",
-    "action": "increase_fitness_training_increment",
-    "value": 1,
-    "level": 1
-  },
-  {
-    "id": 11,
-    "name": "Functional Movement Screening",
-    "description": "Identify and correct imbalances with a functional movement screening.",
     "action": "increase_fitness_training_increment",
     "value": 2,
     "level": 2

@@ -300,10 +300,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const minutesPerGame = parseFloat((40 * Math.pow(averageSkillLevel / 100, 0.8)).toFixed(1));
 
   const teamRole = () => {
-    if (totalSkillLevel < 40) return "Benchwarmer";
-    if (totalSkillLevel < 75) return "Role Player";
-    if (totalSkillLevel < 150) return "Sixth Man";
-    if (totalSkillLevel < 250) return "Starter";
+    if (averageSkillLevel < 30) return "Benchwarmer";
+    if (averageSkillLevel < 60) return "Role Player";
+    if (averageSkillLevel < 75) return "Sixth Man";
+    if (averageSkillLevel < 90) return "Starter";
     return "Star Player";
   };
 
@@ -377,7 +377,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   
     setGrowthRate(newGrowthRate);
   
-    const newIntervalDuration = Math.max(100, 10000 / newGrowthRate);
+    const newIntervalDuration = Math.max(500, 10000 / newGrowthRate);
     setIntervalDuration(newIntervalDuration);
   }, [skills, gamesPlayed]);
   
