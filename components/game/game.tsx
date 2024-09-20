@@ -233,7 +233,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   }, [showRecovery, energyLevel]);
 
   
-  const reduceInitialClickCount = (value: number) => {
+  const reduceClickCount = (value: number) => {
     setClickCount(prevCount => Math.max(0, prevCount - value));
     // setClickCount(initialClickCount * (1 - value / 100));
   };
@@ -343,10 +343,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         reduceTrainingTime('fitness', endorsement.value);
         break;
       case 'reduce_recovery_time':
-        reduceInitialClickCount(endorsement.value)
+        reduceClickCount(endorsement.value)
         break;
       case 'reduce_recovery_time_auto':
-        reduceInitialClickCount(endorsement.value)
+        reduceClickCount(endorsement.value)
         toggleAutoClick()
         break;
       case 'increase_energy_storage':
@@ -472,10 +472,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     const draftScore = weights.agility * skills.agility + weights.shooting * skills.shooting + weights.fitness * skills.fitness;
 
     const thresholds = {
-      undrafted: 30,
-      lateSecondRound: 50,
-      earlySecondRound: 70,
-      lateFirstRound: 85,
+      undrafted: 40,
+      lateSecondRound: 65,
+      earlySecondRound: 80,
+      lateFirstRound: 95,
     };
 
     let newDraftRank;

@@ -24,16 +24,16 @@
     "description": "Average 5 minutes per game"
   },
   {
-    "milestone": "Role Player",
-    "description": "Become a role player on the team"
-  },
-  {
     "milestone": "1000 followers",
     "description": "Reach 1000 followers on social media"
   },
   {
     "milestone": "10 points/game",
     "description": "Average 10 points per game"
+  },
+  {
+    "milestone": "Role Player",
+    "description": "Become a role player on the team"
   },
   {
     "milestone": "15 games played",
@@ -52,14 +52,6 @@
     "description": "Average 10 minutes per game"
   },
   {
-    "milestone": "Sixth Man",
-    "description": "Become the sixth man on your team"
-  },
-  {
-    "milestone": "10,000 followers",
-    "description": "Reach 10,000 followers on social media"
-  },
-  {
     "milestone": "18 points/game",
     "description": "Average 18 points per game"
   },
@@ -70,6 +62,14 @@
   {
     "milestone": "30 games played",
     "description": "Play 30 games"
+  },
+  {
+    "milestone": "Sixth Man",
+    "description": "Become the sixth man on your team"
+  },
+  {
+    "milestone": "10,000 followers",
+    "description": "Reach 10,000 followers on social media"
   },
   {
     "milestone": "Second Round Pick",
