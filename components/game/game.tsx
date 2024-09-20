@@ -300,9 +300,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const minutesPerGame = parseFloat((40 * Math.pow(averageSkillLevel / 100, 0.8)).toFixed(1));
 
   const teamRole = () => {
-    if (averageSkillLevel < 30) return "Benchwarmer";
-    if (averageSkillLevel < 60) return "Role Player";
-    if (averageSkillLevel < 75) return "Sixth Man";
+    if (averageSkillLevel < 25) return "Benchwarmer";
+    if (averageSkillLevel < 50) return "Role Player";
+    if (averageSkillLevel < 70) return "Sixth Man";
     if (averageSkillLevel < 90) return "Starter";
     return "Star Player";
   };

@@ -201,7 +201,7 @@
     "id": 34,
     "name": "Recovery Specialist",
     "type": "endorsement",
-    "content": "Your recovery will now trigger automatically."
+    "content": "Your recovery time has been decreased and will now trigger automatically."
   },
   {
     "id": 35,

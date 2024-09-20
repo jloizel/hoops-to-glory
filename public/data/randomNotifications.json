@@ -1055,14 +1055,14 @@
     "type": "message",
     "name": "Brad",
     "content": "You’re turning into a franchise player!",
-    "level": "2"
+    "level": "3"
   },
   {
     "id": 150,
     "type": "message",
     "name": "Sophie",
     "content": "That fast break dunk was insane, when’s the highlight dropping?",
-    "level": "2"
+    "level": "3"
   },
   {
     "id": 151,
