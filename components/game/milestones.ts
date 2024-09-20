@@ -60,7 +60,6 @@ const milestones: Milestone[] = [
   { condition: ({ teamRole }) => teamRole === 'Starter', achievement: 'Starter' },
   { condition: ({ draftRank }) => draftRank === 'Late First Round Pick', achievement: 'First Round Pick' },  
   { condition: ({ teamRole }) => teamRole === 'Star Player', achievement: 'Star Player' },
-  { condition: ({ minutesPerGame }) => minutesPerGame >= 28, achievement: '28 minutes/game' },
   { condition: ({ followers }) => followers >= 50000, achievement: '50,000 followers' },
   { condition: ({ pointsPerGame }) => pointsPerGame >= 32, achievement: '32 points/game' },
   { condition: ({ draftRank }) => typeof draftRank === 'number' && draftRank <= 10, achievement: 'Top 10 Pick' },
