@@ -33,7 +33,6 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
   const [currentMilestone, setCurrentMilestone] = useState<Milestone | null>(null);
   const [currentLevel, setCurrentLevel] = useState<number>(1);
 
-  const FIRST_MILESTONE = { milestone: '5 games played', description: 'Play 5 games to unlock endorsements' };
 
   useEffect(() => {
     // Fetch endorsements
@@ -80,8 +79,12 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
     const nextAvailable: Endorsement[] = [];
     const types = new Set<string>();
 
-    const level1Endorsements = endorsements.filter(e => e.level === 1);
-    const level2Endorsements = endorsements.filter(e => e.level === 2);
+    const level1Endorsements = endorsements.filter(
+      (e) => e.level === 1 && !selectedEndorsements.some((se) => se.id === e.id)
+    );
+    const level2Endorsements = endorsements.filter(
+      (e) => e.level === 2 && !selectedEndorsements.some((se) => se.id === e.id)
+    );
 
     shuffleArray(level1Endorsements);
     shuffleArray(level2Endorsements);
@@ -89,8 +92,8 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
     for (let i = 0; i < 3; i++) {
       const random = Math.random(); // Get a random number between 0 and 1
 
-      if (random < 0.55) {
-        // 55% chance to pick from level 1
+      if (random < 0.6) {
+        // 60% chance to pick from level 1
         if (level1Endorsements.length > 0) {
           const selected = level1Endorsements.shift(); // Get the first item
           if (selected) {
@@ -99,7 +102,7 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
           }
         }
       } else {
-        // 45% chance to pick from level 2
+        // 40% chance to pick from level 2
         if (level2Endorsements.length > 0) {
           const selected = level2Endorsements.shift(); // Get the first item
           if (selected) {
@@ -148,8 +151,12 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
     const types = new Set<string>(selectedEndorsements.map(e => e.action));
     const nextAvailable: Endorsement[] = [];
 
-    const level1Endorsements = endorsements.filter(e => e.level === 1 && !types.has(e.action));
-    const level2Endorsements = endorsements.filter(e => e.level === 2 && !types.has(e.action));
+    const level1Endorsements = endorsements.filter(
+      (e) => e.level === 1 && !types.has(e.action) && !selectedEndorsements.some((se) => se.id === e.id)
+    );
+    const level2Endorsements = endorsements.filter(
+      (e) => e.level === 2 && !types.has(e.action) && !selectedEndorsements.some((se) => se.id === e.id)
+    );
 
     shuffleArray(level1Endorsements);
     shuffleArray(level2Endorsements);
@@ -157,8 +164,8 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
     for (let i = 0; i < 3; i++) {
       const random = Math.random(); // Get a random number between 0 and 1
 
-      if (random < 0.7) {
-        // 70% chance to pick from level 1
+      if (random < 0.6) {
+        // 60% chance to pick from level 1
         if (level1Endorsements.length > 0) {
           const selected = level1Endorsements.shift(); // Get the first item
           if (selected) {
@@ -167,7 +174,7 @@ const Endorsements: React.FC<EndorsementsProps> = ({ achievements, onEndorsement
           }
         }
       } else {
-        // 30% chance to pick from level 2
+        // 40% chance to pick from level 2
         if (level2Endorsements.length > 0) {
           const selected = level2Endorsements.shift(); // Get the first item
           if (selected) {
