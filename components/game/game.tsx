@@ -472,10 +472,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     const draftScore = weights.agility * skills.agility + weights.shooting * skills.shooting + weights.fitness * skills.fitness;
 
     const thresholds = {
-      undrafted: 40,
-      lateSecondRound: 65,
-      earlySecondRound: 80,
-      lateFirstRound: 95,
+      undrafted: 55,
+      lateSecondRound: 75,
+      earlySecondRound: 85,
+      lateFirstRound: 90,
     };
 
     let newDraftRank;
