@@ -497,7 +497,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
   useEffect(() => {
     if (pickNumber === 1) {
-      setGameOver(true)
+      setTimeout(() => {
+        setGameOver(true)
+      }, 5000);
     }
   })
 

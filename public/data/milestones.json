@@ -108,6 +108,14 @@
     "description": "Become a predicted first round pick"
   },
   {
+    "milestone": "35 points/game",
+    "description": "Average 35 points per game"
+  },
+  {
+    "milestone": "34 minutes/game",
+    "description": "Average 34 minutes per game"
+  },
+  {
     "milestone": "Star Player",
     "description": "Become a star player on the team"
   },
@@ -116,24 +124,12 @@
     "description": "Reach 50,000 followers on social media"
   },
   {
-    "milestone": "32 points/game",
-    "description": "Average 32 points per game"
-  },
-  {
     "milestone": "Top 10 Pick",
     "description": "Become a predicted top 10 pick"
   },
   {
     "milestone": "100,000 followers",
     "description": "Reach 100,000 followers on social media"
-  },
-  {
-    "milestone": "34 minutes/game",
-    "description": "Average 34 minutes per game"
-  },
-  {
-    "milestone": "80 skill average",
-    "description": "Achieve an average skill level of 80"
   },
   {
     "milestone": "25 assists/game",
@@ -146,10 +142,6 @@
   {
     "milestone": "40 points/game",
     "description": "Average 40 points per game"
-  },
-  {
-    "milestone": "100 skill average",
-    "description": "Achieve an average skill level of 100"
   },
   {
     "milestone": "250,000 followers",
