@@ -25,6 +25,7 @@ interface EndorsementsProps {
   handleEndorsementSelection: (endorsement: Endorsement) => void;
   level1Endorsements: Endorsement[];
   level2Endorsements: Endorsement[];
+  selectedEndorsements: string[]
 }
 
 const Endorsements: React.FC<EndorsementsProps> = ({
@@ -36,9 +37,10 @@ const Endorsements: React.FC<EndorsementsProps> = ({
   handleEndorsementSelection,
   level1Endorsements,
   level2Endorsements,
+  selectedEndorsements
 }) => {
   const [availableEndorsements, setAvailableEndorsements] = useState<Endorsement[]>([]);
-  const [selectedEndorsements, setSelectedEndorsements] = useState<Endorsement[]>([]);
+  // const [selectedEndorsements, setSelectedEndorsements] = useState<Endorsement[]>([]);
   const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [currentMilestone, setCurrentMilestone] = useState<Milestone | null>(null);
 
@@ -89,9 +91,11 @@ const Endorsements: React.FC<EndorsementsProps> = ({
   
     // Filter out already selected endorsements
     const filteredLevel1 = level1Endorsements.filter(e => 
-      !selectedEndorsements.some(selected => selected.id === e.id));
+      !selectedEndorsements.includes(e.name) // Compare the endorsement's name to the selectedEndorsements array
+    );
     const filteredLevel2 = level2Endorsements.filter(e => 
-      !selectedEndorsements.some(selected => selected.id === e.id));
+      !selectedEndorsements.includes(e.name) // Same here
+    );
   
     // Shuffle the endorsement arrays to randomize the order
     const shuffledLevel1 = shuffleArray(filteredLevel1);
@@ -126,7 +130,7 @@ const Endorsements: React.FC<EndorsementsProps> = ({
   const handleEndorsementSelect = (endorsement: Endorsement) => {
     // Add the selected endorsement to the list
     onEndorsementSelect(endorsement); // Notify parent about the selected endorsement
-    setSelectedEndorsements((prevEndorsements) => [...prevEndorsements, endorsement]);
+    // setSelectedEndorsements((prevEndorsements) => [...prevEndorsements, endorsement]);
 
     // Notify parent that the current milestone is completed
     if (currentMilestone) {

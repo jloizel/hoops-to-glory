@@ -816,6 +816,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
                 gameOver={gameOver}
                 level1Endorsements={level1Endorsements}
                 level2Endorsements={level2Endorsements}
+                selectedEndorsements={selectedEndorsements}
               />
             }
           </div>
