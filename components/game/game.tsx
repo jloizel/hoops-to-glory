@@ -36,9 +36,10 @@ interface GameProps {
   journeyStarted: boolean;
   showInactiveModal: boolean;
   isTabActive: boolean;
+  handleDontRemindAgain: () => void
 }
 
-const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyStarted, showInactiveModal, isTabActive}) => {
+const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyStarted, showInactiveModal, isTabActive, handleDontRemindAgain}) => {
   const [gameStarted, setGameStarted] = useState(false)
   const [gameOver, setGameOver] = useState(false)
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -546,6 +547,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       setTimeout(() => {
         setGameOver(true)
       }, 5000);
+      handleDontRemindAgain()
     }
   }, [pickNumber])
 

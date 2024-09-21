@@ -150,7 +150,8 @@ const Home = () => {
         handleReset={handleReset} 
         journeyStarted={journeyStarted}
         showInactiveModal={showInactiveModal}   
-        isTabActive={isTabActive}   
+        isTabActive={isTabActive}
+        handleDontRemindAgain={handleDontRemindAgain}
       />
     </div>
   )
