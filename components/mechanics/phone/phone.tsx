@@ -127,7 +127,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
         !displayedNotificationIds.includes(notification.id)
     );
 
-    if (availableNotifications.length > 0) {
+    if (availableNotifications?.length > 0) {
       const randomIndex = Math.floor(Math.random() * availableNotifications.length);
       const randomNotification = availableNotifications[randomIndex];
 
@@ -146,7 +146,7 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
       if (!displayedAchievements.includes(achievementType)) {
         const matchingNotifications = specificNotifications.filter(notification => notification.milestone === achievementType);
         
-        if (matchingNotifications.length > 0) {
+        if (matchingNotifications?.length > 0) {
           setNotifications(prevNotifications => [
             ...matchingNotifications.map(notification => ({ ...notification, id: Date.now() })),
             ...prevNotifications
@@ -168,12 +168,12 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
   }, [achievements, specificNotifications, displayedAchievements]);
 
   useEffect(() => {
-    if (endorsementNotifications.length > 0 && selectedEndorsements.length > 0) {
+    if (endorsementNotifications?.length > 0 && selectedEndorsements?.length > 0) {
       const matchingEndorsements = endorsementNotifications.filter(notification =>
         selectedEndorsements.includes(notification.name) && !displayedNotificationIds.includes(notification.id)
       );
 
-      if (matchingEndorsements.length > 0) {
+      if (matchingEndorsements?.length > 0) {
         setNotifications((prevNotifications) => [
           ...matchingEndorsements.map(notification => ({
             ...notification,
