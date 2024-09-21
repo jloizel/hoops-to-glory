@@ -29,15 +29,15 @@ interface EndorsementsProps {
 }
 
 const Endorsements: React.FC<EndorsementsProps> = ({
-  achievements,
+  achievements = [],
   onEndorsementSelect,
-  completedMilestones,
+  completedMilestones = [],
   onMilestoneChange,
   gameOver,
   handleEndorsementSelection,
-  level1Endorsements,
-  level2Endorsements,
-  selectedEndorsements
+  level1Endorsements = [],
+  level2Endorsements = [],
+  selectedEndorsements = []
 }) => {
   const [availableEndorsements, setAvailableEndorsements] = useState<Endorsement[]>([]);
   // const [selectedEndorsements, setSelectedEndorsements] = useState<Endorsement[]>([]);
