@@ -6,12 +6,6 @@
     "content": "Your skills & agility upgrade increment has been increased."
   },
   {
-    "id": 2,
-    "name": "Biomechanics Analysis",
-    "type": "endorsement",
-    "content": "Your skills & agility upgrade increment has been increased."
-  },
-  {
     "id": 3,
     "name": "Nike Air Zoom",
     "type": "endorsement",
@@ -30,20 +24,8 @@
     "content": "Your shooting upgrade increment has been increased."
   },
   {
-    "id": 6,
-    "name": "Customized Shooting Improvement Plan",
-    "type": "endorsement",
-    "content": "Your shooting upgrade increment has been increased."
-  },
-  {
     "id": 7,
     "name": "Advanced Shooting Analytics",
-    "type": "endorsement",
-    "content": "Your shooting upgrade increment has been increased."
-  },
-  {
-    "id": 8,
-    "name": "Biomechanics Shooting Analysis",
     "type": "endorsement",
     "content": "Your shooting upgrade increment has been increased."
   },
@@ -56,12 +38,6 @@
   {
     "id": 10,
     "name": "High Altitude Training Camp",
-    "type": "endorsement",
-    "content": "Your strength & fitness upgrade increment has been increased."
-  },
-  {
-    "id": 11,
-    "name": "Functional Movement Screening",
     "type": "endorsement",
     "content": "Your strength & fitness upgrade increment has been increased."
   },
