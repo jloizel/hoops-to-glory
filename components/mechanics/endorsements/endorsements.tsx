@@ -66,7 +66,12 @@ const Endorsements: React.FC<EndorsementsProps> = ({
       return []; // Return an empty array or handle the error as needed
     }
   
-    let arr = [...array];
+    // Defensive check to ensure array is not undefined or null
+    if (!array || array.length === 0) {
+      return []; // Return an empty array if input is invalid or empty
+    }
+  
+    let arr = [...array]; // Copy the array to avoid mutation
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];

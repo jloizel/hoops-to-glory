@@ -492,8 +492,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [draftRank, setDraftRank] = useState("Undrafted");
   const [pickNumber, setPickNumber] = useState<number | null>(null);
 
-  console.log(pickNumber)
-
   useEffect(() => {
     const weights = {
       agility: 0.3,
@@ -551,7 +549,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
   }, [pickNumber])
 
-  console.log(gameOver)
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
