@@ -277,7 +277,7 @@
     "description": "Boost your endurance with an intense cardio bootcamp.",
     "action": "increase_energy_storage",
     "value": 1,
-    "level": 1
+    "level": 2
   },
   {
     "id": 40,
