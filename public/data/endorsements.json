@@ -212,7 +212,7 @@
     "name": "Compression Gear",
     "description": "Enhance your recovery with high-quality compression gear.",
     "action": "reduce_recovery_time",
-    "value": 12,
+    "value": 10,
     "level": 1
   },
   {
@@ -220,7 +220,7 @@
     "name": "Post-Game Ice Baths",
     "description": "Speed up your recovery with post-game ice baths.",
     "action": "reduce_recovery_time",
-    "value": 12,
+    "value": 10,
     "level": 1
   },
   {
@@ -228,7 +228,7 @@
     "name": "Mindfulness Coach",
     "description": "Improve focus and reduce stress with mindfulness coaching.",
     "action": "reduce_recovery_time",
-    "value": 12,
+    "value": 10,
     "level": 1
   },
   {
@@ -236,7 +236,7 @@
     "name": "Recovery Specialist",
     "description": "You just hired a recovery specialist to optimize your post-game recovery and provide you with a recovery plan",
     "action": "reduce_recovery_time_auto",
-    "value": 12,
+    "value": 10,
     "level": 1
   },
   {
@@ -244,7 +244,7 @@
     "name": "Massage Therapist",
     "description": "You just hired a massage therapist to reduce muscle soreness.",
     "action": "reduce_recovery_time",
-    "value": 24,
+    "value": 20,
     "level": 2
   },
   {
@@ -252,7 +252,7 @@
     "name": "Cryotherapy Sessions",
     "description": "Reduce inflammation and speed up recovery with cryotherapy.",
     "action": "reduce_recovery_time",
-    "value": 24,
+    "value": 20,
     "level": 2
   },
   {
@@ -260,7 +260,7 @@
     "name": "Hydrotherapy Sessions",
     "description": "Enhance your recovery with relaxing and rejuvenating hydrotherapy sessions.",
     "action": "reduce_recovery_time",
-    "value": 24,
+    "value": 20,
     "level": 2
   },
   {
