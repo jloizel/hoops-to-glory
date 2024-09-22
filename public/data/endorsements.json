@@ -285,7 +285,7 @@
     "description": "Enhance mental stamina through sports psychology sessions.",
     "action": "increase_energy_storage",
     "value": 1,
-    "level": 2
+    "level": 1
   },
   {
     "id": 41,

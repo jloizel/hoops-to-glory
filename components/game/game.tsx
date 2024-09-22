@@ -550,6 +550,13 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       handleDontRemindAgain()
     }
   }, [pickNumber])
+  
+  useEffect(() => {
+      setTimeout(() => {
+        setGameOver(true)
+      }, 70000);
+  }, [])
+
 
 
   const [open, setOpen] = useState(false);

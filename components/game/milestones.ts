@@ -68,7 +68,6 @@ const milestones: Milestone[] = [
   { condition: ({ assistsPerGame }) => assistsPerGame >= 25, achievement: '25 assists/game' },
   { condition: ({ reboundsPerGame }) => reboundsPerGame >= 20, achievement: '20 rebounds/game' },
   { condition: ({ pointsPerGame }) => pointsPerGame >= 40, achievement: '40 points/game' },
-  { condition: ({ followers }) => followers >= 100000, achievement: '100,000 followers' },
   { condition: ({ draftRank }) => draftRank === 'Pick #1', achievement: 'Become Number One NBA Draft Pick' },
 ];
 

@@ -11,7 +11,7 @@ interface ShareProps {
 const Share: React.FC<ShareProps> = ({elapsedTime}) => {
     const [copied, setCopied] = useState(false);
 
-    const scoreText = `I reached the 1st pick in the NBA draft in ${elapsedTime} on HoopsToGlory 🏆`;
+    const scoreText = `I became the 1st pick in the NBA draft in ${elapsedTime} on HoopsToGlory 🏆`;
     // const cityText = `🗺️ ${selectedCity}`;
     const urlText = 'Try to beat my time at https://www.hoopstoglory.com/';
     const text = `${scoreText}\n\n${urlText}`;

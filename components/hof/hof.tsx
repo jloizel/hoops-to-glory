@@ -89,7 +89,7 @@ const HallOfFame = forwardRef<HTMLDivElement, HallOfFameProps>(({ handleCloseIco
         <div className={styles.timesContainer}>
           <div className={styles.times}>
             {times.map((time: Time, index: number) => (
-              index < 10 && (
+              index < 5 && (
                 <div key={time._id} className={styles.timeItem}>
                   <div className={styles.index}>
                     {index + 1}.

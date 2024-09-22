@@ -127,7 +127,7 @@ const GameOver: React.FC<GameOverProps> = ({ username, open, elapsedTime, handle
   // Trigger saving time and calculating rank when game ends
   useEffect(() => {
     if (gameOver && open && !saveCompleted.current) {
-      // Ensure the function is executed only once
+      console.log('Game over, and modal is open. Saving time...');
       saveTimeAndCalculateRank();
       saveCompleted.current = true;  // Mark as completed
     }

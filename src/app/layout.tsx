@@ -32,8 +32,8 @@ export default function RootLayout({
       <meta property="og:description" content="Climb the ranks and secure the number one pick in the NBA draft."/>
       <meta property="og:url" content="https://www.hoopstoglory.com/?"/>
       <meta property="og:type" content="website"/>
-      <meta property="og:image" content="https://www.hoopstoglory.com/hoopstoglory.png"/>
-      <meta property="og:image:secure_url" content="https://www.hoopstoglory.com/hoopstoglory.png"/>
+      <meta property="og:image" content="https://www.hoopstoglory.com/image.png"/>
+      <meta property="og:image:secure_url" content="https://www.hoopstoglory.com/image.png"/>
       <meta property="og:image:alt" content="HoopsToGlory"/>
       <meta property="og:image:width" content="1200"/>
       <meta property="og:image:height" content="630"/>
@@ -43,7 +43,7 @@ export default function RootLayout({
       <meta name="twitter:title" content="HoopsToGlory"/>
       <meta name="twitter:description" content="Climb the ranks and secure the number one pick in the NBA draft."/>
       <meta name="twitter:site" content="https://www.hoopstoglory.com/?"/>
-      <meta name="twitter:image" content="https://www.hoopstoglory.com/hoopstoglory.png"/>
+      <meta name="twitter:image" content="https://www.hoopstoglory.com/image.png"/>
       <meta name="twitter:image:alt" content="HoopsToGlory"/>      
 
       <GA />
