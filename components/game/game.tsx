@@ -190,8 +190,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const reduceClickCount = (value: number) => {
     setClickCount(prevCount => {
       const newCount = prevCount - value;
-      setCurrentClickValue(newCount); 
-      return newCount;
+      const minClickCount = 10;
+      // Ensure that clickCount doesn't go below 10
+      setCurrentClickValue(Math.max(newCount, minClickCount)); 
+      return Math.max(newCount, minClickCount);
     });
   };
 
@@ -199,16 +201,18 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     if (energyLevel >= energyStorage || gameOver) {
       return; // Exit early to prevent further actions
     }
-
-    if (clickCount > 1) {
-      setClickCount((prevCount) => prevCount - 1); // Decrease click count by 1
-    } else if (clickCount === 1) {
+  
+    const minClickCount = 10; // Define the minimum click count
+  
+    if (clickCount > minClickCount) {
+      setClickCount(prevCount => Math.max(prevCount - 1, minClickCount)); // Ensure it doesn't go below 10
+    } else if (clickCount === minClickCount) {
       // Calculate the potential new energy level
       const potentialEnergyLevel = energyLevel + energyStorage;
-
+  
       // Update the energy level, but cap it at the energyStorage limit
-      setEnergyLevel(Math.min(potentialEnergyLevel, energyStorage)); 
-
+      setEnergyLevel(Math.min(potentialEnergyLevel, energyStorage));
+  
       // Reset click count to the initial value after recovering energy
       setClickCount(currentClickValue);
     }
