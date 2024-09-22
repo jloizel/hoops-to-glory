@@ -180,14 +180,20 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   }, [skills]);
 
   useEffect(() => {
-    if (energyLevel >= energyStorage) {
-      setClickDisabled(true)
-    } else if (gameOver) {
+    if (energyLevel >= energyStorage || gameOver) {
       setClickDisabled(true)
     } else {
       setClickDisabled(false)
     }
   }, [energyLevel, energyStorage])
+
+  const reduceClickCount = (value: number) => {
+    setClickCount(prevCount => {
+      const newCount = prevCount - value;
+      setCurrentClickValue(newCount); 
+      return newCount;
+    });
+  };
 
   const handleClick = () => {
     if (energyLevel >= energyStorage || gameOver) {
@@ -195,7 +201,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
 
     if (clickCount > 1) {
-      setClickCount(prevCount => prevCount - 1); // Decrease click count by 1
+      setClickCount((prevCount) => prevCount - 1); // Decrease click count by 1
     } else if (clickCount === 1) {
       // Calculate the potential new energy level
       const potentialEnergyLevel = energyLevel + energyStorage;
@@ -222,19 +228,9 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     }
   }, [showRecovery, energyLevel]);
 
-  
-  const reduceClickCount = (value: number) => {
-    setClickCount(prevCount => {
-      const newCount = prevCount - value;
-      setCurrentClickValue(newCount); // Update the reset value to the current click count
-      return newCount;
-    });
-  };
-
   const increaseEnergyStorage = () => {
     setEnergyStorage(prevEnergyStorage => prevEnergyStorage + 1);
   };
-
 
 
   // GAMES
