@@ -78,7 +78,9 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
   const handleMouseDown = () => {
     setIsClickHeld(true);
     const intervalId = setInterval(() => {
-      handleClick(); // Call handleClick at 200ms intervals
+      if (clickCount > 1) { // Only call handleClick if clickCount is greater than 1
+        handleClick();
+      }
     }, 100);
     setClickIntervalId(intervalId);
   };
