@@ -36,7 +36,7 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
 
-    if (autoClick && clickCount > 1) {
+    if (autoClick && clickCount > 0) {
       interval = setInterval(() => {
         handleClick();
       }, autoClickInterval);
