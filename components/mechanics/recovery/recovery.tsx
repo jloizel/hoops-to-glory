@@ -44,7 +44,7 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
     return () => {
       if (interval) clearInterval(interval); // Cleanup to prevent multiple intervals
     };
-  }, [handleClick]);
+  }, [handleClick, autoClickInterval]);
   
 
   useEffect(() => {
