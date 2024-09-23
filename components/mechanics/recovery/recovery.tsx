@@ -16,9 +16,10 @@ interface RecoveryProps {
   isRunning: boolean;
   trainingInProgress: boolean;
   clickDisabled: boolean;
+  autoClickInterval: number;
 }
 
-const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick, energyStorage, autoClick, isRunning, trainingInProgress, clickDisabled}) => {
+const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick, energyStorage, autoClick, isRunning, trainingInProgress, clickDisabled, autoClickInterval}) => {
   const [displayStorage2, setDisplayStorage2] = useState(false)
   const [displayStorage3, setDisplayStorage3] = useState(false)
   const [displayStorage4, setDisplayStorage4] = useState(false)
@@ -33,7 +34,7 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
     if (autoClick) {
       const interval = setInterval(() => {
         handleClick();
-      }, 300); // Adjust the interval as needed
+      }, autoClickInterval); // Adjust the interval as needed
 
       return () => clearInterval(interval); // Clear interval on component unmount or when autoClick is turned off
     }

@@ -16,14 +16,6 @@
     "level": 2
   },
   {
-    "id": 4,
-    "name": "Adidas Boost",
-    "description": "Experience unparalleled energy return and comfort with Adidas Boost.",
-    "action": "reduce_recovery_time",
-    "value": 10,
-    "level": 1
-  },
-  {
     "id": 5,
     "name": "Shooting Machine",
     "description": "Increase your shooting accuracy with a high-tech shooting machine.",
@@ -45,14 +37,6 @@
     "description": "You just acquired a nutrition guide to optimize your diet and performance.",
     "action": "increase_fitness_training_increment",
     "value": 1,
-    "level": 1
-  },
-  {
-    "id": 10,
-    "name": "High Altitude Training Camp",
-    "description": "Boost your endurance and performance with high altitude training.",
-    "action": "reduce_recovery_time",
-    "value": 10,
     "level": 1
   },
   {
@@ -227,7 +211,7 @@
     "id": 33,
     "name": "Mindfulness Coach",
     "description": "Improve focus and reduce stress with mindfulness coaching.",
-    "action": "reduce_recovery_time",
+    "action": "reduce_recovery_time_auto",
     "value": 10,
     "level": 1
   },
@@ -244,7 +228,7 @@
     "name": "Massage Therapist",
     "description": "You just hired a massage therapist to reduce muscle soreness.",
     "action": "reduce_recovery_time",
-    "value": 20,
+    "value": 15,
     "level": 2
   },
   {
@@ -252,15 +236,7 @@
     "name": "Cryotherapy Sessions",
     "description": "Reduce inflammation and speed up recovery with cryotherapy.",
     "action": "reduce_recovery_time",
-    "value": 20,
-    "level": 2
-  },
-  {
-    "id": 37,
-    "name": "Hydrotherapy Sessions",
-    "description": "Enhance your recovery with relaxing and rejuvenating hydrotherapy sessions.",
-    "action": "reduce_recovery_time",
-    "value": 20,
+    "value": 15,
     "level": 2
   },
   {
