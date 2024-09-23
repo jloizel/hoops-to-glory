@@ -23,6 +23,8 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
   const [displayStorage2, setDisplayStorage2] = useState(false)
   const [displayStorage3, setDisplayStorage3] = useState(false)
   const [displayStorage4, setDisplayStorage4] = useState(false)
+  const [isClickHeld, setIsClickHeld] = useState(false);
+  const [clickIntervalId, setClickIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (energyLevel > energyStorage) {
@@ -30,15 +32,21 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
     }
   }, [energyLevel, energyStorage]);
 
+  console.log(autoClickInterval)
+
   useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
     if (autoClick) {
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         handleClick();
       }, autoClickInterval);
-  
-      return () => clearInterval(interval); // Cleanup to prevent multiple intervals
     }
-  }, [autoClick, autoClickInterval, handleClick]);
+
+    return () => {
+      if (interval) clearInterval(interval); // Cleanup to prevent multiple intervals
+    };
+  }, [autoClickInterval]);
   
 
   useEffect(() => {
@@ -68,6 +76,20 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
     }
   };
 
+  const handleMouseDown = () => {
+    setIsClickHeld(true);
+    const intervalId = setInterval(() => {
+      handleClick(); // Call handleClick at 200ms intervals
+    }, 100);
+    setClickIntervalId(intervalId);
+  };
+
+  const handleMouseUp = () => {
+    setIsClickHeld(false);
+    if (clickIntervalId) {
+      clearInterval(clickIntervalId); // Clear interval on mouse up
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -77,7 +99,12 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
       </div>
       <div className={styles.content}>
         <div className={styles.heartbeatContainer}>
-          <FaHeartCircleBolt onClick={handleClick} className={`${styles.icon} ${clickCount === 1 && (trainingInProgress || isRunning) || clickDisabled ? styles.iconRunning : ''}`} />
+          <FaHeartCircleBolt 
+            onClick={handleClick} 
+            className={`${styles.icon} ${clickCount === 1 && (trainingInProgress || isRunning) || clickDisabled ? styles.iconRunning : ''}`} 
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+          />
           <div className={styles.clickerContainer}>
             <span className={styles.clickCount}>{clickCount}</span>
             <PiMouseLeftClickLight className={styles.clickIcon}/>

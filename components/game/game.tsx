@@ -203,12 +203,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     });
   };
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     reduceAutoClickInterval(10)
-  //   }, 2000);
-  // })
-
 
   const handleClick = () => {
     if (energyLevel >= energyStorage || gameOver) {
@@ -729,7 +723,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setEnergyLevel(0);
     setEnergyStorage(1);
     setClickCount(initialClickCount);
-    setAutoClick(true)
     setStatInterval(3000)
     setFollowers(0);
     setGamesPlayed(0);
@@ -744,7 +737,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setTrainingAvailable(true)
     fetchEndorsements();
     setSelectedEndorsements([])
-    setAutoClickInterval(1000)
+    setAutoClickInterval(800)
   };
 
   return (
