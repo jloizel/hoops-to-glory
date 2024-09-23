@@ -168,6 +168,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const initialClickCount = 100
   const [initialClickValue, setInitialClickValue] = useState(initialClickCount);
   const [clickCount, setClickCount] = useState(initialClickCount); // Initial click count set to 200
+  const [currentClickValue, setCurrentClickValue] = useState(initialClickCount);
   const [energyLevel, setEnergyLevel] = useState(0); // Initial energy level set to 0
   const [energyStorage, setEnergyStorage] = useState(1)
   const [autoClick, setAutoClick] = useState(true);
@@ -189,43 +190,37 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   }, [energyLevel, energyStorage])
 
   const reduceClickCount = (value: number) => {
-    setInitialClickValue(prevValue => {
-      const newInitialValue = Math.max(prevValue - value, 10); // Ensure minimum of 10
-      setClickCount(newInitialValue); // Update clickCount when reducing initial value
-      return newInitialValue;
+    setClickCount(prevCount => {
+      const newCount = prevCount - value;
+      setCurrentClickValue(newCount); 
+      return newCount;
     });
   };
 
   const reduceAutoClickInterval = (reductionValue: number) => {
     setAutoClickInterval(prevInterval => {
-      const newInterval = Math.max(200, prevInterval - reductionValue * 30); // Minimum interval set to 50ms
+      const newInterval = Math.max(100, prevInterval - reductionValue * 30); // Minimum interval set to 50ms
       return newInterval;
     });
   };
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     reduceAutoClickInterval(10)
-  //   }, 2000);
-  // })
 
 
   const handleClick = () => {
     if (energyLevel >= energyStorage || gameOver) {
       return; // Exit early to prevent further actions
     }
-  
+
     if (clickCount > 1) {
       setClickCount((prevCount) => prevCount - 1); // Decrease click count by 1
     } else if (clickCount === 1) {
       // Calculate the potential new energy level
       const potentialEnergyLevel = energyLevel + energyStorage;
-  
+
       // Update the energy level, but cap it at the energyStorage limit
       setEnergyLevel(Math.min(potentialEnergyLevel, energyStorage)); 
-  
-      // Reset click count to the current value of initialClickValue, but ensure it's at least 10
-      setClickCount(Math.max(initialClickValue, 10)); // Reset to at least 10
+
+      // Reset click count to the initial value after recovering energy
+      setClickCount(currentClickValue);
     }
   };
 
