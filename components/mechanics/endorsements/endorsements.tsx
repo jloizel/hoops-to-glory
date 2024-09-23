@@ -84,6 +84,7 @@ const Endorsements: React.FC<EndorsementsProps> = ({
   console.log(level1Endorsements)
   console.log(level2Endorsements)
   console.log(completedMilestones)
+  console.log(selectedEndorsements)
 
   const initializeAvailableEndorsements = () => {
     const nextAvailable: Endorsement[] = [];
@@ -105,7 +106,7 @@ const Endorsements: React.FC<EndorsementsProps> = ({
     while (nextAvailable.length < 3 && (shuffledLevel1.length > 0 || shuffledLevel2.length > 0)) {
       const random = Math.random(); // Get a random number between 0 and 1
   
-      if (random < 0.6 && shuffledLevel1.length > 0) {
+      if (random < 0.5 && shuffledLevel1.length > 0) {
         const selected = shuffledLevel1.shift(); // 60% chance to pick from level 1
         if (selected && !types.has(selected.action)) {
           nextAvailable.push(selected);
