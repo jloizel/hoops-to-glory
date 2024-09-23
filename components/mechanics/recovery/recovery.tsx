@@ -23,6 +23,8 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
   const [displayStorage2, setDisplayStorage2] = useState(false)
   const [displayStorage3, setDisplayStorage3] = useState(false)
   const [displayStorage4, setDisplayStorage4] = useState(false)
+  const [isClickHeld, setIsClickHeld] = useState(false);
+  const [clickIntervalId, setClickIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (energyLevel > energyStorage) {
@@ -30,15 +32,20 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
     }
   }, [energyLevel, energyStorage]);
 
-  useEffect(() => {
-    if (autoClick) {
-      const interval = setInterval(() => {
-        handleClick();
-      }, autoClickInterval); // Adjust the interval as needed
 
-      return () => clearInterval(interval); // Clear interval on component unmount or when autoClick is turned off
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (autoClick) {
+      interval = setInterval(() => {
+        handleClick();
+      }, autoClickInterval);
     }
-  }, [autoClick, handleClick, autoClickInterval]);
+
+    return () => {
+      if (interval) clearInterval(interval); // Cleanup to prevent multiple intervals
+    };
+  }, [autoClickInterval, handleClick]);
   
 
   useEffect(() => {
@@ -68,6 +75,45 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
     }
   };
 
+  const handleMouseDown = () => {
+    setIsClickHeld(true);
+    // if (clickCount > 1) {
+    // const intervalId = setInterval(() => {
+
+    //     handleClick();
+    
+    // }, 100); // Call handleClick every 100ms
+    
+    // setClickIntervalId(intervalId);
+  };
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (isClickHeld) {
+      interval = setInterval(() => {
+        handleClick();
+      }, 50);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval); // Cleanup to prevent multiple intervals
+    };
+  }, [handleClick]);
+
+  // useEffect(() => {
+  //   if (isClickHeld && clickCount > 1) {
+  //     handleClick()
+  //   }
+  // })
+
+  const handleMouseUp = () => {
+    setIsClickHeld(false);
+    if (clickIntervalId) {
+      clearInterval(clickIntervalId); // Clear interval on mouse up
+      setClickIntervalId(null); // Reset the interval ID
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -77,7 +123,12 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
       </div>
       <div className={styles.content}>
         <div className={styles.heartbeatContainer}>
-          <FaHeartCircleBolt onClick={handleClick} className={`${styles.icon} ${clickCount === 1 && (trainingInProgress || isRunning) || clickDisabled ? styles.iconRunning : ''}`} />
+          <FaHeartCircleBolt 
+            onClick={handleClick} 
+            className={`${styles.icon} ${clickCount === 1 && (trainingInProgress || isRunning) || clickDisabled ? styles.iconRunning : ''}`} 
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+          />
           <div className={styles.clickerContainer}>
             <span className={styles.clickCount}>{clickCount}</span>
             <PiMouseLeftClickLight className={styles.clickIcon}/>
