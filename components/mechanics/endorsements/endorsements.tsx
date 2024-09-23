@@ -81,6 +81,10 @@ const Endorsements: React.FC<EndorsementsProps> = ({
     return arr;
   };
 
+  console.log(level1Endorsements)
+  console.log(level2Endorsements)
+  console.log(completedMilestones)
+
   const initializeAvailableEndorsements = () => {
     const nextAvailable: Endorsement[] = [];
     const types = new Set<string>();
