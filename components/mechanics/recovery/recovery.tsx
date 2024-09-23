@@ -77,18 +77,41 @@ const Recovery: React.FC<RecoveryProps> = ({clickCount, energyLevel, handleClick
 
   const handleMouseDown = () => {
     setIsClickHeld(true);
-    const intervalId = setInterval(() => {
-      if (clickCount > 1) { // Only call handleClick if clickCount is greater than 1
-        handleClick();
-      }
-    }, 100);
-    setClickIntervalId(intervalId);
+    // if (clickCount > 1) {
+    // const intervalId = setInterval(() => {
+
+    //     handleClick();
+    
+    // }, 100); // Call handleClick every 100ms
+    
+    // setClickIntervalId(intervalId);
   };
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (isClickHeld) {
+      interval = setInterval(() => {
+        handleClick();
+      }, 50);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval); // Cleanup to prevent multiple intervals
+    };
+  }, [handleClick]);
+
+  // useEffect(() => {
+  //   if (isClickHeld && clickCount > 1) {
+  //     handleClick()
+  //   }
+  // })
 
   const handleMouseUp = () => {
     setIsClickHeld(false);
     if (clickIntervalId) {
       clearInterval(clickIntervalId); // Clear interval on mouse up
+      setClickIntervalId(null); // Reset the interval ID
     }
   };
 
