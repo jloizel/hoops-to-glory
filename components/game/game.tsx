@@ -174,6 +174,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [clickDisabled, setClickDisabled] = useState(false)
   const [autoClickInterval, setAutoClickInterval] = useState(800);
 
+  // useEffect(() => {
+  //   setAutoClickInterval(200)
+  // })
+
   useEffect(() => {
     if (skills.agility > 0 || skills.shooting > 0 || skills.fitness > 0) {
       setShowRecovery(true);
@@ -648,6 +652,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         initialClickValue,
         autoClick,
         autoClickInterval,
+        clickCount,
 
         gamesPlayed,
         statInterval,
@@ -667,7 +672,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     return () => {
       window.removeEventListener('beforeunload', saveGameState);
     };
-  }, [gameStarted, elapsedTime, followers, journeyStarted, showRecovery, showGames, showEndorsements, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, initialClickValue, autoClick, gamesPlayed, statInterval, teamRole, achievements, completedMilestones, level1Endorsements, level2Endorsements, selectedEndorsements, autoClickInterval ]);
+  }, [gameStarted, elapsedTime, followers, journeyStarted, showRecovery, showGames, showEndorsements, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, initialClickValue, autoClick, gamesPlayed, statInterval, teamRole, achievements, completedMilestones, level1Endorsements, level2Endorsements, selectedEndorsements, autoClickInterval, clickCount ]);
 
   useEffect(() => {
     const loadGameState = () => {
@@ -691,6 +696,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         setInitialClickValue(parsedState.initialClickValue)
         // setAutoClick(parsedState.autoClick)
         setAutoClickInterval(parsedState.autoClickInterval)
+        setClickCount(parsedState.clickCount)
 
         setGamesPlayed(parsedState.gamesPlayed || 0);
         setStatInterval(parsedState.statInterval)
