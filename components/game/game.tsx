@@ -223,7 +223,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       setEnergyLevel(Math.min(potentialEnergyLevel, energyStorage)); 
   
       // Reset click count to the initial value after recovering energy
-      setClickCount(initialClickValue); // Directly reset to initialClickValue
+      setClickCount(Math.min(initialClickValue, 10)); // Directly reset to initialClickValue
     }
   };
 
