@@ -81,10 +81,6 @@ const Endorsements: React.FC<EndorsementsProps> = ({
     return arr;
   };
 
-  console.log(level1Endorsements)
-  console.log(level2Endorsements)
-  console.log(completedMilestones)
-  console.log(selectedEndorsements)
 
   const initializeAvailableEndorsements = () => {
     const nextAvailable: Endorsement[] = [];

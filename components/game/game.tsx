@@ -651,7 +651,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         
         energyLevel,
         energyStorage,
-        clickCount,
+        initialClickValue,
         autoClick,
         autoClickInterval,
 
@@ -673,7 +673,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     return () => {
       window.removeEventListener('beforeunload', saveGameState);
     };
-  }, [gameStarted, elapsedTime, followers, journeyStarted, showRecovery, showGames, showEndorsements, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, clickCount, autoClick, gamesPlayed, statInterval, teamRole, achievements, completedMilestones, level1Endorsements, level2Endorsements, selectedEndorsements, autoClickInterval ]);
+  }, [gameStarted, elapsedTime, followers, journeyStarted, showRecovery, showGames, showEndorsements, skills, trainingDurations, skillUpgrade, energyLevel, energyStorage, initialClickValue, autoClick, gamesPlayed, statInterval, teamRole, achievements, completedMilestones, level1Endorsements, level2Endorsements, selectedEndorsements, autoClickInterval ]);
 
   useEffect(() => {
     const loadGameState = () => {
@@ -694,7 +694,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
         setEnergyLevel(parsedState.energyLevel || 0); 
         setEnergyStorage(parsedState.energyStorage || 0);
-        setClickCount(parsedState.clickCount)
+        setInitialClickValue(parsedState.initialClickValue)
         // setAutoClick(parsedState.autoClick)
         setAutoClickInterval(parsedState.autoClickInterval)
 
