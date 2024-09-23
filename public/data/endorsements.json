@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Reflex Training Equipment",
-    "description": "Sharpen your reflexes with specialized reflex training equipment.",
+    "description": "Sharpen your reflexes with specialized reflex training equipment to improve your agility.",
     "action": "increase_agility_training_increment",
     "value": 1,
     "level": 1
@@ -34,7 +34,7 @@
   {
     "id": 9,
     "name": "Nutrition Guide",
-    "description": "You just acquired a nutrition guide to optimize your diet and performance.",
+    "description": "Acquiore a nutrition guide to optimize your diet and performance boosting your fitness.",
     "action": "increase_fitness_training_increment",
     "value": 1,
     "level": 1
@@ -58,7 +58,7 @@
   {
     "id": 14,
     "name": "Dribbling Clinic",
-    "description": "Improve your ball-handling skills with a dribbling clinic.",
+    "description": "Improve your agility & ball-handling skills with a dribbling clinic.",
     "action": "reduce_agility_training_time",
     "value": 4,
     "level": 1
@@ -114,7 +114,7 @@
   {
     "id": 21,
     "name": "Skill Development Camp",
-    "description": "Hone your basketball skills with expert coaching at a development camp.",
+    "description": "Hone your shooting skills with expert coaching at a development camp.",
     "action": "reduce_shooting_training_time",
     "value": 4,
     "level": 1
@@ -138,7 +138,7 @@
   {
     "id": 24,
     "name": "Gatorade",
-    "description": "Boost your energy and performance with every sip.",
+    "description": "Boost your shooting performance with every sip of Gatorade.",
     "action": "reduce_shooting_training_time",
     "value": 8,
     "level": 2
@@ -154,7 +154,7 @@
   {
     "id": 26,
     "name": "Chef",
-    "description": "You just hired a personal chef and dietitian to prepare nutritious meals.",
+    "description": "You just hired a personal chef and dietitian to prepare nutritious meals boosting your fitness.",
     "action": "reduce_fitness_training_time",
     "value": 4,
     "level": 1
@@ -186,7 +186,7 @@
   {
     "id": 30,
     "name": "Sports Chiropractor",
-    "description": "Optimize your performance and reduce injuries with a sports chiropractor.",
+    "description": "Optimize your fitness performance and reduce injuries with a sports chiropractor.",
     "action": "reduce_fitness_training_time",
     "value": 8,
     "level": 2
@@ -210,7 +210,7 @@
   {
     "id": 33,
     "name": "Mindfulness Coach",
-    "description": "Improve focus and reduce stress with mindfulness coaching.",
+    "description": "Improve your recovery by reducing stress with mindfulness coaching.",
     "action": "reduce_recovery_time_auto",
     "value": 10,
     "level": 1
@@ -218,7 +218,7 @@
   {
     "id": 34,
     "name": "Recovery Specialist",
-    "description": "You just hired a recovery specialist to optimize your post-game recovery and provide you with a recovery plan",
+    "description": "Hire a recovery specialist to optimize your post-game recovery and provide you with a recovery plan",
     "action": "reduce_recovery_time_auto",
     "value": 10,
     "level": 1
@@ -226,7 +226,7 @@
   {
     "id": 35,
     "name": "Massage Therapist",
-    "description": "You just hired a massage therapist to reduce muscle soreness.",
+    "description": "Hire a massage therapist to reduce muscle soreness improving your recovery.",
     "action": "reduce_recovery_time",
     "value": 15,
     "level": 2
@@ -266,7 +266,7 @@
   {
     "id": 41,
     "name": "Agility Ladder Pro",
-    "description": "Master footwork and speed with the Agility Ladder Pro to improve reaction time and acceleration.",
+    "description": "Master footwork and speed with to improve your skills & agility.",
     "action": "increase_agility_training_increment",
     "value": 1,
     "level": 1
