@@ -175,6 +175,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
   const [clickDisabled, setClickDisabled] = useState(false)
   const [autoClickInterval, setAutoClickInterval] = useState(800);
 
+  // useEffect(() => {
+  //   setAutoClickInterval(200)
+  // })
+
   useEffect(() => {
     if (skills.agility > 0 || skills.shooting > 0 || skills.fitness > 0) {
       setShowRecovery(true);
@@ -210,17 +214,19 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
       return; // Exit early to prevent further actions
     }
 
+    const minClickCount = 10;
+
     if (clickCount > 1) {
       setClickCount((prevCount) => prevCount - 1); // Decrease click count by 1
     } else if (clickCount === 1) {
       // Calculate the potential new energy level
       const potentialEnergyLevel = energyLevel + energyStorage;
-
+  
       // Update the energy level, but cap it at the energyStorage limit
       setEnergyLevel(Math.min(potentialEnergyLevel, energyStorage)); 
-
+  
       // Reset click count to the initial value after recovering energy
-      setClickCount(currentClickValue);
+      setClickCount(Math.max(initialClickValue, minClickCount));
     }
   };
 
@@ -648,6 +654,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
         initialClickValue,
         autoClick,
         autoClickInterval,
+        clickCount,
 
         gamesPlayed,
         statInterval,
@@ -688,10 +695,10 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
 
         setEnergyLevel(parsedState.energyLevel || 0); 
         setEnergyStorage(parsedState.energyStorage || 0);
-        setClickCount(parsedState.clickCount)
         setInitialClickValue(parsedState.initialClickValue)
         // setAutoClick(parsedState.autoClick)
         setAutoClickInterval(parsedState.autoClickInterval)
+        setClickCount(parsedState.clickCount)
 
         setGamesPlayed(parsedState.gamesPlayed || 0);
         setStatInterval(parsedState.statInterval)
@@ -724,7 +731,6 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setEnergyLevel(0);
     setEnergyStorage(1);
     setClickCount(initialClickCount);
-    setAutoClick(true)
     setStatInterval(3000)
     setFollowers(0);
     setGamesPlayed(0);
@@ -739,7 +745,7 @@ const Game: React.FC<GameProps> = ({username, usernameSet, handleReset, journeyS
     setTrainingAvailable(true)
     fetchEndorsements();
     setSelectedEndorsements([])
-    setAutoClickInterval(1000)
+    setAutoClickInterval(800)
   };
 
   return (
