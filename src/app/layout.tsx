@@ -23,7 +23,7 @@ export default function RootLayout({
       <link rel="icon" href="https://www.hoopstoglory.com/favicon.ico" type="image/x-icon"/>
       <link rel="shortcut icon" href="https://www.hoopstoglory.com/favicon.ico" type="image/x-icon"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-      <meta name="keywords" content="game, basketball, nba, draft, glory, hoops, hoopstoglory"/>
+      <meta name="keywords" content="game, basketball, nba, draft, glory, hoops, hoopstoglory, hoops to glory"/>
       <meta name="description" content="Climb the ranks and secure the number one pick in the NBA draft."/>
       <meta name="author" content="Jack"/>
 
