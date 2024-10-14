@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<a id="readme-top"></a>
 
-## Getting Started
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/github_username/jloizel.github.io">
+    <img src="images/header.png" alt="Logo" width="auto" height="300">
+  </a>
 
-First, run the development server:
+<h3 align="center">Personal Portfolio Website</h3>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+  <p align="center">
+    This is my personal portfolio website built to showcase my design and development skills. It features multiple sections including a bio, project gallery, and contact form. I created this portfolio to have a place where I can present my projects and share my journey.
+    <br />
+    <a href="https://github.com/jloizel/jloizel.github.io"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://www.jackloizel.com/">View Live Project</a>
+    ·
+    <a href="https://github.com/jloizel/jloizel.github.io/issues/new?labels=bug&template=bug-report---.md">Leave some feedback</a>
+<!--     ·
+    <a href="https://github.com/jloizel/jloizel.github.io/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a> -->
+  </p>
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<!-- ABOUT THE PROJECT -->
+## 📝 About The Project
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This project is a personal portfolio website created to showcase my skills and projects as a software engineer. It serves as a central hub for potential employers, collaborators, and clients to explore my work.
 
-## Learn More
+The goal was to build a modern, responsive, and visually appealing site that reflects both my technical abilities and creative approach, while ensuring a seamless user experience across devices.
 
-To learn more about Next.js, take a look at the following resources:
+The portfolio highlights my projects, demonstrates my proficiency in various tools and frameworks, and provides an easy way to get in touch via the contact form. Key features include responsive design, a dynamic project gallery, and a user-focused interface.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Built With
 
-## Deploy on Vercel
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/react-color.svg" alt="react" height="35px"/></code>
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/typescript-color.svg" alt="typescript" height="35px"/></code>
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/css3-color%20(1).svg" alt="css" height="35px"/></code>
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/html5-color.svg" alt="html" height="35px"/></code>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
