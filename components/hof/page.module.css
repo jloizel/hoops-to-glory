@@ -71,7 +71,7 @@
 .timeItem {
   display: flex;
   align-items: center;
-  padding: 10px; /* Add padding if needed */
+  padding: 10px;
   border-bottom: 1px solid #ddd;
 }
 

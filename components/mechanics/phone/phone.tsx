@@ -66,7 +66,6 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
   const [endorsementNotifications, setEndorsementNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
-    // Fetch random notifications
     fetch('/data/randomNotifications.json', {
       headers: {
         'Content-Type': 'application/json',
@@ -76,7 +75,6 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
       .then(response => response.json())
       .then(data => setRandomNotifications(data));
 
-    // Fetch specific notifications
     fetch('/data/specificNotifications.json', {
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +84,6 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
       .then(response => response.json())
       .then(data => setSpecificNotifications(data));
 
-    // Fetch selected endorsements notifications
     fetch('/data/endorsementNotifications.json', {
       headers: {
         'Content-Type': 'application/json',
@@ -109,14 +106,14 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
         // Reset countdown when it reaches zero
         setStartTime(Date.now());
         setPreviousInterval(randomMessageInterval); // Use new interval only after the current countdown finishes
-        triggerRandomNotification(); // Trigger the notification
+        triggerRandomNotification(); 
       }
     };
 
     // Start the countdown and update it every 100ms to account for milliseconds
     countdownInterval = setInterval(updateCountdown, 100);
 
-    return () => clearInterval(countdownInterval); // Clear interval on component unmount
+    return () => clearInterval(countdownInterval); 
   }, [startTime, previousInterval, randomMessageInterval]);
 
 
@@ -201,14 +198,13 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
 
   useEffect(() => {
     if (gameRestarted) {
-      setNotifications([]); // Clear all notifications
-      setDisplayedAchievements([]); // Reset displayed achievements if needed
+      setNotifications([]); 
+      setDisplayedAchievements([]); 
       localStorage.removeItem('displayedAchievements');
-      setDisplayedNotificationIds([]); // Reset notification IDs to avoid duplicate logic
+      setDisplayedNotificationIds([]); 
       setRandomNotifications([]);
       setSpecificNotifications([]);
 
-      // Refetch the notifications data after clearing
       fetch('/data/randomNotifications.json', {
         headers: {
           'Content-Type': 'application/json',
@@ -230,7 +226,6 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
   }, [gameRestarted]);
 
   useEffect(() => {
-    // Function to update date and time
     const updateDateTime = () => {
       const now = new Date();
 
@@ -249,10 +244,8 @@ const Phone: React.FC<PhoneProps> = ({ achievements, randomMessageInterval, rand
       setCurrentDateDay(formattedDateDay);
     };
 
-    // Update date and time initially
     updateDateTime();
 
-    // Update date and time every second
     const interval = setInterval(updateDateTime, 1000);
 
     return () => clearInterval(interval);

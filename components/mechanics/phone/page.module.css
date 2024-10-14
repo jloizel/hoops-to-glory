@@ -72,20 +72,19 @@
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge, and Firefox */
 .notificationsContainer {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
 }
 
 .notificationsContainer {
   position: absolute;
-  top: 140px; /* Adjust based on the iPhone screen position */
+  top: 140px; 
   left: 0;
   right: 0;
   bottom: 0;
   overflow-y: scroll;
-  -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
   padding: 0px 16px;
   box-sizing: border-box;
 
@@ -167,7 +166,6 @@
   width: 14px;
 }
 
-/* Define keyframes for the appear animation */
 @keyframes appear {
   from {
     opacity: 0;
@@ -179,9 +177,6 @@
   }
 }
 
-
-
-/* Apply the appear animation */
 .notificationAppear {
   animation: appear 0.5s ease-out forwards;
 }
@@ -190,11 +185,11 @@
 @keyframes popIn {
   0% {
     opacity: 0;
-    transform:scale(0.5); /* Start smaller */
+    transform: scale(0.5); 
   }
   100% {
     opacity: 1;
-    transform:scale(1); /* Full size */
+    transform: scale(1); 
   }
 }
 

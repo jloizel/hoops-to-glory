@@ -67,7 +67,7 @@ const Home = () => {
   };
 
   const generateRandomUsername = (): string => {
-    const randomNumber = Math.floor(Math.random() * 1000); // Generate a random number between 0 and 99
+    const randomNumber = Math.floor(Math.random() * 1000); 
     return `user${randomNumber}`;
   };
 

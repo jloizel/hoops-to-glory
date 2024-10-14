@@ -46,9 +46,9 @@ const Countdown: React.FC<CountdownProps> = ({trainingInProgress, trainingDurati
         // colorsTime={[trainingDurationinSec, 5, 3, 0]}
         colors={['#ED174F', '#ED174F']}
         colorsTime={[trainingDurationinSec, 0]}
-        size={120} // Size of the circle
+        size={120} 
         trailStrokeWidth={3}
-        strokeWidth={6} // Width of the stroke
+        strokeWidth={6} 
         isSmoothColorTransition={true}
         onComplete={() => {
           setIsPlaying(false); // Set isPlaying to false when countdown completes

@@ -38,7 +38,7 @@
 .middleContentContainer {
   flex: 2;
   display: flex;
-  flex-wrap: wrap; /* Enable flex wrap */
+  flex-wrap: wrap;
   align-items: center;
   gap: 20px;
   padding-bottom: 80px;
@@ -54,7 +54,7 @@
 }
 
 .flash {
-  animation: flash 0.3s ease-in-out 3; /* Animation duration and repetition */
+  animation: flash 0.3s ease-in-out 3; 
 }
 
 .modal {

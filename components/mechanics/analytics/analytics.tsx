@@ -34,10 +34,6 @@ const Analytics: React.FC<AnalyticsProps> = ({followers}) => {
       <div className={styles.content}>
         <FaInstagram className={styles.icon2}/>
         Followers: {formatFollowers(followers)}
-        {/* <div>
-          <FaYoutube className={styles.icon2}/> 
-          Views: {views}
-        </div> */}
       </div>
     </div>
   )

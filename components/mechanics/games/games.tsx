@@ -22,14 +22,13 @@ const Games = ({
   trainingInProgress,
   gameOver
 }) => {
-  const [gameLength, setGameLength] = useState(600000); // 10 minutes for display
+  const [gameLength, setGameLength] = useState(600000); 
   const [quarterStartTime, setQuarterStartTime] = useState(Date.now()); 
   const [quarter, setQuarter] = useState(1);
-  const [stats, setStats] = useState<Stat[]>([]); // Use the Stat type for the state
+  const [stats, setStats] = useState<Stat[]>([]); 
   const [gameStarted, setGameStarted] = useState(false);
-  const [gameEnded, setGameEnded] = useState(false); // Track when the game ends
-  const [updateGameCount, setUpdateGameCount] = useState(false); // Track if gamesPlayed was updated for this game
-
+  const [gameEnded, setGameEnded] = useState(false); 
+  const [updateGameCount, setUpdateGameCount] = useState(false); 
 
   const handleQuarter = () => {
     setQuarter(prevQuarter => prevQuarter + 1);
@@ -37,36 +36,28 @@ const Games = ({
 
   const handleStartGame = () => {
     setGameStarted(true);
-    setGameLength(600000); // Reset timer to 10 minutes
-    setQuarter(1); // Reset quarter to 1
+    setGameLength(600000); 
+    setQuarter(1); 
     setQuarterStartTime(Date.now());
-    setGameEnded(false); // Reset the gameEnded state
+    setGameEnded(false); 
     handleGameStart();
   };
 
   const handleEndGame = () => {
     setGameStarted(false);
-    setGameEnded(true); // Mark the game as ended
+    setGameEnded(true); 
     handleGameEnd();
   };
 
   const handleResetGame = () => {
     setQuarter(1);
     setGameLength(600000);
-    setStats([]); // Clear stats
-    setQuarterStartTime(Date.now()); // Reset quarter start time
-    setGameStarted(false); // Ensure game is not started yet
-    setGameEnded(false); // Reset the gameEnded state
-    setUpdateGameCount(false); // Reset the update flag
+    setStats([]); 
+    setQuarterStartTime(Date.now()); 
+    setGameStarted(false);
+    setGameEnded(false); 
+    setUpdateGameCount(false); 
   };
-
-  // useEffect(() => {
-  //   if (gameStarted) {
-  //     handleGameStart();
-  //   } else if (gameEnded) {
-  //     handleGameEnd();
-  //   }
-  // }, [gameStarted, gameEnded, handleGameStart, handleGameEnd]);
 
   useEffect(() => {
     if (updateGameCount) {
@@ -78,9 +69,9 @@ const Games = ({
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
-    const realQuarterDuration = 5000; // 5 seconds real-time
-    const displayQuarterDuration = 600000; // 10 minutes in milliseconds
-    const updateInterval = 100; // 100 milliseconds for updating the display
+    const realQuarterDuration = 5000; 
+    const displayQuarterDuration = 600000; 
+    const updateInterval = 100; 
 
     if (gameStarted) {
       interval = setInterval(() => {
@@ -114,7 +105,7 @@ const Games = ({
 
     return () => {
       if (interval) {
-        clearInterval(interval); // Clear interval on unmount or re-render
+        clearInterval(interval); 
       }
     };
   }, [gameStarted, quarter, quarterStartTime, handleQuarter, handleEndGame]);
@@ -129,16 +120,16 @@ const Games = ({
     // Remove the stat after 2 seconds for testing
     setTimeout(() => {
       setStats((prevStats) => prevStats.filter((stat) => stat.id !== newStat.id));
-    }, 2000); // Increase timeout duration for better visibility
+    }, 2000); 
   }, []);
 
   const calculateDynamicInterval = useCallback(() => {
-    const baseInterval = 5000; // 5000 ms
+    const baseInterval = 5000; 
     const maxStats = 50 + 15 + 20; // Maximum possible stats
     const currentStats = pointsPerGame + assistsPerGame + reboundsPerGame;
 
     const dynamicInterval = baseInterval * (1 - currentStats / maxStats);
-    return Math.max(dynamicInterval, 2000); // Minimum interval of 500 ms
+    return Math.max(dynamicInterval, 2000); 
   }, [pointsPerGame, assistsPerGame, reboundsPerGame]);
 
   useEffect(() => {

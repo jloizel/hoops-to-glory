@@ -1,8 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-const BASE_URL = 'https://hoops-to-glory-server.vercel.app/'; // Update with your backend server URL
+const BASE_URL = 'https://hoops-to-glory-server.vercel.app/'; 
 
-// Create an Axios instance with custom configurations
 const api: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -10,21 +9,18 @@ const api: AxiosInstance = axios.create({
   },
 });
 
-// Define types for request data and response data
 export interface Time {
   _id: string;
   username: string;
   elapsedTime: string;
 }
 
-
-// API functions
 export const createTime = async (timeData: { username: string, elapsedTime: string }): Promise<Time> => {
   try {
     const response: AxiosResponse<Time> = await api.post('/times/create', timeData);
     return response.data;
   } catch (error) {
-    throw error; // Throw the error message from the server
+    throw error; 
   }
 };
 
@@ -36,7 +32,7 @@ export const getTimeById = async (timeId: string): Promise<Time | null> => {
     if (error === 404) {
       return null;
     }
-    throw error; // Throw other errors
+    throw error; 
   }
 };
 

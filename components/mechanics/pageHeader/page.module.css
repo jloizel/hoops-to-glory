@@ -184,7 +184,7 @@
 }
 
 .disabledIcon {
-  pointer-events: none; /* Prevents any interaction */
+  pointer-events: none; 
   opacity: 0.5;
 }
 

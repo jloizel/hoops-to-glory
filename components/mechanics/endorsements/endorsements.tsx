@@ -68,12 +68,11 @@ const Endorsements: React.FC<EndorsementsProps> = ({
       return []; // Return an empty array or handle the error as needed
     }
   
-    // Defensive check to ensure array is not undefined or null
     if (!array || array.length === 0) {
       return []; // Return an empty array if input is invalid or empty
     }
   
-    let arr = [...array]; // Copy the array to avoid mutation
+    let arr = [...array]; 
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -125,22 +124,16 @@ const Endorsements: React.FC<EndorsementsProps> = ({
   };
 
   const handleEndorsementSelect = (endorsement: Endorsement) => {
-    // Add the selected endorsement to the list
-    onEndorsementSelect(endorsement); // Notify parent about the selected endorsement
+    onEndorsementSelect(endorsement); 
     // setSelectedEndorsements((prevEndorsements) => [...prevEndorsements, endorsement]);
 
-    // Notify parent that the current milestone is completed
     if (currentMilestone) {
       onMilestoneChange(currentMilestone.milestone);
     }
 
-    // Remove endorsement from the parent level array
-    handleEndorsementSelection(endorsement); // Notify parent to update level1/level2 arrays
-
-    // Refresh available endorsements
+    handleEndorsementSelection(endorsement); 
     initializeAvailableEndorsements();
 
-    // Update the current milestone to the next one
     const nextMilestone = getNextAvailableMilestone(milestones);
     setCurrentMilestone(nextMilestone);
   };
