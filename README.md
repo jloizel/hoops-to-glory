@@ -44,6 +44,15 @@ This project highlights my ability to apply mathematical logic and problem-solvi
 <code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/mongoose-color.svg" alt="mongoose" height="35px"/></code>
 <code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/nextdotjs-color.svg" alt="nextJS" height="35px"/></code>
 
+</br>
+
+## 🎮 How to Play
+
+1. Select one of the three skills to train.
+2. Recover before being able to train again.
+3. Play games once you've reached a high enough average skill level.
+4. Choose from a selection of endorsements for each milestone you reach.
+5. Try to become the number 1 pick in the draft as quickly as possible and compete with players worldwide!
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
