@@ -17,7 +17,7 @@
     <br />
     <a href="https://www.hoopstoglory.com//">View Live Project</a>
     ·
-    <a href="https://www.hoopstoglory.com//issues/new?labels=bug&template=bug-report---.md">Leave some feedback</a>
+    <a href="https://github.com/jloizel/hoops-to-glory/issues/new?labels=bug&template=bug-report---.md">Leave some feedback</a>
 <!--     ·
     <a href="https://www.hoopstoglory.com/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a> -->
   </p>
