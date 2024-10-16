@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/jloizel.github.io">
+  <a href="https://github.com/jloizel/hoops-to-glory">
     <img src="images/header.png" alt="Logo" width="auto" height="300">
   </a>
 
