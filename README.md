@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<a id="readme-top"></a>
 
-## Getting Started
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/jloizel/hoops-to-glory">
+    <img src="images/header.png" alt="Logo" width="auto" height="300">
+  </a>
 
-First, run the development server:
+<h3 align="center">HoopsToGlory</h3>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+  <p align="center">
+    HoopsToGlory is a basketball-themed incremental clicker game where your aim is to climb the ranks and secure the number one pick in the NBA draft as quickly as possible, attracting nearly 1,000 users to date. Interconnected gameplay mechanics mean your decisions will have an impact on the game and how quickly you make it to the top.    
+    <br />
+    <a href="https://github.com/jloizel/hoops-to-glory"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://www.hoopstoglory.com//">View Live Project</a>
+    ·
+    <a href="https://github.com/jloizel/hoops-to-glory/issues/new?labels=bug&template=bug-report---.md">Leave some feedback</a>
+<!--     ·
+    <a href="https://www.hoopstoglory.com/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a> -->
+  </p>
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<!-- ABOUT THE PROJECT -->
+## 📝 About The Project
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This project is one of two web games I developed over the past year. After the success of my first project, I wanted to try something different, and creating an incremental game seemed like the perfect challenge. It allowed me to explore new coding concepts and techniques, especially in terms of balancing gameplay mechanics and user engagement.
 
-## Learn More
+HoopsToGlory was inspired by my brother's incremental game, <a href="https://notyoutube.dev/">notYoutube.dev</a>, but I aimed to bring my own spin to the genre. My goal was to create a game where every decision impacts the player's progress, combining multiple mechanics to create a more dynamic experience. I also wanted to improve on the user interface by making it cleaner, modern, and easy on the eyes while maintaining simplicity.
 
-To learn more about Next.js, take a look at the following resources:
+While the early game may feel slow at first, the sense of progression grows quickly, rewarding players with a feeling of accomplishment as they rise through the ranks. I believe this gradual improvement is what makes the game fun and addictive.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project highlights my ability to apply mathematical logic and problem-solving to build interconnected game systems. Though it may look simple on the surface, many complex parameters and calculations work behind the scenes to create a cohesive and engaging player experience.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+### Built With (***non-exhaustive***)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/react-color.svg" alt="react" height="35px"/></code>
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/typescript-color.svg" alt="typescript" height="35px"/></code>
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/mongodb-color.svg" alt="mongodb" height="35px"/></code>
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/mongoose-color.svg" alt="mongoose" height="35px"/></code>
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/nextdotjs-color.svg" alt="nextJS" height="35px"/></code>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+</br>
+
+## 🎮 How to Play
+
+1. Select one of the three skills to train.
+2. Recover before being able to train again.
+3. Play games once you've reached a high enough average skill level.
+4. Choose from a selection of endorsements for each milestone you reach.
+5. Try to become the number 1 pick in the draft as quickly as possible and compete with players worldwide!
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
